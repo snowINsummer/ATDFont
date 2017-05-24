@@ -39,6 +39,7 @@ var Content = React.createClass({
     },
 
 	setFlow(data){
+        /*
         var allWSData = this.state.allWSData;
         var paths = allWSData.paths;
         var wsName = data[this.state.flowIndex];
@@ -56,6 +57,10 @@ var Content = React.createClass({
             "type":type[0],
             "description":getData['summary'] + "," + getData['description'],
             "parameters":getData['parameters']
+            // 增加body属性，区别POST\PUT\PATCH请求，
+            // 这里做第一次遍历属性(in)值
+            // 需要增加textarea，调接口时也要增加对应属性。
+            // 需要更改后台数据类
         };
         var arrflowData = []
         arrflowData.push(flowData);
@@ -64,6 +69,47 @@ var Content = React.createClass({
         });
         console.log(this.state.allWSData);
         console.log(flowData);
+*/
+
+// MOKE
+        var flowData = {
+            // http://dev.xxd.com/integrationPlatform/bids
+            "url":"http://dev.xxd.com/integrationPlatform/bids",
+            "index":0,
+            "wsName":"/bids",
+            "type":"get",
+            "description":"MOKE DATA",
+            "parameters":[{
+                in:"header",
+                name:"key1",
+                default:"value1",
+                description:"description1"
+            },
+            {
+                in:"header",
+                name:"key2",
+                default:"value2",
+                description:"description2"
+            },
+            {
+                in:"query",
+                name:"key1",
+                default:"value1",
+                description:"description3"
+            },
+            {
+                in:"query",
+                name:"key2",
+                default:"value2",
+                description:"description4"
+            }]
+        };
+        var arrflowData = []
+        arrflowData.push(flowData);
+        this.setState({
+            arrflowData:arrflowData
+        });
+
         // console.log(arrflowData);
 		// 把请求方法传给需要触发的组件，处理请求的数据在这一层
 		// 把接口的数据传给需要用的组件，生成dom

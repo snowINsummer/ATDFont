@@ -25,7 +25,8 @@ var FlowData = React.createClass({
             url:url,
             type:type,
             headers:{},
-            parameters:{}
+            parameters:{},
+            body:""
         };
 
         var o = this.refs['sectionForm'];
@@ -39,18 +40,21 @@ var FlowData = React.createClass({
                 headers[input.name] = input.value;
             }else if(input.getAttribute('in') === 'query'){
                 parameters[input.name] = input.value;
+            }else if(input.getAttribute('in') === 'body'){
+                req['body'] = input.value
             }
         }
         req['headers'] = headers;
         req['parameters'] = parameters;
-        console.log(JSON.stringify(req));
-    o.getElementsByTagName('textarea')[0].value = 111;
+        var data = {data:req}
+        console.log(JSON.stringify(data));
+        // o.getElementsByTagName('textarea')[0].value = 111;
         // 由于跨域问题，发送请求，后端调用接口
         $.ajax({
             type:"post", 
             dataType:"json",
             contentType: "application/json; charset=utf-8",
-            data : JSON.stringify(req),
+            data : JSON.stringify(data),
             url:"http://172.16.16.136:8080/tyrant/ws/sendMessage", 
             success:function(data){ 
                 o.getElementById('rspBody').value = data;

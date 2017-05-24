@@ -44,6 +44,6 @@ module.exports = {
         //loaders: [{ test: /\.css$/, loader: "style!css" }]
     },
     resolve: {
-        modulesDirectories: ['../node_modules', './components', '.'],
+        modulesDirectories: ['./../node_modules', './components', '.'],
     }
 };
