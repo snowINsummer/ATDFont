@@ -84,7 +84,7 @@ var FlowData = React.createClass({
                                 <div className="col-lg-4">
                                     <input type="text" className="form-control" defaultValue={o.default} in={o.in} name={o.name}/>
                                 </div>
-                                <div className="col-lg-4">
+                                <div className="col-lg-5">
                                     <label for="name">{o.description}</label>
                                 </div>
                             </div>)

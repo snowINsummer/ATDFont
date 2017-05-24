@@ -44,7 +44,7 @@ var ProductList = React.createClass({
 
     clickItem:function(data){
         this.setState({
-            projectId : data.flowId == this.state.projectId ? '' : data.id,
+            projectId : data.flowId == this.state.projectId ? '' : data.flowId,
             selectItem : data.flowId == this.state.projectId ? true : false,
             selectItemId : data.flowId
         });

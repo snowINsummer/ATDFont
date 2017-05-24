@@ -30,7 +30,7 @@ ul.pjul li {
 }
 
 h4 {
-    font-family: cursive!important;
+    font-family: inherity!important;
 }
 
 li.product:after {
