@@ -14,7 +14,10 @@ var FlowData = React.createClass({
     getInitialState(){
 
         return {
-                wsData:[]
+                wsFlow:[{
+                    "flowId":1,
+                    "wsFlow":['/bids','/bids/{bidCode}']
+                }]
             };
 
     },
@@ -61,10 +64,24 @@ var FlowData = React.createClass({
             }.bind(this)
         });
     },
+    prevFlow(){
+        // console.log('未减 '+this.props.flowIndex);
+        var index = this.props.flowIndex-1;
+        // console.log('已减 '+index);
+        this.props.setFlow(this.state.wsFlow,index);
+    },
+    nextFlow(){
+        // console.log('未加 '+this.props.flowIndex);
+        var index = this.props.flowIndex+1;
+        // console.log('已加 '+index);
+        this.props.setFlow(this.state.wsFlow,index);
+    },
 
     render() {
         var arrflowData = this.props.arrflowData;
         console.log(arrflowData);
+        // var prevFlow = this.props.prevFlow;
+        // console.log(prevFlow);
         return <div className="container" style={{width:'70%',margin:'10px',float:'left'}}>
             <section id="Reportsec" ref="sectionForm">
             {
@@ -106,10 +123,10 @@ var FlowData = React.createClass({
                     </div>
                     <div className="row">
                         <div className="col-lg-2">
-                            <a id="uploadFile" onclick="uploadFile(this)" className="large blue button" filetype="0">Prev</a>
+                            <a id="uploadFile" onClick={this.prevFlow} className="large blue button">Prev</a>
                         </div>
                         <div className="col-lg-2">
-                            <a id="uploadFile" onclick="uploadFile(this)" className="large blue button" filetype="0">Next</a>
+                            <a id="uploadFile" onClick={this.nextFlow} className="large blue button">Next</a>
                         </div>
                     </div>
                     <div className="rsp">

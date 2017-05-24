@@ -50,7 +50,7 @@ var ProductList = React.createClass({
         });
         var o = this.state.wsFlow.find(item=>item.flowId===data.flowId)
         // console.log(o.wsFlow);
-        this.props.setFlow(o.wsFlow);
+        this.props.setFlow(o.wsFlow,0);
 
     },
 

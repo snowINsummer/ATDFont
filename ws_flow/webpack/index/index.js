@@ -15,7 +15,8 @@ var Content = React.createClass({
                     solidFlag : false,
                     allWSData:{},
                     flowIndex:0,
-                    arrflowData:[]
+                    arrflowData:[],
+                    wsFlow:{}
                 };
     },
     componentDidMount(){
@@ -38,7 +39,19 @@ var Content = React.createClass({
         });
     },
 
-	setFlow(data){
+	setFlow(data,index){
+        console.log(index);
+            this.setState({
+                flowIndex:index
+            });
+        // console.log(this.state.flowIndex);
+        // 存放接口流程的接口名称列表
+        // if (Object.keys(this.state.wsFlow).length == 0){
+        //     this.setState({
+        //         wsFlow:data
+        //     });
+        // }
+        
         /*
         var allWSData = this.state.allWSData;
         var paths = allWSData.paths;
@@ -110,10 +123,27 @@ var Content = React.createClass({
             arrflowData:arrflowData
         });
 
+
         // console.log(arrflowData);
 		// 把请求方法传给需要触发的组件，处理请求的数据在这一层
 		// 把接口的数据传给需要用的组件，生成dom
 	},
+
+    prevFlow(){
+        this.setState({
+            flowIndex:this.state.flowIndex -1
+        });
+        // this.setFlow(this.state.wsFlow);
+    },
+    nextFlow(){
+        var index = this.state.flowIndex +1;
+        console.log(index);
+        this.setState({
+            flowIndex:index
+        });
+        console.log(this.state.flowIndex);
+        // this.setFlow(this.state.wsFlow);
+    },
 
     render(){
         return(
@@ -124,6 +154,10 @@ var Content = React.createClass({
                 </ProductList>
                 <div style={{borderLeft:'1px solid #000',width:'10px',height:this.state.solidFlag==true?document.body.scrollHeight:'887px',float:'left'}}></div>
                 <FlowData arrflowData={this.state.arrflowData}
+                            prevFlow={this.prevFlow}
+                            nextFlow={this.nextFlow}
+                            setFlow={this.setFlow}
+                            flowIndex={this.state.flowIndex}
                             >
                 </FlowData>
             </div>
