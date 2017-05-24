@@ -1,0 +1,14 @@
+.main-header {
+    /*position: relative;*/
+    /*max-height: 100px;*/
+    /*z-index: 1030;*/
+    background-color: #3c8dbc;
+}
+
+a {
+    border-bottom: 2px solid transparent;
+}
+
+.logo-lg {
+    color: white;
+}

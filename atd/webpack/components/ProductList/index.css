@@ -1,0 +1,38 @@
+h4.product-name {
+    margin: 1px 0 3px;
+    font-size: 20px;
+    color: rgb(72, 215, 41);
+}
+
+.todo li:first-child {
+    margin-top: 0;
+}
+
+.todo li {
+    position: relative;
+    padding: 17px 0px 21px 10px;
+    margin-top: 2px;
+    font-size: 14px;
+    line-height: 1.214;
+    cursor: pointer;
+    background: #34495e;
+    background-size: 20px 20px;
+    -webkit-transition: .25s;
+    transition: .25s;
+}
+
+li.product ul {
+    margin-left: 20px;
+}
+
+ul.pjul li {
+    padding: 10px 44px 10px 15px!important;
+}
+
+h4 {
+    font-family: cursive!important;
+}
+
+li.product:after {
+    background: none!important;
+}
