@@ -67,13 +67,16 @@ var FlowData = React.createClass({
                 o.getElementsByTagName('textarea')[0].value = JSON.stringify(data,null,4);
             }.bind(this)
         });
+        // console.log("FlowData:"+document.body.scrollHeight);
+
     },
     prevFlow(selectedFlow,flowLen,flowIndex){
         if (flowIndex>0){
             // console.log('未减 '+this.props.flowIndex);
             var index = this.props.flowIndex-1;
             // console.log('已减 '+index);
-            this.props.setFlow(selectedFlow,index);
+            var pageHeight = document.body.scrollHeight-50+'px';
+            this.props.setFlow(selectedFlow,index,pageHeight);
         }else {
             alert('已经是第一步！');
         }
@@ -84,7 +87,8 @@ var FlowData = React.createClass({
             // console.log('未加 '+this.props.flowIndex);
             var index = this.props.flowIndex+1;
             // console.log('已加 '+index);
-            this.props.setFlow(selectedFlow,index);
+            var pageHeight = document.body.scrollHeight-50+'px';
+            this.props.setFlow(selectedFlow,index,pageHeight);
         }else {
             alert('已经是最后一步！');
         }
@@ -151,7 +155,7 @@ var FlowData = React.createClass({
                             <label className="col-lg-2" style={{paddingLeft:'0px'}} for="name">接口返回：</label>
                         </div>
                         <div>
-                            <textarea readOnly="true" className="form-control" rows="3" style={{height:'300px',background:'white',color:'black',marginBottom:'100px'}}></textarea>
+                            <textarea readOnly="true" className="form-control" rows="3" style={{height:'500px',background:'white',color:'black',marginBottom:'100px'}}></textarea>
                         </div>
                     </div>
                 </form>)

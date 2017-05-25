@@ -1,5 +1,5 @@
 /**
- * Created by snow.zhang on 2016/6/16.
+ * Created by snow.zhang on 2017/5/22.
  */
 import $ from 'jquery';
 import React from 'react';
@@ -7,12 +7,13 @@ import dom from 'react-dom';
 import MainHeader from 'MainHeader';
 import ProductList from 'ProductList';
 import FlowData from 'FlowData';
+// import BorderLeftSolid from 'BorderLeftSolid';
 
 var Content = React.createClass({
 
     getInitialState(){
         return {
-                    solidFlag : false,
+                    pageHeight : document.documentElement.clientHeight-50+'px',
                     allWSData:{},
                     flowIndex:0,
                     arrflowData:[],
@@ -61,12 +62,13 @@ var Content = React.createClass({
         });
     },
 
-	setFlow(data,index){
+	setFlow(data,index,pageHeight){
         // console.log(data);
         // console.log(index);
             this.setState({
                 flowIndex:index,
-                selectedFlow:data
+                selectedFlow:data,
+                pageHeight:pageHeight
             });
         // console.log(this.state.flowIndex);
         // 存放接口流程的接口名称列表
@@ -75,8 +77,17 @@ var Content = React.createClass({
         //         wsFlow:data
         //     });
         // }
-        
-        
+        // console.log("Content1:"+this.refs['borderLeftSolid'].style.height);
+        // this.refs['borderLeftSolid'].style.height = document.body.scrollHeight+200+'px';
+        // console.log(document.body.scrollHeight);
+        // console.log("Content2:"+this.refs['borderLeftSolid'].style.height);
+        // console.log(this.refs.flowDataRef);
+        // console.log(this.refs.flowDataRef['refs']['sectionForm']);
+        // var o = this.refs.flowDataRef['refs']['sectionForm'];
+        // console.log(o.clientHeight);
+        // console.log(o.scrollHeight);
+        // console.log(this.refs['borderLeftSolid']);
+
         var allWSData = this.state.allWSData;
         var paths = allWSData.paths;
         var wsName = data[index];
@@ -162,8 +173,8 @@ var Content = React.createClass({
                              setFlow={this.setFlow}
                              >
                 </ProductList>
-                <div style={{borderLeft:'1px solid #000',width:'10px',height:this.state.solidFlag==true?document.body.scrollHeight:'887px',float:'left'}}></div>
-                <FlowData arrflowData={this.state.arrflowData}
+                <div ref="borderLeftSolid" style={{borderLeft:'1px solid #000',width:'10px',height:this.state.pageHeight,float:'left'}}></div>
+                <FlowData ref="flowDataRef" arrflowData={this.state.arrflowData}
                             prevFlow={this.prevFlow}
                             nextFlow={this.nextFlow}
                             setFlow={this.setFlow}

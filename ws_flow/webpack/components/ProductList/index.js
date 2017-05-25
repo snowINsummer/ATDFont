@@ -1,5 +1,5 @@
 /**
- * Created by snow.zhang on 2016/6/22.
+ * Created by snow.zhang on 2017/5/22.
  */
 
 import $ from 'jquery';
@@ -27,11 +27,10 @@ var ProductList = React.createClass({
             selectItem : data.flowId == this.state.projectId ? true : false,
             selectItemId : data.flowId
         });
-        // var o = this.state.wsFlow.find(item=>item.flowId===data.flowId)
         var o = wsFlow.find(item=>item.flowId===data.flowId)
-        // console.log(o.wsFlow);
-        this.props.setFlow(o.wsFlow,0);
-
+        var pageHeight = document.body.scrollHeight-50+'px';
+        this.props.setFlow(o.wsFlow,0,pageHeight);
+        // console.log("ProductList get:"+document.body.scrollHeight);
     },
 
     openProduct:function(htmlId){
