@@ -18,6 +18,8 @@ var Content = React.createClass({
                     flowIndex:0,
                     arrflowData:[],
                     selectedFlow:[],
+                    flowRelation:[],
+                    replaceParameters:{},
                     projectList:[{
                         "id":1,
                         "projectId": 1,
@@ -38,7 +40,8 @@ var Content = React.createClass({
                     }],
                     wsFlow:[{
                         "flowId":1,
-                        "wsFlow":['/bids','/bids/{bidCode}']
+                        "wsFlow":['/bids','/bids/{bidCode}'],
+                        "relation":[{"bidCode":"['data']['data']['items'][0]['bidCode']"}]
                     }]
                 };
     },
@@ -54,6 +57,7 @@ var Content = React.createClass({
             // url : "http://dev.xxd.com/integrationPlatform/bids?keyType=2&keyValue=AO20170412000042&status=BIDDING&productCategory=P001&currentPage=1&pageSize=10s",
             url : "http://172.16.16.136:8080/tyrant/integrationPlatform/api-docs",
             success : function(data){
+                console.log(JSON.stringify(data));
                 // data.data.list.map(o=>Object.assign(o,{expanded:false}))
                 this.setState({
                     allWSData:data.data
@@ -62,13 +66,14 @@ var Content = React.createClass({
         });
     },
 
-	setFlow(data,index,pageHeight){
+	setFlow(data,index,pageHeight,flowRelation){
         // console.log(data);
         // console.log(index);
             this.setState({
                 flowIndex:index,
                 selectedFlow:data,
-                pageHeight:pageHeight
+                pageHeight:pageHeight,
+                flowRelation:flowRelation
             });
         // console.log(this.state.flowIndex);
         // 存放接口流程的接口名称列表
@@ -163,6 +168,11 @@ var Content = React.createClass({
 		// 把接口的数据传给需要用的组件，生成dom
 	},
 
+    setReplaceParameters(replaceParameters){
+        this.setState({
+            replaceParameters:replaceParameters
+        });
+    },
 
     render(){
         return(
@@ -180,6 +190,9 @@ var Content = React.createClass({
                             setFlow={this.setFlow}
                             flowIndex={this.state.flowIndex}
                             selectedFlow={this.state.selectedFlow}
+                            flowRelation={this.state.flowRelation}
+                            setReplaceParameters={this.setReplaceParameters}
+                            replaceParameters={this.state.replaceParameters}
                             >
                 </FlowData>
             </div>

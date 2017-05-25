@@ -19,7 +19,18 @@ var FlowData = React.createClass({
 
     },
 
-    sendMessage:function(url,type){
+    sendMessage:function(url,type,flowRelation,flowLen,flowIndex,replaceParameters){
+        var o = this.refs['sectionForm'];
+        var inputs = o.getElementsByTagName('input');
+        var len = inputs.length;
+        for(var keyT in replaceParameters){
+            for(var i=0;i<len;i++){
+                var input = inputs[i];
+                if (input.name === keyT){
+                    input.value = replaceParameters[keyT]
+                }
+            }
+        }
         // 定义请求报文
         var req = {
             url:url,
@@ -29,9 +40,9 @@ var FlowData = React.createClass({
             body:""
         };
 
-        var o = this.refs['sectionForm'];
-        var inputs = o.getElementsByTagName('input');
-        var len = inputs.length;
+        o = this.refs['sectionForm'];
+        inputs = o.getElementsByTagName('input');
+        len = inputs.length;
         var headers = {};
         var parameters ={};
         for(var i=0;i<len;i++){
@@ -63,32 +74,45 @@ var FlowData = React.createClass({
             // url:"http://172.16.16.136:8080/tyrant/ws/sendMessage", 
             url:"http://localhost:8080/ws/sendMessage", 
             success:function(data){
-                console.log(JSON.stringify(data,null,4));
+                var flowRelationValue = {};
+                if (flowIndex<flowLen-1 && flowIndex>=0){
+                    if (undefined != flowRelation){
+                        var relation = flowRelation[flowIndex];
+                        for(var key in relation){
+                            var tempkey = "";
+                            eval("tempkey = data"+relation[key]);
+                            flowRelationValue[key] = tempkey;
+                        }
+                    }
+
+                    this.props.setReplaceParameters(flowRelationValue);
+                }
+                // console.log(JSON.stringify(data,null,4));
                 o.getElementsByTagName('textarea')[0].value = JSON.stringify(data,null,4);
             }.bind(this)
         });
         // console.log("FlowData:"+document.body.scrollHeight);
 
     },
-    prevFlow(selectedFlow,flowLen,flowIndex){
+    prevFlow(selectedFlow,flowLen,flowIndex,flowRelation){
         if (flowIndex>0){
             // console.log('未减 '+this.props.flowIndex);
             var index = this.props.flowIndex-1;
             // console.log('已减 '+index);
             var pageHeight = document.body.scrollHeight-50+'px';
-            this.props.setFlow(selectedFlow,index,pageHeight);
+            this.props.setFlow(selectedFlow,index,pageHeight,flowRelation);
         }else {
             alert('已经是第一步！');
         }
 
     },
-    nextFlow(selectedFlow,flowLen,flowIndex){
+    nextFlow(selectedFlow,flowLen,flowIndex,flowRelation){
         if (flowIndex<flowLen-1){
             // console.log('未加 '+this.props.flowIndex);
             var index = this.props.flowIndex+1;
             // console.log('已加 '+index);
             var pageHeight = document.body.scrollHeight-50+'px';
-            this.props.setFlow(selectedFlow,index,pageHeight);
+            this.props.setFlow(selectedFlow,index,pageHeight,flowRelation);
         }else {
             alert('已经是最后一步！');
         }
@@ -100,9 +124,10 @@ var FlowData = React.createClass({
         var selectedFlow = this.props.selectedFlow;
         var flowLen = selectedFlow.length;
         var flowIndex = this.props.flowIndex;
-        // console.log(flowIndex);
+        var flowRelation = this.props.flowRelation;
+        var replaceParameters = this.props.replaceParameters;
         // console.log(selectedFlow);
-        console.log(arrflowData);
+        // console.log(arrflowData);
         return <div className="container" style={{width:'70%',margin:'10px',float:'left'}}>
             <section id="Reportsec" ref="sectionForm">
             {
@@ -135,7 +160,7 @@ var FlowData = React.createClass({
                     <hr style={{border:'1px solid #000',marginTop: '20px'}}></hr>
                     <div className="row" style={{marginTop:'20px'}}>
                         <div className="col-lg-2">
-                            <a onClick={this.sendMessage.bind(this,o.url,o.type)} className="large blue button" filetype="0" >
+                            <a onClick={this.sendMessage.bind(this,o.url,o.type,flowRelation,flowLen,flowIndex,replaceParameters)} className="large blue button" filetype="0" >
                             Submit</a>
                         </div>
                         <div className="col-lg-4" style={{fontSize:'12px',textAlign:'left'}}>
@@ -144,10 +169,10 @@ var FlowData = React.createClass({
                     </div>
                     <div className="row">
                         <div className="col-lg-2" id={flowIndex>0?'':'disC'}>
-                            <a onClick={this.prevFlow.bind(this,selectedFlow,flowLen,flowIndex)} className="large blue button">Prev</a>
+                            <a onClick={this.prevFlow.bind(this,selectedFlow,flowLen,flowIndex,flowRelation)} className="large blue button">Prev</a>
                         </div>
                         <div className="col-lg-2" id={flowIndex<flowLen-1?'':'disC'}>
-                            <a onClick={this.nextFlow.bind(this,selectedFlow,flowLen,flowIndex)} className="large blue button">Next</a>
+                            <a onClick={this.nextFlow.bind(this,selectedFlow,flowLen,flowIndex,flowRelation)} className="large blue button">Next</a>
                         </div>
                     </div>
                     <div className="rsp">

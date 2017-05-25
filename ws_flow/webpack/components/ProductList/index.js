@@ -29,8 +29,7 @@ var ProductList = React.createClass({
         });
         var o = wsFlow.find(item=>item.flowId===data.flowId)
         var pageHeight = document.body.scrollHeight-50+'px';
-        this.props.setFlow(o.wsFlow,0,pageHeight);
-        // console.log("ProductList get:"+document.body.scrollHeight);
+        this.props.setFlow(o.wsFlow,0,pageHeight,o.relation);
     },
 
     openProduct:function(htmlId){
@@ -42,16 +41,12 @@ var ProductList = React.createClass({
 
     render:function() {
         var projectList = this.props.projectList;
-        // var projectList = this.state.projectList;
         var productId = this.state.productId;
         var projectId = this.state.projectId;
         var selectItem = this.state.selectItem;
         var selectItemId = this.state.selectItemId;
-
         var wsFlow = this.props.wsFlow;
-
         // console.log(projectList);
-        // console.log(wsFlow);
         return <div className={'container'}
                         style={{textAlign:'left',height:'700px',width:'300px',margin:'10px',marginTop:'10px',float:'left'}}>
                     <section id="ProjectSection">
