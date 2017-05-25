@@ -92,7 +92,7 @@ var FlowData = React.createClass({
                 o.getElementsByTagName('textarea')[0].value = JSON.stringify(data,null,4);
             },
             error:function(e){
-                o.getElementsByTagName('textarea')[0].style.height = '100px';
+                o.getElementsByTagName('textarea')[0].style.height = '';
                 var allRsp = window.localStorage.getItem('allRsp');
                 console.log(allRsp);
                 if (null == allRsp){
@@ -103,7 +103,8 @@ var FlowData = React.createClass({
                 window.localStorage.setItem("allRsp", allRsp);
                 console.log(window.localStorage.getItem('allRsp'));
                 o.getElementsByTagName('textarea')[1].value = allRsp;
-
+                o.getElementsByTagName('textarea')[1].style.height = '1000px';
+                // this.props.setPageHeight(document.body.scrollHeight-50+'px');
             }.bind(this)
         });
         // console.log("FlowData:"+document.body.scrollHeight);
@@ -115,6 +116,7 @@ var FlowData = React.createClass({
             var index = this.props.flowIndex-1;
             // console.log('已减 '+index);
             var pageHeight = document.body.scrollHeight-50+'px';
+            // console.log(pageHeight);
             this.props.setFlow(selectedFlow,index,pageHeight,flowRelation);
         }else {
             alert('已经是第一步！');
@@ -127,6 +129,8 @@ var FlowData = React.createClass({
             var index = this.props.flowIndex+1;
             // console.log('已加 '+index);
             var pageHeight = document.body.scrollHeight-50+'px';
+            // console.log(pageHeight);
+            // this.props.setPageHeight(pageHeight);
             this.props.setFlow(selectedFlow,index,pageHeight,flowRelation);
         }else {
             alert('已经是最后一步！');
@@ -138,6 +142,8 @@ var FlowData = React.createClass({
         window.localStorage.clear();
         var o = this.refs['sectionForm'];
         o.getElementsByTagName('textarea')[1].value = "";
+        // o.getElementsByTagName('textarea')[1].style.height = '';
+        // this.props.setPageHeight(document.documentElement.clientHeight-50+'px');
 
     },
 
@@ -227,7 +233,7 @@ var FlowData = React.createClass({
                             <label className="col-lg-2" style={{paddingLeft:'0px'}} for="name">接口返回：</label>
                         </div>
                         <div>
-                            <textarea readOnly="true" className="form-control" rows="3" style={{height:'100px',background:'white',color:'black',marginBottom:'30px'}}></textarea>
+                            <textarea readOnly="true" className="form-control" rows="3" style={{background:'white',color:'black',marginBottom:'30px'}}></textarea>
                         </div>
                     </div>
                     <div className="row">
@@ -239,7 +245,7 @@ var FlowData = React.createClass({
                         </div>
                     </div>
                         <div>
-                            <textarea readOnly="true" className="form-control" rows="3" style={{height:'1000px',background:'white',color:'black',marginBottom:'100px'}}></textarea>
+                            <textarea readOnly="true" className="form-control" rows="3" style={{height:'1000px',background:'white',color:'black',marginBottom:'100px',overflowY:'visible'}}></textarea>
                         </div>
                 </form>)
             }            

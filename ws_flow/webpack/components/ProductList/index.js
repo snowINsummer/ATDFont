@@ -28,7 +28,7 @@ var ProductList = React.createClass({
             selectItemId : data.flowId
         });
         var o = wsFlow.find(item=>item.flowId===data.flowId)
-        var pageHeight = document.body.scrollHeight-50+'px';
+        var pageHeight = document.body.scrollHeight+1000-50+'px';
         this.props.setFlow(o.wsFlow,0,pageHeight,o.relation);
     },
 

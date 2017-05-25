@@ -179,6 +179,12 @@ var Content = React.createClass({
         });
     },
 
+    setPageHeight(pageHeight){
+        this.setState({
+            pageHeight:pageHeight
+        });
+    },
+
     render(){
         return(
             <div>
@@ -198,6 +204,7 @@ var Content = React.createClass({
                             flowRelation={this.state.flowRelation}
                             setReplaceParameters={this.setReplaceParameters}
                             replaceParameters={this.state.replaceParameters}
+                            setPageHeight={this.setPageHeight}
                             >
                 </FlowData>
             </div>
