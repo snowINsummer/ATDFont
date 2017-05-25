@@ -88,7 +88,22 @@ var FlowData = React.createClass({
                     this.props.setReplaceParameters(flowRelationValue);
                 }
                 // console.log(JSON.stringify(data,null,4));
+                o.getElementsByTagName('textarea')[0].style.height = '500px';
                 o.getElementsByTagName('textarea')[0].value = JSON.stringify(data,null,4);
+            },
+            error:function(e){
+                o.getElementsByTagName('textarea')[0].style.height = '100px';
+                var allRsp = window.localStorage.getItem('allRsp');
+                console.log(allRsp);
+                if (null == allRsp){
+                    allRsp = "";
+                }
+                allRsp += this.CurentTime() + " 接口请求信息---->：\n" + JSON.stringify(req) + "\n"
+                allRsp += this.CurentTime() + " 接口响应信息---->：\n" + JSON.stringify(e,null,4) + "\n\n";
+                window.localStorage.setItem("allRsp", allRsp);
+                console.log(window.localStorage.getItem('allRsp'));
+                o.getElementsByTagName('textarea')[1].value = allRsp;
+
             }.bind(this)
         });
         // console.log("FlowData:"+document.body.scrollHeight);
@@ -117,6 +132,38 @@ var FlowData = React.createClass({
             alert('已经是最后一步！');
         }
 
+    },
+
+    clearCache(){
+        window.localStorage.clear();
+        var o = this.refs['sectionForm'];
+        o.getElementsByTagName('textarea')[1].value = "";
+
+    },
+
+    CurentTime(){
+        var now = new Date();
+        var year = now.getFullYear();       //年
+        var month = now.getMonth() + 1;     //月
+        var day = now.getDate();            //日
+        var hh = now.getHours();            //时
+        var mm = now.getMinutes();          //分
+        var ss = now.getSeconds();           //秒
+        var clock = year + "-";
+        if(month < 10)
+            clock += "0";
+            clock += month + "-";
+        if(day < 10)
+            clock += "0";
+            clock += day + " ";
+        if(hh < 10)
+            clock += "0";
+            clock += hh + ":";
+        if (mm < 10) clock += '0';
+            clock += mm + ":";
+        if (ss < 10) clock += '0';
+            clock += ss;
+        return(clock);
     },
 
     render() {
@@ -180,9 +227,20 @@ var FlowData = React.createClass({
                             <label className="col-lg-2" style={{paddingLeft:'0px'}} for="name">接口返回：</label>
                         </div>
                         <div>
-                            <textarea readOnly="true" className="form-control" rows="3" style={{height:'500px',background:'white',color:'black',marginBottom:'100px'}}></textarea>
+                            <textarea readOnly="true" className="form-control" rows="3" style={{height:'100px',background:'white',color:'black',marginBottom:'30px'}}></textarea>
                         </div>
                     </div>
+                    <div className="row">
+                        <div className="col-lg-2">
+                            <label for="name">全部接口返回：</label>
+                        </div>
+                        <div className="col-lg-3">
+                            <a onClick={this.clearCache} style={{width:'100px'}} className="large orange button">清除缓存</a>
+                        </div>
+                    </div>
+                        <div>
+                            <textarea readOnly="true" className="form-control" rows="3" style={{height:'1000px',background:'white',color:'black',marginBottom:'100px'}}></textarea>
+                        </div>
                 </form>)
             }            
             </section>
