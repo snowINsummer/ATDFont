@@ -62,8 +62,8 @@ var Content = React.createClass({
     },
 
 	setFlow(data,index){
-        console.log(data);
-        console.log(index);
+        // console.log(data);
+        // console.log(index);
             this.setState({
                 flowIndex:index,
                 selectedFlow:data
@@ -88,7 +88,7 @@ var Content = React.createClass({
         var getData = getWSData[type[0]];
         var flowData = {
             // http://dev.xxd.com/integrationPlatform/bids
-            "url":"http:"+allWSData.host+allWSData.basePath+wsName,
+            "url":"http://"+allWSData.host+allWSData.basePath+wsName,
             "index":index,
             "wsName":wsName,
             "type":type[0],
@@ -152,21 +152,6 @@ var Content = React.createClass({
 		// 把接口的数据传给需要用的组件，生成dom
 	},
 
-    prevFlow(){
-        this.setState({
-            flowIndex:this.state.flowIndex -1
-        });
-        // this.setFlow(this.state.wsFlow);
-    },
-    nextFlow(){
-        var index = this.state.flowIndex +1;
-        console.log(index);
-        this.setState({
-            flowIndex:index
-        });
-        console.log(this.state.flowIndex);
-        // this.setFlow(this.state.wsFlow);
-    },
 
     render(){
         return(
