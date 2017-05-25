@@ -16,7 +16,29 @@ var Content = React.createClass({
                     allWSData:{},
                     flowIndex:0,
                     arrflowData:[],
-                    wsFlow:{}
+                    selectedFlow:[],
+                    projectList:[{
+                        "id":1,
+                        "projectId": 1,
+                        "moduleName":"进件平台",
+                        "flowData":[
+                                    {"flowId":1,"flowName":"获取标的详情"},
+                                    {"flowId":2,"flowName":"进件失败"}
+                        ]
+                    },
+                    {
+                        "id":2,
+                        "projectId": 1,
+                        "moduleName":"交易中心",
+                        "flowData":[
+                                    {"flowId":3,"flowName":"交易成功"},
+                                    {"flowId":4,"flowName":"交易失败"}
+                        ]
+                    }],
+                    wsFlow:[{
+                        "flowId":1,
+                        "wsFlow":['/bids','/bids/{bidCode}']
+                    }]
                 };
     },
     componentDidMount(){
@@ -40,9 +62,11 @@ var Content = React.createClass({
     },
 
 	setFlow(data,index){
+        console.log(data);
         console.log(index);
             this.setState({
-                flowIndex:index
+                flowIndex:index,
+                selectedFlow:data
             });
         // console.log(this.state.flowIndex);
         // 存放接口流程的接口名称列表
@@ -52,10 +76,10 @@ var Content = React.createClass({
         //     });
         // }
         
-        /*
+        
         var allWSData = this.state.allWSData;
         var paths = allWSData.paths;
-        var wsName = data[this.state.flowIndex];
+        var wsName = data[index];
         var getWSData = paths[wsName];
         var type = [];
         for(var key in getWSData){
@@ -65,7 +89,7 @@ var Content = React.createClass({
         var flowData = {
             // http://dev.xxd.com/integrationPlatform/bids
             "url":"http:"+allWSData.host+allWSData.basePath+wsName,
-            "index":this.state.flowIndex,
+            "index":index,
             "wsName":wsName,
             "type":type[0],
             "description":getData['summary'] + "," + getData['description'],
@@ -80,10 +104,10 @@ var Content = React.createClass({
         this.setState({
             arrflowData:arrflowData
         });
-        console.log(this.state.allWSData);
-        console.log(flowData);
-*/
+        // console.log(this.state.allWSData);
+        // console.log(flowData);
 
+/*
 // MOKE
         var flowData = {
             // http://dev.xxd.com/integrationPlatform/bids
@@ -122,9 +146,8 @@ var Content = React.createClass({
         this.setState({
             arrflowData:arrflowData
         });
+*/
 
-
-        // console.log(arrflowData);
 		// 把请求方法传给需要触发的组件，处理请求的数据在这一层
 		// 把接口的数据传给需要用的组件，生成dom
 	},
@@ -149,7 +172,9 @@ var Content = React.createClass({
         return(
             <div>
                 <MainHeader></MainHeader>
-                <ProductList setFlow={this.setFlow}
+                <ProductList projectList={this.state.projectList}
+                             wsFlow={this.state.wsFlow}
+                             setFlow={this.setFlow}
                              >
                 </ProductList>
                 <div style={{borderLeft:'1px solid #000',width:'10px',height:this.state.solidFlag==true?document.body.scrollHeight:'887px',float:'left'}}></div>
@@ -158,6 +183,7 @@ var Content = React.createClass({
                             nextFlow={this.nextFlow}
                             setFlow={this.setFlow}
                             flowIndex={this.state.flowIndex}
+                            selectedFlow={this.state.selectedFlow}
                             >
                 </FlowData>
             </div>

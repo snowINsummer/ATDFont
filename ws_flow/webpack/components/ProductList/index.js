@@ -17,38 +17,18 @@ var ProductList = React.createClass({
 
     componentDidMount:function(){
         this.setState({
-            projectList:[{
-                "id":1,
-                "projectId": 1,
-                "moduleName":"进件平台",
-                "flowData":[
-                            {"flowId":1,"flowName":"获取标的详情"},
-                            {"flowId":2,"flowName":"进件失败"}
-                ]
-            },
-            {
-                "id":2,
-                "projectId": 1,
-                "moduleName":"交易中心",
-                "flowData":[
-                            {"flowId":3,"flowName":"交易成功"},
-                            {"flowId":4,"flowName":"交易失败"}
-                ]
-            }],
-            wsFlow:[{
-                "flowId":1,
-                "wsFlow":['/bids','/bids/{bidCode}']
-            }]
+
         });
     },
 
-    clickItem:function(data){
+    clickItem:function(data,wsFlow){
         this.setState({
             projectId : data.flowId == this.state.projectId ? '' : data.flowId,
             selectItem : data.flowId == this.state.projectId ? true : false,
             selectItemId : data.flowId
         });
-        var o = this.state.wsFlow.find(item=>item.flowId===data.flowId)
+        // var o = this.state.wsFlow.find(item=>item.flowId===data.flowId)
+        var o = wsFlow.find(item=>item.flowId===data.flowId)
         // console.log(o.wsFlow);
         this.props.setFlow(o.wsFlow,0);
 
@@ -62,11 +42,17 @@ var ProductList = React.createClass({
     },
 
     render:function() {
-        var projectList = this.state.projectList;
+        var projectList = this.props.projectList;
+        // var projectList = this.state.projectList;
         var productId = this.state.productId;
         var projectId = this.state.projectId;
         var selectItem = this.state.selectItem;
         var selectItemId = this.state.selectItemId;
+
+        var wsFlow = this.props.wsFlow;
+
+        // console.log(projectList);
+        // console.log(wsFlow);
         return <div className={'container'}
                         style={{textAlign:'left',height:'700px',width:'300px',margin:'10px',marginTop:'10px',float:'left'}}>
                     <section id="ProjectSection">
@@ -80,7 +66,7 @@ var ProductList = React.createClass({
                                                 <ul className="pjul" style={{display:o.id===productId ? 'block':'none'}}>
                                                     {
                                                         o.flowData.map(o=> 
-                                                            <li key={o.flowId} className={o.flowId==projectId?'todo-done': selectItem&&o.flowId==selectItemId?'todo-done':''} value={o.flowName} onClick={this.clickItem.bind(this,o)}>
+                                                            <li key={o.flowId} className={o.flowId==projectId?'todo-done': selectItem&&o.flowId==selectItemId?'todo-done':''} value={o.flowName} onClick={this.clickItem.bind(this,o,wsFlow)}>
                                                                 <h4 key={o.flowId} className="todo-name" style={{wordWrap:'break-word'}}>{o.flowName}</h4>
                                                             </li>)
                                                     }

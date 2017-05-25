@@ -14,10 +14,7 @@ var FlowData = React.createClass({
     getInitialState(){
 
         return {
-                wsFlow:[{
-                    "flowId":1,
-                    "wsFlow":['/bids','/bids/{bidCode}']
-                }]
+
             };
 
     },
@@ -58,28 +55,31 @@ var FlowData = React.createClass({
             dataType:"json",
             contentType: "application/json; charset=utf-8",
             data : JSON.stringify(data),
-            url:"http://172.16.16.136:8080/tyrant/ws/sendMessage", 
+            // url:"http://172.16.16.136:8080/tyrant/ws/sendMessage", 
+            url:"http://localhost:8080/ws/sendMessage", 
             success:function(data){ 
                 o.getElementById('rspBody').value = data;
             }.bind(this)
         });
     },
-    prevFlow(){
+    prevFlow(selectedFlow){
         // console.log('未减 '+this.props.flowIndex);
         var index = this.props.flowIndex-1;
         // console.log('已减 '+index);
-        this.props.setFlow(this.state.wsFlow,index);
+        this.props.setFlow(selectedFlow,index);
     },
-    nextFlow(){
+    nextFlow(selectedFlow){
         // console.log('未加 '+this.props.flowIndex);
         var index = this.props.flowIndex+1;
         // console.log('已加 '+index);
-        this.props.setFlow(this.state.wsFlow,index);
+        this.props.setFlow(selectedFlow,index);
     },
 
     render() {
         var arrflowData = this.props.arrflowData;
-        console.log(arrflowData);
+        var selectedFlow = this.props.selectedFlow;
+        // console.log(arrflowData);
+        // console.log(selectedFlow);
         // var prevFlow = this.props.prevFlow;
         // console.log(prevFlow);
         return <div className="container" style={{width:'70%',margin:'10px',float:'left'}}>
@@ -123,10 +123,10 @@ var FlowData = React.createClass({
                     </div>
                     <div className="row">
                         <div className="col-lg-2">
-                            <a id="uploadFile" onClick={this.prevFlow} className="large blue button">Prev</a>
+                            <a id="uploadFile" onClick={this.prevFlow.bind(this,selectedFlow)} className="large blue button">Prev</a>
                         </div>
                         <div className="col-lg-2">
-                            <a id="uploadFile" onClick={this.nextFlow} className="large blue button">Next</a>
+                            <a id="uploadFile" onClick={this.nextFlow.bind(this,selectedFlow)} className="large blue button">Next</a>
                         </div>
                     </div>
                     <div className="rsp">
