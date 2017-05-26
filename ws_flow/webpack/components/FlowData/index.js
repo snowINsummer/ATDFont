@@ -14,7 +14,7 @@ var FlowData = React.createClass({
     getInitialState(){
 
         return {
-
+                rspBCFlag:''
             };
 
     },
@@ -84,27 +84,39 @@ var FlowData = React.createClass({
                             flowRelationValue[key] = tempkey;
                         }
                     }
-
                     this.props.setReplaceParameters(flowRelationValue);
                 }
                 // console.log(JSON.stringify(data,null,4));
                 o.getElementsByTagName('textarea')[0].style.height = '500px';
                 o.getElementsByTagName('textarea')[0].value = JSON.stringify(data,null,4);
-            },
+
+                var allRsp = window.localStorage.getItem('allRsp');
+                allRsp = allRsp==null?'':allRsp;
+                allRsp += this.CurentTime() + " 接口请求信息---->：\n" + JSON.stringify(req) + "\n"
+                allRsp += this.CurentTime() + " 接口响应信息---->：\n" + JSON.stringify(data,null,4) + "\n\n";
+                window.localStorage.setItem("allRsp", allRsp);
+                // console.log(window.localStorage.getItem('allRsp'));
+                o.getElementsByTagName('textarea')[1].value = allRsp;
+                this.props.setPageHeight(document.body.scrollHeight-50+'px');
+                this.setState({
+                    rspBCFlag:true
+                });
+            }.bind(this),
             error:function(e){
                 o.getElementsByTagName('textarea')[0].style.height = '';
                 var allRsp = window.localStorage.getItem('allRsp');
-                console.log(allRsp);
-                if (null == allRsp){
-                    allRsp = "";
-                }
+                // console.log(allRsp);
+                allRsp = allRsp==null?'':allRsp;
                 allRsp += this.CurentTime() + " 接口请求信息---->：\n" + JSON.stringify(req) + "\n"
                 allRsp += this.CurentTime() + " 接口响应信息---->：\n" + JSON.stringify(e,null,4) + "\n\n";
                 window.localStorage.setItem("allRsp", allRsp);
-                console.log(window.localStorage.getItem('allRsp'));
+                // console.log(window.localStorage.getItem('allRsp'));
                 o.getElementsByTagName('textarea')[1].value = allRsp;
-                o.getElementsByTagName('textarea')[1].style.height = '1000px';
+                // o.getElementsByTagName('textarea')[1].style.height = '1000px';
                 // this.props.setPageHeight(document.body.scrollHeight-50+'px');
+                this.setState({
+                    rspBCFlag:false
+                });
             }.bind(this)
         });
         // console.log("FlowData:"+document.body.scrollHeight);
@@ -121,7 +133,9 @@ var FlowData = React.createClass({
         }else {
             alert('已经是第一步！');
         }
-
+        this.setState({
+            rspBCFlag:''
+        });
     },
     nextFlow(selectedFlow,flowLen,flowIndex,flowRelation){
         if (flowIndex<flowLen-1){
@@ -135,7 +149,9 @@ var FlowData = React.createClass({
         }else {
             alert('已经是最后一步！');
         }
-
+        this.setState({
+            rspBCFlag:''
+        });
     },
 
     clearCache(){
@@ -179,8 +195,10 @@ var FlowData = React.createClass({
         var flowIndex = this.props.flowIndex;
         var flowRelation = this.props.flowRelation;
         var replaceParameters = this.props.replaceParameters;
-        // console.log(selectedFlow);
         // console.log(arrflowData);
+        var rspBCFlag = this.state.rspBCFlag;
+        var allRsp = window.localStorage.getItem('allRsp');
+        allRsp = allRsp==null?'':allRsp;
         return <div className="container" style={{width:'70%',margin:'10px',float:'left'}}>
             <section id="Reportsec" ref="sectionForm">
             {
@@ -222,10 +240,10 @@ var FlowData = React.createClass({
                     </div>
                     <div className="row">
                         <div className="col-lg-2" id={flowIndex>0?'':'disC'}>
-                            <a onClick={this.prevFlow.bind(this,selectedFlow,flowLen,flowIndex,flowRelation)} className="large blue button">Prev</a>
+                            <a href="#" onClick={this.prevFlow.bind(this,selectedFlow,flowLen,flowIndex,flowRelation)} className="large blue button">Prev</a>
                         </div>
                         <div className="col-lg-2" id={flowIndex<flowLen-1?'':'disC'}>
-                            <a onClick={this.nextFlow.bind(this,selectedFlow,flowLen,flowIndex,flowRelation)} className="large blue button">Next</a>
+                            <a href="#" onClick={this.nextFlow.bind(this,selectedFlow,flowLen,flowIndex,flowRelation)} className="large blue button">Next</a>
                         </div>
                     </div>
                     <div className="rsp">
@@ -233,7 +251,7 @@ var FlowData = React.createClass({
                             <label className="col-lg-2" style={{paddingLeft:'0px'}} for="name">接口返回：</label>
                         </div>
                         <div>
-                            <textarea readOnly="true" className="form-control" rows="3" style={{background:'white',color:'black',marginBottom:'30px'}}></textarea>
+                            <textarea readOnly="true" className="form-control" rows="3" style={{borderColor:rspBCFlag===''?'':rspBCFlag?'green':'red',borderWidth:rspBCFlag===''?'':'2px',background:'white',color:'black',marginBottom:'30px'}}></textarea>
                         </div>
                     </div>
                     <div className="row">
@@ -245,7 +263,7 @@ var FlowData = React.createClass({
                         </div>
                     </div>
                         <div>
-                            <textarea readOnly="true" className="form-control" rows="3" style={{height:'1000px',background:'white',color:'black',marginBottom:'100px',overflowY:'visible'}}></textarea>
+                            <textarea value={allRsp} readOnly="true" className="form-control" rows="3" style={{height:'1000px',background:'white',color:'black',marginBottom:'100px',overflowY:'visible',borderColor:'orange',borderWidth:'2px'}}></textarea>
                         </div>
                 </form>)
             }            
