@@ -14,6 +14,7 @@ var Content = React.createClass({
     getInitialState(){
         return {
                     pageHeight : document.documentElement.clientHeight-50+'px',
+                    // 定义所有接口相关信息
                     allWSData:{
                         basePath:"/integrationPlatform",
                         host:"dev.xxd.com",
@@ -121,6 +122,7 @@ var Content = React.createClass({
                     selectedFlow:[],
                     flowRelation:[],
                     replaceParameters:{},
+                    // 定义左侧树的流程列表
                     projectList:[{
                         "id":1,
                         "projectId": 1,
@@ -139,6 +141,8 @@ var Content = React.createClass({
                                     {"flowId":4,"flowName":"交易失败"}
                         ]
                     }],
+                    // 定义接口流程顺序、关联的字段及定位路径
+                    // relation[0] 代表 wsFlow[0]和wsFlow[1] 之间的关系
                     wsFlow:[{
                         "flowId":1,
                         "wsFlow":['/bids','/bids/{bidCode}'],
