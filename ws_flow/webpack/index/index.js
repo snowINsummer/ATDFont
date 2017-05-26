@@ -183,32 +183,12 @@ var Content = React.createClass({
     },
 
 	setFlow(data,index,pageHeight,flowRelation){
-        // console.log(data);
-        // console.log(index);
-            this.setState({
-                flowIndex:index,
-                selectedFlow:data,
-                pageHeight:pageHeight,
-                flowRelation:flowRelation
-            });
-        // console.log(this.state.flowIndex);
-        // 存放接口流程的接口名称列表
-        // if (Object.keys(this.state.wsFlow).length == 0){
-        //     this.setState({
-        //         wsFlow:data
-        //     });
-        // }
-        // console.log("Content1:"+this.refs['borderLeftSolid'].style.height);
-        // this.refs['borderLeftSolid'].style.height = document.body.scrollHeight+200+'px';
-        // console.log(document.body.scrollHeight);
-        // console.log("Content2:"+this.refs['borderLeftSolid'].style.height);
-        // console.log(this.refs.flowDataRef);
-        // console.log(this.refs.flowDataRef['refs']['sectionForm']);
-        // var o = this.refs.flowDataRef['refs']['sectionForm'];
-        // console.log(o.clientHeight);
-        // console.log(o.scrollHeight);
-        // console.log(this.refs['borderLeftSolid']);
-
+        this.setState({
+            flowIndex:index,
+            selectedFlow:data,
+            pageHeight:pageHeight,
+            flowRelation:flowRelation
+        });
         var allWSData = this.state.allWSData;
         // console.log(allWSData);
         var paths = allWSData.paths;
@@ -280,7 +260,6 @@ var Content = React.createClass({
             arrflowData:arrflowData
         });
 */
-
 		// 把请求方法传给需要触发的组件，处理请求的数据在这一层
 		// 把接口的数据传给需要用的组件，生成dom
 	},
