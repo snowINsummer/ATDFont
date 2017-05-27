@@ -53,6 +53,7 @@ var FlowData = React.createClass({
                 parameters[input.name] = input.value;
             }else if(input.getAttribute('in') === 'body'){
                 req['body'] = input.value;
+                // console.log(input.value);
             }else if(input.getAttribute('in') === 'path'){
                 var key = input.name;
                 var value = input.value;
@@ -190,6 +191,20 @@ var FlowData = React.createClass({
 
     render() {
         var arrflowData = this.props.arrflowData;
+        arrflowData.map(function(o,index){
+            var parameters = [];
+            var bodyParameters = [];
+            // console.log(o);
+            o.parameters.map(function(oo,index){
+                if (oo.in === 'body'){
+                    bodyParameters.push(oo);
+                }else {
+                    parameters.push(oo);
+                }
+            });
+            arrflowData[index].parameters = parameters;
+            arrflowData[index].bodyParameters = bodyParameters;
+        });
         var selectedFlow = this.props.selectedFlow;
         var flowLen = selectedFlow.length;
         var flowIndex = this.props.flowIndex;
@@ -227,7 +242,20 @@ var FlowData = React.createClass({
                                 </div>
                             </div>)
                     }
-
+                    {
+                        o.bodyParameters.map(o=>
+                            <div key={o.description} className="row">
+                                <div className="col-lg-2">
+                                    <label for="name">{o.name}：</label>
+                                </div>
+                                <div className="col-lg-6">
+                                    <textarea style={{height:'200px',fontWeight:'bold'}} className="form-control" defaultValue={JSON.stringify(o.default)} in={o.in} name={o.name}/>
+                                </div>
+                                <div className="col-lg-5">
+                                    <label for="name">{o.description}</label>
+                                </div>
+                            </div>)
+                    }
                     <hr style={{border:'1px solid #000',marginTop: '20px'}}></hr>
                     <div className="row" style={{marginTop:'20px'}}>
                         <div className="col-lg-2">
