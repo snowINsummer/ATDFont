@@ -112,7 +112,65 @@ var Content = React.createClass({
                                         }
                                     ]
                                 }
+                            },
+                            "/forms": {
+                                "get": {
+                                    "summary": "生成/更新贷款申请单",
+                                    "description": "生成/更新",
+                                    "parameters": [
+                                        {
+                                            "name": "clientId",
+                                            "default": "XXD_LOAN_API",
+                                            "in": "header",
+                                            "description": "客户端ID"
+                                        },
+                                        {
+                                            "name": "clientTime",
+                                            "default": "1459845047000",
+                                            "in": "header",
+                                            "description": "客户端当前时间"
+                                        },
+                                        {
+                                            "name": "s",
+                                            "default": "1e23c0cd354c1a79726fb8d3c1f3651c",
+                                            "in": "header",
+                                            "description": "32 LENGTH CHARS"
+                                        },
+                                        {
+                                            "name": "requestData",
+                                            "default": {
+                                                "data": {
+                                                    "applyCode": "",
+                                                    "productId": "2c9093f65bd29951015bd2a0f981000a",
+                                                    "userId": 1,
+                                                    "mobile": "13122223333",
+                                                    "channel": "mobile",
+                                                    "productName": "审批产品一",
+                                                    "productType": "P001",
+                                                    "productSubType": "",
+                                                    "instalmentPlanId": "2c9093f65bd29951015bd2a03edb0000",
+                                                    "instalmentPlanName": "等额本息一",
+                                                    "repaymentMethod": "001",
+                                                    "loanAmount": 1000000,
+                                                    "period": 12,
+                                                    "periodUnit": "MONTH",
+                                                    "rate": 0.12,
+                                                    "rateType": "MONTH",
+                                                    "loanTitle": "loanTitle",
+                                                    "loanDescription": "loanDescription",
+                                                    "loanPurpose": "001",
+                                                    "awardType": "NONE",
+                                                    "awardValue": 0,
+                                                    "expiryDay": 15
+                                                }
+                                            },
+                                            "in": "body",
+                                            "description": ""
+                                        }
+                                    ]
+                                }
                             }
+
 
                         }
                     },
@@ -123,13 +181,14 @@ var Content = React.createClass({
                     flowRelation:[],
                     replaceParameters:{},
                     // 定义左侧树的流程列表
-                    projectList:[{
+                    projectList:[
+                    {
                         "id":1,
                         "projectId": 1,
                         "moduleName":"进件平台",
                         "flowData":[
                                     {"flowId":1,"flowName":"获取标的详情"},
-                                    {"flowId":2,"flowName":"进件失败"}
+                                    {"flowId":2,"flowName":"生成贷款申请单及查看"},
                         ]
                     },
                     {
@@ -143,11 +202,18 @@ var Content = React.createClass({
                     }],
                     // 定义接口流程顺序、关联的字段及定位路径
                     // relation[0] 代表 wsFlow[0]和wsFlow[1] 之间的关系
-                    wsFlow:[{
-                        "flowId":1,
-                        "wsFlow":['/bids','/bids/{bidCode}'],
-                        "relation":[{"bidCode":"['data']['data']['items'][0]['bidCode']"}]
-                    }]
+                    wsFlow:[
+                        {
+                            "flowId":1,
+                            "wsFlow":['/bids','/bids/{bidCode}'],
+                            "relation":[{"bidCode":"['data']['data']['items'][0]['bidCode']"}]
+                        },
+                        {
+                            "flowId":2,
+                            "wsFlow":['/forms','/forms/{applyCode}'],
+                            "relation":[{"bidCode":"['data']['data']['items'][0]['bidCode']"}]
+                        }
+                    ]
                 };
     },
     componentDidMount(){
@@ -158,25 +224,42 @@ var Content = React.createClass({
             // url : "http://dev.xxd.com/integrationPlatform/bids?keyType=2&keyValue=AO20170412000042&status=BIDDING&productCategory=P001&currentPage=1&pageSize=10s",
             url : "http://172.16.16.136:8080/tyrant/integrationPlatform/api-docs",
             success : function(data){
-                // console.log(data);
-                var wsName = '/bids/{bidCode}';
+                var arr = ['/forms','put'];
+                console.log(data);
+                var wsName = arr[0];
+                // console.log(data.data.paths[wsName]);
                 var pathsData = {};
                 var newP = [];
-                var parameters = data.data.paths[wsName].get.parameters;
+                var parameters = data.data.paths[wsName][arr[1]].parameters;
                 parameters.map(function(o,index){
                     var mapP = {};
-                    mapP.name = o.name
-                    mapP.default = o.default
-                    mapP.in = o.in
-                    mapP.description = o.description
+                    // console.log(o.in);
+                    var value = "";
+                    var description = "";
+                    if (o.in == "body"){
+                        var valueT = o.description;
+                        eval("value = "+valueT);
+                        // console.log(valueT);
+                        // console.log(value);
+                        o.default = JSON.stringify(value);
+                        o.description = "";
+                    }else {
+                        value = o.default;
+                        description = o.description;
+                    }
+                    mapP.name = o.name;
+                    mapP.default = value;
+                    mapP.in = o.in;
+                    mapP.description = o.description;
                     newP.push(mapP);
                 });
                 var getData = {};
-                getData.summary = data.data.paths[wsName].get.summary;
-                getData.description = data.data.paths[wsName].get.description;
+                getData.summary = data.data.paths[wsName][arr[1]].summary;
+                getData.description = data.data.paths[wsName][arr[1]].description;
                 getData.parameters = newP;
                 var getO = {"get":getData}
                 pathsData[wsName] = getO;
+                // console.log(pathsData);
                 // console.log(JSON.stringify(pathsData,null,4));
                 // data.data.list.map(o=>Object.assign(o,{expanded:false}))
                 // this.setState({
@@ -186,6 +269,13 @@ var Content = React.createClass({
         });
     },
 
+/**
+ * [setFlow description]
+ * @param {[type]} data         [description]
+ * @param {[type]} index        [description]
+ * @param {[type]} pageHeight   [description]
+ * @param {[type]} flowRelation [description]
+ */
 	setFlow(data,index,pageHeight,flowRelation){
         this.setState({
             flowIndex:index,
@@ -201,6 +291,9 @@ var Content = React.createClass({
         var type = [];
         for(var key in getWSData){
             type.push(key);
+        }
+        if (type.length == 0){
+            alert(wsName+" 没有该接口的 MOKE 数据！请维护！");
         }
         var getData = getWSData[type[0]];
         var flowData = {
@@ -281,6 +374,18 @@ var Content = React.createClass({
     },
 
     render(){
+        var props = {};
+        props.arrflowData = this.state.arrflowData;
+        props.prevFlow = this.prevFlow;
+        props.nextFlow = this.nextFlow;
+        props.setFlow = this.setFlow;
+        props.flowIndex = this.state.flowIndex;
+        props.selectedFlow = this.state.selectedFlow;
+        props.flowRelation = this.state.flowRelation;
+        props.setReplaceParameters = this.setReplaceParameters;
+        props.replaceParameters = this.state.replaceParameters;
+        props.setPageHeight = this.setPageHeight;
+        
         return(
             <div>
                 <MainHeader></MainHeader>
@@ -290,16 +395,7 @@ var Content = React.createClass({
                              >
                 </ProductList>
                 <div ref="borderLeftSolid" style={{borderLeft:'1px solid #000',width:'10px',height:this.state.pageHeight,float:'left'}}></div>
-                <FlowData ref="flowDataRef" arrflowData={this.state.arrflowData}
-                            prevFlow={this.prevFlow}
-                            nextFlow={this.nextFlow}
-                            setFlow={this.setFlow}
-                            flowIndex={this.state.flowIndex}
-                            selectedFlow={this.state.selectedFlow}
-                            flowRelation={this.state.flowRelation}
-                            setReplaceParameters={this.setReplaceParameters}
-                            replaceParameters={this.state.replaceParameters}
-                            setPageHeight={this.setPageHeight}
+                <FlowData ref="flowDataRef" {...props}
                             >
                 </FlowData>
 
