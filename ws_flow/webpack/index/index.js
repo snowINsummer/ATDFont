@@ -114,7 +114,7 @@ var Content = React.createClass({
                                 }
                             },
                             "/forms": {
-                                "get": {
+                                "put": {
                                     "summary": "生成/更新贷款申请单",
                                     "description": "生成/更新",
                                     "parameters": [
@@ -211,7 +211,7 @@ var Content = React.createClass({
                         {
                             "flowId":2,
                             "wsFlow":['/forms','/forms/{applyCode}'],
-                            "relation":[{"bidCode":"['data']['data']['items'][0]['bidCode']"}]
+                            "relation":[]
                         }
                     ]
                 };
@@ -227,20 +227,16 @@ var Content = React.createClass({
                 var arr = ['/forms','put'];
                 console.log(data);
                 var wsName = arr[0];
-                // console.log(data.data.paths[wsName]);
                 var pathsData = {};
                 var newP = [];
                 var parameters = data.data.paths[wsName][arr[1]].parameters;
                 parameters.map(function(o,index){
                     var mapP = {};
-                    // console.log(o.in);
                     var value = "";
                     var description = "";
                     if (o.in == "body"){
                         var valueT = o.description;
                         eval("value = "+valueT);
-                        // console.log(valueT);
-                        // console.log(value);
                         o.default = JSON.stringify(value);
                         o.description = "";
                     }else {
@@ -257,7 +253,8 @@ var Content = React.createClass({
                 getData.summary = data.data.paths[wsName][arr[1]].summary;
                 getData.description = data.data.paths[wsName][arr[1]].description;
                 getData.parameters = newP;
-                var getO = {"get":getData}
+                var getO = {};
+                getO[arr[1]] = getData;
                 pathsData[wsName] = getO;
                 // console.log(pathsData);
                 // console.log(JSON.stringify(pathsData,null,4));
@@ -277,6 +274,10 @@ var Content = React.createClass({
  * @param {[type]} flowRelation [description]
  */
 	setFlow(data,index,pageHeight,flowRelation){
+        // put成功后，需要调用查询接口，
+        // 此时需要根据put接口的入参（多个）作为查询条件
+        // 通过get接口查询到数据后再往后关联
+        // 之后的接口可能是post put patch，需要解析替换对应的字段
         this.setState({
             flowIndex:index,
             selectedFlow:data,
@@ -284,7 +285,6 @@ var Content = React.createClass({
             flowRelation:flowRelation
         });
         var allWSData = this.state.allWSData;
-        // console.log(allWSData);
         var paths = allWSData.paths;
         var wsName = data[index];
         var getWSData = paths[wsName];
@@ -304,10 +304,6 @@ var Content = React.createClass({
             "type":type[0],
             "description":getData['summary'] + "," + getData['description'],
             "parameters":getData['parameters']
-            // 增加body属性，区别POST\PUT\PATCH请求，
-            // 这里做第一次遍历属性(in)值
-            // 需要增加textarea，调接口时也要增加对应属性。
-            // 需要更改后台数据类
         };
         var arrflowData = []
         arrflowData.push(flowData);
@@ -317,46 +313,6 @@ var Content = React.createClass({
         // console.log(this.state.allWSData);
         // console.log(flowData);
 
-/*
-// MOKE
-        var flowData = {
-            // http://dev.xxd.com/integrationPlatform/bids
-            "url":"http://dev.xxd.com/integrationPlatform/bids",
-            "index":0,
-            "wsName":"/bids",
-            "type":"get",
-            "description":"MOKE DATA",
-            "parameters":[{
-                in:"header",
-                name:"key1",
-                default:"value1",
-                description:"description1"
-            },
-            {
-                in:"header",
-                name:"key2",
-                default:"value2",
-                description:"description2"
-            },
-            {
-                in:"query",
-                name:"key1",
-                default:"value1",
-                description:"description3"
-            },
-            {
-                in:"query",
-                name:"key2",
-                default:"value2",
-                description:"description4"
-            }]
-        };
-        var arrflowData = []
-        arrflowData.push(flowData);
-        this.setState({
-            arrflowData:arrflowData
-        });
-*/
 		// 把请求方法传给需要触发的组件，处理请求的数据在这一层
 		// 把接口的数据传给需要用的组件，生成dom
 	},
@@ -374,6 +330,7 @@ var Content = React.createClass({
     },
 
     render(){
+
         var props = {};
         props.arrflowData = this.state.arrflowData;
         props.prevFlow = this.prevFlow;
@@ -385,7 +342,7 @@ var Content = React.createClass({
         props.setReplaceParameters = this.setReplaceParameters;
         props.replaceParameters = this.state.replaceParameters;
         props.setPageHeight = this.setPageHeight;
-        
+
         return(
             <div>
                 <MainHeader></MainHeader>

@@ -37,7 +37,7 @@ var FlowData = React.createClass({
             type:type,
             headers:{},
             parameters:{},
-            body:""
+            json:""
         };
 
         o = this.refs['sectionForm'];
@@ -51,9 +51,6 @@ var FlowData = React.createClass({
                 headers[input.name] = input.value;
             }else if(input.getAttribute('in') === 'query'){
                 parameters[input.name] = input.value;
-            }else if(input.getAttribute('in') === 'body'){
-                req['body'] = input.value;
-                // console.log(input.value);
             }else if(input.getAttribute('in') === 'path'){
                 var key = input.name;
                 var value = input.value;
@@ -63,6 +60,13 @@ var FlowData = React.createClass({
         }
         req['headers'] = headers;
         req['parameters'] = parameters;
+        // post\put\patch 需要传json
+        console.log(type);
+        if (type.toLowerCase != 'get'){
+            var jsonText = this.refs['jsonText'];
+            console.log(jsonText);
+            req['json'] = jsonText.value;
+        }
         var data = {data:req}
         console.log(JSON.stringify(data));
         // o.getElementsByTagName('textarea')[0].value = 111;
@@ -87,9 +91,10 @@ var FlowData = React.createClass({
                     }
                     this.props.setReplaceParameters(flowRelationValue);
                 }
+
                 // console.log(JSON.stringify(data,null,4));
-                o.getElementsByTagName('textarea')[0].style.height = '500px';
-                o.getElementsByTagName('textarea')[0].value = JSON.stringify(data,null,4);
+                this.refs['rspBody'].style.height = '500px';
+                this.refs['rspBody'].value = JSON.stringify(data,null,4);
 
                 var allRsp = window.localStorage.getItem('allRsp');
                 allRsp = allRsp==null?'':allRsp;
@@ -97,14 +102,14 @@ var FlowData = React.createClass({
                 allRsp += this.CurentTime() + " 接口响应信息---->：\n" + JSON.stringify(data,null,4) + "\n\n";
                 window.localStorage.setItem("allRsp", allRsp);
                 // console.log(window.localStorage.getItem('allRsp'));
-                o.getElementsByTagName('textarea')[1].value = allRsp;
+                this.refs['allRspBody'].value = allRsp;
                 this.props.setPageHeight(document.body.scrollHeight-50+'px');
                 this.setState({
                     rspBCFlag:true
                 });
             }.bind(this),
             error:function(e){
-                o.getElementsByTagName('textarea')[0].style.height = '';
+                this.refs['rspBody'].style.height = '';
                 var allRsp = window.localStorage.getItem('allRsp');
                 // console.log(allRsp);
                 allRsp = allRsp==null?'':allRsp;
@@ -112,7 +117,7 @@ var FlowData = React.createClass({
                 allRsp += this.CurentTime() + " 接口响应信息---->：\n" + JSON.stringify(e,null,4) + "\n\n";
                 window.localStorage.setItem("allRsp", allRsp);
                 // console.log(window.localStorage.getItem('allRsp'));
-                o.getElementsByTagName('textarea')[1].value = allRsp;
+                this.refs['allRspBody'].value = allRsp;
                 // o.getElementsByTagName('textarea')[1].style.height = '1000px';
                 // this.props.setPageHeight(document.body.scrollHeight-50+'px');
                 this.setState({
@@ -158,7 +163,8 @@ var FlowData = React.createClass({
     clearCache(){
         window.localStorage.clear();
         var o = this.refs['sectionForm'];
-        o.getElementsByTagName('textarea')[1].value = "";
+        var textarea = o.getElementsByTagName('textarea');
+        o.getElementsByTagName('textarea')[textarea.length-1].value = "";
         // o.getElementsByTagName('textarea')[1].style.height = '';
         // this.props.setPageHeight(document.documentElement.clientHeight-50+'px');
 
@@ -191,26 +197,31 @@ var FlowData = React.createClass({
 
     render() {
         var arrflowData = this.props.arrflowData;
+        // console.log(this.props.arrflowData);
         arrflowData.map(function(o,index){
             var parameters = [];
             var bodyParameters = [];
-            // console.log(o);
-            o.parameters.map(function(oo,index){
-                if (oo.in === 'body'){
-                    bodyParameters.push(oo);
-                }else {
-                    parameters.push(oo);
-                }
-            });
-            arrflowData[index].parameters = parameters;
-            arrflowData[index].bodyParameters = bodyParameters;
+            if (o.bodyParameters != null){
+                bodyParameters = o.bodyParameters;
+            }else {
+                // console.log(o);
+                o.parameters.map(function(oo,index){
+                    if (oo.in === 'body'){
+                        bodyParameters.push(oo);
+                    }else {
+                        parameters.push(oo);
+                    }
+                });
+                arrflowData[index].parameters = parameters;
+                arrflowData[index].bodyParameters = bodyParameters;
+            }
         });
+        // console.log(arrflowData);
         var selectedFlow = this.props.selectedFlow;
         var flowLen = selectedFlow.length;
         var flowIndex = this.props.flowIndex;
         var flowRelation = this.props.flowRelation;
         var replaceParameters = this.props.replaceParameters;
-        // console.log(arrflowData);
         var rspBCFlag = this.state.rspBCFlag;
         var allRsp = window.localStorage.getItem('allRsp');
         allRsp = allRsp==null?'':allRsp;
@@ -249,7 +260,7 @@ var FlowData = React.createClass({
                                     <label for="name">{o.name}：</label>
                                 </div>
                                 <div className="col-lg-6">
-                                    <textarea style={{height:'200px',fontWeight:'bold'}} className="form-control" defaultValue={JSON.stringify(o.default)} in={o.in} name={o.name}/>
+                                    <textarea ref="jsonText" style={{height:'200px',fontWeight:'bold'}} className="form-control" defaultValue={JSON.stringify(o.default)} in={o.in} name={o.name}/>
                                 </div>
                                 <div className="col-lg-5">
                                     <label for="name">{o.description}</label>
@@ -268,10 +279,14 @@ var FlowData = React.createClass({
                     </div>
                     <div className="row">
                         <div className="col-lg-2" id={flowIndex>0?'':'disC'}>
-                            <a href="#" onClick={this.prevFlow.bind(this,selectedFlow,flowLen,flowIndex,flowRelation)} className="large blue button">Prev</a>
+                            <a href="#" onClick={this.prevFlow.bind(this,selectedFlow,flowLen,flowIndex,flowRelation)} className="large blue button">
+                                Prev
+                            </a>
                         </div>
                         <div className="col-lg-2" id={flowIndex<flowLen-1?'':'disC'}>
-                            <a href="#" onClick={this.nextFlow.bind(this,selectedFlow,flowLen,flowIndex,flowRelation)} className="large blue button">Next</a>
+                            <a href="#" onClick={this.nextFlow.bind(this,selectedFlow,flowLen,flowIndex,flowRelation)} className="large blue button">
+                                Next
+                            </a>
                         </div>
                     </div>
                     <div className="rsp">
@@ -279,7 +294,7 @@ var FlowData = React.createClass({
                             <label className="col-lg-2" style={{paddingLeft:'0px'}} for="name">接口返回：</label>
                         </div>
                         <div>
-                            <textarea readOnly="true" className="form-control" rows="3" style={{borderColor:rspBCFlag===''?'':rspBCFlag?'green':'red',borderWidth:rspBCFlag===''?'':'2px',background:'white',color:'black',marginBottom:'30px'}}></textarea>
+                            <textarea ref="rspBody" readOnly="true" className="form-control" rows="3" style={{borderColor:rspBCFlag===''?'':rspBCFlag?'green':'red',borderWidth:rspBCFlag===''?'':'2px',background:'white',color:'black',marginBottom:'30px'}}></textarea>
                         </div>
                     </div>
                     <div className="row">
@@ -291,7 +306,7 @@ var FlowData = React.createClass({
                         </div>
                     </div>
                         <div>
-                            <textarea value={allRsp} readOnly="true" className="form-control" rows="3" style={{height:'1000px',background:'white',color:'black',marginBottom:'100px',overflowY:'visible',borderColor:'orange',borderWidth:'2px'}}></textarea>
+                            <textarea ref="allRspBody" value={allRsp} readOnly="true" className="form-control" rows="3" style={{height:'1000px',background:'white',color:'black',marginBottom:'100px',overflowY:'visible',borderColor:'orange',borderWidth:'2px'}}></textarea>
                         </div>
                 </form>)
             }            
