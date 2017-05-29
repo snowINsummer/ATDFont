@@ -169,7 +169,71 @@ var Content = React.createClass({
                                         }
                                     ]
                                 }
+                            },
+                            "/forms/{applyCode}": {
+                                "get": {
+                                    "summary": "标的详情",
+                                    "description": "查询单条记录",
+                                    "parameters": [
+                                        {
+                                            "name": "clientId",
+                                            "default": "XXD_LOAN_API",
+                                            "in": "header",
+                                            "description": "客户端I D"
+                                        },
+                                        {
+                                            "name": "clientTime",
+                                            "default": "1459845047000",
+                                            "in": "header",
+                                            "description": "客户端当前时间"
+                                        },
+                                        {
+                                            "name": "s",
+                                            "default": "0878b0790e427c8a35b05d0b5b4ff113",
+                                            "in": "header",
+                                            "description": "32 LENGTH CHARS"
+                                        },
+                                        {
+                                            "name": "bidCode",
+                                            "default": "BO20160000000006",
+                                            "in": "path",
+                                            "description": "标的编号"
+                                        },
+                                        {
+                                            "name": "requestData",
+                                            "default": {
+                                                "data": {
+                                                    "applyCode": "",
+                                                    "productId": "2c9093f65bd29951015bd2a0f981000a",
+                                                    "userId": 1,
+                                                    "mobile": "13122223333",
+                                                    "channel": "mobile",
+                                                    "productName": "审批产品一",
+                                                    "productType": "P001",
+                                                    "productSubType": "",
+                                                    "instalmentPlanId": "2c9093f65bd29951015bd2a03edb0000",
+                                                    "instalmentPlanName": "等额本息一",
+                                                    "repaymentMethod": "001",
+                                                    "loanAmount": 1000000,
+                                                    "period": 12,
+                                                    "periodUnit": "MONTH",
+                                                    "rate": 0.12,
+                                                    "rateType": "MONTH",
+                                                    "loanTitle": "loanTitle",
+                                                    "loanDescription": "loanDescription",
+                                                    "loanPurpose": "001",
+                                                    "awardType": "NONE",
+                                                    "awardValue": 0,
+                                                    "expiryDay": 15
+                                                }
+                                            },
+                                            "in": "body",
+                                            "description": ""
+                                        }
+                                    ]
+                                }
                             }
+
 
 
                         }
@@ -211,7 +275,7 @@ var Content = React.createClass({
                         {
                             "flowId":2,
                             "wsFlow":['/forms','/forms/{applyCode}'],
-                            "relation":[]
+                            "relation":[{"['data']['applyCode']":"['data']['data']['items'][0]['bidCode']"}]
                         }
                     ]
                 };
@@ -274,10 +338,17 @@ var Content = React.createClass({
  * @param {[type]} flowRelation [description]
  */
 	setFlow(data,index,pageHeight,flowRelation){
+        /*
         // put成功后，需要调用查询接口，
         // 此时需要根据put接口的入参（多个）作为查询条件
         // 通过get接口查询到数据后再往后关联
-        // 之后的接口可能是post put patch，需要解析替换对应的字段
+        */
+        // 新增、数据后会返回该条数据所有字段信息，不需要做上面的功能
+        // TODO
+        // 1、之后的接口可能是post put patch，需要解析替换对应的字段
+        // 2、token的获取方式
+        // 3、验证功能
+        
         this.setState({
             flowIndex:index,
             selectedFlow:data,
@@ -305,7 +376,7 @@ var Content = React.createClass({
             "description":getData['summary'] + "," + getData['description'],
             "parameters":getData['parameters']
         };
-        var arrflowData = []
+        var arrflowData = [];
         arrflowData.push(flowData);
         this.setState({
             arrflowData:arrflowData

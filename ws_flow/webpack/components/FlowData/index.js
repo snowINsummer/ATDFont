@@ -23,14 +23,27 @@ var FlowData = React.createClass({
         var o = this.refs['sectionForm'];
         var inputs = o.getElementsByTagName('input');
         var len = inputs.length;
-        for(var keyT in replaceParameters){
+        for(var key in replaceParameters){
+            if(key.indexOf("[") === 0){
+                // 处理key，根据key获取需要被替换的字段
+                var requestData = this.refs['jsonText'];
+                var jsonText = requestData.value;
+                var jsonObj = JSON.parse(jsonText);
+                eval("jsonObj"+key+"='"+replaceParameters[key]+"'");
+                // console.log("replaced requestData------>  ");
+                // console.log(jsonObj);
+                requestData.value = JSON.stringify(jsonObj);
+                continue;
+            }
             for(var i=0;i<len;i++){
                 var input = inputs[i];
-                if (input.name === keyT){
-                    input.value = replaceParameters[keyT]
+                // console.log(input.name);
+                if (input.name === key){
+                    input.value = replaceParameters[key]
                 }
             }
         }
+        // console.log(replaceParameters);
         // 定义请求报文
         var req = {
             url:url,
@@ -60,16 +73,13 @@ var FlowData = React.createClass({
         }
         req['headers'] = headers;
         req['parameters'] = parameters;
-        // post\put\patch 需要传json
-        console.log(type);
         if (type.toLowerCase != 'get'){
             var jsonText = this.refs['jsonText'];
-            console.log(jsonText);
             req['json'] = jsonText.value;
+            console.log("requestData------>  "+jsonText.value);
         }
         var data = {data:req}
         console.log(JSON.stringify(data));
-        // o.getElementsByTagName('textarea')[0].value = 111;
         // 由于跨域问题，发送请求，后端调用接口
         $.ajax({
             type:"post", 
@@ -123,6 +133,21 @@ var FlowData = React.createClass({
                 this.setState({
                     rspBCFlag:false
                 });
+
+                /* 调试 */
+                console.log("error!!!");
+                var flowRelationValue = {};
+                if (flowIndex<flowLen-1 && flowIndex>=0){
+                    if (undefined != flowRelation){
+                        var relation = flowRelation[flowIndex];
+                        for(var key in relation){
+                            var tempkey = "test";
+                            // eval("tempkey = data"+relation[key]);
+                            flowRelationValue[key] = tempkey;
+                        }
+                    }
+                    this.props.setReplaceParameters(flowRelationValue);
+                }
             }.bind(this)
         });
         // console.log("FlowData:"+document.body.scrollHeight);
