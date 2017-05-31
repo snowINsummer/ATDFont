@@ -73,7 +73,7 @@ var FlowData = React.createClass({
         }
         req['headers'] = headers;
         req['parameters'] = parameters;
-        if (type.toLowerCase != 'get'){
+        if (type.toLowerCase() != 'get'){
             var jsonText = this.refs['jsonText'];
             req['json'] = jsonText.value;
             console.log("requestData------>  "+jsonText.value);
@@ -118,8 +118,9 @@ var FlowData = React.createClass({
                     rspBCFlag:true
                 });
             }.bind(this),
-            error:function(e){
-                this.refs['rspBody'].style.height = '';
+            error:function(e,textStatus){
+                this.refs['rspBody'].style.height = '500px';
+                this.refs['rspBody'].value = JSON.stringify(e,null,4);
                 var allRsp = window.localStorage.getItem('allRsp');
                 // console.log(allRsp);
                 allRsp = allRsp==null?'':allRsp;
@@ -135,7 +136,7 @@ var FlowData = React.createClass({
                 });
 
                 /* 调试 */
-                console.log("error!!!");
+                /*
                 var flowRelationValue = {};
                 if (flowIndex<flowLen-1 && flowIndex>=0){
                     if (undefined != flowRelation){
@@ -148,6 +149,7 @@ var FlowData = React.createClass({
                     }
                     this.props.setReplaceParameters(flowRelationValue);
                 }
+                */
             }.bind(this)
         });
         // console.log("FlowData:"+document.body.scrollHeight);

@@ -172,8 +172,42 @@ var Content = React.createClass({
                             },
                             "/forms/{applyCode}": {
                                 "get": {
-                                    "summary": "标的详情",
+                                    "summary": "申请单详情",
                                     "description": "查询单条记录",
+                                    "parameters": [
+                                        {
+                                            "name": "clientId",
+                                            "default": "XXD_LOAN_API",
+                                            "in": "header",
+                                            "description": "客户端ID"
+                                        },
+                                        {
+                                            "name": "clientTime",
+                                            "default": "1459845047000",
+                                            "in": "header",
+                                            "description": "客户端当前时间"
+                                        },
+                                        {
+                                            "name": "s",
+                                            "default": "0878b0790e427c8a35b05d0b5b4ff113",
+                                            "in": "header",
+                                            "description": "32 LENGTH CHARS"
+                                        },
+                                        {
+                                            "name": "applyCode",
+                                            "default": "LOAN_APPLY20170511152658000222",
+                                            "in": "path",
+                                            "description": "申请单号"
+                                        }
+                                    ]
+                                }
+                            },
+
+                            // 进件平台全流程
+                            "/products": {
+                                "get": {
+                                    "summary": "可申请产品列表",
+                                    "description": "分页查询所有记录",
                                     "parameters": [
                                         {
                                             "name": "clientId",
@@ -194,45 +228,21 @@ var Content = React.createClass({
                                             "description": "32 LENGTH CHARS"
                                         },
                                         {
-                                            "name": "bidCode",
-                                            "default": "BO20160000000006",
-                                            "in": "path",
-                                            "description": "标的编号"
+                                            "name": "currentPage",
+                                            "default": 1,
+                                            "in": "query",
+                                            "description": "页码"
                                         },
                                         {
-                                            "name": "requestData",
-                                            "default": {
-                                                "data": {
-                                                    "applyCode": "",
-                                                    "productId": "2c9093f65bd29951015bd2a0f981000a",
-                                                    "userId": 1,
-                                                    "mobile": "13122223333",
-                                                    "channel": "mobile",
-                                                    "productName": "审批产品一",
-                                                    "productType": "P001",
-                                                    "productSubType": "",
-                                                    "instalmentPlanId": "2c9093f65bd29951015bd2a03edb0000",
-                                                    "instalmentPlanName": "等额本息一",
-                                                    "repaymentMethod": "001",
-                                                    "loanAmount": 1000000,
-                                                    "period": 12,
-                                                    "periodUnit": "MONTH",
-                                                    "rate": 0.12,
-                                                    "rateType": "MONTH",
-                                                    "loanTitle": "loanTitle",
-                                                    "loanDescription": "loanDescription",
-                                                    "loanPurpose": "001",
-                                                    "awardType": "NONE",
-                                                    "awardValue": 0,
-                                                    "expiryDay": 15
-                                                }
-                                            },
-                                            "in": "body",
-                                            "description": ""
+                                            "name": "pageSize",
+                                            "default": 10,
+                                            "in": "query",
+                                            "description": "每页数据的条目"
                                         }
                                     ]
                                 }
                             }
+
 
 
 
@@ -251,8 +261,9 @@ var Content = React.createClass({
                         "projectId": 1,
                         "moduleName":"进件平台",
                         "flowData":[
-                                    {"flowId":1,"flowName":"获取标的详情"},
-                                    {"flowId":2,"flowName":"生成贷款申请单及查看"},
+                                    {"flowId":1,"flowName":"全流程"},
+                                    {"flowId":2,"flowName":"获取标的详情"},
+                                    {"flowId":3,"flowName":"生成贷款申请单及查看"}
                         ]
                     },
                     {
@@ -260,8 +271,7 @@ var Content = React.createClass({
                         "projectId": 1,
                         "moduleName":"交易中心",
                         "flowData":[
-                                    {"flowId":3,"flowName":"交易成功"},
-                                    {"flowId":4,"flowName":"交易失败"}
+                                    {"flowId":4,"flowName":"交易成功"}
                         ]
                     }],
                     // 定义接口流程顺序、关联的字段及定位路径
@@ -269,13 +279,27 @@ var Content = React.createClass({
                     wsFlow:[
                         {
                             "flowId":1,
-                            "wsFlow":['/bids','/bids/{bidCode}'],
+                            "wsFlow":['/products','/forms/reapplyStatuses','/products/{productId}',
+                                        '/products/instalment-plans/{productId}','/forms/{userId}/{productId}',
+                                        '/forms/repayment-plan-trial','/forms','/users/{userId}','/users/{userId}',
+                                        '/credits/statues','/credits/statues','/credits/loginStatuses','/credits/statues',
+                                        '/credits/cities/{cityCode}','/credits/results/{typeCode}','/credits/cities',
+                                        '/credits/results/{typeCode}','/credits/results/{typeCode}','/credits/results/{typeCode}',
+                                        '/credits/results/{typeCode}','/files_get','/files_post','/files_put','/receipts/{applyCode}',
+                                        '/forms/statuses/{applyCode}'
+                                    ],
                             "relation":[{"bidCode":"['data']['data']['items'][0]['bidCode']"}]
                         },
                         {
                             "flowId":2,
+                            "wsFlow":['/bids','/bids/{bidCode}'],
+                            "relation":[{"bidCode":"['data']['data']['items'][0]['bidCode']"}]
+                        },
+                        {
+                            "flowId":3,
                             "wsFlow":['/forms','/forms/{applyCode}'],
-                            "relation":[{"['data']['applyCode']":"['data']['data']['items'][0]['bidCode']"}]
+                            // "relation":[{"['data']['applyCode']":"['data']['data']['items'][0]['bidCode']"}]
+                            "relation":[{"applyCode":"['data']['data']['items'][0]['bidCode']"}]
                         }
                     ]
                 };
@@ -288,7 +312,7 @@ var Content = React.createClass({
             // url : "http://dev.xxd.com/integrationPlatform/bids?keyType=2&keyValue=AO20170412000042&status=BIDDING&productCategory=P001&currentPage=1&pageSize=10s",
             url : "http://172.16.16.136:8080/tyrant/integrationPlatform/api-docs",
             success : function(data){
-                var arr = ['/forms','put'];
+                var arr = ['/products','get'];
                 console.log(data);
                 var wsName = arr[0];
                 var pathsData = {};
@@ -320,8 +344,8 @@ var Content = React.createClass({
                 var getO = {};
                 getO[arr[1]] = getData;
                 pathsData[wsName] = getO;
-                // console.log(pathsData);
-                // console.log(JSON.stringify(pathsData,null,4));
+                console.log(pathsData);
+                console.log(JSON.stringify(pathsData,null,4));
                 // data.data.list.map(o=>Object.assign(o,{expanded:false}))
                 // this.setState({
                 //     allWSData:data.data
