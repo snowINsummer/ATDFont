@@ -287,7 +287,7 @@ var FlowData = React.createClass({
                                     <label for="name">{o.name}：</label>
                                 </div>
                                 <div className="col-lg-6">
-                                    <textarea ref="jsonText" style={{height:'200px',fontWeight:'bold'}} className="form-control" defaultValue={JSON.stringify(o.default)} in={o.in} name={o.name}/>
+                                    <textarea ref="jsonText" style={{height:'200px',fontWeight:'bold'}} className="form-control" defaultValue={JSON.stringify(o.default,null,4)} in={o.in} name={o.name}/>
                                 </div>
                                 <div className="col-lg-5">
                                     <label for="name">{o.description}</label>

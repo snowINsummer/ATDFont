@@ -241,7 +241,1049 @@ var Content = React.createClass({
                                         }
                                     ]
                                 }
+                            },
+                            "/forms/reapplyStatuses": {
+                                "get": {
+                                    "summary": "进件检查",
+                                    "description": "是否允许重新进件",
+                                    "parameters": [
+                                        {
+                                            "name": "clientId",
+                                            "default": "XXD_LOAN_API",
+                                            "in": "header",
+                                            "description": "客户端ID"
+                                        },
+                                        {
+                                            "name": "clientTime",
+                                            "default": "1459845047000",
+                                            "in": "header",
+                                            "description": "客户端当前时间"
+                                        },
+                                        {
+                                            "name": "s",
+                                            "default": "0878b0790e427c8a35b05d0b5b4ff113",
+                                            "in": "header",
+                                            "description": "32 LENGTH CHARS"
+                                        },
+                                        {
+                                            "name": "idNo",
+                                            "default": "232700198912067312",
+                                            "in": "query",
+                                            "description": "身份证号"
+                                        }
+                                    ]
+                                }
+                            },
+                            "/products/{productId}": {
+                                "get": {
+                                    "summary": "产品详情",
+                                    "description": "查询单条记录",
+                                    "parameters": [
+                                        {
+                                            "name": "clientId",
+                                            "default": "XXD_LOAN_API",
+                                            "in": "header",
+                                            "description": "客户端ID"
+                                        },
+                                        {
+                                            "name": "clientTime",
+                                            "default": "1459845047000",
+                                            "in": "header",
+                                            "description": "客户端当前时间"
+                                        },
+                                        {
+                                            "name": "s",
+                                            "default": "0878b0790e427c8a35b05d0b5b4ff113",
+                                            "in": "header",
+                                            "description": "32 LENGTH CHARS"
+                                        },
+                                        {
+                                            "name": "productId",
+                                            "default": "2c9093f65bd29951015bd2a0f981000a",
+                                            "in": "path",
+                                            "description": "产品ID"
+                                        }
+                                    ]
+                                }
+                            },
+                            "/products/instalment-plans/{productId}": {
+                                "get": {
+                                    "summary": "分期计划",
+                                    "description": "查询单条记录",
+                                    "parameters": [
+                                        {
+                                            "name": "clientId",
+                                            "default": "XXD_LOAN_API",
+                                            "in": "header",
+                                            "description": "客户端ID"
+                                        },
+                                        {
+                                            "name": "clientTime",
+                                            "default": "1459845047000",
+                                            "in": "header",
+                                            "description": "客户端当前时间"
+                                        },
+                                        {
+                                            "name": "s",
+                                            "default": "0878b0790e427c8a35b05d0b5b4ff113",
+                                            "in": "header",
+                                            "description": "32 LENGTH CHARS"
+                                        },
+                                        {
+                                            "name": "productId",
+                                            "default": "2c9093f65bd29951015bd2a0f981000a",
+                                            "in": "path",
+                                            "description": "产品ID"
+                                        }
+                                    ]
+                                }
+                            },
+                            "/forms/{userId}/{productId}": {
+                                "get": {
+                                    "summary": "未提交申请单详情",
+                                    "description": "查询单条记录",
+                                    "parameters": [
+                                        {
+                                            "name": "clientId",
+                                            "default": "XXD_LOAN_API",
+                                            "in": "header",
+                                            "description": "客户端ID"
+                                        },
+                                        {
+                                            "name": "clientTime",
+                                            "default": "1459845047000",
+                                            "in": "header",
+                                            "description": "客户端当前时间"
+                                        },
+                                        {
+                                            "name": "s",
+                                            "default": "0878b0790e427c8a35b05d0b5b4ff113",
+                                            "in": "header",
+                                            "description": "32 LENGTH CHARS"
+                                        },
+                                        {
+                                            "name": "userId",
+                                            "default": 1,
+                                            "in": "path",
+                                            "description": "用户id"
+                                        },
+                                        {
+                                            "name": "productId",
+                                            "default": "2c9093f65bd29951015bd2a0f981000a",
+                                            "in": "path",
+                                            "description": "产品id"
+                                        }
+                                    ]
+                                }
+                            },
+                            "/forms/repayment-plan-trial": {
+                                "post": {
+                                    "summary": "还款计划试算",
+                                    "description": "预览",
+                                    "parameters": [
+                                        {
+                                            "name": "requestData",
+                                            "default": {
+                                                "data": {
+                                                    "applyCode": "AO20170412000042",
+                                                    "loanAmount": 2000.44,
+                                                    "loanDate": 1459845047000,
+                                                    "peroidValue": 12,
+                                                    "instalmentPlanId": "2c9093f65bd29951015bd2a03edb0000"
+                                                }
+                                            },
+                                            "in": "body",
+                                            "description": ""
+                                        },
+                                        {
+                                            "name": "clientId",
+                                            "default": "XXD_LOAN_API",
+                                            "in": "header",
+                                            "description": "客户端ID"
+                                        },
+                                        {
+                                            "name": "clientTime",
+                                            "default": "1459845047000",
+                                            "in": "header",
+                                            "description": "客户端当前时间"
+                                        },
+                                        {
+                                            "name": "s",
+                                            "default": "dd2a2f38d14be81783f5898e41ae545d",
+                                            "in": "header",
+                                            "description": "32 LENGTH CHARS"
+                                        }
+                                    ]
+                                }
+                            },
+                            "/forms": {
+                                "put": {
+                                    "summary": "生成/更新贷款申请单",
+                                    "description": "生成/更新",
+                                    "parameters": [
+                                        {
+                                            "name": "clientId",
+                                            "default": "XXD_LOAN_API",
+                                            "in": "header",
+                                            "description": "客户端ID"
+                                        },
+                                        {
+                                            "name": "clientTime",
+                                            "default": "1459845047000",
+                                            "in": "header",
+                                            "description": "客户端当前时间"
+                                        },
+                                        {
+                                            "name": "s",
+                                            "default": "1e23c0cd354c1a79726fb8d3c1f3651c",
+                                            "in": "header",
+                                            "description": "32 LENGTH CHARS"
+                                        },
+                                        {
+                                            "name": "requestData",
+                                            "default": {
+                                                "data": {
+                                                    "applyCode": "",
+                                                    "productId": "2c9093f65bd29951015bd2a0f981000a",
+                                                    "userId": 1,
+                                                    "mobile": "13122223333",
+                                                    "channel": "mobile",
+                                                    "productName": "审批产品一",
+                                                    "productType": "P001",
+                                                    "productSubType": "",
+                                                    "instalmentPlanId": "2c9093f65bd29951015bd2a03edb0000",
+                                                    "instalmentPlanName": "等额本息一",
+                                                    "repaymentMethod": "001",
+                                                    "loanAmount": 1000000,
+                                                    "period": 12,
+                                                    "periodUnit": "MONTH",
+                                                    "rate": 0.12,
+                                                    "rateType": "MONTH",
+                                                    "loanTitle": "loanTitle",
+                                                    "loanDescription": "loanDescription",
+                                                    "loanPurpose": "001",
+                                                    "awardType": "NONE",
+                                                    "awardValue": 0,
+                                                    "expiryDay": 15
+                                                }
+                                            },
+                                            "in": "body",
+                                            "description": ""
+                                        }
+                                    ]
+                                }
+                            },
+                            "/users/{userId}": {
+                                "get": {
+                                    "summary": "个人信息详情",
+                                    "description": "查询单条记录",
+                                    "parameters": [
+                                        {
+                                            "name": "clientId",
+                                            "default": "XXD_LOAN_API",
+                                            "in": "header",
+                                            "description": "客户端ID"
+                                        },
+                                        {
+                                            "name": "clientTime",
+                                            "default": "1459845047000",
+                                            "in": "header",
+                                            "description": "客户端当前时间"
+                                        },
+                                        {
+                                            "name": "s",
+                                            "default": "0878b0790e427c8a35b05d0b5b4ff113",
+                                            "in": "header",
+                                            "description": "32 LENGTH CHARS"
+                                        },
+                                        {
+                                            "name": "token",
+                                            "default": "hqB+6NnSabFXgMFRTQ2Qdw2zj2cwldwVabyI3cbd9IFim64lbxMcrAMjimC91hCsH3/qA9+p7Kc5kFkBGMhh8uPRT0aqwfpdyGkDzXqa8HY=",
+                                            "in": "header",
+                                            "description": "令牌"
+                                        },
+                                        {
+                                            "name": "userId",
+                                            "default": 1,
+                                            "in": "path",
+                                            "description": "用户ID"
+                                        }
+                                    ]
+                                }
+                            },
+                            "/users/{userId}": {
+                                "patch": {
+                                    "summary": "修改个人信息",
+                                    "description": "修改",
+                                    "parameters": [
+                                        {
+                                            "name": "clientId",
+                                            "default": "XXD_LOAN_API",
+                                            "in": "header",
+                                            "description": "客户端ID"
+                                        },
+                                        {
+                                            "name": "clientTime",
+                                            "default": "1459845047000",
+                                            "in": "header",
+                                            "description": "客户端当前时间"
+                                        },
+                                        {
+                                            "name": "s",
+                                            "default": "78316f08bc8635effdce79e41edb3d8f",
+                                            "in": "header",
+                                            "description": "32 LENGTH CHARS"
+                                        },
+                                        {
+                                            "name": "token",
+                                            "default": "hqB+6NnSabFXgMFRTQ2Qdw2zj2cwldwVabyI3cbd9IFim64lbxMcrAMjimC91hCsH3/qA9+p7Kc5kFkBGMhh8uPRT0aqwfpdyGkDzXqa8HY=",
+                                            "in": "header",
+                                            "description": "令牌"
+                                        },
+                                        {
+                                            "name": "requestData",
+                                            "default": {
+                                                "data": {
+                                                    "resideType": "Y",
+                                                    "resideProvinceCode": "310000",
+                                                    "resideCityCode": "310000",
+                                                    "resideAddress": "更新的居住地址",
+                                                    "homeTel": "更新的家庭电话",
+                                                    "companyName": "更新的公司名称",
+                                                    "industry": "3",
+                                                    "postType": "2",
+                                                    "companyProvinceCode": "310000",
+                                                    "companyCityCode": "310000",
+                                                    "companyAddress": "更新的单位地址",
+                                                    "companyTel": "更新的单位电话",
+                                                    "contactInfoList": [
+                                                        {
+                                                            "contactName": "更新的姓名",
+                                                            "contactType": "2",
+                                                            "mobile": "更新的手机号",
+                                                            "relationship": "7",
+                                                            "homePhone": "家庭电话",
+                                                            "comPhone": "单位电话"
+                                                        }
+                                                    ]
+                                                }
+                                            },
+                                            "in": "body",
+                                            "description": ""
+                                        },
+                                        {
+                                            "name": "userId",
+                                            "default": 1,
+                                            "in": "path",
+                                            "description": "用户ID"
+                                        }
+                                    ]
+                                }
+                            },
+                            "/credits/statuses": {
+                                "post": {
+                                    "summary": "是否已验证成功过",
+                                    "description": "查询状态",
+                                    "parameters": [
+                                        {
+                                            "name": "clientId",
+                                            "default": "XXD_LOAN_API",
+                                            "in": "header",
+                                            "description": "客户端ID"
+                                        },
+                                        {
+                                            "name": "clientTime",
+                                            "default": "1459845047000",
+                                            "in": "header",
+                                            "description": "客户端当前时间"
+                                        },
+                                        {
+                                            "name": "s",
+                                            "default": "ff29ae6913d0f00c769bb0a196bf6b70",
+                                            "in": "header",
+                                            "description": "32 LENGTH CHARS"
+                                        },
+                                        {
+                                            "name": "requestData",
+                                            "default": {
+                                                "data": {
+                                                    "userId": "1",
+                                                    "type": [
+                                                        "RESERVED_FUND",
+                                                        "SOCIAL_INSURANCE",
+                                                        "CREDIT_REPORT"
+                                                    ]
+                                                }
+                                            },
+                                            "in": "body",
+                                            "description": ""
+                                        }
+                                    ]
+                                }
+                            },
+                            "/credits/statuses": {
+                                "post": {
+                                    "summary": "是否已验证成功过",
+                                    "description": "查询状态",
+                                    "parameters": [
+                                        {
+                                            "name": "clientId",
+                                            "default": "XXD_LOAN_API",
+                                            "in": "header",
+                                            "description": "客户端ID"
+                                        },
+                                        {
+                                            "name": "clientTime",
+                                            "default": "1459845047000",
+                                            "in": "header",
+                                            "description": "客户端当前时间"
+                                        },
+                                        {
+                                            "name": "s",
+                                            "default": "ff29ae6913d0f00c769bb0a196bf6b70",
+                                            "in": "header",
+                                            "description": "32 LENGTH CHARS"
+                                        },
+                                        {
+                                            "name": "requestData",
+                                            "default": {
+                                                "data": {
+                                                    "userId": "1",
+                                                    "type": [
+                                                        "RESERVED_FUND",
+                                                        "SOCIAL_INSURANCE",
+                                                        "CREDIT_REPORT"
+                                                    ]
+                                                }
+                                            },
+                                            "in": "body",
+                                            "description": ""
+                                        }
+                                    ]
+                                }
+                            },
+                            "/credits/loginStatuses": {
+                                "post": {
+                                    "summary": "魔蝎银行登录回调",
+                                    "description": "神州融调用",
+                                    "parameters": [
+                                        {
+                                            "name": "clientId",
+                                            "default": "XXD_LOAN_API",
+                                            "in": "header",
+                                            "description": "客户端ID"
+                                        },
+                                        {
+                                            "name": "clientTime",
+                                            "default": "1459845047000",
+                                            "in": "header",
+                                            "description": "客户端当前时间"
+                                        },
+                                        {
+                                            "name": "s",
+                                            "default": "d331f1f8df6634c70d6f3d3db4db7cc5",
+                                            "in": "header",
+                                            "description": "32 LENGTH CHARS"
+                                        },
+                                        {
+                                            "name": "requestData",
+                                            "default": {
+                                                "data": {
+                                                    "username": "6222001001112435988",
+                                                    "result": "true",
+                                                    "message": "登录成功",
+                                                    "token": "d48ac090-3bb2-11e7-b86d-00163e0cf9f8",
+                                                    "user_id": 1
+                                                }
+                                            },
+                                            "in": "body",
+                                            "description": ""
+                                        }
+                                    ]
+                                }
+                            },
+                            "/credits/statuses": {
+                                "post": {
+                                    "summary": "是否已验证成功过",
+                                    "description": "查询状态",
+                                    "parameters": [
+                                        {
+                                            "name": "clientId",
+                                            "default": "XXD_LOAN_API",
+                                            "in": "header",
+                                            "description": "客户端ID"
+                                        },
+                                        {
+                                            "name": "clientTime",
+                                            "default": "1459845047000",
+                                            "in": "header",
+                                            "description": "客户端当前时间"
+                                        },
+                                        {
+                                            "name": "s",
+                                            "default": "ff29ae6913d0f00c769bb0a196bf6b70",
+                                            "in": "header",
+                                            "description": "32 LENGTH CHARS"
+                                        },
+                                        {
+                                            "name": "requestData",
+                                            "default": {
+                                                "data": {
+                                                    "userId": "1",
+                                                    "type": [
+                                                        "RESERVED_FUND",
+                                                        "SOCIAL_INSURANCE",
+                                                        "CREDIT_REPORT"
+                                                    ]
+                                                }
+                                            },
+                                            "in": "body",
+                                            "description": ""
+                                        }
+                                    ]
+                                }
+                            },
+                            "/credits/cities/{cityCode}": {
+                                "get": {
+                                    "summary": "获取公积金、社保区域表单",
+                                    "description": "从神州融获取",
+                                    "parameters": [
+                                        {
+                                            "name": "clientId",
+                                            "default": "XXD_LOAN_API",
+                                            "in": "header",
+                                            "description": "客户端ID"
+                                        },
+                                        {
+                                            "name": "clientTime",
+                                            "default": "1459845047000",
+                                            "in": "header",
+                                            "description": "客户端当前时间"
+                                        },
+                                        {
+                                            "name": "s",
+                                            "default": "0878b0790e427c8a35b05d0b5b4ff113",
+                                            "in": "header",
+                                            "description": "32 LENGTH CHARS"
+                                        },
+                                        {
+                                            "name": "type",
+                                            "default": "RESERVED_FUND",
+                                            "in": "query",
+                                            "description": "征信类型，一律以字符串传值。1： RESERVED_FUND 2： SOCIAL_INSURANCE"
+                                        },
+                                        {
+                                            "name": "cityCode",
+                                            "default": "00312900",
+                                            "in": "path",
+                                            "description": "区域编号"
+                                        }
+                                    ]
+                                }
+                            },
+                            "/credits/results/{typeCode}": {
+                                "post": {
+                                    "summary": "验证征信",
+                                    "description": "从神州融获取",
+                                    "parameters": [
+                                        {
+                                            "name": "clientId",
+                                            "default": "XXD_LOAN_API",
+                                            "in": "header",
+                                            "description": "客户端ID"
+                                        },
+                                        {
+                                            "name": "clientTime",
+                                            "default": "1459845047000",
+                                            "in": "header",
+                                            "description": "客户端当前时间"
+                                        },
+                                        {
+                                            "name": "s",
+                                            "default": "b20b4293d35fd405a231d1afb5f9514b",
+                                            "in": "header",
+                                            "description": "32 LENGTH CHARS"
+                                        },
+                                        {
+                                            "name": "token",
+                                            "default": "hqB+6NnSabFXgMFRTQ2Qd0r1hedvdTmBBDiY/PBJuzdB5pm3KHnlWY5QBUnojpvo7PMuMDUegpa/sGVUMF/zaaAw3tS9scaDx+sxN/ZlLXo=",
+                                            "in": "header",
+                                            "description": "令牌"
+                                        },
+                                        {
+                                            "name": "requestData",
+                                            "default": {
+                                                "data":{"type":"auth_auto","sort":"002122200000-1212","website":"housingfund_dalian", "name":"张君未","id_card_num":"211422198903060925","cell_phone_num":"18500817089", "field_info":[{"field_name":"joint_card_num","field_value":"6212263400006390636"}, {"field_name":"password","field_value":"198936"}]}
+                                            },
+                                            "in": "body",
+                                            "description": ""
+                                        },
+                                        {
+                                            "name": "typeCode",
+                                            "default": "1",
+                                            "in": "path",
+                                            "description": "征信类型，一律以数字传值。1： RESERVED_FUND 2： SOCIAL_INSURANCE 3： CREDIT_REPORT 4：EB 5： OPERATOR 6: BANK_STATEMENT"
+                                        }
+                                    ]
+                                }
+                            },
+                            "/credits/cities": {
+                                "get": {
+                                    "summary": "获取公积金、社保支持区域",
+                                    "description": "从神州融获取",
+                                    "parameters": [
+                                        {
+                                            "name": "clientId",
+                                            "default": "XXD_LOAN_API",
+                                            "in": "header",
+                                            "description": "客户端ID"
+                                        },
+                                        {
+                                            "name": "clientTime",
+                                            "default": "1459845047000",
+                                            "in": "header",
+                                            "description": "客户端当前时间"
+                                        },
+                                        {
+                                            "name": "s",
+                                            "default": "0878b0790e427c8a35b05d0b5b4ff113",
+                                            "in": "header",
+                                            "description": "32 LENGTH CHARS"
+                                        },
+                                        {
+                                            "name": "type",
+                                            "default": "RESERVED_FUND",
+                                            "in": "query",
+                                            "description": "征信类型，一律以字符串传值。1： RESERVED_FUND 2： SOCIAL_INSURANCE"
+                                        }
+                                    ]
+                                }
+                            },
+                            "/credits/results/{typeCode}": {
+                                "post": {
+                                    "summary": "验证征信",
+                                    "description": "从神州融获取",
+                                    "parameters": [
+                                        {
+                                            "name": "clientId",
+                                            "default": "XXD_LOAN_API",
+                                            "in": "header",
+                                            "description": "客户端ID"
+                                        },
+                                        {
+                                            "name": "clientTime",
+                                            "default": "1459845047000",
+                                            "in": "header",
+                                            "description": "客户端当前时间"
+                                        },
+                                        {
+                                            "name": "s",
+                                            "default": "b20b4293d35fd405a231d1afb5f9514b",
+                                            "in": "header",
+                                            "description": "32 LENGTH CHARS"
+                                        },
+                                        {
+                                            "name": "token",
+                                            "default": "hqB+6NnSabFXgMFRTQ2Qd0r1hedvdTmBBDiY/PBJuzdB5pm3KHnlWY5QBUnojpvo7PMuMDUegpa/sGVUMF/zaaAw3tS9scaDx+sxN/ZlLXo=",
+                                            "in": "header",
+                                            "description": "令牌"
+                                        },
+                                        {
+                                            "name": "requestData",
+                                            "default": {
+                                                "data":{"type":"auth_auto","sort":"002122200000-1212","website":"housingfund_dalian", "name":"张君未","id_card_num":"211422198903060925","cell_phone_num":"18500817089", "field_info":[{"field_name":"joint_card_num","field_value":"6212263400006390636"}, {"field_name":"password","field_value":"198936"}]}
+                                            },
+                                            "in": "body",
+                                            "description": ""
+                                        },
+                                        {
+                                            "name": "typeCode",
+                                            "default": "1",
+                                            "in": "path",
+                                            "description": "征信类型，一律以数字传值。1： RESERVED_FUND 2： SOCIAL_INSURANCE 3： CREDIT_REPORT 4：EB 5： OPERATOR 6: BANK_STATEMENT"
+                                        }
+                                    ]
+                                }
+                            },
+                            "/credits/results/{typeCode}": {
+                                "post": {
+                                    "summary": "验证征信",
+                                    "description": "从神州融获取",
+                                    "parameters": [
+                                        {
+                                            "name": "clientId",
+                                            "default": "XXD_LOAN_API",
+                                            "in": "header",
+                                            "description": "客户端ID"
+                                        },
+                                        {
+                                            "name": "clientTime",
+                                            "default": "1459845047000",
+                                            "in": "header",
+                                            "description": "客户端当前时间"
+                                        },
+                                        {
+                                            "name": "s",
+                                            "default": "b20b4293d35fd405a231d1afb5f9514b",
+                                            "in": "header",
+                                            "description": "32 LENGTH CHARS"
+                                        },
+                                        {
+                                            "name": "token",
+                                            "default": "hqB+6NnSabFXgMFRTQ2Qd0r1hedvdTmBBDiY/PBJuzdB5pm3KHnlWY5QBUnojpvo7PMuMDUegpa/sGVUMF/zaaAw3tS9scaDx+sxN/ZlLXo=",
+                                            "in": "header",
+                                            "description": "令牌"
+                                        },
+                                        {
+                                            "name": "requestData",
+                                            "default": {
+                                                "data":{"type":"auth_auto","sort":"002122200000-1212","website":"housingfund_dalian", "name":"张君未","id_card_num":"211422198903060925","cell_phone_num":"18500817089", "field_info":[{"field_name":"joint_card_num","field_value":"6212263400006390636"}, {"field_name":"password","field_value":"198936"}]}
+                                            },
+                                            "in": "body",
+                                            "description": ""
+                                        },
+                                        {
+                                            "name": "typeCode",
+                                            "default": "1",
+                                            "in": "path",
+                                            "description": "征信类型，一律以数字传值。1： RESERVED_FUND 2： SOCIAL_INSURANCE 3： CREDIT_REPORT 4：EB 5： OPERATOR 6: BANK_STATEMENT"
+                                        }
+                                    ]
+                                }
+                            },
+                            "/credits/results/{typeCode}": {
+                                "post": {
+                                    "summary": "验证征信",
+                                    "description": "从神州融获取",
+                                    "parameters": [
+                                        {
+                                            "name": "clientId",
+                                            "default": "XXD_LOAN_API",
+                                            "in": "header",
+                                            "description": "客户端ID"
+                                        },
+                                        {
+                                            "name": "clientTime",
+                                            "default": "1459845047000",
+                                            "in": "header",
+                                            "description": "客户端当前时间"
+                                        },
+                                        {
+                                            "name": "s",
+                                            "default": "b20b4293d35fd405a231d1afb5f9514b",
+                                            "in": "header",
+                                            "description": "32 LENGTH CHARS"
+                                        },
+                                        {
+                                            "name": "token",
+                                            "default": "hqB+6NnSabFXgMFRTQ2Qd0r1hedvdTmBBDiY/PBJuzdB5pm3KHnlWY5QBUnojpvo7PMuMDUegpa/sGVUMF/zaaAw3tS9scaDx+sxN/ZlLXo=",
+                                            "in": "header",
+                                            "description": "令牌"
+                                        },
+                                        {
+                                            "name": "requestData",
+                                            "default": {
+                                                "data":{"type":"auth_auto","sort":"002122200000-1212","website":"housingfund_dalian", "name":"张君未","id_card_num":"211422198903060925","cell_phone_num":"18500817089", "field_info":[{"field_name":"joint_card_num","field_value":"6212263400006390636"}, {"field_name":"password","field_value":"198936"}]}
+                                            },
+                                            "in": "body",
+                                            "description": ""
+                                        },
+                                        {
+                                            "name": "typeCode",
+                                            "default": "1",
+                                            "in": "path",
+                                            "description": "征信类型，一律以数字传值。1： RESERVED_FUND 2： SOCIAL_INSURANCE 3： CREDIT_REPORT 4：EB 5： OPERATOR 6: BANK_STATEMENT"
+                                        }
+                                    ]
+                                }
+                            },
+                            "/credits/results/{typeCode}": {
+                                "post": {
+                                    "summary": "验证征信",
+                                    "description": "从神州融获取",
+                                    "parameters": [
+                                        {
+                                            "name": "clientId",
+                                            "default": "XXD_LOAN_API",
+                                            "in": "header",
+                                            "description": "客户端ID"
+                                        },
+                                        {
+                                            "name": "clientTime",
+                                            "default": "1459845047000",
+                                            "in": "header",
+                                            "description": "客户端当前时间"
+                                        },
+                                        {
+                                            "name": "s",
+                                            "default": "b20b4293d35fd405a231d1afb5f9514b",
+                                            "in": "header",
+                                            "description": "32 LENGTH CHARS"
+                                        },
+                                        {
+                                            "name": "token",
+                                            "default": "hqB+6NnSabFXgMFRTQ2Qd0r1hedvdTmBBDiY/PBJuzdB5pm3KHnlWY5QBUnojpvo7PMuMDUegpa/sGVUMF/zaaAw3tS9scaDx+sxN/ZlLXo=",
+                                            "in": "header",
+                                            "description": "令牌"
+                                        },
+                                        {
+                                            "name": "requestData",
+                                            "default": {
+                                                "data":{"type":"auth_auto","sort":"002122200000-1212","website":"housingfund_dalian", "name":"张君未","id_card_num":"211422198903060925","cell_phone_num":"18500817089", "field_info":[{"field_name":"joint_card_num","field_value":"6212263400006390636"}, {"field_name":"password","field_value":"198936"}]}
+                                            },
+                                            "in": "body",
+                                            "description": ""
+                                        },
+                                        {
+                                            "name": "typeCode",
+                                            "default": "1",
+                                            "in": "path",
+                                            "description": "征信类型，一律以数字传值。1： RESERVED_FUND 2： SOCIAL_INSURANCE 3： CREDIT_REPORT 4：EB 5： OPERATOR 6: BANK_STATEMENT"
+                                        }
+                                    ]
+                                }
+                            },
+                            "/files": {
+                                "get": {
+                                    "summary": "查看列表",
+                                    "description": "分页查询所有记录",
+                                    "parameters": [
+                                        {
+                                            "name": "clientId",
+                                            "default": "XXD_LOAN_API",
+                                            "in": "header",
+                                            "description": "客户端ID"
+                                        },
+                                        {
+                                            "name": "clientTime",
+                                            "default": "1459845047000",
+                                            "in": "header",
+                                            "description": "客户端当前时间"
+                                        },
+                                        {
+                                            "name": "s",
+                                            "default": "0878b0790e427c8a35b05d0b5b4ff113",
+                                            "in": "header",
+                                            "description": "32 LENGTH CHARS"
+                                        },
+                                        {
+                                            "name": "applyCode",
+                                            "default": "AO20170412000042",
+                                            "in": "query",
+                                            "description": "进件编号"
+                                        },
+                                        {
+                                            "name": "bidCode",
+                                            "default": "test",
+                                            "in": "query",
+                                            "description": "标的编号"
+                                        },
+                                        {
+                                            "name": "categoryCode",
+                                            "default": 111,
+                                            "in": "query",
+                                            "description": "分类ID"
+                                        },
+                                        {
+                                            "name": "userId",
+                                            "default": 1000,
+                                            "in": "query",
+                                            "description": "用户ID"
+                                        },
+                                        {
+                                            "name": "sourceType",
+                                            "default": "FRONTEND",
+                                            "in": "query",
+                                            "description": "进件来源（FRONTEND:前台,BACKEND:后台）"
+                                        },
+                                        {
+                                            "name": "watermarkFlag",
+                                            "default": "WATERMARK_NO",
+                                            "in": "query",
+                                            "description": "是否需要水印"
+                                        },
+                                        {
+                                            "name": "thumbnailFlag",
+                                            "default": "THUMBNAIL_NO",
+                                            "in": "query",
+                                            "description": "是否需要缩略图"
+                                        },
+                                        {
+                                            "name": "currentPage",
+                                            "default": 1,
+                                            "in": "query",
+                                            "description": "页码"
+                                        },
+                                        {
+                                            "name": "pageSize",
+                                            "default": 10,
+                                            "in": "query",
+                                            "description": "每页数据的条目"
+                                        }
+                                    ]
+                                }
+                            },
+                            "/files": {
+                                "get": {}
+                            },
+                            "/files": {
+                                "put": {
+                                    "summary": "上传",
+                                    "description": "新增或修改记录",
+                                    "parameters": [
+                                        {
+                                            "name": "clientId",
+                                            "default": "XXD_LOAN_API",
+                                            "in": "header",
+                                            "description": "客户端ID"
+                                        },
+                                        {
+                                            "name": "clientTime",
+                                            "default": "1459845047000",
+                                            "in": "header",
+                                            "description": "客户端当前时间"
+                                        },
+                                        {
+                                            "name": "s",
+                                            "default": "520a3efcbba3969cebeb56f9807fffd7",
+                                            "in": "header",
+                                            "description": "32 LENGTH CHARS"
+                                        },
+                                        {
+                                            "name": "requestData",
+                                            "default": {
+                                                "data": {
+                                                    "userId": 116245,
+                                                    "applyCode": "AO20170412000042",
+                                                    "bidCode": "test",
+                                                    "categoryCode": "111",
+                                                    "sourceType": "FRONTEND",
+                                                    "propertyCodes": "1",
+                                                    "fileId": 23,
+                                                    "fileType": "TXT",
+                                                    "applyFileId": 111
+                                                }
+                                            },
+                                            "in": "body",
+                                            "description": ""
+                                        }
+                                    ]
+                                }
+                            },
+                            "/receipts/{applyCode}": {
+                                "put": {
+                                    "summary": "提交进件",
+                                    "description": "拼接所有必需参数提交给神州融",
+                                    "parameters": [
+                                        {
+                                            "name": "clientId",
+                                            "default": "XXD_LOAN_API",
+                                            "in": "header",
+                                            "description": "客户端ID"
+                                        },
+                                        {
+                                            "name": "clientTime",
+                                            "default": "1459845047000",
+                                            "in": "header",
+                                            "description": "客户端当前时间"
+                                        },
+                                        {
+                                            "name": "s",
+                                            "default": "2b3464ae43ba5628e3e5a79d8cd4039d",
+                                            "in": "header",
+                                            "description": "32 LENGTH CHARS"
+                                        },
+                                        {
+                                            "name": "token",
+                                            "default": "hqB+6NnSabFXgMFRTQ2Qd1wYibVnD7mD0maJvRJYRUouLs7vVPcwfD642B8uk2UeA0YHECuksbX20Y8mjDbudE7xTcd6NhNmKFXDUF5bCi8=",
+                                            "in": "header",
+                                            "description": "令牌"
+                                        },
+                                        {
+                                            "name": "requestData",
+                                            "default": {
+                                                "data": {
+                                                    "deviceType": 1,
+                                                    "gpsInfo": {
+                                                        "gpsAuthorized": "Y",
+                                                        "gpsProvince": "CODE",
+                                                        "gpsCity": "CODE",
+                                                        "gpsDistrict": "CODE",
+                                                        "gpsPosition": "具体地址",
+                                                        "ipAddress": "127.0.0.1"
+                                                    },
+                                                    "mobileContactList": [
+                                                        {
+                                                            "contactName": "联系人姓名",
+                                                            "contactMobile": "手机",
+                                                            "contactBizPhone": "单位电话"
+                                                        }
+                                                    ],
+                                                    "mobileAppList": [
+                                                        {
+                                                            "name": "qq"
+                                                        }
+                                                    ],
+                                                    "smsList": [],
+                                                    "tdBlackBox": "blackBoxValue"
+                                                }
+                                            },
+                                            "in": "body",
+                                            "description": ""
+                                        },
+                                        {
+                                            "name": "applyCode",
+                                            "default": "LOAN_APPLY20170511152658000222",
+                                            "in": "path",
+                                            "description": "贷款申请单编号"
+                                        }
+                                    ]
+                                }
+                            },
+                            "/forms/statuses/{applyCode}": {
+                                "patch": {
+                                    "summary": "更改申请单状态",
+                                    "description": "更改状态",
+                                    "parameters": [
+                                        {
+                                            "name": "clientId",
+                                            "default": "XXD_LOAN_API",
+                                            "in": "header",
+                                            "description": "客户端ID"
+                                        },
+                                        {
+                                            "name": "clientTime",
+                                            "default": "1459845047000",
+                                            "in": "header",
+                                            "description": "客户端当前时间"
+                                        },
+                                        {
+                                            "name": "s",
+                                            "default": "a00a198e46175b736a8748800f84f63b",
+                                            "in": "header",
+                                            "description": "32 LENGTH CHARS"
+                                        },
+                                        {
+                                            "name": "requestData",
+                                            "default": {
+                                                "data": {
+                                                    "status": "APPLY_SUCCESS",
+                                                    "notifyUser": "Y"
+                                                }
+                                            },
+                                            "in": "body",
+                                            "description": ""
+                                        },
+                                        {
+                                            "name": "applyCode",
+                                            "default": "LOAN_APPLY20170511152658000222",
+                                            "in": "path",
+                                            "description": "申请单编号"
+                                        }
+                                    ]
+                                }
                             }
+
 
 
 
@@ -262,10 +1304,11 @@ var Content = React.createClass({
                         "moduleName":"进件平台",
                         "flowData":[
                                     {"flowId":1,"flowName":"全流程"},
-                                    {"flowId":2,"flowName":"获取标的详情"},
-                                    {"flowId":3,"flowName":"生成贷款申请单及查看"}
+                                    // {"flowId":2,"flowName":"获取标的详情"},
+                                    // {"flowId":3,"flowName":"生成贷款申请单及查看"}
                         ]
                     },
+/*
                     {
                         "id":2,
                         "projectId": 1,
@@ -273,7 +1316,9 @@ var Content = React.createClass({
                         "flowData":[
                                     {"flowId":4,"flowName":"交易成功"}
                         ]
-                    }],
+                    }
+*/
+                    ],
                     // 定义接口流程顺序、关联的字段及定位路径
                     // relation[0] 代表 wsFlow[0]和wsFlow[1] 之间的关系
                     wsFlow:[
@@ -282,13 +1327,14 @@ var Content = React.createClass({
                             "wsFlow":['/products','/forms/reapplyStatuses','/products/{productId}',
                                         '/products/instalment-plans/{productId}','/forms/{userId}/{productId}',
                                         '/forms/repayment-plan-trial','/forms','/users/{userId}','/users/{userId}',
-                                        '/credits/statues','/credits/statues','/credits/loginStatuses','/credits/statues',
+                                        '/credits/statuses','/credits/statuses','/credits/loginStatuses','/credits/statuses',
                                         '/credits/cities/{cityCode}','/credits/results/{typeCode}','/credits/cities',
                                         '/credits/results/{typeCode}','/credits/results/{typeCode}','/credits/results/{typeCode}',
-                                        '/credits/results/{typeCode}','/files_get','/files_post','/files_put','/receipts/{applyCode}',
+                                        '/credits/results/{typeCode}','/files','/files','/files','/receipts/{applyCode}',
                                         '/forms/statuses/{applyCode}'
                                     ],
-                            "relation":[{"bidCode":"['data']['data']['items'][0]['bidCode']"}]
+                            
+                            "relation":[{"bidCode":"['data']['data']['items'][1]['bidCode']"}]
                         },
                         {
                             "flowId":2,
@@ -312,8 +1358,8 @@ var Content = React.createClass({
             // url : "http://dev.xxd.com/integrationPlatform/bids?keyType=2&keyValue=AO20170412000042&status=BIDDING&productCategory=P001&currentPage=1&pageSize=10s",
             url : "http://172.16.16.136:8080/tyrant/integrationPlatform/api-docs",
             success : function(data){
-                var arr = ['/products','get'];
-                console.log(data);
+                var arr = ['/files','put'];
+                console.log(data.data.paths);
                 var wsName = arr[0];
                 var pathsData = {};
                 var newP = [];
@@ -370,9 +1416,10 @@ var Content = React.createClass({
         // 新增、数据后会返回该条数据所有字段信息，不需要做上面的功能
         // TODO
         // 1、之后的接口可能是post put patch，需要解析替换对应的字段
-        // 2、token的获取方式
-        // 3、验证功能
-        
+        //      做全局的变量池，定义返回中需要存的变量
+        // 2、实时获取sign、token的值，调开发接口
+        // 3、流程有更改
+
         this.setState({
             flowIndex:index,
             selectedFlow:data,
