@@ -268,6 +268,29 @@ var FlowData = React.createClass({
                         </div>
                     </div>
                     <hr style={{border:'1px solid #000',marginTop: '10px'}}></hr>
+                    <div className="row" style={{marginTop:'20px'}}>
+                        <div className="col-lg-2">
+                            <a onClick={this.sendMessage.bind(this,o.url,o.type,flowLen,flowIndex,selectedFlow)} className="large blue button" filetype="0" >
+                            Submit</a>
+                        </div>
+                        <div className="col-lg-4" style={{fontSize:'12px',textAlign:'left'}}>
+                            <label for="name">第{flowIndex+1}步，一共{flowLen}个步骤。</label>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-lg-2" id={flowIndex>0?'':'disC'}>
+                            <a href="#" onClick={this.prevFlow.bind(this,selectedFlow,flowLen,flowIndex,flowRelation)} className="large blue button">
+                                Prev
+                            </a>
+                        </div>
+                        <div className="col-lg-2" id={flowIndex<flowLen-1?'':'disC'}>
+                            <a href="#" onClick={this.nextFlow.bind(this,selectedFlow,flowLen,flowIndex,flowRelation)} className="large blue button">
+                                Next
+                            </a>
+                        </div>
+                    </div>
+                    <hr style={{border:'1px solid #000',marginTop: '20px'}}></hr>
+
                     {
                         o.parameters.map(o=>
                             <div key={o.description} className="row">
@@ -297,27 +320,6 @@ var FlowData = React.createClass({
                             </div>)
                     }
                     <hr style={{border:'1px solid #000',marginTop: '20px'}}></hr>
-                    <div className="row" style={{marginTop:'20px'}}>
-                        <div className="col-lg-2">
-                            <a onClick={this.sendMessage.bind(this,o.url,o.type,flowLen,flowIndex,selectedFlow)} className="large blue button" filetype="0" >
-                            Submit</a>
-                        </div>
-                        <div className="col-lg-4" style={{fontSize:'12px',textAlign:'left'}}>
-                            <label for="name">第{flowIndex+1}步，一共{flowLen}个步骤。</label>
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col-lg-2" id={flowIndex>0?'':'disC'}>
-                            <a href="#" onClick={this.prevFlow.bind(this,selectedFlow,flowLen,flowIndex,flowRelation)} className="large blue button">
-                                Prev
-                            </a>
-                        </div>
-                        <div className="col-lg-2" id={flowIndex<flowLen-1?'':'disC'}>
-                            <a href="#" onClick={this.nextFlow.bind(this,selectedFlow,flowLen,flowIndex,flowRelation)} className="large blue button">
-                                Next
-                            </a>
-                        </div>
-                    </div>
                     <div className="rsp">
                         <div className="form-group">
                             <label className="col-lg-2" style={{paddingLeft:'0px'}} for="name">接口返回：</label>
