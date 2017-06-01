@@ -190,8 +190,16 @@ var FlowData = React.createClass({
         });
     },
 
+    clearAllParameters(){
+        if (confirm("清除所有变量缓存！")){
+            var allRsp = window.localStorage.getItem("allRsp");
+            window.localStorage.clear();
+            window.localStorage.setItem("allRsp",allRsp);   
+        }
+    },
+
     clearCache(){
-        window.localStorage.clear();
+        window.localStorage.setItem("allRsp","");
         var o = this.refs['sectionForm'];
         var textarea = o.getElementsByTagName('textarea');
         o.getElementsByTagName('textarea')[textarea.length-1].value = "";
@@ -288,6 +296,11 @@ var FlowData = React.createClass({
                                 Next
                             </a>
                         </div>
+                        <div className="col-lg-3">
+                            <a style={{width:'150px'}} onClick={this.clearAllParameters} className="large red button">
+                                清除所有变量缓存
+                            </a>
+                        </div>
                     </div>
                     <hr style={{border:'1px solid #000',marginTop: '20px'}}></hr>
 
@@ -312,7 +325,7 @@ var FlowData = React.createClass({
                                     <label for="name">{o.name}：</label>
                                 </div>
                                 <div className="col-lg-6">
-                                    <textarea ref="jsonText" style={{height:'200px',fontWeight:'bold'}} className="form-control" defaultValue={JSON.stringify(o.default,null,4)} in={o.in} name={o.name}/>
+                                    <textarea ref="jsonText" style={{height:'300px',fontWeight:'bold'}} className="form-control" defaultValue={JSON.stringify(o.default,null,4)} in={o.in} name={o.name}/>
                                 </div>
                                 <div className="col-lg-5">
                                     <label for="name">{o.description}</label>
