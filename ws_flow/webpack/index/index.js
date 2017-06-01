@@ -1295,7 +1295,6 @@ var Content = React.createClass({
                     arrflowData:[],
                     selectedFlow:[],
                     flowRelation:[],
-                    replaceParameters:{},
                     // 定义左侧树的流程列表
                     projectList:[
                     {
@@ -1324,7 +1323,25 @@ var Content = React.createClass({
                     wsFlow:[
                         {
                             "flowId":1,
-                            "wsFlow":['/products','/forms/reapplyStatuses','/products/{productId}',
+                            "wsFlow":[
+                                        {
+                                            name:'/products',
+                                            saveParameters:{
+                                                                productId:"['data']['data']['items'][1]['productId']",
+                                                                productName:"['data']['data']['items'][1]['productName']"
+                                                            },
+                                            // relation:{productId:"productId"}
+                                        },
+                                        {
+                                            name:'/forms/reapplyStatuses',
+                                            saveParameters:{},
+                                            relation:{}
+                                        },
+                                        {
+                                            name:'/products/{productId}',
+                                            saveParameters:{},
+                                            relation:{productId:"productId"}
+                                        },
                                         '/products/instalment-plans/{productId}','/forms/{userId}/{productId}',
                                         '/forms/repayment-plan-trial','/forms','/users/{userId}','/users/{userId}',
                                         '/credits/statuses','/credits/statuses','/credits/loginStatuses','/credits/statuses',
@@ -1390,8 +1407,8 @@ var Content = React.createClass({
                 var getO = {};
                 getO[arr[1]] = getData;
                 pathsData[wsName] = getO;
-                console.log(pathsData);
-                console.log(JSON.stringify(pathsData,null,4));
+                // console.log(pathsData);
+                // console.log(JSON.stringify(pathsData,null,4));
                 // data.data.list.map(o=>Object.assign(o,{expanded:false}))
                 // this.setState({
                 //     allWSData:data.data
@@ -1402,12 +1419,12 @@ var Content = React.createClass({
 
 /**
  * [setFlow description]
- * @param {[type]} data         [description]
+ * @param {[type]} selectedFlow [description]
  * @param {[type]} index        [description]
  * @param {[type]} pageHeight   [description]
  * @param {[type]} flowRelation [description]
  */
-	setFlow(data,index,pageHeight,flowRelation){
+	setFlow(selectedFlow,index,pageHeight,flowRelation){
         /*
         // put成功后，需要调用查询接口，
         // 此时需要根据put接口的入参（多个）作为查询条件
@@ -1422,13 +1439,15 @@ var Content = React.createClass({
 
         this.setState({
             flowIndex:index,
-            selectedFlow:data,
+            selectedFlow:selectedFlow,
             pageHeight:pageHeight,
             flowRelation:flowRelation
         });
         var allWSData = this.state.allWSData;
         var paths = allWSData.paths;
-        var wsName = data[index];
+        var flow = selectedFlow[index];
+        var wsName = flow.name;
+        // console.log(wsName);
         var getWSData = paths[wsName];
         var type = [];
         for(var key in getWSData){
@@ -1459,12 +1478,6 @@ var Content = React.createClass({
 		// 把接口的数据传给需要用的组件，生成dom
 	},
 
-    setReplaceParameters(replaceParameters){
-        this.setState({
-            replaceParameters:replaceParameters
-        });
-    },
-
     setPageHeight(pageHeight){
         this.setState({
             pageHeight:pageHeight
@@ -1481,8 +1494,6 @@ var Content = React.createClass({
         props.flowIndex = this.state.flowIndex;
         props.selectedFlow = this.state.selectedFlow;
         props.flowRelation = this.state.flowRelation;
-        props.setReplaceParameters = this.setReplaceParameters;
-        props.replaceParameters = this.state.replaceParameters;
         props.setPageHeight = this.setPageHeight;
 
         return(

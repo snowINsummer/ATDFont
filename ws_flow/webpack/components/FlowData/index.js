@@ -19,17 +19,19 @@ var FlowData = React.createClass({
 
     },
 
-    sendMessage:function(url,type,flowRelation,flowLen,flowIndex,replaceParameters){
+    sendMessage:function(url,type,flowLen,flowIndex,selectedFlow){
         var o = this.refs['sectionForm'];
         var inputs = o.getElementsByTagName('input');
         var len = inputs.length;
-        for(var key in replaceParameters){
+
+        var flowRelation = selectedFlow[flowIndex].relation;
+        for(var key in flowRelation){
             if(key.indexOf("[") === 0){
                 // 处理key，根据key获取需要被替换的字段
                 var requestData = this.refs['jsonText'];
                 var jsonText = requestData.value;
                 var jsonObj = JSON.parse(jsonText);
-                eval("jsonObj"+key+"='"+replaceParameters[key]+"'");
+                eval("jsonObj"+key+"='"+window.localStorage.getItem(flowRelation[key])+"'");
                 // console.log("replaced requestData------>  ");
                 // console.log(jsonObj);
                 requestData.value = JSON.stringify(jsonObj);
@@ -39,11 +41,10 @@ var FlowData = React.createClass({
                 var input = inputs[i];
                 // console.log(input.name);
                 if (input.name === key){
-                    input.value = replaceParameters[key]
+                    input.value = window.localStorage.getItem(flowRelation[key]);
                 }
             }
         }
-        // console.log(replaceParameters);
         // 定义请求报文
         var req = {
             url:url,
@@ -89,18 +90,20 @@ var FlowData = React.createClass({
             // url:"http://172.16.16.136:8080/tyrant/ws/sendMessage", 
             url:"http://localhost:8080/ws/sendMessage", 
             success:function(data){
-                var flowRelationValue = {};
-                if (flowIndex<flowLen-1 && flowIndex>=0){
-                    if (undefined != flowRelation){
-                        var relation = flowRelation[flowIndex];
-                        for(var key in relation){
-                            var tempkey = "";
-                            eval("tempkey = data"+relation[key]);
-                            flowRelationValue[key] = tempkey;
-                        }
-                    }
-                    this.props.setReplaceParameters(flowRelationValue);
+                // 保存全局变量
+                var saveParameters = selectedFlow[flowIndex].saveParameters;
+                // console.log(saveParameters);
+                for(var saveP in saveParameters){
+                    var tempValue = "";
+                    eval("tempValue = data"+saveParameters[saveP]);
+                    window.localStorage.setItem(saveP,tempValue);
+                    // console.log(tempValue);
+                    // console.log(window.localStorage.getItem(saveP));
                 }
+
+
+                
+               
 
                 // console.log(JSON.stringify(data,null,4));
                 this.refs['rspBody'].style.height = '500px';
@@ -248,7 +251,6 @@ var FlowData = React.createClass({
         var flowLen = selectedFlow.length;
         var flowIndex = this.props.flowIndex;
         var flowRelation = this.props.flowRelation;
-        var replaceParameters = this.props.replaceParameters;
         var rspBCFlag = this.state.rspBCFlag;
         var allRsp = window.localStorage.getItem('allRsp');
         allRsp = allRsp==null?'':allRsp;
@@ -297,7 +299,7 @@ var FlowData = React.createClass({
                     <hr style={{border:'1px solid #000',marginTop: '20px'}}></hr>
                     <div className="row" style={{marginTop:'20px'}}>
                         <div className="col-lg-2">
-                            <a onClick={this.sendMessage.bind(this,o.url,o.type,flowRelation,flowLen,flowIndex,replaceParameters)} className="large blue button" filetype="0" >
+                            <a onClick={this.sendMessage.bind(this,o.url,o.type,flowLen,flowIndex,selectedFlow)} className="large blue button" filetype="0" >
                             Submit</a>
                         </div>
                         <div className="col-lg-4" style={{fontSize:'12px',textAlign:'left'}}>
