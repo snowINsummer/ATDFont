@@ -1812,6 +1812,7 @@ var Content = React.createClass({
                     ]
                 };
     },
+    /*
     componentDidMount(){
         $.ajax({
             type : "GET",
@@ -1865,7 +1866,7 @@ var Content = React.createClass({
                 getO[arr[1]] = getData;
                 pathsData[wsName] = getO;
                 // console.log(pathsData);
-                console.log(JSON.stringify(pathsData,null,4));
+                // console.log(JSON.stringify(pathsData,null,4));
                 // data.data.list.map(o=>Object.assign(o,{expanded:false}))
                 // this.setState({
                 //     allWSData:data.data
@@ -1910,6 +1911,7 @@ var Content = React.createClass({
             }.bind(this)
         });
     },
+*/
 
 /**
  * [setFlow description]

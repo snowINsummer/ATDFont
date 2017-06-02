@@ -20,6 +20,7 @@ var FlowData = React.createClass({
     },
 
     sendMessage:function(url,type,flowLen,flowIndex,selectedFlow){
+        this.refs['rspBody'].value = "";
         var o = this.refs['sectionForm'];
         var inputs = o.getElementsByTagName('input');
         var len = inputs.length;
@@ -79,7 +80,7 @@ var FlowData = React.createClass({
         req['parameters'] = parameters;
         if (type.toLowerCase() != 'get'){
             var jsonText = this.refs['jsonText'];
-            console.log(jsonText);
+            // console.log(jsonText);
             req['json'] = jsonText===undefined?'':jsonText.value;
             // console.log("requestData------>  "+jsonText.value);
         }
@@ -281,7 +282,7 @@ var FlowData = React.createClass({
                 arrflowData[index].bodyParameters = bodyParameters;
             }
         });
-        console.log(arrflowData);
+        // console.log(arrflowData);
 
         var rspBCFlag = this.state.rspBCFlag;
         var allRsp = window.localStorage.getItem('allRsp');
