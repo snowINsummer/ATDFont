@@ -182,11 +182,1279 @@ var Content = React.createClass({
                                         }
                                     ]
                                 }
+                            },
+                            "/user/appro/autoRealname": {
+                                "post": {
+                                    "basePath": "/userCenter",
+                                    "summary": "提交鹏元审核实名认证接口",
+                                    "description": "提交到鹏元审核实名认证",
+                                    "parameters": [
+                                        {
+                                            "name": "Content-Type",
+                                            "default": "application/json",
+                                            "in": "header",
+                                            "description": "Response Content Type"
+                                        },
+                                        {
+                                            "name": "clientId",
+                                            "default": "XXD_INTEGRATION_PLATFORM",
+                                            "in": "header",
+                                            "description": "分配给前端的客户端id"
+                                        },
+                                        {
+                                            "name": "clientTime",
+                                            "default": "1459845047000",
+                                            "in": "header",
+                                            "description": "客户端当前时间"
+                                        },
+                                        {
+                                            "name": "token",
+                                            "default": "xxx",
+                                            "in": "header",
+                                            "description": "登录令牌"
+                                        },
+                                        {
+                                            "name": "data",
+                                            "default": {
+                                                "data": {
+                                                    "realName": "王刚",
+                                                    "idCardNumber": "310112198703043425",
+                                                    "cardType": "1"
+                                                }
+                                            },
+                                            "in": "body",
+                                            "description": ""
+                                        }
+                                    ]
+                                }
+                            },
+                            "/forms/reapplyStatuses": {
+                                "get": {
+                                    "basePath": "/integrationPlatform",
+                                    "summary": "进件检查",
+                                    "description": "是否允许重新进件",
+                                    "parameters": [
+                                        {
+                                            "name": "clientId",
+                                            "default": "XXD_LOAN_API",
+                                            "in": "header",
+                                            "description": "客户端ID"
+                                        },
+                                        {
+                                            "name": "clientTime",
+                                            "default": "1459845047000",
+                                            "in": "header",
+                                            "description": "客户端当前时间"
+                                        },
+                                        {
+                                            "name": "s",
+                                            "default": "0878b0790e427c8a35b05d0b5b4ff113",
+                                            "in": "header",
+                                            "description": "32 LENGTH CHARS"
+                                        },
+                                        {
+                                            "name": "idNo",
+                                            "default": "232700198912067312",
+                                            "in": "query",
+                                            "description": "身份证号"
+                                        }
+                                    ]
+                                }
+                            },
+                            "/products/{productId}": {
+                                "get": {
+                                    "basePath": "/integrationPlatform",
+                                    "summary": "产品详情",
+                                    "description": "查询单条记录",
+                                    "parameters": [
+                                        {
+                                            "name": "clientId",
+                                            "default": "XXD_LOAN_API",
+                                            "in": "header",
+                                            "description": "客户端ID"
+                                        },
+                                        {
+                                            "name": "clientTime",
+                                            "default": "1459845047000",
+                                            "in": "header",
+                                            "description": "客户端当前时间"
+                                        },
+                                        {
+                                            "name": "s",
+                                            "default": "0878b0790e427c8a35b05d0b5b4ff113",
+                                            "in": "header",
+                                            "description": "32 LENGTH CHARS"
+                                        },
+                                        {
+                                            "name": "productId",
+                                            "default": "2c9093f65bd29951015bd2a0f981000a",
+                                            "in": "path",
+                                            "description": "产品ID"
+                                        }
+                                    ]
+                                }
+                            },
+                            "/products/instalment-plans/{productId}": {
+                                "get": {
+                                    "basePath": "/integrationPlatform",
+                                    "summary": "分期计划",
+                                    "description": "查询单条记录",
+                                    "parameters": [
+                                        {
+                                            "name": "clientId",
+                                            "default": "XXD_LOAN_API",
+                                            "in": "header",
+                                            "description": "客户端ID"
+                                        },
+                                        {
+                                            "name": "clientTime",
+                                            "default": "1459845047000",
+                                            "in": "header",
+                                            "description": "客户端当前时间"
+                                        },
+                                        {
+                                            "name": "s",
+                                            "default": "0878b0790e427c8a35b05d0b5b4ff113",
+                                            "in": "header",
+                                            "description": "32 LENGTH CHARS"
+                                        },
+                                        {
+                                            "name": "productId",
+                                            "default": "2c9093f65bd29951015bd2a0f981000a",
+                                            "in": "path",
+                                            "description": "产品ID"
+                                        }
+                                    ]
+                                }
+                            },
+                            "/forms/{productId}/unsubmittedForms": {
+                                "get": {
+                                    "basePath": "/integrationPlatform",
+                                    "summary": "未提交申请单详情",
+                                    "description": "查询单条记录",
+                                    "parameters": [
+                                        {
+                                            "name": "clientId",
+                                            "default": "XXD_LOAN_API",
+                                            "in": "header",
+                                            "description": "客户端ID"
+                                        },
+                                        {
+                                            "name": "clientTime",
+                                            "default": "1459845047000",
+                                            "in": "header",
+                                            "description": "客户端当前时间"
+                                        },
+                                        {
+                                            "name": "token",
+                                            "default": "sEVbo09YZBSF9NXz2CLkUycrhQwgMK5JCO8M_OdVF3fQBBtsX0w9iqtdnNHQ3RgWgi_jpky0i3mhVM1M0-c9eIns7ZcIu1SbmpF3V0D4MLA",
+                                            "in": "header",
+                                            "description": "令牌"
+                                        },
+                                        {
+                                            "name": "s",
+                                            "default": "0878b0790e427c8a35b05d0b5b4ff113",
+                                            "in": "header",
+                                            "description": "32 LENGTH CHARS"
+                                        },
+                                        {
+                                            "name": "productId",
+                                            "default": "2c9093f65bd29951015bd2a0f981000a",
+                                            "in": "path",
+                                            "description": "产品id"
+                                        }
+                                    ]
+                                }
+                            },
+                            "/forms/repayment-plan-trial": {
+                                "post": {
+                                    "basePath": "/integrationPlatform",
+                                    "summary": "还款计划试算",
+                                    "description": "预览",
+                                    "parameters": [
+                                        {
+                                            "name": "Content-Type",
+                                            "default": "application/json",
+                                            "in": "header",
+                                            "description": "Response Content Type"
+                                        },
+                                        {
+                                            "name": "requestData",
+                                            "default": {
+                                                "data": {
+                                                    "applyCode": "",
+                                                    "loanAmount": 2000.44,
+                                                    "loanDate": "2017-01-01",
+                                                    "peroidValue": 12,
+                                                    "instalmentPlanId": "2c9093f65bd29951015bd2a03edb0000"
+                                                }
+                                            },
+                                            "in": "body",
+                                            "description": ""
+                                        },
+                                        {
+                                            "name": "clientId",
+                                            "default": "XXD_LOAN_API",
+                                            "in": "header",
+                                            "description": "客户端ID"
+                                        },
+                                        {
+                                            "name": "clientTime",
+                                            "default": "1459845047000",
+                                            "in": "header",
+                                            "description": "客户端当前时间"
+                                        },
+                                        {
+                                            "name": "s",
+                                            "default": "dd2a2f38d14be81783f5898e41ae545d",
+                                            "in": "header",
+                                            "description": "32 LENGTH CHARS"
+                                        }
+                                    ]
+                                }
+                            },
+                            "/forms": {
+                                "put": {
+                                    "basePath": "/integrationPlatform",
+                                    "summary": "生成/更新贷款申请单",
+                                    "description": "生成/更新",
+                                    "parameters": [
+                                        {
+                                            "name": "Content-Type",
+                                            "default": "application/json",
+                                            "in": "header",
+                                            "description": "Response Content Type"
+                                        },
+                                        {
+                                            "name": "clientId",
+                                            "default": "XXD_LOAN_API",
+                                            "in": "header",
+                                            "description": "客户端ID"
+                                        },
+                                        {
+                                            "name": "clientTime",
+                                            "default": "1459845047000",
+                                            "in": "header",
+                                            "description": "客户端当前时间"
+                                        },
+                                        {
+                                            "name": "s",
+                                            "default": "1beca755494cb21f92521d6a6beefe30",
+                                            "in": "header",
+                                            "description": "32 LENGTH CHARS"
+                                        },
+                                        {
+                                            "name": "token",
+                                            "default": "sEVbo09YZBSF9NXz2CLkU0k9PYuaGsMd0Bkxfifgv0FpWeKwevZ7EJjV_mN3Q26wBuKSU90JF9Y03CMqlcTFBMtoyD8oZTWUsAs66PozMAw",
+                                            "in": "header",
+                                            "description": "令牌"
+                                        },
+                                        {
+                                            "name": "requestData",
+                                            "default": {
+                                                "data": {
+                                                    "applyCode": "",
+                                                    "productId": "2c9093f65bd29951015bd2a0f981000a",
+                                                    "mobile": "13122223333",
+                                                    "channel": "mobile",
+                                                    "productName": "审批产品一",
+                                                    "productType": "P001",
+                                                    "productSubType": "",
+                                                    "instalmentPlanId": "2c9093f65bd29951015bd2a03edb0000",
+                                                    "instalmentPlanName": "等额本息一",
+                                                    "repaymentMethod": "001",
+                                                    "loanAmount": 1000000,
+                                                    "period": 12,
+                                                    "periodUnit": "MONTH",
+                                                    "rate": 0.12,
+                                                    "rateType": "MONTH",
+                                                    "loanTitle": "loanTitle",
+                                                    "loanDescription": "loanDescription",
+                                                    "loanPurpose": "001",
+                                                    "awardType": "NONE",
+                                                    "awardValue": 0,
+                                                    "expiryDay": 15
+                                                }
+                                            },
+                                            "in": "body",
+                                            "description": ""
+                                        }
+                                    ]
+                                }
+                            },
+                            "/users_get": {
+                                "get": {
+                                    "basePath": "/integrationPlatform",
+                                    "summary": "个人信息详情",
+                                    "description": "查询单条记录",
+                                    "parameters": [
+                                        {
+                                            "name": "clientId",
+                                            "default": "XXD_LOAN_API",
+                                            "in": "header",
+                                            "description": "客户端ID"
+                                        },
+                                        {
+                                            "name": "clientTime",
+                                            "default": "1459845047000",
+                                            "in": "header",
+                                            "description": "客户端当前时间"
+                                        },
+                                        {
+                                            "name": "s",
+                                            "default": "8a9c3d50f1a2b9426346be59b94b2e36",
+                                            "in": "header",
+                                            "description": "32 LENGTH CHARS"
+                                        },
+                                        {
+                                            "name": "token",
+                                            "default": "sEVbo09YZBSF9NXz2CLkU-cenMM_GAOfaRma4G13CCvkamU_fXz4EcQGbSNwfZYkkyidCLL9fA21RtopTq_0HITZGObHTQaYhjCGLUmCCtk",
+                                            "in": "header",
+                                            "description": "令牌"
+                                        }
+                                    ]
+                                }
+                            },
+                            "/users_patch": {
+                                "patch": {
+                                    "basePath": "/integrationPlatform",
+                                    "summary": "修改个人信息",
+                                    "description": "修改",
+                                    "parameters": [
+                                        {
+                                            "name": "Content-Type",
+                                            "default": "application/json",
+                                            "in": "header",
+                                            "description": "Response Content Type"
+                                        },
+                                        {
+                                            "name": "clientId",
+                                            "default": "XXD_LOAN_API",
+                                            "in": "header",
+                                            "description": "客户端ID"
+                                        },
+                                        {
+                                            "name": "clientTime",
+                                            "default": "1459845047000",
+                                            "in": "header",
+                                            "description": "客户端当前时间"
+                                        },
+                                        {
+                                            "name": "s",
+                                            "default": "78316f08bc8635effdce79e41edb3d8f",
+                                            "in": "header",
+                                            "description": "32 LENGTH CHARS"
+                                        },
+                                        {
+                                            "name": "token",
+                                            "default": "sEVbo09YZBSF9NXz2CLkU_9GtkLQAynBl2wkX4OSJKf94Pph7ciVbJ_4x6zJMettw5ENwj65KQ4pZThuLw40MdEZpYvziEOG-BzGqAIjPYE",
+                                            "in": "header",
+                                            "description": "令牌"
+                                        },
+                                        {
+                                            "name": "requestData",
+                                            "default": {
+                                                "data": {
+                                                    "resideType": "Y",
+                                                    "resideProvinceCode": "310000",
+                                                    "resideCityCode": "310000",
+                                                    "resideAddress": "更新的居住地址",
+                                                    "homeTel": "更新的家庭电话",
+                                                    "companyName": "更新的公司名称",
+                                                    "industry": "3",
+                                                    "postType": "2",
+                                                    "companyProvinceCode": "310000",
+                                                    "companyCityCode": "310000",
+                                                    "companyAddress": "更新的单位地址",
+                                                    "companyTel": "更新的单位电话",
+                                                    "contactInfoList": [
+                                                        {
+                                                            "contactName": "更新的姓名",
+                                                            "contactType": "2",
+                                                            "mobile": "更新的手机号",
+                                                            "relationship": "7",
+                                                            "homePhone": "家庭电话",
+                                                            "comPhone": "单位电话"
+                                                        }
+                                                    ]
+                                                }
+                                            },
+                                            "in": "body",
+                                            "description": ""
+                                        }
+                                    ]
+                                }
+                            },
+                            "/credits/statuses": {
+                                "post": {
+                                    "basePath": "/integrationPlatform",
+                                    "summary": "是否已验证成功过",
+                                    "description": "查询状态",
+                                    "parameters": [
+                                        {
+                                            "name": "Content-Type",
+                                            "default": "application/json",
+                                            "in": "header",
+                                            "description": "Response Content Type"
+                                        },
+                                        {
+                                            "name": "clientId",
+                                            "default": "XXD_LOAN_API",
+                                            "in": "header",
+                                            "description": "客户端ID"
+                                        },
+                                        {
+                                            "name": "clientTime",
+                                            "default": "1459845047000",
+                                            "in": "header",
+                                            "description": "客户端当前时间"
+                                        },
+                                        {
+                                            "name": "s",
+                                            "default": "9e35d01f94c048e60b07e68cd1d3db58",
+                                            "in": "header",
+                                            "description": "32 LENGTH CHARS"
+                                        },
+                                        {
+                                            "name": "token",
+                                            "default": "hqB+6NnSabFXgMFRTQ2Qd0r1hedvdTmBBDiY/PBJuzdB5pm3KHnlWY5QBUnojpvo7PMuMDUegpa/sGVUMF/zaaAw3tS9scaDx+sxN/ZlLXo=",
+                                            "in": "header",
+                                            "description": "令牌"
+                                        },
+                                        {
+                                            "name": "requestData",
+                                            "default": {
+                                                "data": {
+                                                    "type": [
+                                                        "RESERVED_FUND",
+                                                        "SOCIAL_INSURANCE",
+                                                        "CREDIT_REPORT",
+                                                        "EB",
+                                                        "OPERATOR",
+                                                        "BANK_STATEMENT"
+                                                    ]
+                                                }
+                                            },
+                                            "in": "body",
+                                            "description": ""
+                                        }
+                                    ]
+                                }
+                            },
+                            "/credits/bank-statement-urls": {
+                                "get": {
+                                    "basePath": "/integrationPlatform",
+                                    "summary": "获取银行流水采集的URL页面",
+                                    "description": "从神州融获取",
+                                    "parameters": [
+                                        {
+                                            "name": "clientId",
+                                            "default": "XXD_LOAN_API",
+                                            "in": "header",
+                                            "description": "客户端ID"
+                                        },
+                                        {
+                                            "name": "clientTime",
+                                            "default": "1459845047000",
+                                            "in": "header",
+                                            "description": "客户端当前时间"
+                                        },
+                                        {
+                                            "name": "s",
+                                            "default": "0878b0790e427c8a35b05d0b5b4ff113",
+                                            "in": "header",
+                                            "description": "32 LENGTH CHARS"
+                                        },
+                                        {
+                                            "name": "token",
+                                            "default": "hqB+6NnSabFXgMFRTQ2Qd0r1hedvdTmBBDiY/PBJuzdB5pm3KHnlWY5QBUnojpvo7PMuMDUegpa/sGVUMF/zaaAw3tS9scaDx+sxN/ZlLXo=",
+                                            "in": "header",
+                                            "description": "令牌"
+                                        },
+                                        {
+                                            "name": "themeColor",
+                                            "default": "%230000",
+                                            "in": "query",
+                                            "description": "页面主题颜色"
+                                        },
+                                        {
+                                            "name": "backUrl",
+                                            "default": "www.xinxindai.com",
+                                            "in": "query",
+                                            "description": "跳转URL地址"
+                                        }
+                                    ]
+                                }
+                            },
+                            "/credits/cities_RESERVED_FUND": {
+                                "get": {
+                                    "basePath": "/integrationPlatform",
+                                    "summary": "获取公积金",
+                                    "description": "从神州融获取",
+                                    "parameters": [
+                                        {
+                                            "name": "clientId",
+                                            "default": "XXD_LOAN_API",
+                                            "in": "header",
+                                            "description": "客户端ID"
+                                        },
+                                        {
+                                            "name": "clientTime",
+                                            "default": "1459845047000",
+                                            "in": "header",
+                                            "description": "客户端当前时间"
+                                        },
+                                        {
+                                            "name": "s",
+                                            "default": "0878b0790e427c8a35b05d0b5b4ff113",
+                                            "in": "header",
+                                            "description": "32 LENGTH CHARS"
+                                        },
+                                        {
+                                            "name": "type",
+                                            "default": "RESERVED_FUND",
+                                            "in": "query",
+                                            "description": "征信类型，一律以字符串传值。1： RESERVED_FUND 2： SOCIAL_INSURANCE"
+                                        }
+                                    ]
+                                }
+                            },
+                            "/credits/cities/{cityCode}_RESERVED_FUND": {
+                                "get": {
+                                    "basePath": "/integrationPlatform",
+                                    "summary": "获取公积金",
+                                    "description": "从神州融获取",
+                                    "parameters": [
+                                        {
+                                            "name": "clientId",
+                                            "default": "XXD_LOAN_API",
+                                            "in": "header",
+                                            "description": "客户端ID"
+                                        },
+                                        {
+                                            "name": "clientTime",
+                                            "default": "1459845047000",
+                                            "in": "header",
+                                            "description": "客户端当前时间"
+                                        },
+                                        {
+                                            "name": "s",
+                                            "default": "0878b0790e427c8a35b05d0b5b4ff113",
+                                            "in": "header",
+                                            "description": "32 LENGTH CHARS"
+                                        },
+                                        {
+                                            "name": "type",
+                                            "default": "RESERVED_FUND",
+                                            "in": "query",
+                                            "description": "征信类型，一律以字符串传值。1： RESERVED_FUND 2： SOCIAL_INSURANCE"
+                                        },
+                                        {
+                                            "name": "cityCode",
+                                            "default": "00312900",
+                                            "in": "path",
+                                            "description": "区域编号"
+                                        }
+                                    ]
+                                }
+                            },
+                            "/credits/results/{typeCode}_RESERVED_FUND": {
+                                "post": {
+                                    "basePath": "/integrationPlatform",
+                                    "summary": "验证征信--公积金",
+                                    "description": "从神州融获取",
+                                    "parameters": [
+                                        {
+                                            "name": "Content-Type",
+                                            "default": "application/json",
+                                            "in": "header",
+                                            "description": "Response Content Type"
+                                        },
+                                        {
+                                            "name": "clientId",
+                                            "default": "XXD_LOAN_API",
+                                            "in": "header",
+                                            "description": "客户端ID"
+                                        },
+                                        {
+                                            "name": "clientTime",
+                                            "default": "1459845047000",
+                                            "in": "header",
+                                            "description": "客户端当前时间"
+                                        },
+                                        {
+                                            "name": "s",
+                                            "default": "b20b4293d35fd405a231d1afb5f9514b",
+                                            "in": "header",
+                                            "description": "32 LENGTH CHARS"
+                                        },
+                                        {
+                                            "name": "token",
+                                            "default": "hqB+6NnSabFXgMFRTQ2Qd0r1hedvdTmBBDiY/PBJuzdB5pm3KHnlWY5QBUnojpvo7PMuMDUegpa/sGVUMF/zaaAw3tS9scaDx+sxN/ZlLXo=",
+                                            "in": "header",
+                                            "description": "令牌"
+                                        },
+                                        {
+                                            "name": "requestData",
+                                            "default":  {"data":{"type":"auth_auto","sort":"002122200000-1212","website":"housingfund_dalian", "name":"张君未","id_card_num":"211422198903060925","cell_phone_num":"18500817089", "field_info":[{"field_name":"joint_card_num","field_value":"6212263400006390636"}, {"field_name":"password","field_value":"198936"}]}},
+                                            "in": "body",
+                                            // "description": "RESERVED_FUND： {\"data\":{\"type\":\"auth_auto\",\"sort\":\"002122200000-1212\",\"website\":\"housingfund_dalian\",\n\"name\":\"张君未\",\"id_card_num\":\"211422198903060925\",\"cell_phone_num\":\"18500817089\",\n\"field_info\":[{\"field_name\":\"joint_card_num\",\"field_value\":\"6212263400006390636\"},\n{\"field_name\":\"password\",\"field_value\":\"198936\"}]}}\n\nSOCIAL_INSURANCE： {\"data\":{\"type\":\"auth_auto\",\"sort\":\"005151020000-1202\",\"website\":\"si_sichuansheng\",\n\"name\":\"陈泽\",\"id_card_num\":\"410426197809205515\",\"cell_phone_num\":\"13908207986\",\n\"field_info\":[{\"field_name\":\"account\",\"field_value\":\"010619495\"},\n{\"field_name\":\"password\",\"field_value\":\"13896222\"}]}}\n\nCREDIT_REPORT： {\"data\":{\"apply_info\":{\"basic_info\":{\"name\":\"许传龙\",\"phone\":\"13987106275\",\"idNo\":\"532424198201060910\"}},\n\"account\":\"xuchuanlong06\",\"password\":\"19840720lyh\",\"captcha\":\"d4prse\"}}\n\nEB： {\"data\":{\"name\":\"姓名\",\"phone\":\"手机号码\",\"idNo\":\"身份证号码\",\"account\":\"京东账号\",\"password\":\"密码\",\n\"captcha\":\"\",\"type\":\"\",\"queryPwd\":\"\",\"website\":\"\",\"skip_mobile\":\"true\"}}"
+                                        },
+                                        {
+                                            "name": "typeCode",
+                                            "default": "1",
+                                            "in": "path",
+                                            "description": "征信类型，一律以数字传值。1： RESERVED_FUND 2： SOCIAL_INSURANCE 3： CREDIT_REPORT 4：EB 5： OPERATOR 6: BANK_STATEMENT"
+                                        }
+                                    ]
+                                }
+                            },
+
+                            "/credits/cities_SOCIAL_INSURANCE": {
+                                "get": {
+                                    "basePath": "/integrationPlatform",
+                                    "summary": "社保支持区域",
+                                    "description": "从神州融获取",
+                                    "parameters": [
+                                        {
+                                            "name": "clientId",
+                                            "default": "XXD_LOAN_API",
+                                            "in": "header",
+                                            "description": "客户端ID"
+                                        },
+                                        {
+                                            "name": "clientTime",
+                                            "default": "1459845047000",
+                                            "in": "header",
+                                            "description": "客户端当前时间"
+                                        },
+                                        {
+                                            "name": "s",
+                                            "default": "0878b0790e427c8a35b05d0b5b4ff113",
+                                            "in": "header",
+                                            "description": "32 LENGTH CHARS"
+                                        },
+                                        {
+                                            "name": "type",
+                                            "default": "SOCIAL_INSURANCE",
+                                            "in": "query",
+                                            "description": "征信类型，一律以字符串传值。1： RESERVED_FUND 2： SOCIAL_INSURANCE"
+                                        }
+                                    ]
+                                }
+                            },
+                            "/credits/cities/{cityCode}_SOCIAL_INSURANCE": {
+                                "get": {
+                                    "basePath": "/integrationPlatform",
+                                    "summary": "社保区域表单",
+                                    "description": "从神州融获取",
+                                    "parameters": [
+                                        {
+                                            "name": "clientId",
+                                            "default": "XXD_LOAN_API",
+                                            "in": "header",
+                                            "description": "客户端ID"
+                                        },
+                                        {
+                                            "name": "clientTime",
+                                            "default": "1459845047000",
+                                            "in": "header",
+                                            "description": "客户端当前时间"
+                                        },
+                                        {
+                                            "name": "s",
+                                            "default": "0878b0790e427c8a35b05d0b5b4ff113",
+                                            "in": "header",
+                                            "description": "32 LENGTH CHARS"
+                                        },
+                                        {
+                                            "name": "type",
+                                            "default": "SOCIAL_INSURANCE",
+                                            "in": "query",
+                                            "description": "征信类型，一律以字符串传值。1： RESERVED_FUND 2： SOCIAL_INSURANCE"
+                                        },
+                                        {
+                                            "name": "cityCode",
+                                            "default": "00312900",
+                                            "in": "path",
+                                            "description": "区域编号"
+                                        }
+                                    ]
+                                }
+                            },
+                            "/credits/results/{typeCode}_SOCIAL_INSURANCE": {
+                                "post": {
+                                    "basePath": "/integrationPlatform",
+                                    "summary": "验证征信--社保",
+                                    "description": "从神州融获取",
+                                    "parameters": [
+                                        {
+                                            "name": "Content-Type",
+                                            "default": "application/json",
+                                            "in": "header",
+                                            "description": "Response Content Type"
+                                        },
+                                        {
+                                            "name": "clientId",
+                                            "default": "XXD_LOAN_API",
+                                            "in": "header",
+                                            "description": "客户端ID"
+                                        },
+                                        {
+                                            "name": "clientTime",
+                                            "default": "1459845047000",
+                                            "in": "header",
+                                            "description": "客户端当前时间"
+                                        },
+                                        {
+                                            "name": "s",
+                                            "default": "b20b4293d35fd405a231d1afb5f9514b",
+                                            "in": "header",
+                                            "description": "32 LENGTH CHARS"
+                                        },
+                                        {
+                                            "name": "token",
+                                            "default": "hqB+6NnSabFXgMFRTQ2Qd0r1hedvdTmBBDiY/PBJuzdB5pm3KHnlWY5QBUnojpvo7PMuMDUegpa/sGVUMF/zaaAw3tS9scaDx+sxN/ZlLXo=",
+                                            "in": "header",
+                                            "description": "令牌"
+                                        },
+                                        {
+                                            "name": "requestData",
+                                            "default":  {"data":{"type":"auth_auto","sort":"005151020000-1202","website":"si_sichuansheng", "name":"陈泽","id_card_num":"410426197809205515","cell_phone_num":"13908207986", "field_info":[{"field_name":"account","field_value":"010619495"}, {"field_name":"password","field_value":"13896222"}]}},
+                                            "in": "body",
+                                            // "description": "RESERVED_FUND： {\"data\":{\"type\":\"auth_auto\",\"sort\":\"002122200000-1212\",\"website\":\"housingfund_dalian\",\n\"name\":\"张君未\",\"id_card_num\":\"211422198903060925\",\"cell_phone_num\":\"18500817089\",\n\"field_info\":[{\"field_name\":\"joint_card_num\",\"field_value\":\"6212263400006390636\"},\n{\"field_name\":\"password\",\"field_value\":\"198936\"}]}}\n\nSOCIAL_INSURANCE： {\"data\":{\"type\":\"auth_auto\",\"sort\":\"005151020000-1202\",\"website\":\"si_sichuansheng\",\n\"name\":\"陈泽\",\"id_card_num\":\"410426197809205515\",\"cell_phone_num\":\"13908207986\",\n\"field_info\":[{\"field_name\":\"account\",\"field_value\":\"010619495\"},\n{\"field_name\":\"password\",\"field_value\":\"13896222\"}]}}\n\nCREDIT_REPORT： {\"data\":{\"apply_info\":{\"basic_info\":{\"name\":\"许传龙\",\"phone\":\"13987106275\",\"idNo\":\"532424198201060910\"}},\n\"account\":\"xuchuanlong06\",\"password\":\"19840720lyh\",\"captcha\":\"d4prse\"}}\n\nEB： {\"data\":{\"name\":\"姓名\",\"phone\":\"手机号码\",\"idNo\":\"身份证号码\",\"account\":\"京东账号\",\"password\":\"密码\",\n\"captcha\":\"\",\"type\":\"\",\"queryPwd\":\"\",\"website\":\"\",\"skip_mobile\":\"true\"}}"
+                                        },
+                                        {
+                                            "name": "typeCode",
+                                            "default": "2",
+                                            "in": "path",
+                                            "description": "征信类型，一律以数字传值。1： RESERVED_FUND 2： SOCIAL_INSURANCE 3： CREDIT_REPORT 4：EB 5： OPERATOR 6: BANK_STATEMENT"
+                                        }
+                                    ]
+                                }
+                            },
+                            "/credits/results/{typeCode}_CREDIT_REPORT": {
+                                "post": {
+                                    "basePath": "/integrationPlatform",
+                                    "summary": "验证征信--个人",
+                                    "description": "从神州融获取",
+                                    "parameters": [
+                                        {
+                                            "name": "Content-Type",
+                                            "default": "application/json",
+                                            "in": "header",
+                                            "description": "Response Content Type"
+                                        },
+                                        {
+                                            "name": "clientId",
+                                            "default": "XXD_LOAN_API",
+                                            "in": "header",
+                                            "description": "客户端ID"
+                                        },
+                                        {
+                                            "name": "clientTime",
+                                            "default": "1459845047000",
+                                            "in": "header",
+                                            "description": "客户端当前时间"
+                                        },
+                                        {
+                                            "name": "s",
+                                            "default": "b20b4293d35fd405a231d1afb5f9514b",
+                                            "in": "header",
+                                            "description": "32 LENGTH CHARS"
+                                        },
+                                        {
+                                            "name": "token",
+                                            "default": "hqB+6NnSabFXgMFRTQ2Qd0r1hedvdTmBBDiY/PBJuzdB5pm3KHnlWY5QBUnojpvo7PMuMDUegpa/sGVUMF/zaaAw3tS9scaDx+sxN/ZlLXo=",
+                                            "in": "header",
+                                            "description": "令牌"
+                                        },
+                                        {
+                                            "name": "requestData",
+                                            "default":  {"data":{"apply_info":{"basic_info":{"name":"许传龙","phone":"13987106275","idNo":"532424198201060910"}}, "account":"xuchuanlong06","password":"19840720lyh","captcha":"d4prse"}},
+                                            "in": "body",
+                                            // "description": "RESERVED_FUND： {\"data\":{\"type\":\"auth_auto\",\"sort\":\"002122200000-1212\",\"website\":\"housingfund_dalian\",\n\"name\":\"张君未\",\"id_card_num\":\"211422198903060925\",\"cell_phone_num\":\"18500817089\",\n\"field_info\":[{\"field_name\":\"joint_card_num\",\"field_value\":\"6212263400006390636\"},\n{\"field_name\":\"password\",\"field_value\":\"198936\"}]}}\n\nSOCIAL_INSURANCE： {\"data\":{\"type\":\"auth_auto\",\"sort\":\"005151020000-1202\",\"website\":\"si_sichuansheng\",\n\"name\":\"陈泽\",\"id_card_num\":\"410426197809205515\",\"cell_phone_num\":\"13908207986\",\n\"field_info\":[{\"field_name\":\"account\",\"field_value\":\"010619495\"},\n{\"field_name\":\"password\",\"field_value\":\"13896222\"}]}}\n\nCREDIT_REPORT： {\"data\":{\"apply_info\":{\"basic_info\":{\"name\":\"许传龙\",\"phone\":\"13987106275\",\"idNo\":\"532424198201060910\"}},\n\"account\":\"xuchuanlong06\",\"password\":\"19840720lyh\",\"captcha\":\"d4prse\"}}\n\nEB： {\"data\":{\"name\":\"姓名\",\"phone\":\"手机号码\",\"idNo\":\"身份证号码\",\"account\":\"京东账号\",\"password\":\"密码\",\n\"captcha\":\"\",\"type\":\"\",\"queryPwd\":\"\",\"website\":\"\",\"skip_mobile\":\"true\"}}"
+                                        },
+                                        {
+                                            "name": "typeCode",
+                                            "default": "3",
+                                            "in": "path",
+                                            "description": "征信类型，一律以数字传值。1： RESERVED_FUND 2： SOCIAL_INSURANCE 3： CREDIT_REPORT 4：EB 5： OPERATOR 6: BANK_STATEMENT"
+                                        }
+                                    ]
+                                }
+                            },
+                            "/credits/results/{typeCode}_EB": {
+                                "post": {
+                                    "basePath": "/integrationPlatform",
+                                    "summary": "验证征信--电商",
+                                    "description": "从神州融获取",
+                                    "parameters": [
+                                        {
+                                            "name": "Content-Type",
+                                            "default": "application/json",
+                                            "in": "header",
+                                            "description": "Response Content Type"
+                                        },
+                                        {
+                                            "name": "clientId",
+                                            "default": "XXD_LOAN_API",
+                                            "in": "header",
+                                            "description": "客户端ID"
+                                        },
+                                        {
+                                            "name": "clientTime",
+                                            "default": "1459845047000",
+                                            "in": "header",
+                                            "description": "客户端当前时间"
+                                        },
+                                        {
+                                            "name": "s",
+                                            "default": "b20b4293d35fd405a231d1afb5f9514b",
+                                            "in": "header",
+                                            "description": "32 LENGTH CHARS"
+                                        },
+                                        {
+                                            "name": "token",
+                                            "default": "hqB+6NnSabFXgMFRTQ2Qd0r1hedvdTmBBDiY/PBJuzdB5pm3KHnlWY5QBUnojpvo7PMuMDUegpa/sGVUMF/zaaAw3tS9scaDx+sxN/ZlLXo=",
+                                            "in": "header",
+                                            "description": "令牌"
+                                        },
+                                        {
+                                            "name": "requestData",
+                                            "default":  {"data":{"name":"姓名","phone":"手机号码","idNo":"身份证号码","account":"京东账号","password":"密码", "captcha":"","type":"","queryPwd":"","website":"","skip_mobile":"true"}},
+                                            "in": "body",
+                                            // "description": "RESERVED_FUND： {\"data\":{\"type\":\"auth_auto\",\"sort\":\"002122200000-1212\",\"website\":\"housingfund_dalian\",\n\"name\":\"张君未\",\"id_card_num\":\"211422198903060925\",\"cell_phone_num\":\"18500817089\",\n\"field_info\":[{\"field_name\":\"joint_card_num\",\"field_value\":\"6212263400006390636\"},\n{\"field_name\":\"password\",\"field_value\":\"198936\"}]}}\n\nSOCIAL_INSURANCE： {\"data\":{\"type\":\"auth_auto\",\"sort\":\"005151020000-1202\",\"website\":\"si_sichuansheng\",\n\"name\":\"陈泽\",\"id_card_num\":\"410426197809205515\",\"cell_phone_num\":\"13908207986\",\n\"field_info\":[{\"field_name\":\"account\",\"field_value\":\"010619495\"},\n{\"field_name\":\"password\",\"field_value\":\"13896222\"}]}}\n\nCREDIT_REPORT： {\"data\":{\"apply_info\":{\"basic_info\":{\"name\":\"许传龙\",\"phone\":\"13987106275\",\"idNo\":\"532424198201060910\"}},\n\"account\":\"xuchuanlong06\",\"password\":\"19840720lyh\",\"captcha\":\"d4prse\"}}\n\nEB： {\"data\":{\"name\":\"姓名\",\"phone\":\"手机号码\",\"idNo\":\"身份证号码\",\"account\":\"京东账号\",\"password\":\"密码\",\n\"captcha\":\"\",\"type\":\"\",\"queryPwd\":\"\",\"website\":\"\",\"skip_mobile\":\"true\"}}"
+                                        },
+                                        {
+                                            "name": "typeCode",
+                                            "default": "4",
+                                            "in": "path",
+                                            "description": "征信类型，一律以数字传值。1： RESERVED_FUND 2： SOCIAL_INSURANCE 3： CREDIT_REPORT 4：EB 5： OPERATOR 6: BANK_STATEMENT"
+                                        }
+                                    ]
+                                }
+                            },
+                            "/credits/results/{typeCode}_OPERATOR": {
+                                "post": {
+                                    "basePath": "/integrationPlatform",
+                                    "summary": "验证征信-运营商",
+                                    "description": "从神州融获取",
+                                    "parameters": [
+                                        {
+                                            "name": "Content-Type",
+                                            "default": "application/json",
+                                            "in": "header",
+                                            "description": "Response Content Type"
+                                        },
+                                        {
+                                            "name": "clientId",
+                                            "default": "XXD_LOAN_API",
+                                            "in": "header",
+                                            "description": "客户端ID"
+                                        },
+                                        {
+                                            "name": "clientTime",
+                                            "default": "1459845047000",
+                                            "in": "header",
+                                            "description": "客户端当前时间"
+                                        },
+                                        {
+                                            "name": "s",
+                                            "default": "b20b4293d35fd405a231d1afb5f9514b",
+                                            "in": "header",
+                                            "description": "32 LENGTH CHARS"
+                                        },
+                                        {
+                                            "name": "token",
+                                            "default": "hqB+6NnSabFXgMFRTQ2Qd0r1hedvdTmBBDiY/PBJuzdB5pm3KHnlWY5QBUnojpvo7PMuMDUegpa/sGVUMF/zaaAw3tS9scaDx+sxN/ZlLXo=",
+                                            "in": "header",
+                                            "description": "令牌"
+                                        },
+                                        {
+                                            "name": "requestData",
+                                            "default":  {"data":{"name":"姓名","phone":"手机号码","idNo":"身份证号码","account":"京东账号","password":"密码", "captcha":"","type":"","queryPwd":"","website":"","skip_mobile":"true"}},
+                                            "in": "body",
+                                            // "description": "RESERVED_FUND： {\"data\":{\"type\":\"auth_auto\",\"sort\":\"002122200000-1212\",\"website\":\"housingfund_dalian\",\n\"name\":\"张君未\",\"id_card_num\":\"211422198903060925\",\"cell_phone_num\":\"18500817089\",\n\"field_info\":[{\"field_name\":\"joint_card_num\",\"field_value\":\"6212263400006390636\"},\n{\"field_name\":\"password\",\"field_value\":\"198936\"}]}}\n\nSOCIAL_INSURANCE： {\"data\":{\"type\":\"auth_auto\",\"sort\":\"005151020000-1202\",\"website\":\"si_sichuansheng\",\n\"name\":\"陈泽\",\"id_card_num\":\"410426197809205515\",\"cell_phone_num\":\"13908207986\",\n\"field_info\":[{\"field_name\":\"account\",\"field_value\":\"010619495\"},\n{\"field_name\":\"password\",\"field_value\":\"13896222\"}]}}\n\nCREDIT_REPORT： {\"data\":{\"apply_info\":{\"basic_info\":{\"name\":\"许传龙\",\"phone\":\"13987106275\",\"idNo\":\"532424198201060910\"}},\n\"account\":\"xuchuanlong06\",\"password\":\"19840720lyh\",\"captcha\":\"d4prse\"}}\n\nEB： {\"data\":{\"name\":\"姓名\",\"phone\":\"手机号码\",\"idNo\":\"身份证号码\",\"account\":\"京东账号\",\"password\":\"密码\",\n\"captcha\":\"\",\"type\":\"\",\"queryPwd\":\"\",\"website\":\"\",\"skip_mobile\":\"true\"}}"
+                                        },
+                                        {
+                                            "name": "typeCode",
+                                            "default": "5",
+                                            "in": "path",
+                                            "description": "征信类型，一律以数字传值。1： RESERVED_FUND 2： SOCIAL_INSURANCE 3： CREDIT_REPORT 4：EB 5： OPERATOR 6: BANK_STATEMENT"
+                                        }
+                                    ]
+                                }
+                            },
+                            "/files_get": {
+                                "get": {
+                                    "basePath": "/integrationPlatform",
+                                    "summary": "查看影像列表",
+                                    "description": "分页查询所有记录",
+                                    "parameters": [
+                                        {
+                                            "name": "clientId",
+                                            "default": "XXD_LOAN_API",
+                                            "in": "header",
+                                            "description": "客户端ID"
+                                        },
+                                        {
+                                            "name": "clientTime",
+                                            "default": "1459845047000",
+                                            "in": "header",
+                                            "description": "客户端当前时间"
+                                        },
+                                        {
+                                            "name": "s",
+                                            "default": "0878b0790e427c8a35b05d0b5b4ff113",
+                                            "in": "header",
+                                            "description": "32 LENGTH CHARS"
+                                        },
+                                        {
+                                            "name": "token",
+                                            "default": "hqB+6NnSabFXgMFRTQ2Qd0r1hedvdTmBBDiY/PBJuzdB5pm3KHnlWY5QBUnojpvo7PMuMDUegpa/sGVUMF/zaaAw3tS9scaDx+sxN/ZlLXo=",
+                                            "in": "header",
+                                            "description": "令牌"
+                                        },
+                                        {
+                                            "name": "applyCode",
+                                            "default": "",
+                                            "in": "query",
+                                            "description": "进件编号"
+                                        },
+                                        {
+                                            "name": "bidCode",
+                                            "default": "",
+                                            "in": "query",
+                                            "description": "标的编号"
+                                        },
+                                        {
+                                            "name": "categoryCode",
+                                            "default": "RECEIPT_CONTRACT",
+                                            "in": "query",
+                                            "description": "分类ID"
+                                        },
+                                        {
+                                            "name": "sourceType",
+                                            "default": "FRONTEND",
+                                            "in": "query",
+                                            "description": "进件来源（FRONTEND:前台,BACKEND:后台）"
+                                        },
+                                        {
+                                            "name": "watermarkFlag",
+                                            "default": "WATERMARK_NO",
+                                            "in": "query",
+                                            "description": "是否需要水印"
+                                        },
+                                        {
+                                            "name": "thumbnailFlag",
+                                            "default": "THUMBNAIL_NO",
+                                            "in": "query",
+                                            "description": "是否需要缩略图"
+                                        },
+                                        {
+                                            "name": "currentPage",
+                                            "default": 1,
+                                            "in": "query",
+                                            "description": "页码"
+                                        },
+                                        {
+                                            "name": "pageSize",
+                                            "default": 10,
+                                            "in": "query",
+                                            "description": "每页数据的条目"
+                                        }
+                                    ]
+                                }
+                            },
+                            "/files_post": {
+                                "post": {
+                                    "basePath": "/fileCenter",
+                                    "summary": "单个文件上传",
+                                    "description": "单个文件上传",
+                                    "parameters": [
+                                        {
+                                            "name": "Content-Type",
+                                            "default": "multipart/form-data",
+                                            "in": "header",
+                                            "description": "Response Content Type"
+                                        },
+                                        {
+                                            "name": "bizCode",
+                                            "in": "query",
+                                            "description": "bizCode"
+                                        },
+                                        {
+                                            "name": "fileDir",
+                                            "in": "query",
+                                            "description": "fileDir"
+                                        },
+                                        {
+                                            "name": "file",
+                                            "in": "formData",
+                                            "description": "file"
+                                        },
+                                        {
+                                            "name": "clientId",
+                                            "default": "SHENZHOURONG",
+                                            "in": "header",
+                                            "description": "clientId"
+                                        },
+                                        {
+                                            "name": "clientTime",
+                                            "default": "1459845047000",
+                                            "in": "header",
+                                            "description": "1459845047000"
+                                        },
+                                        {
+                                            "name": "s",
+                                            "default": "f7e69ef50cffb34c14f7dd59e1da4f89",
+                                            "in": "header",
+                                            "description": "clientSign"
+                                        }
+                                    ]
+                                }
+                            },
+                            "/files_put": {
+                                "put": {
+                                    "basePath": "/integrationPlatform",
+                                    "summary": "上传",
+                                    "description": "新增或修改记录",
+                                    "parameters": [
+                                        {
+                                            "name": "Content-Type",
+                                            "default": "application/json",
+                                            "in": "header",
+                                            "description": "Response Content Type"
+                                        },
+                                        {
+                                            "name": "clientId",
+                                            "default": "XXD_LOAN_API",
+                                            "in": "header",
+                                            "description": "客户端ID"
+                                        },
+                                        {
+                                            "name": "clientTime",
+                                            "default": "1459845047000",
+                                            "in": "header",
+                                            "description": "客户端当前时间"
+                                        },
+                                        {
+                                            "name": "s",
+                                            "default": "d8ea65d826debbcb0469b7a0201fc88c",
+                                            "in": "header",
+                                            "description": "32 LENGTH CHARS"
+                                        },
+                                        {
+                                            "name": "requestData",
+                                            "default": {"data":{"applyCode":"", "bidCode":"", "categoryCode":"RECEIPT_CONTRACT", "sourceType":"FRONTEND", "propertyCodes":"1", "fileId":23, "fileType":"TXT", "applyFileId":111}},
+                                            "in": "body",
+                                            "description": ""
+                                        }
+                                    ]
+                                }
+                            },
+                            "/user/userInfoByToken": {
+                                "get": {
+                                    "basePath": "/userCenter",
+                                    "summary": "获取用户信息",
+                                    "description": "通过Token从用户中心获取用户信息",
+                                    "parameters": [
+                                        {
+                                            "name": "clientId",
+                                            "default": "XXD_INTEGRATION_PLATFORM",
+                                            "in": "header",
+                                            "description": "分配给前端的客户端id"
+                                        },
+                                        {
+                                            "name": "clientTime",
+                                            "default": "1459845047000",
+                                            "in": "header",
+                                            "description": "客户端当前时间"
+                                        },
+                                        {
+                                            "name": "s",
+                                            "default": "de42212bdc77b66092a9211cc08b2313",
+                                            "in": "header",
+                                            "description": "32 LENGTH CHARS"
+                                        },
+                                        {
+                                            "name": "token",
+                                            "default": "xxx",
+                                            "in": "header",
+                                            "description": "令牌"
+                                        }
+                                    ]
+                                }
+                            },
+                            "/user/capitalAccount/openFuiouOpenAccountPage/staticMobile": {
+                                "post": {
+                                    "basePath": "/userCenter",
+                                    "summary": "用户调转到富友开户页面接口--供移动端使用",
+                                    "description": "用户富友开户接口--供移动端使用：获取富友开户页面的url & 需要的流水号回调地址签名等信息",
+                                    "parameters": [
+                                        {
+                                            "name": "Content-Type",
+                                            "default": "application/json",
+                                            "in": "header",
+                                            "description": "Response Content Type"
+                                        },
+                                        {
+                                            "name": "clientId",
+                                            "default": "XXD_STATIC_MOBILE",
+                                            "in": "header",
+                                            "description": "分配给前端的客户端id"
+                                        },
+                                        {
+                                            "name": "clientTime",
+                                            "default": "1459845047000",
+                                            "in": "header",
+                                            "description": "客户端当前时间"
+                                        },
+                                        {
+                                            "name": "s",
+                                            "default": "de42212bdc77b66092a9211cc08b2313",
+                                            "in": "header",
+                                            "description": "32 LENGTH CHARS"
+                                        },
+                                        {
+                                            "name": "token",
+                                            "default": "5C4AAzdmX8USro6lpUOUB5+R67+9GbVhknHklpdW1Wicd6mZEtO50qa50arHWil86zrSkB2mmA4GQen8MozQKHtAEegTjTxuO+6LJcCUNYs=+puLmtcq0yNLu5cfY0GBJUXC0r68en+KahWXF8KuOE=",
+                                            "in": "header",
+                                            "description": "令牌"
+                                        }
+                                    ]
+                                }
+                            },
+                            "/receipts/{applyCode}": {
+                                "put": {
+                                    "basePath": "/integrationPlatform",
+                                    "summary": "提交进件",
+                                    "description": "拼接所有必需参数提交给神州融",
+                                    "parameters": [
+                                        {
+                                            "name": "Content-Type",
+                                            "default": "application/json",
+                                            "in": "header",
+                                            "description": "Response Content Type"
+                                        },
+                                        {
+                                            "name": "clientId",
+                                            "default": "XXD_LOAN_API",
+                                            "in": "header",
+                                            "description": "客户端ID"
+                                        },
+                                        {
+                                            "name": "clientTime",
+                                            "default": "1459845047000",
+                                            "in": "header",
+                                            "description": "客户端当前时间"
+                                        },
+                                        {
+                                            "name": "s",
+                                            "default": "2b3464ae43ba5628e3e5a79d8cd4039d",
+                                            "in": "header",
+                                            "description": "32 LENGTH CHARS"
+                                        },
+                                        {
+                                            "name": "token",
+                                            "default": "hqB+6NnSabFXgMFRTQ2Qd1wYibVnD7mD0maJvRJYRUouLs7vVPcwfD642B8uk2UeA0YHECuksbX20Y8mjDbudE7xTcd6NhNmKFXDUF5bCi8=",
+                                            "in": "header",
+                                            "description": "令牌"
+                                        },
+                                        {
+                                            "name": "requestData",
+                                            "default": {"data":{"deviceType":1,"gpsInfo":{"gpsAuthorized":"Y","gpsProvince":"CODE","gpsCity":"CODE", "gpsDistrict":"CODE","gpsPosition":"具体地址","ipAddress":"127.0.0.1"}, "mobileContactList":[{"contactName":"联系人姓名","contactMobile":"手机","contactBizPhone":"单位电话"}], "mobileAppList":[{"name":"qq"}],"smsList":[],"tdBlackBox":"blackBoxValue"}},
+                                            "in": "body",
+                                            "description": ""
+                                        },
+                                        {
+                                            "name": "applyCode",
+                                            "default": "LOAN_APPLY20170511152658000222",
+                                            "in": "path",
+                                            "description": "贷款申请单编号"
+                                        }
+                                    ]
+                                }
+                            },
+                            "/forms/statuses/{applyCode}": {
+                                "patch": {
+                                    "basePath": "/integrationPlatform",
+                                    "summary": "更改申请单状态",
+                                    "description": "更改状态",
+                                    "parameters": [
+                                        {
+                                            "name": "Content-Type",
+                                            "default": "application/json",
+                                            "in": "header",
+                                            "description": "Response Content Type"
+                                        },
+                                        {
+                                            "name": "clientId",
+                                            "default": "XXD_LOAN_API",
+                                            "in": "header",
+                                            "description": "客户端ID"
+                                        },
+                                        {
+                                            "name": "clientTime",
+                                            "default": "1459845047000",
+                                            "in": "header",
+                                            "description": "客户端当前时间"
+                                        },
+                                        {
+                                            "name": "s",
+                                            "default": "a00a198e46175b736a8748800f84f63b",
+                                            "in": "header",
+                                            "description": "32 LENGTH CHARS"
+                                        },
+                                        {
+                                            "name": "requestData",
+                                            "default": {"data": {"status":"APPLY_SUCCESS", "notifyUser":"Y" }},
+                                            "in": "body",
+                                            "description": ""
+                                        },
+                                        {
+                                            "name": "applyCode",
+                                            "default": "LOAN_APPLY20170511152658000222",
+                                            "in": "path",
+                                            "description": "申请单编号"
+                                        }
+                                    ]
+                                }
+                            },
+                            "/forms/{applyCode}": {
+                                "get": {
+                                    "basePath": "/integrationPlatform",
+                                    "summary": "申请单详情",
+                                    "description": "查询单条记录",
+                                    "parameters": [
+                                        {
+                                            "name": "clientId",
+                                            "default": "XXD_LOAN_API",
+                                            "in": "header",
+                                            "description": "客户端ID"
+                                        },
+                                        {
+                                            "name": "clientTime",
+                                            "default": "1459845047000",
+                                            "in": "header",
+                                            "description": "客户端当前时间"
+                                        },
+                                        {
+                                            "name": "s",
+                                            "default": "0878b0790e427c8a35b05d0b5b4ff113",
+                                            "in": "header",
+                                            "description": "32 LENGTH CHARS"
+                                        },
+                                        {
+                                            "name": "applyCode",
+                                            "default": "LOAN_APPLY20170511152658000222",
+                                            "in": "path",
+                                            "description": "申请单号"
+                                        }
+                                    ]
+                                }
                             }
-
-
-
-
 
                         }
                     },
@@ -227,7 +1495,8 @@ var Content = React.createClass({
                             "flowId":1,
                             "wsFlow":[
                                         {
-                                            name:'/user/regist',
+                                            // 用户注册
+                                            name:'/user/regist', 
                                             saveParameters:{
                                                                 request:{
                                                                             phone:"['data']['phone']",
@@ -238,6 +1507,7 @@ var Content = React.createClass({
 
                                         },
                                         {
+                                            // 登录操作
                                             name:'/user/login',
                                             saveParameters:{
                                                                 response:{
@@ -250,25 +1520,283 @@ var Content = React.createClass({
                                                     }
                                         },
                                         {
+                                            // 可申请产品列表
                                             name:'/products',
-                                            saveParameters:{
-                                                                productId:"['data']['data']['items'][1]['productId']",
-                                                                productName:"['data']['data']['items'][1]['productName']"
+                                            saveParameters:{    
+                                                                response:{
+                                                                    productId:"['data']['data']['items'][1]['productId']",
+                                                                    productName:"['data']['data']['items'][1]['productName']"
+                                                                }
                                                             },
                                             relation:{
-                                                // productId:"productId"
                                             }
                                         },
                                         {
+                                            // 检查是否实名（获取实名信息）
                                             name:'/user/appro/realname',
                                             saveParameters:{},
                                             relation:{
                                                 token:"token"
                                             }
-                                        }
-                                    ],
+                                        },
+                                        {
+                                            // 实名认证
+                                            name:'/user/appro/autoRealname',
+                                            saveParameters:{
+                                                                request:{
+                                                                            idCardNumber:"['data']['idCardNumber']",
+                                                                            realName:"['data']['realName']"
+                                                                        },
+                                                                response:{}
+                                            },
+                                            relation:{
+                                                token:"token"
+                                            }
+                                        },
+                                        {
+                                            // 进件检查
+                                            name:'/forms/reapplyStatuses',
+                                            saveParameters:{},
+                                            relation:{
+                                                idNo:"idCardNumber"
+                                            }
+                                        },
+                                        {
+                                            // 产品详情
+                                            name:'/products/{productId}',
+                                            saveParameters:{},
+                                            relation:{
+                                                productId:"productId"
+                                            }
+                                        },
+                                        {
+                                            // 分期计划
+                                            name:'/products/instalment-plans/{productId}',
+                                            saveParameters:{
+                                                response:{
+                                                    instalmentPlanId:"['data']['data']['items'][0]['instalmentPlanId']",
+                                                    instalmentPlanName:"['data']['data']['items'][0]['instalmentPlanName']",
+                                                    repayType:"['data']['data']['items'][0]['repayType']"
+                                                }
+                                            },
+                                            relation:{
+                                                productId:"productId"
+                                            }
+                                        },
+                                        {
+                                            // 未提交申请单详情
+                                            name:'/forms/{productId}/unsubmittedForms',
+                                            saveParameters:{},
+                                            relation:{
+                                                token:"token",
+                                                productId:"productId"
+                                            }
+                                        },
+                                        {
+                                            // 还款计划试算
+                                            name:'/forms/repayment-plan-trial',
+                                            saveParameters:{},
+                                            relation:{
+                                                // token:"token",
+                                                "['data']['instalmentPlanId']":"instalmentPlanId"
+                                            }
+                                        },
+                                        {
+                                            // 生成/更新贷款申请单
+                                            name:'/forms',
+                                            saveParameters:{
+                                                response:{
+                                                    applyCode:"['data']['data']['applyCode']"
+                                                }
+                                            },
+                                            relation:{
+                                                token:"token",
+                                                "['data']['mobile']":"phone",
+                                                "['data']['productId']":"productId",
+                                                "['data']['productName']":"productName",
+                                                "['data']['instalmentPlanId']":"productId",
+                                                "['data']['instalmentPlanName']":"instalmentPlanName",
+                                            }
+                                        },
+                                        {
+                                            // 查询个人信息
+                                            name:'/users_get',
+                                            saveParameters:{},
+                                            relation:{
+                                                token:"token"
+                                            }
+                                        },
+                                        {
+                                            // 修改个人信息
+                                            name:'/users_patch',
+                                            saveParameters:{},
+                                            relation:{
+                                                token:"token"
+                                            }
+                                        },
+                                        {
+                                            // 是否已验证过征信
+                                            name:'/credits/statuses',
+                                            saveParameters:{},
+                                            relation:{
+                                                token:"token"
+                                            }
+                                        },
+                                        {
+                                            // 获取银行流水采集的URL页面
+                                            name:'/credits/bank-statement-urls',
+                                            saveParameters:{},
+                                            relation:{
+                                                token:"token"
+                                            }
+                                        },
+                                        {
+                                            // 获取公积金支持区域
+                                            name:'/credits/cities_RESERVED_FUND',
+                                            saveParameters:{},
+                                            relation:{
+                                                // token:"token"
+                                            }
+                                        },
+                                        {
+                                            // 获取公积金区域表单
+                                            name:'/credits/cities/{cityCode}_RESERVED_FUND',
+                                            saveParameters:{},
+                                            relation:{
+                                                // token:"token"
+                                            }
+                                        },
+                                        {
+                                            // 验证公积金征信
+                                            name:'/credits/results/{typeCode}_RESERVED_FUND',
+                                            saveParameters:{},
+                                            relation:{
+                                                token:"token"
+                                            }
+                                        },
+
+                                        {
+                                            // 获取社保支持区域
+                                            name:'/credits/cities_SOCIAL_INSURANCE',
+                                            saveParameters:{},
+                                            relation:{
+                                                // token:"token"
+                                            }
+                                        },
+                                        {
+                                            // 获取社保区域表单
+                                            name:'/credits/cities/{cityCode}_SOCIAL_INSURANCE',
+                                            saveParameters:{},
+                                            relation:{
+                                                // token:"token"
+                                            }
+                                        },
+                                        {
+                                            // 验证社保征信
+                                            name:'/credits/results/{typeCode}_SOCIAL_INSURANCE',
+                                            saveParameters:{},
+                                            relation:{
+                                                token:"token"
+                                            }
+                                        },
+                                        {
+                                            // 验证个人征信
+                                            name:'/credits/results/{typeCode}_CREDIT_REPORT',
+                                            saveParameters:{},
+                                            relation:{
+                                                token:"token"
+                                            }
+                                        },
+                                        {
+                                            // 验证电商征信
+                                            name:'/credits/results/{typeCode}_EB',
+                                            saveParameters:{},
+                                            relation:{
+                                                token:"token"
+                                            }
+                                        },
+                                        {
+                                            // 验证运营商征信
+                                            name:'/credits/results/{typeCode}_OPERATOR',
+                                            saveParameters:{},
+                                            relation:{
+                                                token:"token"
+                                            }
+                                        },
+                                        {
+                                            // 查看影像资料列表
+                                            name:'/files_get',
+                                            saveParameters:{},
+                                            relation:{
+                                                token:"token",
+                                                applyCode:"applyCode"
+                                            }
+                                        },
+                                        {
+                                            // 单个文件上传
+                                            name:'/files_post',
+                                            saveParameters:{},
+                                            relation:{
+                                                token:"token",
+                                                applyCode:"applyCode"
+                                            }
+                                        },
+                                        {
+                                            // 上传影像资料
+                                            name:'/files_put',
+                                            saveParameters:{},
+                                            relation:{
+                                                token:"token",
+                                                "['data']['applyCode']":"applyCode"
+                                            }
+                                        },
+                                        {
+                                            // 获取用户信息（检查是否开户）
+                                            name:'/user/userInfoByToken',
+                                            saveParameters:{},
+                                            relation:{
+                                                token:"token"
+                                            }
+                                        },
+                                        {
+                                            // 获取开户URL
+                                            name:'/user/capitalAccount/openFuiouOpenAccountPage/staticMobile',
+                                            saveParameters:{},
+                                            relation:{
+                                                token:"token"
+                                            }
+                                        },
+                                        {
+                                            // 提交进件
+                                            name:'/receipts/{applyCode}',
+                                            saveParameters:{},
+                                            relation:{
+                                                token:"token",
+                                                applyCode:"applyCode"
+                                            }
+                                        },
+                                        {
+                                            // 修改申请单状态
+                                            name:'/forms/statuses/{applyCode}',
+                                            saveParameters:{},
+                                            relation:{
+                                                token:"token",
+                                                applyCode:"applyCode"
+                                            }
+                                        },
+                                        {
+                                            // 查询贷款申请单
+                                            name:'/forms/{applyCode}',
+                                            saveParameters:{},
+                                            relation:{
+                                                token:"token",
+                                                applyCode:"applyCode"
+                                            }
+                                        },
+
+
+                                    ]
                             
-                            "relation":[{"bidCode":"['data']['data']['items'][1]['bidCode']"}]
                         },
                         {
                             "flowId":2,
@@ -293,11 +1821,11 @@ var Content = React.createClass({
             // url : "http://172.16.16.136:8080/tyrant/swagger/api-docs?platformName=userCenter",
             // url : "http://localhost:8080/swagger/api-docs?platformName=userCenter",
             // 
-            url : "http://172.16.16.136:8080/tyrant/swagger/api-docs?platformName=userCenter",
-            // url : "http://localhost:8080/swagger/api-docs?platformName=integrationPlatform",
+            // url : "http://172.16.16.136:8080/tyrant/swagger/api-docs?platformName=userCenter",
+            url : "http://localhost:8080/swagger/api-docs?platformName=integrationPlatform",
             // url : "http://localhost:8080/swagger/api-docs?platformName=fileCenter",
             success : function(data){
-                var arr = ['/user/appro/realname','get'];
+                var arr = ['/forms/{applyCode}','get'];
                 // console.log(data.data.basePath);
                 // console.log(data.data.paths);
                 // console.log(JSON.stringify(data.data));
@@ -314,10 +1842,10 @@ var Content = React.createClass({
                     var value = "";
                     var description = "";
                     if (o.in == "body"){
-                        var valueT = o.description;
-                        eval("value = "+valueT);
-                        o.default = JSON.stringify(value);
-                        o.description = "";
+                        // var valueT = o.description;
+                        // eval("value = "+valueT);
+                        // o.default = JSON.stringify(value);
+                        // o.description = "";
                     }else {
                         value = o.default;
                         description = o.description;

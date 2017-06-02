@@ -79,11 +79,12 @@ var FlowData = React.createClass({
         req['parameters'] = parameters;
         if (type.toLowerCase() != 'get'){
             var jsonText = this.refs['jsonText'];
-            req['json'] = jsonText.value;
+            console.log(jsonText);
+            req['json'] = jsonText===undefined?'':jsonText.value;
             // console.log("requestData------>  "+jsonText.value);
         }
         var data = {data:req}
-        // console.log(JSON.stringify(data));
+        console.log(JSON.stringify(data));
         // 由于跨域问题，发送请求，后端调用接口
         $.ajax({
             type:"post", 
@@ -169,7 +170,7 @@ var FlowData = React.createClass({
     },
     prevFlow(selectedFlow,flowLen,flowIndex,flowRelation){
         if (flowIndex>0){
-            var index = this.props.flowIndex-1;
+            var index = flowIndex-1;
             var pageHeight = document.body.scrollHeight-50+'px';
             this.props.setFlow(selectedFlow,index,pageHeight,flowRelation);
         }else {
@@ -181,9 +182,7 @@ var FlowData = React.createClass({
     },
     nextFlow(selectedFlow,flowLen,flowIndex,flowRelation){
         if (flowIndex<flowLen-1){
-
-                
-            var index = this.props.flowIndex+1;
+            var index = flowIndex+1;
             var pageHeight = document.body.scrollHeight-50+'px';
             this.props.setFlow(selectedFlow,index,pageHeight,flowRelation);
         }else {
@@ -253,9 +252,9 @@ var FlowData = React.createClass({
             }else {
                 // console.log(o);
                 var flowRelation = selectedFlow[flowIndex].relation;
-                console.log(flowRelation);
+                // console.log(flowRelation);
                 o.parameters.map(function(oo,index){
-                    console.log(oo);
+                    // console.log(oo);
                     if (oo.in === 'body'){
                         for(var key in flowRelation){
                             // var tempJsonData = oo.default;
@@ -282,7 +281,7 @@ var FlowData = React.createClass({
                 arrflowData[index].bodyParameters = bodyParameters;
             }
         });
-        // console.log(arrflowData);
+        console.log(arrflowData);
 
         var rspBCFlag = this.state.rspBCFlag;
         var allRsp = window.localStorage.getItem('allRsp');
@@ -327,6 +326,20 @@ var FlowData = React.createClass({
                             </a>
                         </div>
                     </div>
+
+                    <div className="row">
+                        <div className="col-lg-2" id={flowIndex>0?'':'disC'}>
+                            <a href="#" onClick={this.prevFlow.bind(this,selectedFlow,flowLen,1,flowRelation)} className="large white button">
+                                First
+                            </a>
+                        </div>
+                        <div className="col-lg-2" id={flowIndex<flowLen-1?'':'disC'}>
+                            <a href="#" onClick={this.nextFlow.bind(this,selectedFlow,flowLen,flowLen-2,flowRelation)} className="large white button">
+                                Last
+                            </a>
+                        </div>
+                    </div>
+
                     <hr style={{border:'1px solid #000',marginTop: '20px'}}></hr>
 
                     {
