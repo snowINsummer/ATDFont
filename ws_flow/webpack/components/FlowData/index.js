@@ -108,7 +108,7 @@ var FlowData = React.createClass({
 
                 for(var saveP in responseP){
                     var tempValue = "";
-                    eval("tempValue = data"+saveParameters[saveP]);
+                    eval("tempValue = data"+responseP[saveP]);
                     window.localStorage.setItem(saveP,tempValue);
                     // console.log(tempValue);
                     // console.log(window.localStorage.getItem(saveP));
@@ -255,7 +255,7 @@ var FlowData = React.createClass({
                 var flowRelation = selectedFlow[flowIndex].relation;
                 console.log(flowRelation);
                 o.parameters.map(function(oo,index){
-                    // console.log(oo);
+                    console.log(oo);
                     if (oo.in === 'body'){
                         for(var key in flowRelation){
                             // var tempJsonData = oo.default;
@@ -269,7 +269,7 @@ var FlowData = React.createClass({
                         for(var key in flowRelation){
                             // var tempJsonData = oo.default;
                             // var tempVar = "";
-                            if(key.indexOf("[") === 0){
+                            if(key.indexOf("[") === -1){
                                 if (key === oo.name){
                                     oo.default = window.localStorage.getItem(flowRelation[key]);
                                 }

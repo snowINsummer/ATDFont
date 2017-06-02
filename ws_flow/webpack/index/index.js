@@ -100,8 +100,8 @@ var Content = React.createClass({
                                             "name": "data",
                                             "default": {
                                                 "data": {
-                                                    "userName": "18755605072",
-                                                    "password": "59466ce0191505196fd7eb6fa6590ae4"
+                                                    "userName": "135242690241",
+                                                    "password": "123456"
                                                 }
                                             },
                                             "in": "body",
@@ -150,10 +150,39 @@ var Content = React.createClass({
                                     ]
                                 }
                             },
-
-
-
-
+                            "/user/appro/realname": {
+                                "get": {
+                                    "basePath": "/userCenter",
+                                    "summary": "实名认证信息",
+                                    "description": "用户实名认证信息",
+                                    "parameters": [
+                                        {
+                                            "name": "clientId",
+                                            "default": "XXD_INTEGRATION_PLATFORM",
+                                            "in": "header",
+                                            "description": "分配给前端的客户端id"
+                                        },
+                                        {
+                                            "name": "clientTime",
+                                            "default": "1459845047000",
+                                            "in": "header",
+                                            "description": "客户端当前时间"
+                                        },
+                                        {
+                                            "name": "s",
+                                            "default": "de42212bdc77b66092a9211cc08b2313",
+                                            "in": "header",
+                                            "description": "32 LENGTH CHARS"
+                                        },
+                                        {
+                                            "name": "token",
+                                            "default": "KXQOjUH9ez+NMHJGBMl11VIorUFFff6quy8M4ToecSXMHVe8y2xw6ccP7VKXR3/rNhfTJiedyRIqP7Qf3NiZP/eIcfvXlkgNJTs5Hvl/OoA=",
+                                            "in": "header",
+                                            "description": "令牌"
+                                        }
+                                    ]
+                                }
+                            }
 
 
 
@@ -211,140 +240,31 @@ var Content = React.createClass({
                                         {
                                             name:'/user/login',
                                             saveParameters:{
+                                                                response:{
+                                                                            token:"['data']['data']['data']"
+                                                                }
                                                             },
-                                            relation:{"['data']['userName']":"phone",
-                                                        "['data']['password']":"password"}
+                                            relation:{
+                                                        // "['data']['userName']":"phone",
+                                                        // "['data']['password']":"password"
+                                                    }
                                         },
-
-
-
                                         {
                                             name:'/products',
                                             saveParameters:{
                                                                 productId:"['data']['data']['items'][1]['productId']",
                                                                 productName:"['data']['data']['items'][1]['productName']"
                                                             },
-                                            // relation:{productId:"productId"}
+                                            relation:{
+                                                // productId:"productId"
+                                            }
                                         },
                                         {
-                                            name:'/forms/reapplyStatuses',
+                                            name:'/user/appro/realname',
                                             saveParameters:{},
-                                            relation:{}
-                                        },
-                                        {
-                                            name:'/products/{productId}',
-                                            saveParameters:{},
-                                            relation:{productId:"productId"}
-                                        },
-                                        {
-                                            name:'/products/instalment-plans/{productId}',
-                                            saveParameters:{},
-                                            relation:{productId:"productId"}
-                                        },
-                                        {
-                                            name:'/forms/{userId}/{productId}',
-                                            saveParameters:{},
-                                            relation:{productId:"productId"}
-                                        },
-                                        {
-                                            name:'/forms/repayment-plan-trial',
-                                            saveParameters:{},
-                                            relation:{productId:"productId"}
-                                        },
-                                        {
-                                            name:'/forms',
-                                            saveParameters:{},
-                                            relation:{productId:"productId"}
-                                        },
-                                        {
-                                            name:'/users/{userId}',
-                                            saveParameters:{},
-                                            relation:{productId:"productId"}
-                                        },
-                                        {
-                                            name:'/users/{userId}',
-                                            saveParameters:{},
-                                            relation:{productId:"productId"}
-                                        },
-                                        {
-                                            name:'/credits/statuses',
-                                            saveParameters:{},
-                                            relation:{productId:"productId"}
-                                        },
-                                        {
-                                            name:'/credits/statuses',
-                                            saveParameters:{},
-                                            relation:{productId:"productId"}
-                                        },
-                                        {
-                                            name:'/credits/loginStatuses',
-                                            saveParameters:{},
-                                            relation:{productId:"productId"}
-                                        },
-                                        {
-                                            name:'/credits/statuses',
-                                            saveParameters:{},
-                                            relation:{productId:"productId"}
-                                        },
-                                        {
-                                            name:'/credits/cities/{cityCode}',
-                                            saveParameters:{},
-                                            relation:{productId:"productId"}
-                                        },
-                                        {
-                                            name:'/credits/results/{typeCode}',
-                                            saveParameters:{},
-                                            relation:{productId:"productId"}
-                                        },
-                                        {
-                                            name:'/credits/cities',
-                                            saveParameters:{},
-                                            relation:{productId:"productId"}
-                                        },
-                                        {
-                                            name:'/credits/results/{typeCode}',
-                                            saveParameters:{},
-                                            relation:{productId:"productId"}
-                                        },
-                                        {
-                                            name:'/credits/results/{typeCode}',
-                                            saveParameters:{},
-                                            relation:{productId:"productId"}
-                                        },
-                                        {
-                                            name:'/credits/results/{typeCode}',
-                                            saveParameters:{},
-                                            relation:{productId:"productId"}
-                                        },
-                                        {
-                                            name:'/credits/results/{typeCode}',
-                                            saveParameters:{},
-                                            relation:{productId:"productId"}
-                                        },
-                                        {
-                                            name:'/files',
-                                            saveParameters:{},
-                                            relation:{productId:"productId"}
-                                        },
-                                        {
-                                            name:'/files',
-                                            saveParameters:{},
-                                            relation:{productId:"productId"}
-                                        },
-                                        {
-                                            name:'/files',
-                                            saveParameters:{},
-                                            relation:{productId:"productId"}
-                                        },
-                                        {
-                                            name:'/receipts/{applyCode}',
-                                            saveParameters:{},
-                                            relation:{productId:"productId"}
-                                        },
-                                        {
-                                            name:'/forms/statuses/{applyCode}',
-                                            saveParameters:{},
-                                            relation:{productId:"productId"}
+                                            relation:{
+                                                token:"token"
+                                            }
                                         }
                                     ],
                             
@@ -373,11 +293,11 @@ var Content = React.createClass({
             // url : "http://172.16.16.136:8080/tyrant/swagger/api-docs?platformName=userCenter",
             // url : "http://localhost:8080/swagger/api-docs?platformName=userCenter",
             // 
-            // url : "http://172.16.16.136:8080/tyrant/swagger/api-docs?platformName=userCenter",
-            url : "http://localhost:8080/swagger/api-docs?platformName=integrationPlatform",
+            url : "http://172.16.16.136:8080/tyrant/swagger/api-docs?platformName=userCenter",
+            // url : "http://localhost:8080/swagger/api-docs?platformName=integrationPlatform",
             // url : "http://localhost:8080/swagger/api-docs?platformName=fileCenter",
             success : function(data){
-                var arr = ['/products','get'];
+                var arr = ['/user/appro/realname','get'];
                 // console.log(data.data.basePath);
                 // console.log(data.data.paths);
                 // console.log(JSON.stringify(data.data));
