@@ -301,32 +301,6 @@ var FlowData = React.createClass({
                         </div>
                     </div>
                     <hr style={{border:'1px solid #000',marginTop: '10px'}}></hr>
-                    <div className="row" style={{marginTop:'20px'}}>
-                        <div className="col-lg-2">
-                            <a onClick={this.sendMessage.bind(this,o.url,o.type,flowLen,flowIndex,selectedFlow)} className="large blue button" filetype="0" >
-                            Submit</a>
-                        </div>
-                        <div className="col-lg-4" style={{fontSize:'12px',textAlign:'left'}}>
-                            <label for="name">第{flowIndex+1}步，一共{flowLen}个步骤。</label>
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col-lg-2" id={flowIndex>0?'':'disC'}>
-                            <a href="#" onClick={this.prevFlow.bind(this,selectedFlow,flowLen,flowIndex,flowRelation)} className="large blue button">
-                                Prev
-                            </a>
-                        </div>
-                        <div className="col-lg-2" id={flowIndex<flowLen-1?'':'disC'}>
-                            <a href="#" onClick={this.nextFlow.bind(this,selectedFlow,flowLen,flowIndex,flowRelation)} className="large blue button">
-                                Next
-                            </a>
-                        </div>
-                        <div className="col-lg-3">
-                            <a style={{width:'150px'}} onClick={this.clearAllParameters} className="large red button">
-                                清除所有变量缓存
-                            </a>
-                        </div>
-                    </div>
 
                     <div className="row">
                         <div className="col-lg-2" id={flowIndex>0?'':'disC'}>
@@ -339,7 +313,34 @@ var FlowData = React.createClass({
                                 Last
                             </a>
                         </div>
+                        <div className="col-lg-3">
+                            <a style={{width:'150px'}} onClick={this.clearAllParameters} className="large red button">
+                                清除所有变量缓存
+                            </a>
+                        </div>
                     </div>
+
+                    <div className="row">
+                        <div className="col-lg-2" id={flowIndex>0?'':'disC'}>
+                            <a href="#" onClick={this.prevFlow.bind(this,selectedFlow,flowLen,flowIndex,flowRelation)} className="large blue button">
+                                Prev
+                            </a>
+                        </div>
+                        <div className="col-lg-2" id={flowIndex<flowLen-1?'':'disC'}>
+                            <a href="#" onClick={this.nextFlow.bind(this,selectedFlow,flowLen,flowIndex,flowRelation)} className="large blue button">
+                                Next
+                            </a>
+                        </div>
+                        <div className="col-lg-2">
+                            <a onClick={this.sendMessage.bind(this,o.url,o.type,flowLen,flowIndex,selectedFlow)} className="large blue button" filetype="0" >
+                            Submit</a>
+                        </div>
+                        <div className="col-lg-4" style={{fontSize:'12px',textAlign:'left'}}>
+                            <label for="name">第{flowIndex+1}步，一共{flowLen}个步骤。</label>
+                        </div>
+
+                    </div>
+
 
                     <hr style={{border:'1px solid #000',marginTop: '20px'}}></hr>
 
