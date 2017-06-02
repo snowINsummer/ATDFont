@@ -33,7 +33,7 @@ var FlowData = React.createClass({
                 var jsonObj = JSON.parse(jsonText);
                 eval("jsonObj"+key+"='"+window.localStorage.getItem(flowRelation[key])+"'");
                 // console.log("replaced requestData------>  ");
-                // console.log(jsonObj);
+                console.log(jsonObj);
                 requestData.value = JSON.stringify(jsonObj);
                 continue;
             }
@@ -111,8 +111,8 @@ var FlowData = React.createClass({
 
                 var allRsp = window.localStorage.getItem('allRsp');
                 allRsp = allRsp==null?'':allRsp;
-                allRsp += this.CurentTime() + " 接口请求信息---->：\n" + JSON.stringify(req) + "\n"
-                allRsp += this.CurentTime() + " 接口响应信息---->：\n" + JSON.stringify(data,null,4) + "\n\n";
+                allRsp += this.CurentTime() + "---->\n "+selectedFlow[flowIndex].name + " 接口请求信息 ：" + JSON.stringify(req) + "\n"
+                allRsp += this.CurentTime() + "---->\n "+selectedFlow[flowIndex].name + " 接口响应信息 ：" + JSON.stringify(data,null,4) + "\n\n";
                 window.localStorage.setItem("allRsp", allRsp);
                 // console.log(window.localStorage.getItem('allRsp'));
                 this.refs['allRspBody'].value = allRsp;
@@ -127,8 +127,8 @@ var FlowData = React.createClass({
                 var allRsp = window.localStorage.getItem('allRsp');
                 // console.log(allRsp);
                 allRsp = allRsp==null?'':allRsp;
-                allRsp += this.CurentTime() + " 接口请求信息---->：\n" + JSON.stringify(req) + "\n"
-                allRsp += this.CurentTime() + " 接口响应信息---->：\n" + JSON.stringify(e,null,4) + "\n\n";
+                allRsp += this.CurentTime() + " "+selectedFlow[flowIndex].name + " 接口请求信息---->：\n" + JSON.stringify(req) + "\n"
+                allRsp += this.CurentTime() + " "+selectedFlow[flowIndex].name + " 接口响应信息---->：\n" + JSON.stringify(e,null,4) + "\n\n";
                 window.localStorage.setItem("allRsp", allRsp);
                 // console.log(window.localStorage.getItem('allRsp'));
                 this.refs['allRspBody'].value = allRsp;
@@ -235,7 +235,7 @@ var FlowData = React.createClass({
 
     render() {
         var arrflowData = this.props.arrflowData;
-        // console.log(this.props.arrflowData);
+
         arrflowData.map(function(o,index){
             var parameters = [];
             var bodyParameters = [];
@@ -254,6 +254,7 @@ var FlowData = React.createClass({
                 arrflowData[index].bodyParameters = bodyParameters;
             }
         });
+
         // console.log(arrflowData);
         var selectedFlow = this.props.selectedFlow;
         var flowLen = selectedFlow.length;
