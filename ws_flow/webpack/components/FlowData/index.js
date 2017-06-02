@@ -24,6 +24,7 @@ var FlowData = React.createClass({
         var inputs = o.getElementsByTagName('input');
         var len = inputs.length;
 
+/*
         var flowRelation = selectedFlow[flowIndex].relation;
         for(var key in flowRelation){
             if(key.indexOf("[") === 0){
@@ -34,7 +35,7 @@ var FlowData = React.createClass({
                 eval("jsonObj"+key+"='"+window.localStorage.getItem(flowRelation[key])+"'");
                 // console.log("replaced requestData------>  ");
                 console.log(jsonObj);
-                requestData.value = JSON.stringify(jsonObj);
+                requestData.value = JSON.stringify(jsonObj,null,4);
                 continue;
             }
             for(var i=0;i<len;i++){
@@ -45,6 +46,8 @@ var FlowData = React.createClass({
                 }
             }
         }
+*/
+
         // 定义请求报文
         var req = {
             url:url,
@@ -77,10 +80,10 @@ var FlowData = React.createClass({
         if (type.toLowerCase() != 'get'){
             var jsonText = this.refs['jsonText'];
             req['json'] = jsonText.value;
-            console.log("requestData------>  "+jsonText.value);
+            // console.log("requestData------>  "+jsonText.value);
         }
         var data = {data:req}
-        console.log(JSON.stringify(data));
+        // console.log(JSON.stringify(data));
         // 由于跨域问题，发送请求，后端调用接口
         $.ajax({
             type:"post", 
@@ -92,18 +95,24 @@ var FlowData = React.createClass({
             success:function(data){
                 // 保存全局变量
                 var saveParameters = selectedFlow[flowIndex].saveParameters;
-                // console.log(saveParameters);
-                for(var saveP in saveParameters){
+                var requestP = saveParameters.request;
+                var responseP = saveParameters.response;
+                // console.log(requestP);
+                for(var saveP in requestP){
+                    var tempData = JSON.parse(req['json']);
+                    var tempValue = "";
+                    eval("tempValue = tempData"+requestP[saveP]);
+                    window.localStorage.setItem(saveP,tempValue);
+                    // console.log(tempValue);
+                }
+
+                for(var saveP in responseP){
                     var tempValue = "";
                     eval("tempValue = data"+saveParameters[saveP]);
                     window.localStorage.setItem(saveP,tempValue);
                     // console.log(tempValue);
                     // console.log(window.localStorage.getItem(saveP));
                 }
-
-
-                
-               
 
                 // console.log(JSON.stringify(data,null,4));
                 this.refs['rspBody'].style.height = '500px';
@@ -160,11 +169,8 @@ var FlowData = React.createClass({
     },
     prevFlow(selectedFlow,flowLen,flowIndex,flowRelation){
         if (flowIndex>0){
-            // console.log('未减 '+this.props.flowIndex);
             var index = this.props.flowIndex-1;
-            // console.log('已减 '+index);
             var pageHeight = document.body.scrollHeight-50+'px';
-            // console.log(pageHeight);
             this.props.setFlow(selectedFlow,index,pageHeight,flowRelation);
         }else {
             alert('已经是第一步！');
@@ -175,12 +181,10 @@ var FlowData = React.createClass({
     },
     nextFlow(selectedFlow,flowLen,flowIndex,flowRelation){
         if (flowIndex<flowLen-1){
-            // console.log('未加 '+this.props.flowIndex);
+
+                
             var index = this.props.flowIndex+1;
-            // console.log('已加 '+index);
             var pageHeight = document.body.scrollHeight-50+'px';
-            // console.log(pageHeight);
-            // this.props.setPageHeight(pageHeight);
             this.props.setFlow(selectedFlow,index,pageHeight,flowRelation);
         }else {
             alert('已经是最后一步！');
@@ -235,6 +239,11 @@ var FlowData = React.createClass({
 
     render() {
         var arrflowData = this.props.arrflowData;
+        // console.log(arrflowData);
+        var selectedFlow = this.props.selectedFlow;
+        var flowLen = selectedFlow.length;
+        var flowIndex = this.props.flowIndex;
+        var flowRelation = this.props.flowRelation;
 
         arrflowData.map(function(o,index){
             var parameters = [];
@@ -243,10 +252,29 @@ var FlowData = React.createClass({
                 bodyParameters = o.bodyParameters;
             }else {
                 // console.log(o);
+                var flowRelation = selectedFlow[flowIndex].relation;
+                console.log(flowRelation);
                 o.parameters.map(function(oo,index){
+                    // console.log(oo);
                     if (oo.in === 'body'){
+                        for(var key in flowRelation){
+                            // var tempJsonData = oo.default;
+                            // var tempVar = "";
+                            if(key.indexOf("[") === 0){
+                                eval("oo.default"+key+"='"+window.localStorage.getItem(flowRelation[key])+"'");
+                            }
+                        }
                         bodyParameters.push(oo);
                     }else {
+                        for(var key in flowRelation){
+                            // var tempJsonData = oo.default;
+                            // var tempVar = "";
+                            if(key.indexOf("[") === 0){
+                                if (key === oo.name){
+                                    oo.default = window.localStorage.getItem(flowRelation[key]);
+                                }
+                            }
+                        }
                         parameters.push(oo);
                     }
                 });
@@ -254,12 +282,8 @@ var FlowData = React.createClass({
                 arrflowData[index].bodyParameters = bodyParameters;
             }
         });
-
         // console.log(arrflowData);
-        var selectedFlow = this.props.selectedFlow;
-        var flowLen = selectedFlow.length;
-        var flowIndex = this.props.flowIndex;
-        var flowRelation = this.props.flowRelation;
+
         var rspBCFlag = this.state.rspBCFlag;
         var allRsp = window.localStorage.getItem('allRsp');
         allRsp = allRsp==null?'':allRsp;
