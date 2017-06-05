@@ -71,6 +71,7 @@ var ProductList = React.createClass({
                             </div>
                         </div>
                     </section>
+
                 <div style={{textAlign:'center'}}>
                     <a href="#" style={{position:'fixed',bottom:'20px'}} className="large green button">回到顶部</a>
                 </div>

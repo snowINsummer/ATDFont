@@ -48,7 +48,10 @@ var FlowData = React.createClass({
             }
         }
 */
-
+        
+        // 标记参数类型json||FormData
+        var isFormData = false;
+        var file;
         // 定义请求报文
         var req = {
             url:url,
@@ -74,6 +77,9 @@ var FlowData = React.createClass({
                 var value = input.value;
                 url = url.replace("{"+key+"}",value);
                 req['url'] = url;
+            }else if(input.getAttribute('in') === 'formData'){
+                isFormData = true;
+                file = input.files[0];
             }
         }
         req['headers'] = headers;
@@ -84,16 +90,38 @@ var FlowData = React.createClass({
             req['json'] = jsonText===undefined?'':jsonText.value;
             // console.log("requestData------>  "+jsonText.value);
         }
-        var data = {data:req}
-        console.log(JSON.stringify(data));
+        var data;
+        var contentType;
+        var url;
+        var mimeType;
+        if (isFormData){
+            data = new FormData();
+            data.append("file",file);
+            data.append("data",JSON.stringify(req));
+            contentType = false;
+            mimeType = "multipart/form-data";
+            url = "http://localhost:8080/ws/uploadFile";
+            console.log(file);
+            console.log(JSON.stringify(req));
+        }else {
+            data = {data:req};
+            contentType = "application/json; charset=utf-8";
+            mimeType = "text/plain;charset=UTF-8";
+            url = "http://localhost:8080/ws/sendMessage";
+            console.log(JSON.stringify(data));
+        }
+
+
         // 由于跨域问题，发送请求，后端调用接口
         $.ajax({
             type:"post", 
             dataType:"json",
-            contentType: "application/json; charset=utf-8",
-            data : JSON.stringify(data),
+            "processData": false,
+            contentType: contentType,
+            data : data,
+            // mimeType: mimeType,
             // url:"http://172.16.16.136:8080/tyrant/ws/sendMessage", 
-            url:"http://localhost:8080/ws/sendMessage", 
+            url:url, 
             success:function(data){
                 // 保存全局变量
                 var saveParameters = selectedFlow[flowIndex].saveParameters;
@@ -343,10 +371,19 @@ var FlowData = React.createClass({
 
 
                     <hr style={{border:'1px solid #000',marginTop: '20px'}}></hr>
-
                     {
                         o.parameters.map(o=>
-                            <div key={o.description} className="row">
+                            o.in==='formData'?<div key={o.description} className="row">
+                                <div className="col-lg-2">
+                                    <label for="name">{o.name}：</label>
+                                </div>
+                                <div className="col-lg-4">
+                                    <input type="file" className="form-control" defaultValue={o.default} in={o.in} name={o.name}/>
+                                </div>
+                                <div className="col-lg-5">
+                                    <label for="name">{o.description}</label>
+                                </div>
+                            </div>:<div key={o.description} className="row">
                                 <div className="col-lg-2">
                                     <label for="name">{o.name}：</label>
                                 </div>
@@ -356,8 +393,10 @@ var FlowData = React.createClass({
                                 <div className="col-lg-5">
                                     <label for="name">{o.description}</label>
                                 </div>
-                            </div>)
+                            </div>
+                            )
                     }
+
                     {
                         o.bodyParameters.map(o=>
                             <div key={o.description} className="row">

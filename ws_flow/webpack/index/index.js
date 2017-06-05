@@ -1621,6 +1621,7 @@ var Content = React.createClass({
                                         {
                                             // 查询个人信息
                                             name:'/users_get',
+                                            tName:'/users',
                                             saveParameters:{},
                                             relation:{
                                                 token:"token"
@@ -1629,6 +1630,7 @@ var Content = React.createClass({
                                         {
                                             // 修改个人信息
                                             name:'/users_patch',
+                                            tName:'/users',
                                             saveParameters:{},
                                             relation:{
                                                 token:"token"
@@ -1653,6 +1655,7 @@ var Content = React.createClass({
                                         {
                                             // 获取公积金支持区域
                                             name:'/credits/cities_RESERVED_FUND',
+                                            tName:'/credits/cities',
                                             saveParameters:{},
                                             relation:{
                                                 // token:"token"
@@ -1661,6 +1664,7 @@ var Content = React.createClass({
                                         {
                                             // 获取公积金区域表单
                                             name:'/credits/cities/{cityCode}_RESERVED_FUND',
+                                            tName:'/credits/cities/{cityCode}',
                                             saveParameters:{},
                                             relation:{
                                                 // token:"token"
@@ -1669,6 +1673,7 @@ var Content = React.createClass({
                                         {
                                             // 验证公积金征信
                                             name:'/credits/results/{typeCode}_RESERVED_FUND',
+                                            tName:'/credits/results/{typeCode}',
                                             saveParameters:{},
                                             relation:{
                                                 token:"token"
@@ -1678,6 +1683,7 @@ var Content = React.createClass({
                                         {
                                             // 获取社保支持区域
                                             name:'/credits/cities_SOCIAL_INSURANCE',
+                                            tName:'/credits/cities',
                                             saveParameters:{},
                                             relation:{
                                                 // token:"token"
@@ -1686,6 +1692,7 @@ var Content = React.createClass({
                                         {
                                             // 获取社保区域表单
                                             name:'/credits/cities/{cityCode}_SOCIAL_INSURANCE',
+                                            tName:'/credits/cities/{cityCode}',
                                             saveParameters:{},
                                             relation:{
                                                 // token:"token"
@@ -1694,6 +1701,7 @@ var Content = React.createClass({
                                         {
                                             // 验证社保征信
                                             name:'/credits/results/{typeCode}_SOCIAL_INSURANCE',
+                                            tName:'/credits/results/{typeCode}',
                                             saveParameters:{},
                                             relation:{
                                                 token:"token"
@@ -1702,6 +1710,7 @@ var Content = React.createClass({
                                         {
                                             // 验证个人征信
                                             name:'/credits/results/{typeCode}_CREDIT_REPORT',
+                                            tName:'/credits/results/{typeCode}',
                                             saveParameters:{},
                                             relation:{
                                                 token:"token"
@@ -1710,6 +1719,7 @@ var Content = React.createClass({
                                         {
                                             // 验证电商征信
                                             name:'/credits/results/{typeCode}_EB',
+                                            tName:'/credits/results/{typeCode}',
                                             saveParameters:{},
                                             relation:{
                                                 token:"token"
@@ -1718,6 +1728,7 @@ var Content = React.createClass({
                                         {
                                             // 验证运营商征信
                                             name:'/credits/results/{typeCode}_OPERATOR',
+                                            tName:'/credits/results/{typeCode}',
                                             saveParameters:{},
                                             relation:{
                                                 token:"token"
@@ -1726,6 +1737,7 @@ var Content = React.createClass({
                                         {
                                             // 查看影像资料列表
                                             name:'/files_get',
+                                            tName:'/files',
                                             saveParameters:{},
                                             relation:{
                                                 token:"token",
@@ -1735,6 +1747,7 @@ var Content = React.createClass({
                                         {
                                             // 单个文件上传
                                             name:'/files_post',
+                                            tName:'/files',
                                             saveParameters:{},
                                             relation:{
                                                 token:"token",
@@ -1744,6 +1757,7 @@ var Content = React.createClass({
                                         {
                                             // 上传影像资料
                                             name:'/files_put',
+                                            tName:'/files',
                                             saveParameters:{},
                                             relation:{
                                                 token:"token",
@@ -1944,6 +1958,7 @@ var Content = React.createClass({
         var paths = allWSData.paths;
         var flow = selectedFlow[index];
         var wsName = flow.name;
+        var tName = flow.tName;
         // console.log(flow);
         var getWSData = paths[wsName];
         var type = [];
@@ -1957,7 +1972,7 @@ var Content = React.createClass({
         // console.log(getData);
         var flowData = {
             // http://dev.xxd.com/integrationPlatform/bids
-            "url":"http://"+allWSData.host+getData.basePath+wsName,
+            "url":"http://"+allWSData.host+getData.basePath+(tName===undefined?wsName:tName),
             "index":index,
             "wsName":wsName,
             "type":type[0],
@@ -1982,6 +1997,8 @@ var Content = React.createClass({
         });
     },
 
+
+
     render(){
 
         var props = {};
@@ -2002,6 +2019,7 @@ var Content = React.createClass({
                              setFlow={this.setFlow}
                              >
                 </ProductList>
+
                 <div ref="borderLeftSolid" style={{borderLeft:'1px solid #000',width:'10px',height:this.state.pageHeight,float:'left'}}></div>
                 <FlowData ref="flowDataRef" {...props}
                             >
