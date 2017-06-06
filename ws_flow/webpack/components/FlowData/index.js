@@ -14,7 +14,8 @@ var FlowData = React.createClass({
     getInitialState(){
 
         return {
-                rspBCFlag:''
+                rspBCFlag:'',
+                popUpFrameDisplay:true
             };
 
     },
@@ -99,16 +100,18 @@ var FlowData = React.createClass({
             data.append("file",file);
             data.append("data",JSON.stringify(req));
             contentType = false;
-            mimeType = "multipart/form-data";
-            url = "http://localhost:8080/ws/uploadFile";
+            // mimeType = "multipart/form-data";
+            url = "http://172.16.16.136:8080/tyrant/ws/uploadFile";
+            // url = "http://localhost:8080/ws/uploadFile";
             console.log(file);
             console.log(JSON.stringify(req));
         }else {
-            data = {data:req};
+            data = JSON.stringify({data:req});
             contentType = "application/json; charset=utf-8";
-            mimeType = "text/plain;charset=UTF-8";
-            url = "http://localhost:8080/ws/sendMessage";
-            console.log(JSON.stringify(data));
+            // mimeType = "text/plain;charset=UTF-8";
+            url = "http://172.16.16.136:8080/tyrant/ws/sendMessage";
+            // url = "http://localhost:8080/ws/sendMessage";
+            console.log(data);
         }
 
 
@@ -120,7 +123,6 @@ var FlowData = React.createClass({
             contentType: contentType,
             data : data,
             // mimeType: mimeType,
-            // url:"http://172.16.16.136:8080/tyrant/ws/sendMessage", 
             url:url, 
             success:function(data){
                 // 保存全局变量
@@ -128,21 +130,26 @@ var FlowData = React.createClass({
                 var requestP = saveParameters.request;
                 var responseP = saveParameters.response;
                 // console.log(requestP);
-                for(var saveP in requestP){
-                    var tempData = JSON.parse(req['json']);
-                    var tempValue = "";
-                    eval("tempValue = tempData"+requestP[saveP]);
-                    window.localStorage.setItem(saveP,tempValue);
-                    // console.log(tempValue);
+                try{
+                    for(var saveP in requestP){
+                        var tempData = JSON.parse(req['json']);
+                        var tempValue = "";
+                        eval("tempValue = tempData"+requestP[saveP]);
+                        window.localStorage.setItem(saveP,tempValue);
+                        // console.log(tempValue);
+                    }
+
+                    for(var saveP in responseP){
+                        var tempValue = "";
+                        eval("tempValue = data"+responseP[saveP]);
+                        window.localStorage.setItem(saveP,tempValue);
+                        // console.log(tempValue);
+                        // console.log(window.localStorage.getItem(saveP));
+                    }
+                }catch(err){
+                   console.log(err);
                 }
 
-                for(var saveP in responseP){
-                    var tempValue = "";
-                    eval("tempValue = data"+responseP[saveP]);
-                    window.localStorage.setItem(saveP,tempValue);
-                    // console.log(tempValue);
-                    // console.log(window.localStorage.getItem(saveP));
-                }
 
                 // console.log(JSON.stringify(data,null,4));
                 this.refs['rspBody'].style.height = '500px';
@@ -159,6 +166,9 @@ var FlowData = React.createClass({
                 this.setState({
                     rspBCFlag:true
                 });
+
+
+
             }.bind(this),
             error:function(e,textStatus){
                 this.refs['rspBody'].style.height = '500px';
@@ -226,7 +236,9 @@ var FlowData = React.createClass({
         if (confirm("清除所有变量缓存！")){
             var allRsp = window.localStorage.getItem("allRsp");
             window.localStorage.clear();
-            window.localStorage.setItem("allRsp",allRsp);   
+            window.localStorage.setItem("allRsp",allRsp);
+            var o = this.refs['popUpFrame'];
+            o.innerText = "";
         }
     },
 
@@ -238,6 +250,33 @@ var FlowData = React.createClass({
         // o.getElementsByTagName('textarea')[1].style.height = '';
         // this.props.setPageHeight(document.documentElement.clientHeight-50+'px');
 
+    },
+
+    popUpFrame(){
+        var clearPara = this.refs['clearPara'];
+        var clearParaParent = clearPara.parentNode;
+        var clearParaParentOffsetWidth = clearParaParent.offsetWidth;
+        var clearParaWidth = clearPara.clientWidth;
+        var clearParaLeft = clearParaParentOffsetWidth - clearParaWidth - 15
+        var popUpFrame = this.refs['popUpFrame'];
+        popUpFrame.style.left = "-"+clearParaLeft+"px";
+        var allRsp = window.localStorage.getItem("allRsp");
+        window.localStorage.removeItem("allRsp");
+        if (window.localStorage.length > 0){
+            popUpFrame.value = JSON.stringify(window.localStorage,null,4);
+        }
+        window.localStorage.setItem("allRsp", allRsp);
+        this.setPopDownFrameVisiable();
+    },
+    setPopDownFrameVisiable(){
+        this.setState({
+            popUpFrameDisplay:false
+        });
+    },
+    popDownFrame(){
+        this.setState({
+            popUpFrameDisplay:true
+        });
     },
 
     CurentTime(){
@@ -342,9 +381,15 @@ var FlowData = React.createClass({
                             </a>
                         </div>
                         <div className="col-lg-3">
-                            <a style={{width:'150px'}} onClick={this.clearAllParameters} className="large red button">
+                            <a id="a" ref="clearPara" style={{width:'150px'}} onClick={this.clearAllParameters} onMouseOver={this.popUpFrame} onMouseOut={this.popDownFrame}
+                                className="large red button">
                                 清除所有变量缓存
                             </a>
+                        </div>
+                        <div id="b" className="col-lg-3">
+                            <textarea ref="popUpFrame" style={{display:this.state.popUpFrameDisplay?'none':'block',left:this.state.popUpFrameLeft}} 
+                                    onMouseOver={this.setPopDownFrameVisiable} onMouseOut={this.popDownFrame}
+                                        className='pop-up-frame' readOnly="true"></textarea>
                         </div>
                     </div>
 

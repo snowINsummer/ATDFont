@@ -1941,13 +1941,14 @@ var Content = React.createClass({
         // 通过get接口查询到数据后再往后关联
         */
         // 新增、数据后会返回该条数据所有字段信息，不需要做上面的功能
-        // TODO
         // 1、之后的接口可能是post put patch，需要解析替换对应的字段
         //      做全局的变量池，定义返回中需要存的变量
         // 2、实时获取sign、token的值，调开发接口
         // 3、流程有更改
         // 4、实时替换下一个接口的参数
-
+        // TODO
+        // 查看所有变量功能
+        
         this.setState({
             flowIndex:index,
             selectedFlow:selectedFlow,
