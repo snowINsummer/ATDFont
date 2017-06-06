@@ -558,23 +558,23 @@ var Content = React.createClass({
                                                     "resideType": "Y",
                                                     "resideProvinceCode": "310000",
                                                     "resideCityCode": "310000",
-                                                    "resideAddress": "更新的居住地址",
-                                                    "homeTel": "更新的家庭电话",
-                                                    "companyName": "更新的公司名称",
+                                                    "resideAddress": "永和路318弄",
+                                                    "homeTel": "66660000",
+                                                    "companyName": "xxd",
                                                     "industry": "3",
                                                     "postType": "2",
                                                     "companyProvinceCode": "310000",
                                                     "companyCityCode": "310000",
-                                                    "companyAddress": "更新的单位地址",
-                                                    "companyTel": "更新的单位电话",
+                                                    "companyAddress": "永和路318弄",
+                                                    "companyTel": "66661111",
                                                     "contactInfoList": [
                                                         {
-                                                            "contactName": "更新的姓名",
+                                                            "contactName": "ft2",
                                                             "contactType": "2",
-                                                            "mobile": "更新的手机号",
+                                                            "mobile": "13012345678",
                                                             "relationship": "7",
-                                                            "homePhone": "家庭电话",
-                                                            "comPhone": "单位电话"
+                                                            "homePhone": "66660000",
+                                                            "comPhone": "66661111"
                                                         }
                                                     ]
                                                 }
