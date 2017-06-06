@@ -264,6 +264,8 @@ var FlowData = React.createClass({
         window.localStorage.removeItem("allRsp");
         if (window.localStorage.length > 0){
             popUpFrame.value = JSON.stringify(window.localStorage,null,4);
+        }else {
+            popUpFrame.value = "";
         }
         window.localStorage.setItem("allRsp", allRsp);
         this.setPopDownFrameVisiable();
