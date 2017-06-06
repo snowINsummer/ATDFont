@@ -1510,6 +1510,9 @@ var Content = React.createClass({
                                             // 登录操作
                                             name:'/user/login',
                                             saveParameters:{
+                                                                request:{
+                                                                            phone:"['data']['userName']"
+                                                                        },
                                                                 response:{
                                                                             token:"['data']['data']['data']"
                                                                 }
