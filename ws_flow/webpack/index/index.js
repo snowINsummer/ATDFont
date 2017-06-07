@@ -1455,7 +1455,392 @@ var Content = React.createClass({
                                         }
                                     ]
                                 }
+                            },
+                            "/receipts": {
+                                "get": {
+                                    "basePath": "/integrationPlatform",
+                                    "summary": "申请件列表",
+                                    "description": "根据身份证号和进件状态分页查询所有记录",
+                                    "parameters": [
+                                        {
+                                            "name": "clientId",
+                                            "default": "XXD_LOAN_API",
+                                            "in": "header",
+                                            "description": "客户端ID"
+                                        },
+                                        {
+                                            "name": "clientTime",
+                                            "default": "1459845047000",
+                                            "in": "header",
+                                            "description": "客户端当前时间"
+                                        },
+                                        {
+                                            "name": "s",
+                                            "default": "0878b0790e427c8a35b05d0b5b4ff113",
+                                            "in": "header",
+                                            "description": "32 LENGTH CHARS"
+                                        },
+                                        {
+                                            "name": "currentPage",
+                                            "default": 1,
+                                            "in": "query",
+                                            "description": "页码"
+                                        },
+                                        {
+                                            "name": "pageSize",
+                                            "default": 10,
+                                            "in": "query",
+                                            "description": "每页数据的条目"
+                                        },
+                                        {
+                                            "name": "idNo",
+                                            "default": "232700198912067312",
+                                            "in": "query",
+                                            "description": "身份证号"
+                                        },
+                                        {
+                                            "name": "applyStatus",
+                                            "default": "",
+                                            "in": "query",
+                                            "description": "进件状态（SUBMIT-提交申请、APPROVE-审批中、 FINISHED-审批结束、SIGN_SUCCESS-签约完成、 SIGN_FAILURE-签约失败）"
+                                        }
+                                    ]
+                                }
+                            },
+                            "/receipts/{applyCode}": {
+                                "get": {
+                                    "basePath": "/integrationPlatform",
+                                    "summary": "申请件详情",
+                                    "description": "查询详情",
+                                    "parameters": [
+                                        {
+                                            "name": "clientId",
+                                            "default": "XXD_LOAN_API",
+                                            "in": "header",
+                                            "description": "客户端ID"
+                                        },
+                                        {
+                                            "name": "clientTime",
+                                            "default": "1459845047000",
+                                            "in": "header",
+                                            "description": "客户端当前时间"
+                                        },
+                                        {
+                                            "name": "s",
+                                            "default": "0878b0790e427c8a35b05d0b5b4ff113",
+                                            "in": "header",
+                                            "description": "32 LENGTH CHARS"
+                                        },
+                                        {
+                                            "name": "applyCode",
+                                            "default": "LOAN_APPLY20170511152658000222",
+                                            "in": "path",
+                                            "description": "贷款申请单编号"
+                                        }
+                                    ]
+                                }
+                            },
+                            "/receipts/{applyCode}/contracts": {
+                                "get": {
+                                    "basePath": "/integrationPlatform",
+                                    "summary": "合同列表",
+                                    "description": "分页查询所有记录",
+                                    "parameters": [
+                                        {
+                                            "name": "clientId",
+                                            "default": "XXD_LOAN_API",
+                                            "in": "header",
+                                            "description": "客户端ID"
+                                        },
+                                        {
+                                            "name": "clientTime",
+                                            "default": "1459845047000",
+                                            "in": "header",
+                                            "description": "客户端当前时间"
+                                        },
+                                        {
+                                            "name": "s",
+                                            "default": "0878b0790e427c8a35b05d0b5b4ff113",
+                                            "in": "header",
+                                            "description": "32 LENGTH CHARS"
+                                        },
+                                        {
+                                            "name": "currentPage",
+                                            "default": 1,
+                                            "in": "query",
+                                            "description": "页码"
+                                        },
+                                        {
+                                            "name": "pageSize",
+                                            "default": 10,
+                                            "in": "query",
+                                            "description": "每页数据的条目"
+                                        },
+                                        {
+                                            "name": "applyCode",
+                                            "default": "LOAN_APPLY20170511152658000222",
+                                            "in": "path",
+                                            "description": "贷款申请单编号"
+                                        }
+                                    ]
+                                }
+                            },
+                            "/receipts/contracts/{contractNo}": {
+                                "get": {
+                                    "basePath": "/integrationPlatform",
+                                    "summary": "合同详情",
+                                    "description": "查询详情",
+                                    "parameters": [
+                                        {
+                                            "name": "clientId",
+                                            "default": "XXD_LOAN_API",
+                                            "in": "header",
+                                            "description": "客户端ID"
+                                        },
+                                        {
+                                            "name": "clientTime",
+                                            "default": "1459845047000",
+                                            "in": "header",
+                                            "description": "客户端当前时间"
+                                        },
+                                        {
+                                            "name": "s",
+                                            "default": "0878b0790e427c8a35b05d0b5b4ff113",
+                                            "in": "header",
+                                            "description": "32 LENGTH CHARS"
+                                        },
+                                        {
+                                            "name": "contractNo",
+                                            "default": "XXD170512000020",
+                                            "in": "path",
+                                            "description": "合同编号"
+                                        }
+                                    ]
+                                }
+                            },
+                            "/bid/create": {
+                                "post": {
+                                    "basePath": "/tradeCenter",
+                                    "summary": "生成标的订单",
+                                    "description": "神州融调用请求，生成标的订单",
+                                    "parameters": [
+                                        {
+                                            "name": "Content-Type",
+                                            "default": "application/json",
+                                            "in": "header",
+                                            "description": "Response Content Type"
+                                        },
+                                        {
+                                            "name": "clientId",
+                                            "default": "XXD_PAY_GATE",
+                                            "in": "header",
+                                            "description": "BOSS"
+                                        },
+                                        {
+                                            "name": "clientTime",
+                                            "default": "1459845047000",
+                                            "in": "header",
+                                            "description": "1459845047000"
+                                        },
+                                        {
+                                            "name": "body",
+                                            "default": {
+                                                "data": {
+                                                    "applyCode": "AO20170412000042",
+                                                    "idCardNo": "340601199410221796",
+                                                    "contractCode": "A112232222",
+                                                    "productId": "PKU001",
+                                                    "productCategory": "P001",
+                                                    "productType": "SS",
+                                                    "bidTitle": "借钱",
+                                                    "bidInfo": "肯定还",
+                                                    "plannedAnnualRate": 12,
+                                                    "leastPeriodValue": 12,
+                                                    "leastPeriodType": "MONTH",
+                                                    "instalmentPlanId": 1,
+                                                    "instalmentPlanName": "不还",
+                                                    "repaymentType": "REPAY_MODE_001",
+                                                    "loanPurpose": "短期经营借款",
+                                                    "bonusType": "固定值",
+                                                    "bonusValue": 1,
+                                                    "bidAmount": 10000.1265,
+                                                    "tenderAmountUp": 50,
+                                                    "tenderAmountDown": 1000,
+                                                    "validityDays": 15
+                                                }
+                                            },
+                                            "in": "body",
+                                            "description": ""
+                                        }
+                                    ]
+                                }
+                            },
+                            "/bids": {
+                                "get": {
+                                    "basePath": "/integrationPlatform",
+                                    "summary": "标的列表",
+                                    "description": "分页查询所有记录",
+                                    "parameters": [
+                                        {
+                                            "name": "clientId",
+                                            "default": "XXD_LOAN_API",
+                                            "in": "header",
+                                            "description": "客户端I D"
+                                        },
+                                        {
+                                            "name": "clientTime",
+                                            "default": "1459845047000",
+                                            "in": "header",
+                                            "description": "客户端当前时间"
+                                        },
+                                        {
+                                            "name": "s",
+                                            "default": "0878b0790e427c8a35b05d0b5b4ff113",
+                                            "in": "header",
+                                            "description": "32 LENGTH CHARS"
+                                        },
+                                        {
+                                            "name": "keyType",
+                                            "default": 2,
+                                            "in": "query",
+                                            "description": "查询类型,1产品ID2申请单编号3全部"
+                                        },
+                                        {
+                                            "name": "keyValue",
+                                            "default": "LOAN_APPLY20170511152658000222",
+                                            "in": "query",
+                                            "description": "key值,查询类型为3时可不传"
+                                        },
+                                        {
+                                            "name": "status",
+                                            "default": "BIDDING",
+                                            "in": "query",
+                                            "description": "状态,不传为查所有"
+                                        },
+                                        {
+                                            "name": "productCategory",
+                                            "default": "P001",
+                                            "in": "query",
+                                            "description": "产品大类"
+                                        },
+                                        {
+                                            "name": "currentPage",
+                                            "default": 1,
+                                            "in": "query",
+                                            "description": "页码"
+                                        },
+                                        {
+                                            "name": "pageSize",
+                                            "default": 10,
+                                            "in": "query",
+                                            "description": "每页数据的条目"
+                                        }
+                                    ]
+                                }
+                            },
+                            "/bids/{bidCode}": {
+                                "get": {
+                                    "basePath": "/integrationPlatform",
+                                    "summary": "标的详情",
+                                    "description": "查询单条记录",
+                                    "parameters": [
+                                        {
+                                            "name": "clientId",
+                                            "default": "XXD_LOAN_API",
+                                            "in": "header",
+                                            "description": "客户端I D"
+                                        },
+                                        {
+                                            "name": "clientTime",
+                                            "default": "1459845047000",
+                                            "in": "header",
+                                            "description": "客户端当前时间"
+                                        },
+                                        {
+                                            "name": "s",
+                                            "default": "0878b0790e427c8a35b05d0b5b4ff113",
+                                            "in": "header",
+                                            "description": "32 LENGTH CHARS"
+                                        },
+                                        {
+                                            "name": "bidCode",
+                                            "default": "BO20160000000006",
+                                            "in": "path",
+                                            "description": "标的编号"
+                                        }
+                                    ]
+                                }
+                            },
+                            "/bids/{bidCode}/investment": {
+                                "get": {
+                                    "basePath": "/integrationPlatform",
+                                    "summary": "标的投标记录",
+                                    "description": "查询单条记录",
+                                    "parameters": [
+                                        {
+                                            "name": "clientId",
+                                            "default": "XXD_LOAN_API",
+                                            "in": "header",
+                                            "description": "客户端I D"
+                                        },
+                                        {
+                                            "name": "clientTime",
+                                            "default": "1459845047000",
+                                            "in": "header",
+                                            "description": "客户端当前时间"
+                                        },
+                                        {
+                                            "name": "s",
+                                            "default": "0878b0790e427c8a35b05d0b5b4ff113",
+                                            "in": "header",
+                                            "description": "32 LENGTH CHARS"
+                                        },
+                                        {
+                                            "name": "bidCode",
+                                            "default": "BW201412100356",
+                                            "in": "path",
+                                            "description": "标的编号"
+                                        }
+                                    ]
+                                }
+                            },
+                            "/bids/{bidCode}/repayment": {
+                                "get": {
+                                    "basePath": "/integrationPlatform",
+                                    "summary": "标的还款记录",
+                                    "description": "查询单条记录",
+                                    "parameters": [
+                                        {
+                                            "name": "clientId",
+                                            "default": "XXD_LOAN_API",
+                                            "in": "header",
+                                            "description": "客户端I D"
+                                        },
+                                        {
+                                            "name": "clientTime",
+                                            "default": "1459845047000",
+                                            "in": "header",
+                                            "description": "客户端当前时间"
+                                        },
+                                        {
+                                            "name": "s",
+                                            "default": "0878b0790e427c8a35b05d0b5b4ff113",
+                                            "in": "header",
+                                            "description": "32 LENGTH CHARS"
+                                        },
+                                        {
+                                            "name": "bidCode",
+                                            "default": "BO20170418000111",
+                                            "in": "path",
+                                            "description": "标的编号"
+                                        }
+                                    ]
+                                }
                             }
+
+
+
+
 
                         }
                     },
@@ -1811,6 +2196,95 @@ var Content = React.createClass({
                                                 applyCode:"applyCode"
                                             }
                                         },
+                                        {
+                                            // 查看申请件列表
+                                            name:'/receipts',
+                                            saveParameters:{},
+                                            relation:{
+                                                idNo:"idCardNumber"
+                                            }
+                                        },
+                                        {
+                                            // 查看申请件详情
+                                            name:'/receipts/{applyCode}',
+                                            saveParameters:{},
+                                            relation:{
+                                                applyCode:"applyCode"
+                                            }
+                                        },
+                                        {
+                                            // 查看合同列表
+                                            name:'/receipts/{applyCode}/contracts',
+                                            saveParameters:{
+                                                response:{
+                                                    contractNo:"['data']['data']['items'][0]['contractNo']"
+                                                }
+                                            },
+                                            relation:{
+                                                applyCode:"applyCode"
+                                            }
+                                        },
+                                        {
+                                            // 查看合同详情
+                                            name:'/receipts/contracts/{contractNo}',
+                                            saveParameters:{},
+                                            relation:{
+                                                contractNo:"contractNo"
+                                            }
+                                        },
+                                        {
+                                            // TODO 发标
+                                            name:'/bid/create',
+                                            saveParameters:{},
+                                            relation:{
+                                                "['data']['applyCode']":"applyCode",
+                                                "['data']['idCardNo']":"contractNo",
+                                                "['data']['contractNo']":"idCardNumber",
+                                                // "['data']['contractNo']":"idCardNumber",
+                                                // "['data']['contractNo']":"idCardNumber",
+                                                // "['data']['contractNo']":"idCardNumber",
+                                                // "['data']['contractNo']":"idCardNumber",
+                                                // "['data']['contractNo']":"idCardNumber",
+                                            }
+                                        },
+                                        {
+                                            // 根据申请件单号查看标的列表
+                                            name:'/bids',
+                                            saveParameters:{},
+                                            relation:{
+                                                contractNo:"contractNo"
+                                            }
+                                        },
+                                        {
+                                            // 查看标的详情
+                                            name:'/bids/{bidCode}',
+                                            saveParameters:{},
+                                            relation:{
+                                                contractNo:"contractNo"
+                                            }
+                                        },
+
+                                        // TODO 债权匹配和投标
+
+                                        {
+                                            // 查看标的投标记录
+                                            name:'/bids/{bidCode}/investment',
+                                            saveParameters:{},
+                                            relation:{
+                                                contractNo:"contractNo"
+                                            }
+                                        },
+
+                                        // TODO 还款
+                                         
+                                        {
+                                            // 查看标的投标记录
+                                            name:'/bids/{bidCode}/repayment',
+                                            saveParameters:{},
+                                            relation:{
+                                                contractNo:"contractNo"
+                                            }
+                                        },
 
 
                                     ]
@@ -1830,7 +2304,7 @@ var Content = React.createClass({
                     ]
                 };
     },
-    /*
+    
     componentDidMount(){
         $.ajax({
             type : "GET",
@@ -1841,10 +2315,12 @@ var Content = React.createClass({
             // url : "http://localhost:8080/swagger/api-docs?platformName=userCenter",
             // 
             // url : "http://172.16.16.136:8080/tyrant/swagger/api-docs?platformName=userCenter",
-            url : "http://localhost:8080/swagger/api-docs?platformName=integrationPlatform",
+            url : "http://172.16.16.136:8080/tyrant/swagger/api-docs?platformName=integrationPlatform",
+            // url : "http://172.16.16.136:8080/tyrant/swagger/api-docs?platformName=tradeCenter",
+            // url : "http://localhost:8080/swagger/api-docs?platformName=integrationPlatform",
             // url : "http://localhost:8080/swagger/api-docs?platformName=fileCenter",
             success : function(data){
-                var arr = ['/forms/{applyCode}','get'];
+                var arr = ['/bids/{bidCode}/repayment','get'];
                 // console.log(data.data.basePath);
                 // console.log(data.data.paths);
                 // console.log(JSON.stringify(data.data));
@@ -1861,10 +2337,10 @@ var Content = React.createClass({
                     var value = "";
                     var description = "";
                     if (o.in == "body"){
-                        // var valueT = o.description;
-                        // eval("value = "+valueT);
-                        // o.default = JSON.stringify(value);
-                        // o.description = "";
+                        var valueT = o.description;
+                        eval("value = "+valueT);
+                        o.default = JSON.stringify(value);
+                        o.description = "";
                     }else {
                         value = o.default;
                         description = o.description;
@@ -1884,7 +2360,7 @@ var Content = React.createClass({
                 getO[arr[1]] = getData;
                 pathsData[wsName] = getO;
                 // console.log(pathsData);
-                // console.log(JSON.stringify(pathsData,null,4));
+                console.log(JSON.stringify(pathsData,null,4));
                 // data.data.list.map(o=>Object.assign(o,{expanded:false}))
                 // this.setState({
                 //     allWSData:data.data
@@ -1929,7 +2405,7 @@ var Content = React.createClass({
             }.bind(this)
         });
     },
-*/
+
 
 /**
  * [setFlow description]
@@ -1954,6 +2430,7 @@ var Content = React.createClass({
         // TODO
         // 6、增加手动维护的全局变量
         // 7、增加判断，接口请求成功后才存储变量
+        // 8、增加请求时加载效果
         
         this.setState({
             flowIndex:index,
