@@ -1181,6 +1181,7 @@ var Content = React.createClass({
                                         },
                                         {
                                             "name": "bizCode",
+                                            "default":"RECEIPT_APPLY_FILE",
                                             "in": "query",
                                             "description": "bizCode"
                                         },
@@ -1949,8 +1950,10 @@ var Content = React.createClass({
         // 2、实时获取sign、token的值，调开发接口
         // 3、流程有更改
         // 4、实时替换下一个接口的参数
+        // 5、查看所有变量功能
         // TODO
-        // 查看所有变量功能
+        // 6、增加手动维护的全局变量
+        // 7、增加判断，接口请求成功后才存储变量
         
         this.setState({
             flowIndex:index,
