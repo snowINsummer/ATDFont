@@ -55,8 +55,8 @@ var Content = React.createClass({
                                             "default": {
                                                 "data": {
                                                     "userName": "ws_flow",
-                                                    "phone": "a11111",
-                                                    "password": "123456",
+                                                    "phone": "",
+                                                    "password": "a11111",
                                                     "code": "mark"
                                                 }
                                             },
