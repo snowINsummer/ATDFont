@@ -55,8 +55,8 @@ var Content = React.createClass({
                                             "default": {
                                                 "data": {
                                                     "userName": "ws_flow",
-                                                    "phone": "13524690241",
-                                                    "password": "1",
+                                                    "phone": "",
+                                                    "password": "123456",
                                                     "code": "mark"
                                                 }
                                             },
@@ -100,7 +100,7 @@ var Content = React.createClass({
                                             "name": "data",
                                             "default": {
                                                 "data": {
-                                                    "userName": "135242690241",
+                                                    "userName": "",
                                                     "password": "123456"
                                                 }
                                             },
@@ -176,7 +176,7 @@ var Content = React.createClass({
                                         },
                                         {
                                             "name": "token",
-                                            "default": "KXQOjUH9ez+NMHJGBMl11VIorUFFff6quy8M4ToecSXMHVe8y2xw6ccP7VKXR3/rNhfTJiedyRIqP7Qf3NiZP/eIcfvXlkgNJTs5Hvl/OoA=",
+                                            "default": "",
                                             "in": "header",
                                             "description": "令牌"
                                         }
@@ -209,7 +209,7 @@ var Content = React.createClass({
                                         },
                                         {
                                             "name": "token",
-                                            "default": "xxx",
+                                            "default": "",
                                             "in": "header",
                                             "description": "登录令牌"
                                         },
@@ -254,7 +254,7 @@ var Content = React.createClass({
                                         },
                                         {
                                             "name": "idNo",
-                                            "default": "232700198912067312",
+                                            "default": "",
                                             "in": "query",
                                             "description": "身份证号"
                                         }
@@ -287,7 +287,7 @@ var Content = React.createClass({
                                         },
                                         {
                                             "name": "productId",
-                                            "default": "2c9093f65bd29951015bd2a0f981000a",
+                                            "default": "",
                                             "in": "path",
                                             "description": "产品ID"
                                         }
@@ -320,7 +320,7 @@ var Content = React.createClass({
                                         },
                                         {
                                             "name": "productId",
-                                            "default": "2c9093f65bd29951015bd2a0f981000a",
+                                            "default": "",
                                             "in": "path",
                                             "description": "产品ID"
                                         }
@@ -347,7 +347,7 @@ var Content = React.createClass({
                                         },
                                         {
                                             "name": "token",
-                                            "default": "sEVbo09YZBSF9NXz2CLkUycrhQwgMK5JCO8M_OdVF3fQBBtsX0w9iqtdnNHQ3RgWgi_jpky0i3mhVM1M0-c9eIns7ZcIu1SbmpF3V0D4MLA",
+                                            "default": "",
                                             "in": "header",
                                             "description": "令牌"
                                         },
@@ -359,7 +359,7 @@ var Content = React.createClass({
                                         },
                                         {
                                             "name": "productId",
-                                            "default": "2c9093f65bd29951015bd2a0f981000a",
+                                            "default": "",
                                             "in": "path",
                                             "description": "产品id"
                                         }
@@ -386,7 +386,7 @@ var Content = React.createClass({
                                                     "loanAmount": 2000.44,
                                                     "loanDate": "2017-01-01",
                                                     "peroidValue": 12,
-                                                    "instalmentPlanId": "2c9093f65bd29951015bd2a03edb0000"
+                                                    "instalmentPlanId": ""
                                                 }
                                             },
                                             "in": "body",
@@ -445,7 +445,7 @@ var Content = React.createClass({
                                         },
                                         {
                                             "name": "token",
-                                            "default": "sEVbo09YZBSF9NXz2CLkU0k9PYuaGsMd0Bkxfifgv0FpWeKwevZ7EJjV_mN3Q26wBuKSU90JF9Y03CMqlcTFBMtoyD8oZTWUsAs66PozMAw",
+                                            "default": "",
                                             "in": "header",
                                             "description": "令牌"
                                         },
@@ -454,13 +454,13 @@ var Content = React.createClass({
                                             "default": {
                                                 "data": {
                                                     "applyCode": "",
-                                                    "productId": "2c9093f65bd29951015bd2a0f981000a",
+                                                    "productId": "",
                                                     "mobile": "13122223333",
                                                     "channel": "mobile",
                                                     "productName": "审批产品一",
                                                     "productType": "P001",
                                                     "productSubType": "",
-                                                    "instalmentPlanId": "2c9093f65bd29951015bd2a03edb0000",
+                                                    "instalmentPlanId": "",
                                                     "instalmentPlanName": "等额本息一",
                                                     "repaymentMethod": "001",
                                                     "loanAmount": 1000000,
@@ -508,7 +508,7 @@ var Content = React.createClass({
                                         },
                                         {
                                             "name": "token",
-                                            "default": "sEVbo09YZBSF9NXz2CLkU-cenMM_GAOfaRma4G13CCvkamU_fXz4EcQGbSNwfZYkkyidCLL9fA21RtopTq_0HITZGObHTQaYhjCGLUmCCtk",
+                                            "default": "",
                                             "in": "header",
                                             "description": "令牌"
                                         }
@@ -547,7 +547,7 @@ var Content = React.createClass({
                                         },
                                         {
                                             "name": "token",
-                                            "default": "sEVbo09YZBSF9NXz2CLkU_9GtkLQAynBl2wkX4OSJKf94Pph7ciVbJ_4x6zJMettw5ENwj65KQ4pZThuLw40MdEZpYvziEOG-BzGqAIjPYE",
+                                            "default": "",
                                             "in": "header",
                                             "description": "令牌"
                                         },
@@ -617,7 +617,7 @@ var Content = React.createClass({
                                         },
                                         {
                                             "name": "token",
-                                            "default": "hqB+6NnSabFXgMFRTQ2Qd0r1hedvdTmBBDiY/PBJuzdB5pm3KHnlWY5QBUnojpvo7PMuMDUegpa/sGVUMF/zaaAw3tS9scaDx+sxN/ZlLXo=",
+                                            "default": "",
                                             "in": "header",
                                             "description": "令牌"
                                         },
@@ -667,7 +667,7 @@ var Content = React.createClass({
                                         },
                                         {
                                             "name": "token",
-                                            "default": "hqB+6NnSabFXgMFRTQ2Qd0r1hedvdTmBBDiY/PBJuzdB5pm3KHnlWY5QBUnojpvo7PMuMDUegpa/sGVUMF/zaaAw3tS9scaDx+sxN/ZlLXo=",
+                                            "default": "",
                                             "in": "header",
                                             "description": "令牌"
                                         },
@@ -914,7 +914,7 @@ var Content = React.createClass({
                                         },
                                         {
                                             "name": "token",
-                                            "default": "hqB+6NnSabFXgMFRTQ2Qd0r1hedvdTmBBDiY/PBJuzdB5pm3KHnlWY5QBUnojpvo7PMuMDUegpa/sGVUMF/zaaAw3tS9scaDx+sxN/ZlLXo=",
+                                            "default": "",
                                             "in": "header",
                                             "description": "令牌"
                                         },
@@ -965,7 +965,7 @@ var Content = React.createClass({
                                         },
                                         {
                                             "name": "token",
-                                            "default": "hqB+6NnSabFXgMFRTQ2Qd0r1hedvdTmBBDiY/PBJuzdB5pm3KHnlWY5QBUnojpvo7PMuMDUegpa/sGVUMF/zaaAw3tS9scaDx+sxN/ZlLXo=",
+                                            "default": "",
                                             "in": "header",
                                             "description": "令牌"
                                         },
@@ -1016,7 +1016,7 @@ var Content = React.createClass({
                                         },
                                         {
                                             "name": "token",
-                                            "default": "hqB+6NnSabFXgMFRTQ2Qd0r1hedvdTmBBDiY/PBJuzdB5pm3KHnlWY5QBUnojpvo7PMuMDUegpa/sGVUMF/zaaAw3tS9scaDx+sxN/ZlLXo=",
+                                            "default": "",
                                             "in": "header",
                                             "description": "令牌"
                                         },
@@ -1067,7 +1067,7 @@ var Content = React.createClass({
                                         },
                                         {
                                             "name": "token",
-                                            "default": "hqB+6NnSabFXgMFRTQ2Qd0r1hedvdTmBBDiY/PBJuzdB5pm3KHnlWY5QBUnojpvo7PMuMDUegpa/sGVUMF/zaaAw3tS9scaDx+sxN/ZlLXo=",
+                                            "default": "",
                                             "in": "header",
                                             "description": "令牌"
                                         },
@@ -1112,7 +1112,7 @@ var Content = React.createClass({
                                         },
                                         {
                                             "name": "token",
-                                            "default": "hqB+6NnSabFXgMFRTQ2Qd0r1hedvdTmBBDiY/PBJuzdB5pm3KHnlWY5QBUnojpvo7PMuMDUegpa/sGVUMF/zaaAw3tS9scaDx+sxN/ZlLXo=",
+                                            "default": "",
                                             "in": "header",
                                             "description": "令牌"
                                         },
@@ -1281,7 +1281,7 @@ var Content = React.createClass({
                                         },
                                         {
                                             "name": "token",
-                                            "default": "xxx",
+                                            "default": "",
                                             "in": "header",
                                             "description": "令牌"
                                         }
@@ -1320,7 +1320,7 @@ var Content = React.createClass({
                                         },
                                         {
                                             "name": "token",
-                                            "default": "5C4AAzdmX8USro6lpUOUB5+R67+9GbVhknHklpdW1Wicd6mZEtO50qa50arHWil86zrSkB2mmA4GQen8MozQKHtAEegTjTxuO+6LJcCUNYs=+puLmtcq0yNLu5cfY0GBJUXC0r68en+KahWXF8KuOE=",
+                                            "default": "",
                                             "in": "header",
                                             "description": "令牌"
                                         }
@@ -1371,7 +1371,7 @@ var Content = React.createClass({
                                         },
                                         {
                                             "name": "applyCode",
-                                            "default": "LOAN_APPLY20170511152658000222",
+                                            "default": "",
                                             "in": "path",
                                             "description": "贷款申请单编号"
                                         }
@@ -1416,7 +1416,7 @@ var Content = React.createClass({
                                         },
                                         {
                                             "name": "applyCode",
-                                            "default": "LOAN_APPLY20170511152658000222",
+                                            "default": "",
                                             "in": "path",
                                             "description": "申请单编号"
                                         }
@@ -1449,7 +1449,7 @@ var Content = React.createClass({
                                         },
                                         {
                                             "name": "applyCode",
-                                            "default": "LOAN_APPLY20170511152658000222",
+                                            "default": "",
                                             "in": "path",
                                             "description": "申请单号"
                                         }
@@ -1533,7 +1533,7 @@ var Content = React.createClass({
                                         },
                                         {
                                             "name": "applyCode",
-                                            "default": "LOAN_APPLY20170511152658000222",
+                                            "default": "",
                                             "in": "path",
                                             "description": "贷款申请单编号"
                                         }
@@ -1622,56 +1622,8 @@ var Content = React.createClass({
                                 "post": {
                                     "basePath": "/tradeCenter",
                                     "summary": "生成标的订单",
-                                    "description": "神州融调用请求，生成标的订单",
+                                    "description": "签约后自动调用，检查标的是否存在，可根据进件单号查询。神州融调用请求，生成标的订单",
                                     "parameters": [
-                                        {
-                                            "name": "Content-Type",
-                                            "default": "application/json",
-                                            "in": "header",
-                                            "description": "Response Content Type"
-                                        },
-                                        {
-                                            "name": "clientId",
-                                            "default": "XXD_PAY_GATE",
-                                            "in": "header",
-                                            "description": "BOSS"
-                                        },
-                                        {
-                                            "name": "clientTime",
-                                            "default": "1459845047000",
-                                            "in": "header",
-                                            "description": "1459845047000"
-                                        },
-                                        {
-                                            "name": "body",
-                                            "default": {
-                                                "data": {
-                                                    "applyCode": "AO20170412000042",
-                                                    "idCardNo": "340601199410221796",
-                                                    "contractCode": "A112232222",
-                                                    "productId": "PKU001",
-                                                    "productCategory": "P001",
-                                                    "productType": "SS",
-                                                    "bidTitle": "借钱",
-                                                    "bidInfo": "肯定还",
-                                                    "plannedAnnualRate": 12,
-                                                    "leastPeriodValue": 12,
-                                                    "leastPeriodType": "MONTH",
-                                                    "instalmentPlanId": 1,
-                                                    "instalmentPlanName": "不还",
-                                                    "repaymentType": "REPAY_MODE_001",
-                                                    "loanPurpose": "短期经营借款",
-                                                    "bonusType": "固定值",
-                                                    "bonusValue": 1,
-                                                    "bidAmount": 10000.1265,
-                                                    "tenderAmountUp": 50,
-                                                    "tenderAmountDown": 1000,
-                                                    "validityDays": 15
-                                                }
-                                            },
-                                            "in": "body",
-                                            "description": ""
-                                        }
                                     ]
                                 }
                             },
@@ -1707,13 +1659,13 @@ var Content = React.createClass({
                                         },
                                         {
                                             "name": "keyValue",
-                                            "default": "LOAN_APPLY20170511152658000222",
+                                            "default": "",
                                             "in": "query",
                                             "description": "key值,查询类型为3时可不传"
                                         },
                                         {
                                             "name": "status",
-                                            "default": "BIDDING",
+                                            "default": "",
                                             "in": "query",
                                             "description": "状态,不传为查所有"
                                         },
@@ -1764,10 +1716,19 @@ var Content = React.createClass({
                                         },
                                         {
                                             "name": "bidCode",
-                                            "default": "BO20160000000006",
+                                            "default": "",
                                             "in": "path",
                                             "description": "标的编号"
                                         }
+                                    ]
+                                }
+                            },
+                            "XXX": {
+                                "post": {
+                                    "basePath": "",
+                                    "summary": "债权匹配和投标",
+                                    "description": "这个接口还没有做，所以只能造数据。具体和开发沟通",
+                                    "parameters": [
                                     ]
                                 }
                             },
@@ -1797,10 +1758,19 @@ var Content = React.createClass({
                                         },
                                         {
                                             "name": "bidCode",
-                                            "default": "BW201412100356",
+                                            "default": "",
                                             "in": "path",
                                             "description": "标的编号"
                                         }
+                                    ]
+                                }
+                            },
+                            "XXXXX": {
+                                "post": {
+                                    "basePath": "",
+                                    "summary": "还款",
+                                    "description": "满标后，进入神州融触发还款",
+                                    "parameters": [
                                     ]
                                 }
                             },
@@ -1830,7 +1800,7 @@ var Content = React.createClass({
                                         },
                                         {
                                             "name": "bidCode",
-                                            "default": "BO20170418000111",
+                                            "default": "",
                                             "in": "path",
                                             "description": "标的编号"
                                         }
@@ -2003,7 +1973,7 @@ var Content = React.createClass({
                                                 "['data']['mobile']":"phone",
                                                 "['data']['productId']":"productId",
                                                 "['data']['productName']":"productName",
-                                                "['data']['instalmentPlanId']":"productId",
+                                                "['data']['instalmentPlanId']":"instalmentPlanId",
                                                 "['data']['instalmentPlanName']":"instalmentPlanName",
                                             }
                                         },
@@ -2139,8 +2109,7 @@ var Content = React.createClass({
                                             tName:'/files',
                                             saveParameters:{},
                                             relation:{
-                                                token:"token",
-                                                applyCode:"applyCode"
+                                                token:"token"
                                             }
                                         },
                                         {
@@ -2237,22 +2206,18 @@ var Content = React.createClass({
                                             name:'/bid/create',
                                             saveParameters:{},
                                             relation:{
-                                                "['data']['applyCode']":"applyCode",
-                                                "['data']['idCardNo']":"contractNo",
-                                                "['data']['contractNo']":"idCardNumber",
-                                                // "['data']['contractNo']":"idCardNumber",
-                                                // "['data']['contractNo']":"idCardNumber",
-                                                // "['data']['contractNo']":"idCardNumber",
-                                                // "['data']['contractNo']":"idCardNumber",
-                                                // "['data']['contractNo']":"idCardNumber",
                                             }
                                         },
                                         {
                                             // 根据申请件单号查看标的列表
                                             name:'/bids',
-                                            saveParameters:{},
+                                            saveParameters:{
+                                                response:{
+                                                    bidCode:"['data']['data']['items'][0]['bidCode']"
+                                                }
+                                            },
                                             relation:{
-                                                contractNo:"contractNo"
+                                                keyValue:"applyCode"
                                             }
                                         },
                                         {
@@ -2260,29 +2225,38 @@ var Content = React.createClass({
                                             name:'/bids/{bidCode}',
                                             saveParameters:{},
                                             relation:{
-                                                contractNo:"contractNo"
+                                                bidCode:"bidCode"
                                             }
                                         },
-
-                                        // TODO 债权匹配和投标
-
+                                        {
+                                            // 债权匹配和投标
+                                            name:'XXX',
+                                            saveParameters:{},
+                                            relation:{
+                                            }
+                                        },
                                         {
                                             // 查看标的投标记录
                                             name:'/bids/{bidCode}/investment',
                                             saveParameters:{},
                                             relation:{
-                                                contractNo:"contractNo"
+                                                bidCode:"bidCode"
                                             }
                                         },
 
-                                        // TODO 还款
-                                         
+                                        {
+                                            // 还款
+                                            name:'XXXXX',
+                                            saveParameters:{},
+                                            relation:{
+                                            }
+                                        },
                                         {
                                             // 查看标的投标记录
                                             name:'/bids/{bidCode}/repayment',
                                             saveParameters:{},
                                             relation:{
-                                                contractNo:"contractNo"
+                                                bidCode:"bidCode"
                                             }
                                         },
 
@@ -2321,7 +2295,7 @@ var Content = React.createClass({
             // url : "http://localhost:8080/swagger/api-docs?platformName=fileCenter",
             success : function(data){
                 var arr = ['/bids/{bidCode}/repayment','get'];
-                // console.log(data.data.basePath);
+                console.log(data);
                 // console.log(data.data.paths);
                 // console.log(JSON.stringify(data.data));
                 var wsName = arr[0];
@@ -2360,7 +2334,7 @@ var Content = React.createClass({
                 getO[arr[1]] = getData;
                 pathsData[wsName] = getO;
                 // console.log(pathsData);
-                console.log(JSON.stringify(pathsData,null,4));
+                // console.log(JSON.stringify(pathsData,null,4));
                 // data.data.list.map(o=>Object.assign(o,{expanded:false}))
                 // this.setState({
                 //     allWSData:data.data
