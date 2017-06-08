@@ -55,7 +55,7 @@ var Content = React.createClass({
                                             "default": {
                                                 "data": {
                                                     "userName": "ws_flow",
-                                                    "phone": "",
+                                                    "phone": "a11111",
                                                     "password": "123456",
                                                     "code": "mark"
                                                 }
@@ -566,7 +566,7 @@ var Content = React.createClass({
                                                     "companyProvinceCode": "310000",
                                                     "companyCityCode": "310000",
                                                     "companyAddress": "永和路318弄",
-                                                    "companyTel": "66661111",
+                                                    "companyTel": "021-66661111",
                                                     "contactInfoList": [
                                                         {
                                                             "contactName": "ft2",
@@ -2295,7 +2295,7 @@ var Content = React.createClass({
             // url : "http://localhost:8080/swagger/api-docs?platformName=fileCenter",
             success : function(data){
                 var arr = ['/bids/{bidCode}/repayment','get'];
-                console.log(data);
+                // console.log(data);
                 // console.log(data.data.paths);
                 // console.log(JSON.stringify(data.data));
                 var wsName = arr[0];
