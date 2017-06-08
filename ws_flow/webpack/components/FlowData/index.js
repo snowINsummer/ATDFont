@@ -467,6 +467,7 @@ var FlowData = React.createClass({
                             <textarea ref="rspBody" readOnly="true" className="form-control" rows="3" style={{borderColor:rspBCFlag===''?'':rspBCFlag?'green':'red',borderWidth:rspBCFlag===''?'':'2px',background:'white',color:'black',marginBottom:'30px'}}></textarea>
                         </div>
                     </div>
+                    <hr style={{border:'1px solid #000',marginTop: '40px',marginBottom:'50px'}}></hr>
                     <div className="row">
                         <div className="col-lg-2">
                             <label for="name">全部接口返回：</label>
