@@ -1365,7 +1365,7 @@ var Content = React.createClass({
                                         },
                                         {
                                             "name": "requestData",
-                                            "default": {"data":{"deviceType":1,"gpsInfo":{"gpsAuthorized":"Y","gpsProvince":"CODE","gpsCity":"CODE", "gpsDistrict":"CODE","gpsPosition":"具体地址","ipAddress":"127.0.0.1"}, "mobileContactList":[{"contactName":"联系人姓名","contactMobile":"手机","contactBizPhone":"单位电话"}], "mobileAppList":[{"name":"qq"}],"smsList":[],"tdBlackBox":"blackBoxValue"}},
+                                            "default": {"data":{"deviceType":1,"gpsInfo":{"gpsAuthorized":"Y","gpsProvince":"CODE","gpsCity":"CODE", "gpsDistrict":"CODE","gpsPosition":"具体地址","ipAddress":"127.0.0.1"}, "mobileContactList":[{"contactName":"联系人姓名","contactMobile":"手机","contactBusiPhone":"单位电话"}], "mobileAppList":[],"smsList":[],"tdBlackBox":"blackBoxValue"}},
                                             "in": "body",
                                             "description": ""
                                         },
