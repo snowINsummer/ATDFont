@@ -46,6 +46,8 @@ var ProductList = React.createClass({
         var selectItem = this.state.selectItem;
         var selectItemId = this.state.selectItemId;
         var wsFlow = this.props.wsFlow;
+
+        var historyReportInfo = [];
         // console.log(projectList);
         return <div className={'container'}
                         style={{textAlign:'left',height:'700px',width:'300px',margin:'10px',marginTop:'10px',float:'left'}}>
@@ -71,7 +73,25 @@ var ProductList = React.createClass({
                             </div>
                         </div>
                     </section>
-
+                    <section style={{textAlign:'left'}} id="Menu">
+                        <h4 style={{textAlign:'left',fontSize:'20px',width:'300px'}}>报告链接</h4>
+                        {
+                            historyReportInfo.map(o=>
+                            <ul key={1} style={{textAlign:'left',float:'left',width:'300px',color:'#000080'}} id="l">
+                                        <li key={2}>
+                                            <a target='_blank' href={o.lastReport} style={{marginBottom:'100px',color:'#000080'}}>{o.projectName}</a>
+                                        </li>
+                                        <li key={3} style={{listStyleType:'none',marginTop:'100px'}}>历史记录</li>
+                                        {
+                                            o.historyReport.map(o=>
+                                                <li key={o.reportTime}>
+                                                    <a target='_blank' href={o.reportLink} style={{fontSize:'12px',color:'#000080'}}>{o.reportTime}</a>
+                                                </li>
+                                                )
+                                        }
+                            </ul>)
+                        }
+                    </section>
                 <div style={{textAlign:'center'}}>
                     <a href="#" style={{position:'fixed',bottom:'20px'}} className="large green button">回到顶部</a>
                 </div>

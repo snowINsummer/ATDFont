@@ -1327,7 +1327,7 @@ var Content = React.createClass({
                                     ]
                                 }
                             },
-                            "/receipts/{applyCode}": {
+                            "/receipts/{applyCode}_put": {
                                 "put": {
                                     "basePath": "/integrationPlatform",
                                     "summary": "提交进件",
@@ -1507,7 +1507,7 @@ var Content = React.createClass({
                                     ]
                                 }
                             },
-                            "/receipts/{applyCode}": {
+                            "/receipts/{applyCode}_get": {
                                 "get": {
                                     "basePath": "/integrationPlatform",
                                     "summary": "申请件详情",
@@ -2140,7 +2140,8 @@ var Content = React.createClass({
                                         },
                                         {
                                             // 提交进件
-                                            name:'/receipts/{applyCode}',
+                                            name:'/receipts/{applyCode}_put',
+                                            tName:'/receipts/{applyCode}',
                                             saveParameters:{},
                                             relation:{
                                                 token:"token",
@@ -2173,14 +2174,17 @@ var Content = React.createClass({
                                                 idNo:"idCardNumber"
                                             }
                                         },
+
                                         {
                                             // 查看申请件详情
-                                            name:'/receipts/{applyCode}',
+                                            name:'/receipts/{applyCode}_get',
+                                            tName:'/receipts/{applyCode}',
                                             saveParameters:{},
                                             relation:{
                                                 applyCode:"applyCode"
                                             }
                                         },
+                                        
                                         {
                                             // 查看合同列表
                                             name:'/receipts/{applyCode}/contracts',
@@ -2294,7 +2298,7 @@ var Content = React.createClass({
             // url : "http://localhost:8080/swagger/api-docs?platformName=integrationPlatform",
             // url : "http://localhost:8080/swagger/api-docs?platformName=fileCenter",
             success : function(data){
-                var arr = ['/bids/{bidCode}/repayment','get'];
+                var arr = ['/receipts/{applyCode}','put'];
                 // console.log(data);
                 // console.log(data.data.paths);
                 // console.log(JSON.stringify(data.data));
