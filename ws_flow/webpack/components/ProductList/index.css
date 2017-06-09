@@ -36,3 +36,8 @@ h4 {
 li.product:after {
     background: none!important;
 }
+
+#wsList a:hover {
+    /*text-decoration: none;*/
+    cursor:pointer;
+}

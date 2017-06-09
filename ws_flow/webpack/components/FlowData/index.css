@@ -19,7 +19,7 @@
 
 #disC a:hover {
 	text-decoration: none;
-	cursor:inherit;
+	cursor:default;
 }
 
 .pop-up-frame {
