@@ -29,12 +29,13 @@ var ProductList = React.createClass({
             selectItemId : data.flowId
         });
         var o = wsFlow.find(item=>item.flowId===data.flowId)
+        var relation = o.wsFlow[0].relation;
         this.setState({
             selectedFlow:[o]
         });
-        console.log(o);
+        // console.log(relation);
         var pageHeight = document.body.scrollHeight+1000-50+'px';
-        this.props.setFlow(o.wsFlow,0,pageHeight,o.relation);
+        this.props.setFlow(o.wsFlow,0,pageHeight,relation);
     },
 
     openProduct:function(htmlId){
@@ -44,6 +45,16 @@ var ProductList = React.createClass({
         // <h4 key={o.id} className="product-name" style={{marginBottom:'10px'}} onClick={obj=>this.setState({productId:o.id==this.state.productId?'':o.id})}> {o.id==this.state.productId?'-':'+'} {o.productName}</h4>
     },
 
+    selectWS(selectedFlow,index){
+        var wsFlow = selectedFlow.wsFlow;
+        console.log(wsFlow);
+        console.log(index);
+        var pageHeight = document.body.scrollHeight-50+'px';
+
+        this.props.setFlow(wsFlow,index,pageHeight,wsFlow[index].relation);
+        // console.log(this.state.relation);
+    },
+
     render:function() {
         var projectList = this.props.projectList;
         var productId = this.state.productId;
@@ -51,7 +62,6 @@ var ProductList = React.createClass({
         var selectItem = this.state.selectItem;
         var selectItemId = this.state.selectItemId;
         var wsFlow = this.props.wsFlow;
-
         var selectedFlow = this.state.selectedFlow;
         // console.log(wsFlow);
         return <div className={'container'}
@@ -85,9 +95,9 @@ var ProductList = React.createClass({
                                     <h4 style={{textAlign:'left',fontSize:'20px',width:'300px'}}>接口列表：</h4>
                                     <ul style={{textAlign:'left',float:'left',width:'300px',color:'#000080'}} id="l">
                                         {
-                                            o.wsFlow.map(o=>
-                                                <li key={o.name} style={{width:'230px',wordWrap:'break-word',marginBottom:'3px'}}>
-                                                    <a href={o.reportLink} style={{fontSize:'14px',color:'#000080'}}>{o.name}</a>
+                                            o.wsFlow.map((oo,index)=>
+                                                <li key={oo.name} style={{width:'230px',wordWrap:'break-word',marginBottom:'3px'}}>
+                                                    <a onClick={this.selectWS.bind(this,o,index)} style={{fontSize:'14px',color:'#000080'}}>{oo.name}</a>
                                                 </li>
                                                 )
                                         }

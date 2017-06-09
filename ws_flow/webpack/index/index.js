@@ -2393,6 +2393,8 @@ var Content = React.createClass({
  * @param {[type]} flowRelation [description]
  */
 	setFlow(selectedFlow,index,pageHeight,flowRelation){
+        // console.log(selectedFlow);
+        // console.log(index);
         /*
         // put成功后，需要调用查询接口，
         // 此时需要根据put接口的入参（多个）作为查询条件
@@ -2409,7 +2411,7 @@ var Content = React.createClass({
         // 6、增加手动维护的全局变量
         // 7、增加判断，接口请求成功后才存储变量
         // 8、增加请求时加载效果
-        
+        // 9、增加接口列表，点击某个接口自动跳转
         this.setState({
             flowIndex:index,
             selectedFlow:selectedFlow,
