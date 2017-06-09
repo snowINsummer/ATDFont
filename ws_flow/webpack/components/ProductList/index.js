@@ -47,12 +47,8 @@ var ProductList = React.createClass({
 
     selectWS(selectedFlow,index){
         var wsFlow = selectedFlow.wsFlow;
-        console.log(wsFlow);
-        console.log(index);
         var pageHeight = document.body.scrollHeight-50+'px';
-
         this.props.setFlow(wsFlow,index,pageHeight,wsFlow[index].relation);
-        // console.log(this.state.relation);
     },
 
     render:function() {

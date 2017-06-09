@@ -136,13 +136,14 @@ var FlowData = React.createClass({
                         var tempValue = "";
                         eval("tempValue = tempData"+requestP[saveP]);
                         window.localStorage.setItem(saveP,tempValue);
-                        // console.log(tempValue);
                     }
 
                     for(var saveP in responseP){
                         var tempValue = "";
                         eval("tempValue = data"+responseP[saveP]);
-                        window.localStorage.setItem(saveP,tempValue);
+                        if (undefined != tempValue){
+                            window.localStorage.setItem(saveP,tempValue);
+                        }
                         // console.log(tempValue);
                         // console.log(window.localStorage.getItem(saveP));
                     }
@@ -355,6 +356,7 @@ var FlowData = React.createClass({
 
         var rspBCFlag = this.state.rspBCFlag;
         var allRsp = window.localStorage.getItem('allRsp');
+        // console.log(allRsp);
         allRsp = allRsp==null?'':allRsp;
         return <div className="container" style={{width:'70%',margin:'10px',float:'left'}}>
             <section id="Reportsec" ref="sectionForm">
