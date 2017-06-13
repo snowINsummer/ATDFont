@@ -1895,8 +1895,8 @@ var Content = React.createClass({
                                             name:'/user/appro/realname',
                                             saveParameters:{
                                                 response:{
-                                                    idcardno:"['data']['data']['data']['idcardno']",
-                                                    realname:"['data']['data']['data']['realname']"
+                                                    idCardNumber:"['data']['data']['data']['idcardno']",
+                                                    realName:"['data']['data']['data']['realname']"
                                                 }
                                             },
                                             relation:{
@@ -2052,8 +2052,8 @@ var Content = React.createClass({
                                                 "['data']['type']":"type",
                                                 "['data']['sort']":"sort",
                                                 "['data']['website']":"website",
-                                                "['data']['name']":"realname",
-                                                "['data']['id_card_num']":"idcardno",
+                                                "['data']['name']":"realName",
+                                                "['data']['id_card_num']":"idCardNumber",
                                                 "['data']['cell_phone_num']":"phone",
                                                 "['data']['field_info'][0]['field_name']":"parameter_code1",
                                                 "['data']['field_info'][1]['field_name']":"parameter_code2"
