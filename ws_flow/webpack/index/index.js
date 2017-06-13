@@ -559,7 +559,7 @@ var Content = React.createClass({
                                                     "resideProvinceCode": "310000",
                                                     "resideCityCode": "310000",
                                                     "resideAddress": "永和路318弄",
-                                                    "homeTel": "66660000",
+                                                    "homeTel": "021-66660000",
                                                     "companyName": "xxd",
                                                     "industry": "3",
                                                     "postType": "2",
@@ -573,8 +573,8 @@ var Content = React.createClass({
                                                             "contactType": "2",
                                                             "mobile": "13012345678",
                                                             "relationship": "7",
-                                                            "homePhone": "66660000",
-                                                            "comPhone": "66661111"
+                                                            "homePhone": "021-66660000",
+                                                            "comPhone": "021-66661111"
                                                         }
                                                     ]
                                                 }
@@ -1853,6 +1853,7 @@ var Content = React.createClass({
                                         {
                                             // 用户注册
                                             name:'/user/regist', 
+                                            description:"用户注册",
                                             saveParameters:{
                                                                 request:{
                                                                             phone:"['data']['phone']",
@@ -1865,6 +1866,7 @@ var Content = React.createClass({
                                         {
                                             // 登录操作
                                             name:'/user/login',
+                                            description:"登录操作",
                                             saveParameters:{
                                                                 request:{
                                                                             phone:"['data']['userName']"
@@ -1881,6 +1883,7 @@ var Content = React.createClass({
                                         {
                                             // 可申请产品列表
                                             name:'/products',
+                                            description:"可申请产品列表",
                                             saveParameters:{    
                                                                 response:{
                                                                     productId:"['data']['data']['items'][1]['productId']",
@@ -1893,6 +1896,7 @@ var Content = React.createClass({
                                         {
                                             // 检查是否实名（获取实名信息）
                                             name:'/user/appro/realname',
+                                            description:"检查是否实名（获取实名信息）",
                                             saveParameters:{
                                                 response:{
                                                     idCardNumber:"['data']['data']['data']['idcardno']",
@@ -1906,6 +1910,7 @@ var Content = React.createClass({
                                         {
                                             // 实名认证
                                             name:'/user/appro/autoRealname',
+                                            description:"实名认证",
                                             saveParameters:{
                                                                 request:{
                                                                             idCardNumber:"['data']['idCardNumber']",
@@ -1920,6 +1925,7 @@ var Content = React.createClass({
                                         {
                                             // 进件检查
                                             name:'/forms/reapplyStatuses',
+                                            description:"进件检查",
                                             saveParameters:{},
                                             relation:{
                                                 idNo:"idCardNumber"
@@ -1928,6 +1934,7 @@ var Content = React.createClass({
                                         {
                                             // 产品详情
                                             name:'/products/{productId}',
+                                            description:"产品详情",
                                             saveParameters:{},
                                             relation:{
                                                 productId:"productId"
@@ -1936,6 +1943,7 @@ var Content = React.createClass({
                                         {
                                             // 分期计划
                                             name:'/products/instalment-plans/{productId}',
+                                            description:"分期计划",
                                             saveParameters:{
                                                 response:{
                                                     instalmentPlanId:"['data']['data']['items'][0]['instalmentPlanId']",
@@ -1950,6 +1958,7 @@ var Content = React.createClass({
                                         {
                                             // 未提交申请单详情
                                             name:'/forms/{productId}/unsubmittedForms',
+                                            description:"未提交申请单详情",
                                             saveParameters:{},
                                             relation:{
                                                 token:"token",
@@ -1959,6 +1968,7 @@ var Content = React.createClass({
                                         {
                                             // 还款计划试算
                                             name:'/forms/repayment-plan-trial',
+                                            description:"还款计划试算",
                                             saveParameters:{},
                                             relation:{
                                                 // token:"token",
@@ -1968,6 +1978,7 @@ var Content = React.createClass({
                                         {
                                             // 生成/更新贷款申请单
                                             name:'/forms',
+                                            description:"生成/更新贷款申请单",
                                             saveParameters:{
                                                 response:{
                                                     applyCode:"['data']['data']['applyCode']"
@@ -1985,6 +1996,7 @@ var Content = React.createClass({
                                         {
                                             // 查询个人信息
                                             name:'/users_get',
+                                            description:"查询个人信息",
                                             tName:'/users',
                                             saveParameters:{},
                                             relation:{
@@ -1994,6 +2006,7 @@ var Content = React.createClass({
                                         {
                                             // 修改个人信息
                                             name:'/users_patch',
+                                            description:"修改个人信息",
                                             tName:'/users',
                                             saveParameters:{},
                                             relation:{
@@ -2003,6 +2016,7 @@ var Content = React.createClass({
                                         {
                                             // 是否已验证过征信
                                             name:'/credits/statuses',
+                                            description:"是否已验证过征信",
                                             saveParameters:{},
                                             relation:{
                                                 token:"token"
@@ -2011,6 +2025,7 @@ var Content = React.createClass({
                                         {
                                             // 获取银行流水采集的URL页面
                                             name:'/credits/bank-statement-urls',
+                                            description:"获取银行流水采集的URL页面",
                                             saveParameters:{},
                                             relation:{
                                                 token:"token"
@@ -2019,6 +2034,7 @@ var Content = React.createClass({
                                         {
                                             // 获取公积金支持区域
                                             name:'/credits/cities_RESERVED_FUND',
+                                            description:"获取公积金支持区域",
                                             tName:'/credits/cities',
                                             saveParameters:{},
                                             relation:{
@@ -2028,6 +2044,7 @@ var Content = React.createClass({
                                         {
                                             // 获取公积金区域表单
                                             name:'/credits/cities/{cityCode}_RESERVED_FUND',
+                                            description:"获取公积金区域表单",
                                             tName:'/credits/cities/{cityCode}',
                                             saveParameters:{
                                                 response:{
@@ -2045,6 +2062,7 @@ var Content = React.createClass({
                                         {
                                             // 验证公积金征信
                                             name:'/credits/results/{typeCode}_RESERVED_FUND',
+                                            description:"验证公积金征信",
                                             tName:'/credits/results/{typeCode}',
                                             saveParameters:{},
                                             relation:{
@@ -2063,6 +2081,7 @@ var Content = React.createClass({
                                         {
                                             // 获取社保支持区域
                                             name:'/credits/cities_SOCIAL_INSURANCE',
+                                            description:"获取社保支持区域",
                                             tName:'/credits/cities',
                                             saveParameters:{},
                                             relation:{
@@ -2072,6 +2091,7 @@ var Content = React.createClass({
                                         {
                                             // 获取社保区域表单
                                             name:'/credits/cities/{cityCode}_SOCIAL_INSURANCE',
+                                            description:"获取社保区域表单",
                                             tName:'/credits/cities/{cityCode}',
                                             saveParameters:{},
                                             relation:{
@@ -2081,6 +2101,7 @@ var Content = React.createClass({
                                         {
                                             // 验证社保征信
                                             name:'/credits/results/{typeCode}_SOCIAL_INSURANCE',
+                                            description:"验证社保征信",
                                             tName:'/credits/results/{typeCode}',
                                             saveParameters:{},
                                             relation:{
@@ -2090,6 +2111,7 @@ var Content = React.createClass({
                                         {
                                             // 验证个人征信
                                             name:'/credits/results/{typeCode}_CREDIT_REPORT',
+                                            description:"验证个人征信",
                                             tName:'/credits/results/{typeCode}',
                                             saveParameters:{},
                                             relation:{
@@ -2099,6 +2121,7 @@ var Content = React.createClass({
                                         {
                                             // 验证电商征信
                                             name:'/credits/results/{typeCode}_EB',
+                                            description:"验证电商征信",
                                             tName:'/credits/results/{typeCode}',
                                             saveParameters:{},
                                             relation:{
@@ -2108,6 +2131,7 @@ var Content = React.createClass({
                                         {
                                             // 验证运营商征信
                                             name:'/credits/results/{typeCode}_OPERATOR',
+                                            description:"验证运营商征信",
                                             tName:'/credits/results/{typeCode}',
                                             saveParameters:{},
                                             relation:{
@@ -2117,6 +2141,7 @@ var Content = React.createClass({
                                         {
                                             // 查看影像资料列表
                                             name:'/files_get',
+                                            description:"查看影像资料列表",
                                             tName:'/files',
                                             saveParameters:{},
                                             relation:{
@@ -2127,6 +2152,7 @@ var Content = React.createClass({
                                         {
                                             // 单个文件上传
                                             name:'/files_post',
+                                            description:"单个文件上传",
                                             tName:'/files',
                                             saveParameters:{},
                                             relation:{
@@ -2136,6 +2162,7 @@ var Content = React.createClass({
                                         {
                                             // 上传影像资料
                                             name:'/files_put',
+                                            description:"上传影像资料",
                                             tName:'/files',
                                             saveParameters:{},
                                             relation:{
@@ -2146,6 +2173,7 @@ var Content = React.createClass({
                                         {
                                             // 获取用户信息（检查是否开户）
                                             name:'/user/userInfoByToken',
+                                            description:"获取用户信息（检查是否开户）",
                                             saveParameters:{},
                                             relation:{
                                                 token:"token"
@@ -2154,6 +2182,7 @@ var Content = React.createClass({
                                         {
                                             // 获取开户URL
                                             name:'/user/capitalAccount/openFuiouOpenAccountPage/staticMobile',
+                                            description:"获取开户URL",
                                             saveParameters:{},
                                             relation:{
                                                 token:"token"
@@ -2162,6 +2191,7 @@ var Content = React.createClass({
                                         {
                                             // 提交进件
                                             name:'/receipts/{applyCode}_put',
+                                            description:"提交进件",
                                             tName:'/receipts/{applyCode}',
                                             saveParameters:{},
                                             relation:{
@@ -2172,6 +2202,7 @@ var Content = React.createClass({
                                         {
                                             // 修改申请单状态
                                             name:'/forms/statuses/{applyCode}',
+                                            description:"修改申请单状态",
                                             saveParameters:{},
                                             relation:{
                                                 token:"token",
@@ -2181,6 +2212,7 @@ var Content = React.createClass({
                                         {
                                             // 查询贷款申请单
                                             name:'/forms/{applyCode}',
+                                            description:"查询贷款申请单",
                                             saveParameters:{},
                                             relation:{
                                                 token:"token",
@@ -2190,6 +2222,7 @@ var Content = React.createClass({
                                         {
                                             // 查看申请件列表
                                             name:'/receipts',
+                                            description:"查看申请件列表",
                                             saveParameters:{},
                                             relation:{
                                                 idNo:"idCardNumber"
@@ -2199,6 +2232,7 @@ var Content = React.createClass({
                                         {
                                             // 查看申请件详情
                                             name:'/receipts/{applyCode}_get',
+                                            description:"查看申请件详情",
                                             tName:'/receipts/{applyCode}',
                                             saveParameters:{},
                                             relation:{
@@ -2209,6 +2243,7 @@ var Content = React.createClass({
                                         {
                                             // 查看合同列表
                                             name:'/receipts/{applyCode}/contracts',
+                                            description:"查看合同列表",
                                             saveParameters:{
                                                 response:{
                                                     contractNo:"['data']['data']['items'][0]['contractNo']"
@@ -2221,6 +2256,7 @@ var Content = React.createClass({
                                         {
                                             // 查看合同详情
                                             name:'/receipts/contracts/{contractNo}',
+                                            description:"查看合同详情",
                                             saveParameters:{},
                                             relation:{
                                                 contractNo:"contractNo"
@@ -2229,6 +2265,7 @@ var Content = React.createClass({
                                         {
                                             // TODO 发标
                                             name:'/bid/create',
+                                            description:"发标（不需要请求）",
                                             saveParameters:{},
                                             relation:{
                                             }
@@ -2236,6 +2273,7 @@ var Content = React.createClass({
                                         {
                                             // 根据申请件单号查看标的列表
                                             name:'/bids',
+                                            description:"根据申请件单号查看标的列表",
                                             saveParameters:{
                                                 response:{
                                                     bidCode:"['data']['data']['items'][0]['bidCode']"
@@ -2248,6 +2286,7 @@ var Content = React.createClass({
                                         {
                                             // 查看标的详情
                                             name:'/bids/{bidCode}',
+                                            description:"查看标的详情",
                                             saveParameters:{},
                                             relation:{
                                                 bidCode:"bidCode"
@@ -2256,6 +2295,7 @@ var Content = React.createClass({
                                         {
                                             // 债权匹配和投标
                                             name:'XXX',
+                                            description:"债权匹配和投标（不需要请求）",
                                             saveParameters:{},
                                             relation:{
                                             }
@@ -2263,6 +2303,7 @@ var Content = React.createClass({
                                         {
                                             // 查看标的投标记录
                                             name:'/bids/{bidCode}/investment',
+                                            description:"查看标的投标记录",
                                             saveParameters:{},
                                             relation:{
                                                 bidCode:"bidCode"
@@ -2272,6 +2313,7 @@ var Content = React.createClass({
                                         {
                                             // 还款
                                             name:'XXXXX',
+                                            description:"还款（不需要请求）",
                                             saveParameters:{},
                                             relation:{
                                             }
@@ -2279,6 +2321,7 @@ var Content = React.createClass({
                                         {
                                             // 查看标的投标记录
                                             name:'/bids/{bidCode}/repayment',
+                                            description:"查看标的投标记录",
                                             saveParameters:{},
                                             relation:{
                                                 bidCode:"bidCode"

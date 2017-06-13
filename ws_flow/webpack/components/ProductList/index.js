@@ -59,7 +59,7 @@ var ProductList = React.createClass({
         var selectItemId = this.state.selectItemId;
         var wsFlow = this.props.wsFlow;
         var selectedFlow = this.state.selectedFlow;
-        // console.log(wsFlow);
+        console.log(selectedFlow);
         return <div className={'container'}
                         style={{textAlign:'left',height:'700px',width:'300px',margin:'10px',marginTop:'10px',float:'left'}}>
                     <section id="ProjectSection">
@@ -93,7 +93,7 @@ var ProductList = React.createClass({
                                         {
                                             o.wsFlow.map((oo,index)=>
                                                 <li key={oo.name} style={{width:'230px',wordWrap:'break-word',marginBottom:'3px'}}>
-                                                    <a onClick={this.selectWS.bind(this,o,index)} style={{fontSize:'14px',color:'#000080'}}>{oo.name}</a>
+                                                    <a onClick={this.selectWS.bind(this,o,index)} style={{fontSize:'14px',color:'#000080'}}>{oo.description}</a>
                                                 </li>
                                                 )
                                         }
