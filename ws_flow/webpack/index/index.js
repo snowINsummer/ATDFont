@@ -1893,7 +1893,12 @@ var Content = React.createClass({
                                         {
                                             // 检查是否实名（获取实名信息）
                                             name:'/user/appro/realname',
-                                            saveParameters:{},
+                                            saveParameters:{
+                                                response:{
+                                                    idcardno:"['data']['data']['data']['idcardno']",
+                                                    realname:"['data']['data']['data']['realname']"
+                                                }
+                                            },
                                             relation:{
                                                 token:"token"
                                             }
@@ -2024,7 +2029,15 @@ var Content = React.createClass({
                                             // 获取公积金区域表单
                                             name:'/credits/cities/{cityCode}_RESERVED_FUND',
                                             tName:'/credits/cities/{cityCode}',
-                                            saveParameters:{},
+                                            saveParameters:{
+                                                response:{
+                                                    website:"['data']['data']['website']",
+                                                    parameter_code1:"['data']['data']['field'][0]['parameter_code']",
+                                                    parameter_code2:"['data']['data']['field'][1]['parameter_code']",
+                                                    type:"['data']['data']['type']",
+                                                    sort:"['data']['data']['field'][0]['sort']"
+                                                }
+                                            },
                                             relation:{
                                                 // token:"token"
                                             }
@@ -2035,7 +2048,15 @@ var Content = React.createClass({
                                             tName:'/credits/results/{typeCode}',
                                             saveParameters:{},
                                             relation:{
-                                                token:"token"
+                                                token:"token",
+                                                "['data']['type']":"type",
+                                                "['data']['sort']":"sort",
+                                                "['data']['website']":"website",
+                                                "['data']['name']":"realname",
+                                                "['data']['id_card_num']":"idcardno",
+                                                "['data']['cell_phone_num']":"phone",
+                                                "['data']['field_info'][0]['field_name']":"parameter_code1",
+                                                "['data']['field_info'][1]['field_name']":"parameter_code2"
                                             }
                                         },
 
