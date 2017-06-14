@@ -470,7 +470,7 @@ var Content = React.createClass({
                                                     "rateType": "MONTH",
                                                     "loanTitle": "loanTitle",
                                                     "loanDescription": "loanDescription",
-                                                    "loanPurpose": "001",
+                                                    "loanPurpose": "1",
                                                     "awardType": "NONE",
                                                     "awardValue": 0,
                                                     "expiryDay": 15
@@ -557,14 +557,14 @@ var Content = React.createClass({
                                                 "data": {
                                                     "resideType": "Y",
                                                     "resideProvinceCode": "310000",
-                                                    "resideCityCode": "310000",
+                                                    "resideCityCode": "310106",
                                                     "resideAddress": "永和路318弄",
                                                     "homeTel": "021-66660000",
                                                     "companyName": "xxd",
                                                     "industry": "3",
                                                     "postType": "2",
                                                     "companyProvinceCode": "310000",
-                                                    "companyCityCode": "310000",
+                                                    "companyCityCode": "310106",
                                                     "companyAddress": "永和路318弄",
                                                     "companyTel": "021-66661111",
                                                     "contactInfoList": [
