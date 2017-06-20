@@ -28,6 +28,7 @@ var SelectedMenu = React.createClass({
         	moduleList:[],
         	wsAllMap:{},
         	wsList:[],
+        	ws:{},
             selectedPlat: -1,
             selectedModule: -1,
             selectedWS: -1,
@@ -41,25 +42,18 @@ var SelectedMenu = React.createClass({
 	changePlat(event){
 		var platId = event.target.value;
 		this.setState({
-			selectedPlat:platId
+			selectedPlat:platId,
+			selectedModule:-1,
+			selectedWS:-1
 		});
-		// console.log(platId);
 		var platList = this.state.platList;
-		// console.log(platList);
-		// var plat = platList.find(function(item,index){
-		// 	console.log(item.id===platId);
-		// 	if (item.id==platId){
-		// 		return item;
-		// 	}
-		// })
 		var plat = platList.find(item=>item['id']==platId);
-		// console.log(plat);
 		$.ajax({
             type : "GET",
             crossDomain: true,
             url : "http://172.16.16.136:8080/tyrant/swagger/api-docs?platformName="+plat.name,
             success : function(data){
-                // console.log(data);
+                console.log(data);
                 this.setState({
                 	swaggerData:data
                 }); 
@@ -84,6 +78,9 @@ var SelectedMenu = React.createClass({
                 	var wsListTemp = ws[key];
                 	for(var keyT in wsListTemp){
                 		var wsTemp = wsListTemp[keyT];
+                		var description = wsTemp.description;
+                		var summary = wsTemp.summary;
+                		var titleDesc = description + "，" + summary;
                 		// console.log(wsTemp);
                 		var wsTag = wsTemp.tags[0];
 		            	moduleList.map(function(module){
@@ -97,7 +94,7 @@ var SelectedMenu = React.createClass({
 	                		if (module.name.indexOf(wsTag) == 0){
 	                			var map = {};
 	                			map.name = key;
-	                			map.title = keyT.toUpperCase() + " " + key;
+	                			map.title = keyT.toUpperCase() + " " + key + "：" + titleDesc;
 	                			wsMap[indexTemp].push(map);
 	                		}
         				});
@@ -161,7 +158,8 @@ var SelectedMenu = React.createClass({
 	changeModule(event){
 		var value = event.target.value;
 		this.setState({
-			selectedModule:value
+			selectedModule:value,
+			selectedWS:-1
 		});
 		var wsAllMap = this.state.wsAllMap;
 		var wsList = wsAllMap[value];
@@ -171,19 +169,25 @@ var SelectedMenu = React.createClass({
 		this.setState({
 			wsList:wsList
 		});
-		console.log(wsList);
+		// console.log(wsList);
 	},
 
 	changeWS(event){
+		// console.log(event.target);
+		event.target.blur();
 		var value = event.target.value;
+		var wsList = this.state.wsList;
+		var ws = wsList.find(o=>o.id==value);
 		this.setState({
-			selectedWS:value
+			selectedWS:value,
+			ws:ws
 		});
 	},
 
     render() {
     	var selectedMenu = this.props.selectedMenu;
-    	// console.log(selectedMenu);
+    	var ws = this.state.ws
+    	// console.log(ws);
     	return <div>
 	    			<section className="content-header">
 				      <h1>
@@ -213,7 +217,7 @@ var SelectedMenu = React.createClass({
 										  }
 										</select>
 									</div>
-				    				<div className="col-lg-2">
+				    				<div className="col-lg-3">
 										<select className="form-control" placeholder="test" value={this.state.selectedModule} onChange={this.changeModule}>
 										  <option style={{display:this.state.selectedModule===-1?'block':'none'}} value="-1">--请选择模块--</option>
 										  {
@@ -223,8 +227,9 @@ var SelectedMenu = React.createClass({
 										  }
 										</select>
 									</div>
-				    				<div className="col-lg-2">
-										<select className="form-control" value={this.state.selectedWS} onChange={this.changeWS}>
+				    				<div className="col-lg-3">
+										<select className="form-control" value={this.state.selectedWS} onChange={this.changeWS} 
+												data-toggle="tooltip" data-placement="top" data-original-title={ws.title}>
 										  <option style={{display:this.state.selectedWS===-1?'block':'none'}} value="-1">--请选择接口--</option>
 										  {
 										  	this.state.wsList.map(o=>

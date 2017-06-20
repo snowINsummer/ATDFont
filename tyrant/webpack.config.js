@@ -18,7 +18,7 @@ module.exports = {
         //path: path.resolve('./dist'),
         //filename: '[name]/index_[chunkhash:4].js'
     },
-	devServer: { inline: true, port: 7778 },
+	devServer: { inline: true, port: 8888 },
     module: {
         loaders: [
                     {
