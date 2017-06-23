@@ -14,6 +14,7 @@ var Content = React.createClass({
 
     getInitialState(){
     	return {
+            mainSidebarHeigth:document.documentElement.clientHeight-50+'px',
     		welcome:true,
     		menu:[
     			{
@@ -52,10 +53,23 @@ var Content = React.createClass({
     	});
     },
 
+    setMainSidebarHeight(height){
+        this.setState({
+            mainSidebarHeigth:height
+        });
+    },
+
 	render(){
 		// TODO 
 		// 1、通过swagger获取接口定义
 		// 2、利用下拉列表提供选择，平台-模块-接口
+    // TODO  
+    // 3、增加单接口的字段列表及发送请求功能
+    // 4、接口的所有参数全部保存到缓存
+    // 5、只维护字段命名异常的接口关系，维护到数据库，通过接口实时获取
+    // 6、异步接口，后续的接口请求时，先判断关联字段状态，给出相应提示，关系维护到数据库，通过接口实时获取。
+    // 7、实时更新左侧菜单高度
+    // 
 		// <MainFooter></MainFooter>	
 
         var props = {};
@@ -64,12 +78,14 @@ var Content = React.createClass({
   				<div class="wrapper">
   					<MainHeader></MainHeader>
   					<MainSidebar 
+                        mainSidebarHeigth={this.state.mainSidebarHeigth}
   						menu={this.state.menu}
   						setSelectedMenu={this.setSelectedMenu}
   						/>
   					<ContentWrapper 
   						welcome={this.state.welcome}
   						selectedMenu={this.state.selectedMenu}
+                        setMainSidebarHeight={this.setMainSidebarHeight}
   						/>
   					<ControlSidebar></ControlSidebar>
 

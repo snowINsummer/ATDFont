@@ -59,7 +59,7 @@ var ProductList = React.createClass({
         var selectItemId = this.state.selectItemId;
         var wsFlow = this.props.wsFlow;
         var selectedFlow = this.state.selectedFlow;
-        console.log(selectedFlow);
+        // console.log(selectedFlow);
         return <div className={'container'}
                         style={{textAlign:'left',height:'700px',width:'300px',margin:'10px',marginTop:'10px',float:'left'}}>
                     <section id="ProjectSection">

@@ -7,14 +7,21 @@ import React from 'react';
 
 var MainSidebar = React.createClass({
 
+	getInitialState(){
+		return {
+			mainSidebarHeigth:""
+		}
+	},
+
 	clickMenu(menu){
 		this.props.setSelectedMenu(menu);
 	},
 
     render() {
-    	// console.log(this.props.selectedMenu);
+    	var mainSidebarHeigth = this.props.mainSidebarHeigth;
+    	console.log(mainSidebarHeigth);
     	var menu = this.props.menu;
-        return <aside className="main-sidebar">
+        return <aside className="main-sidebar" style={{height:mainSidebarHeigth}}>
 				    <section className="sidebar">
 
 				      <ul className="sidebar-menu">

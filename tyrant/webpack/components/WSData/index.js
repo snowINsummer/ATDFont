@@ -5,7 +5,7 @@
 import React from 'react';
 import $ from 'jquery';
 // import WSFormData from 'WSFormData';
-import '../../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
+// import '../../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 // import './index.css';
 
@@ -19,37 +19,23 @@ var WSData = React.createClass({
             };
 
     },
+    
+    componentDidMount(){
+        this.props.setMainSidebarHeight(document.body.scrollHeight+'px');
+    },
 
-    sendMessage:function(url,type,flowLen,flowIndex,selectedFlow){
-        this.refs['rspBody'].value = "";
-        var o = this.refs['sectionForm'];
-        var inputs = o.getElementsByTagName('input');
-        var len = inputs.length;
+    handleClick(wsData){
+        this.setState({
+            wsData:wsData
+        });
+    },
+    submitHandler(wsData,event){
+        console.log(wsData);
 
-/*
-        var flowRelation = selectedFlow[flowIndex].relation;
-        for(var key in flowRelation){
-            if(key.indexOf("[") === 0){
-                // 处理key，根据key获取需要被替换的字段
-                var requestData = this.refs['jsonText'];
-                var jsonText = requestData.value;
-                var jsonObj = JSON.parse(jsonText);
-                eval("jsonObj"+key+"='"+window.localStorage.getItem(flowRelation[key])+"'");
-                // console.log("replaced requestData------>  ");
-                console.log(jsonObj);
-                requestData.value = JSON.stringify(jsonObj,null,4);
-                continue;
-            }
-            for(var i=0;i<len;i++){
-                var input = inputs[i];
-                // console.log(input.name);
-                if (input.name === key){
-                    input.value = window.localStorage.getItem(flowRelation[key]);
-                }
-            }
-        }
-*/
-        
+        event.preventDefault(); // 阻止表单提交
+        // var wsData = this.state.wsData;
+        var url = "http://" + wsData.host + wsData.basePath + wsData.name;
+        var type = wsData.type;
         // 标记参数类型json||FormData
         var isFormData = false;
         var file;
@@ -61,12 +47,11 @@ var WSData = React.createClass({
             parameters:{},
             json:""
         };
-
-        o = this.refs['sectionForm'];
-        inputs = o.getElementsByTagName('input');
-        len = inputs.length;
         var headers = {};
         var parameters ={};
+
+        var inputs = event.target.getElementsByTagName('input');
+        var len = inputs.length;
         for(var i=0;i<len;i++){
             var input = inputs[i];
             if (input.getAttribute('in') === 'header'){
@@ -85,12 +70,23 @@ var WSData = React.createClass({
         }
         req['headers'] = headers;
         req['parameters'] = parameters;
+        var textareas = event.target.getElementsByTagName('textarea');
+        var textareaLen = textareas.length;
+        // console.log(textareas);
+        var jsonText;
         if (type.toLowerCase() != 'get'){
-            var jsonText = this.refs['jsonText'];
-            // console.log(jsonText);
-            req['json'] = jsonText===undefined?'':jsonText.value;
-            // console.log("requestData------>  "+jsonText.value);
+            for(var i=0;i<textareaLen;i++){
+                if (textareas[i].id == "jsonText"){
+                    jsonText = textareas[i];
+                    break;
+                }
+            }
+            // var jsonText = this.refs['jsonText'];
+            // req['json'] = jsonText===undefined?'':jsonText.value;
         }
+        req['json'] = jsonText===undefined?'':jsonText.value;
+
+
         var data;
         var contentType;
         var url;
@@ -114,6 +110,9 @@ var WSData = React.createClass({
             console.log(data);
         }
 
+        var allRsp = window.localStorage.getItem('allRsp');
+        allRsp = allRsp=="null"?'':allRsp;
+        allRsp += this.CurentTime() + "---->\n "+wsData.name + " 接口请求信息 ：" + JSON.stringify(req) + "\n"
 
         // 由于跨域问题，发送请求，后端调用接口
         $.ajax({
@@ -126,7 +125,8 @@ var WSData = React.createClass({
             url:url, 
             success:function(data){
                 // 保存全局变量
-                var saveParameters = selectedFlow[flowIndex].saveParameters;
+                // var saveParameters = selectedFlow[flowIndex].saveParameters;
+                var saveParameters = {};
                 var requestP = saveParameters.request;
                 var responseP = saveParameters.response;
                 // console.log(requestP);
@@ -151,22 +151,16 @@ var WSData = React.createClass({
                    console.log(err);
                 }
 
-
-                // console.log(JSON.stringify(data,null,4));
                 this.refs['rspBody'].style.height = '500px';
                 this.refs['rspBody'].value = JSON.stringify(data,null,4);
 
-                var allRsp = window.localStorage.getItem('allRsp');
-                allRsp = allRsp==null?'':allRsp;
-                allRsp += this.CurentTime() + "---->\n "+selectedFlow[flowIndex].name + " 接口请求信息 ：" + JSON.stringify(req) + "\n"
-                allRsp += this.CurentTime() + "---->\n "+selectedFlow[flowIndex].name + " 接口响应信息 ：" + JSON.stringify(data,null,4) + "\n\n";
+                allRsp += this.CurentTime() + "---->\n "+wsData.name+ " 接口响应信息 ：" + JSON.stringify(data,null,4) + "\n\n";
                 window.localStorage.setItem("allRsp", allRsp);
-                // console.log(window.localStorage.getItem('allRsp'));
                 this.refs['allRspBody'].value = allRsp;
-                this.props.setPageHeight(document.body.scrollHeight-50+'px');
                 this.setState({
                     rspBCFlag:true
                 });
+                this.props.setMainSidebarHeight(document.body.scrollHeight+'px');
 
 
 
@@ -175,62 +169,17 @@ var WSData = React.createClass({
                 this.refs['rspBody'].style.height = '500px';
                 this.refs['rspBody'].value = JSON.stringify(e,null,4);
                 var allRsp = window.localStorage.getItem('allRsp');
-                // console.log(allRsp);
-                allRsp = allRsp==null?'':allRsp;
-                allRsp += this.CurentTime() + " "+selectedFlow[flowIndex].name + " 接口请求信息---->：\n" + JSON.stringify(req) + "\n"
-                allRsp += this.CurentTime() + " "+selectedFlow[flowIndex].name + " 接口响应信息---->：\n" + JSON.stringify(e,null,4) + "\n\n";
+                allRsp += this.CurentTime() + " "+wsData.name + " 接口响应信息---->：\n" + JSON.stringify(e,null,4) + "\n\n";
                 window.localStorage.setItem("allRsp", allRsp);
-                // console.log(window.localStorage.getItem('allRsp'));
                 this.refs['allRspBody'].value = allRsp;
                 // o.getElementsByTagName('textarea')[1].style.height = '1000px';
-                // this.props.setPageHeight(document.body.scrollHeight-50+'px');
                 this.setState({
                     rspBCFlag:false
                 });
-
-                /* 调试 */
-                /*
-                var flowRelationValue = {};
-                if (flowIndex<flowLen-1 && flowIndex>=0){
-                    if (undefined != flowRelation){
-                        var relation = flowRelation[flowIndex];
-                        for(var key in relation){
-                            var tempkey = "test";
-                            // eval("tempkey = data"+relation[key]);
-                            flowRelationValue[key] = tempkey;
-                        }
-                    }
-                    this.props.setReplaceParameters(flowRelationValue);
-                }
-                */
             }.bind(this)
         });
-        // console.log("FlowData:"+document.body.scrollHeight);
 
-    },
-    prevFlow(selectedFlow,flowLen,flowIndex,flowRelation){
-        if (flowIndex>0){
-            var index = flowIndex-1;
-            var pageHeight = document.body.scrollHeight-50+'px';
-            this.props.setFlow(selectedFlow,index,pageHeight,flowRelation);
-        }else {
-            alert('已经是第一步！');
-        }
-        this.setState({
-            rspBCFlag:''
-        });
-    },
-    nextFlow(selectedFlow,flowLen,flowIndex,flowRelation){
-        if (flowIndex<flowLen-1){
-            var index = flowIndex+1;
-            var pageHeight = document.body.scrollHeight-50+'px';
-            this.props.setFlow(selectedFlow,index,pageHeight,flowRelation);
-        }else {
-            alert('已经是最后一步！');
-        }
-        this.setState({
-            rspBCFlag:''
-        });
+
     },
 
     clearAllParameters(){
@@ -245,10 +194,8 @@ var WSData = React.createClass({
 
     clearCache(){
         window.localStorage.setItem("allRsp","");
-        var o = this.refs['sectionForm'];
-        var textarea = o.getElementsByTagName('textarea');
-        o.getElementsByTagName('textarea')[textarea.length-1].value = "";
-        // o.getElementsByTagName('textarea')[1].style.height = '';
+        var textarea = this.refs['allRspBody'];
+        textarea.value = "";
         // this.props.setPageHeight(document.documentElement.clientHeight-50+'px');
 
     },
@@ -308,23 +255,22 @@ var WSData = React.createClass({
     },
 
     render() {
-        var arrflowData = this.props.arrflowData;
-        console.log(arrflowData);
-        var selectedFlow = this.props.selectedFlow;
-        var flowLen = selectedFlow.length;
-        var flowIndex = this.props.flowIndex;
-        var flowRelation = this.props.flowRelation;
+        // console.log(this.props.setMainSidebarHeight);
+        var wsData = this.props.wsData;
+        var wsDescription = wsData.summary + "，" + wsData.description;
 
-        arrflowData.map(function(o,index){
+        // var selectedFlow = this.props.selectedFlow;
+        // var flowRelation = this.props.flowRelation;
+
             var parameters = [];
             var bodyParameters = [];
-            if (o.bodyParameters != null){
-                bodyParameters = o.bodyParameters;
+            if (wsData.bodyParameters != null){
+                bodyParameters = wsData.bodyParameters;
             }else {
-                // console.log(o);
-                var flowRelation = selectedFlow[flowIndex].relation;
-                // console.log(flowRelation);
-                o.parameters.map(function(oo,index){
+                // var flowRelation = selectedFlow[flowIndex].relation;
+                // TODO 调接口，实时从数据库获取关系。
+                var flowRelation = {};
+                wsData.parameters.map(function(oo,index){
                     // console.log(oo);
                     if (oo.in === 'body'){
                         for(var key in flowRelation){
@@ -348,41 +294,35 @@ var WSData = React.createClass({
                         parameters.push(oo);
                     }
                 });
-                arrflowData[index].parameters = parameters;
-                arrflowData[index].bodyParameters = bodyParameters;
+                wsData.parameters = parameters;
+                wsData.bodyParameters = bodyParameters;
             }
-        });
-        // console.log(arrflowData);
+
+
+        // console.log(wsData);
 
         var rspBCFlag = this.state.rspBCFlag;
         var allRsp = window.localStorage.getItem('allRsp');
         // console.log(allRsp);
-        allRsp = allRsp==null?'':allRsp;
-        return <div className="container" style={{width:'70%',margin:'10px',float:'left'}}>
-            <section id="Reportsec" ref="sectionForm">
-            {
-                arrflowData.map(o=>
-                <form key={o.index}>
-                    <div className="row" style={{fontWeight:'bold'}}>
-                        <div className="col-lg-3">
+        allRsp = allRsp=="null"?'':allRsp;
+        return <form className="wsform" onSubmit={this.submitHandler.bind(this,wsData)}>
+                    <div className="row" style={{fontWeight:'bold',textAlign:'left',marginTop:'15px'}}>
+                        <div className="col-lg-2">
                             <label for="name">接口名称及描述：</label>
                         </div>
                         <div className="col-lg-8">
-                            <label for="name">{o.wsName} - {o.description}</label>
+                            <label for="name">{wsData.name} - {wsDescription}</label>
                         </div>
                     </div>
                     <hr style={{border:'1px solid #000',marginTop: '10px'}}></hr>
 
                     <div className="row">
-                        <div className="col-lg-2" id={flowIndex>0?'':'disC'}>
-                            <a href="#" onClick={this.prevFlow.bind(this,selectedFlow,flowLen,1,flowRelation)} className="large white button">
-                                First
-                            </a>
+                        <div className="col-lg-2">
+                            <input type="submit" id="submit" className="large blue button" value="Submit">
+                            </input>
                         </div>
-                        <div className="col-lg-2" id={flowIndex<flowLen-1?'':'disC'}>
-                            <a href="#" onClick={this.nextFlow.bind(this,selectedFlow,flowLen,flowLen-2,flowRelation)} className="large white button">
-                                Last
-                            </a>
+                        <div className="col-lg-3" style={{display:'none',fontSize:'12px',textAlign:'left'}}>
+                            <label for="name">加载进度条</label>
                         </div>
                         <div className="col-lg-3">
                             <a id="a" ref="clearPara" style={{width:'150px'}} onClick={this.clearAllParameters} onMouseOver={this.popUpFrame} onMouseOut={this.popDownFrame}
@@ -397,32 +337,13 @@ var WSData = React.createClass({
                         </div>
                     </div>
 
-                    <div className="row">
-                        <div className="col-lg-2" id={flowIndex>0?'':'disC'}>
-                            <a href="#" onClick={this.prevFlow.bind(this,selectedFlow,flowLen,flowIndex,flowRelation)} className="large blue button">
-                                Prev
-                            </a>
-                        </div>
-                        <div className="col-lg-2" id={flowIndex<flowLen-1?'':'disC'}>
-                            <a href="#" onClick={this.nextFlow.bind(this,selectedFlow,flowLen,flowIndex,flowRelation)} className="large blue button">
-                                Next
-                            </a>
-                        </div>
-                        <div className="col-lg-2">
-                            <a onClick={this.sendMessage.bind(this,o.url,o.type,flowLen,flowIndex,selectedFlow)} className="large blue button" filetype="0" >
-                            Submit</a>
-                        </div>
-                        <div className="col-lg-4" style={{fontSize:'12px',textAlign:'left'}}>
-                            <label for="name">第{flowIndex+1}步，一共{flowLen}个步骤。</label>
-                        </div>
-
-                    </div>
-
 
                     <hr style={{border:'1px solid #000',marginTop: '20px'}}></hr>
                     {
-                        o.parameters.map(o=>
-                            o.in==='formData'?<div key={o.description} className="row">
+                        wsData.parameters.map(o=>
+                            o.in==='formData'
+                            ?
+                            <div key={o.description} className="row">
                                 <div className="col-lg-2">
                                     <label for="name">{o.name}：</label>
                                 </div>
@@ -432,7 +353,9 @@ var WSData = React.createClass({
                                 <div className="col-lg-5">
                                     <label for="name">{o.description}</label>
                                 </div>
-                            </div>:<div key={o.description} className="row">
+                            </div>
+                            :
+                            <div key={o.description} className="row">
                                 <div className="col-lg-2">
                                     <label for="name">{o.name}：</label>
                                 </div>
@@ -447,13 +370,13 @@ var WSData = React.createClass({
                     }
 
                     {
-                        o.bodyParameters.map(o=>
+                        wsData.bodyParameters.map(o=>
                             <div key={o.description} className="row">
                                 <div className="col-lg-2">
                                     <label for="name">{o.name}：</label>
                                 </div>
                                 <div className="col-lg-6">
-                                    <textarea ref="jsonText" style={{height:'300px',fontWeight:'bold'}} className="form-control" defaultValue={JSON.stringify(o.default,null,4)} in={o.in} name={o.name}/>
+                                    <textarea id="jsonText" style={{height:'300px',fontWeight:'bold'}} className="form-control" defaultValue={JSON.stringify(o.default,null,4)} in={o.in} name={o.name}/>
                                 </div>
                                 <div className="col-lg-5">
                                     <label for="name">{o.description}</label>
@@ -470,7 +393,7 @@ var WSData = React.createClass({
                         </div>
                     </div>
                     <hr style={{border:'1px solid #000',marginTop: '40px',marginBottom:'50px'}}></hr>
-                    <div className="row">
+                    <div className="row" style={{marginBottom:'10px'}}>
                         <div className="col-lg-2">
                             <label for="name">全部接口返回：</label>
                         </div>
@@ -478,13 +401,11 @@ var WSData = React.createClass({
                             <a onClick={this.clearCache} style={{width:'100px'}} className="large orange button">清除缓存</a>
                         </div>
                     </div>
-                        <div>
-                            <textarea ref="allRspBody" value={allRsp} readOnly="true" className="form-control" rows="3" style={{height:'1000px',background:'white',color:'black',marginBottom:'100px',overflowY:'visible',borderColor:'orange',borderWidth:'2px'}}></textarea>
-                        </div>
-                </form>)
-            }            
-            </section>
-        </div>;
+                    <div>
+                        <textarea ref="allRspBody" value={allRsp} readOnly="true" className="form-control" rows="3" style={{height:'1000px',background:'white',color:'black',marginBottom:'100px',overflowY:'visible',borderColor:'orange',borderWidth:'2px'}}></textarea>
+                    </div>
+                </form>
+            ;
     }
 
 });

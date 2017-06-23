@@ -8,7 +8,6 @@ import SelectedMenu from 'SelectedMenu';
 
 var ContentWrapper = React.createClass({
 
-
 	iFrameHeight(){
         var iframe = this.refs['iframe'];
         var contentWrapper = this.refs['contentWrapper'];
@@ -28,7 +27,10 @@ var ContentWrapper = React.createClass({
         					?
                                 <iframe ref="iframe" src="webpack/common/html/tree.html" style={{width:'100%',borderWidth:'0px'}} onLoad={this.iFrameHeight} scrolling="no"/>
         					:
-        						<SelectedMenu selectedMenu={selectedMenu}/>
+        						<SelectedMenu 
+                                    selectedMenu={selectedMenu}
+                                    setMainSidebarHeight={this.props.setMainSidebarHeight}
+                                />
         			}
 				</div>;
     }
