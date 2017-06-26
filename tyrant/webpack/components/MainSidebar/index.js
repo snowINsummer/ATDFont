@@ -19,7 +19,7 @@ var MainSidebar = React.createClass({
 
     render() {
     	var mainSidebarHeigth = this.props.mainSidebarHeigth;
-    	console.log(mainSidebarHeigth);
+    	// console.log(mainSidebarHeigth);
     	var menu = this.props.menu;
         return <aside className="main-sidebar" style={{height:mainSidebarHeigth}}>
 				    <section className="sidebar">

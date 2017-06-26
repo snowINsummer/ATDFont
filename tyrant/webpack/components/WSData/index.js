@@ -36,8 +36,6 @@ var WSData = React.createClass({
         // var wsData = this.state.wsData;
         var url = "http://" + wsData.host + wsData.basePath + wsData.name;
         var type = wsData.type;
-        // 标记参数类型json||FormData
-        var isFormData = false;
         var file;
         // 定义请求报文
         var req = {
@@ -64,7 +62,6 @@ var WSData = React.createClass({
                 url = url.replace("{"+key+"}",value);
                 req['url'] = url;
             }else if(input.getAttribute('in') === 'formData'){
-                isFormData = true;
                 file = input.files[0];
             }
         }
@@ -91,24 +88,15 @@ var WSData = React.createClass({
         var contentType;
         var url;
         var mimeType;
-        if (isFormData){
             data = new FormData();
             data.append("file",file);
             data.append("data",JSON.stringify(req));
             contentType = false;
             // mimeType = "multipart/form-data";
-            url = "http://172.16.16.136:8080/tyrant/ws/uploadFile";
-            // url = "http://localhost:8080/ws/uploadFile";
+            // url = "http://172.16.16.136:8080/tyrant/ws/uploadFile";
+            url = "http://localhost:8080/testcase/save";
             console.log(file);
             console.log(JSON.stringify(req));
-        }else {
-            data = JSON.stringify({data:req});
-            contentType = "application/json; charset=utf-8";
-            // mimeType = "text/plain;charset=UTF-8";
-            url = "http://172.16.16.136:8080/tyrant/ws/sendMessage";
-            // url = "http://localhost:8080/ws/sendMessage";
-            console.log(data);
-        }
 
         var allRsp = window.localStorage.getItem('allRsp');
         allRsp = allRsp=="null"?'':allRsp;
