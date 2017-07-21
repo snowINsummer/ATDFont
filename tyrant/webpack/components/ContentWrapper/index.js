@@ -25,7 +25,7 @@ var ContentWrapper = React.createClass({
         			{
         				welcome===true
         					?
-                                <iframe ref="iframe" src="webpack/common/html/tree.html" style={{width:'100%',borderWidth:'0px'}} onLoad={this.iFrameHeight} scrolling="no"/>
+                                <iframe ref="iframe" src="../webpack/common/html/tree.html" style={{width:'100%',borderWidth:'0px'}} onLoad={this.iFrameHeight} scrolling="no"/>
         					:
         						<SelectedMenu 
                                     selectedMenu={selectedMenu}

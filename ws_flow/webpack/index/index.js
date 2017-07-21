@@ -2353,12 +2353,12 @@ var Content = React.createClass({
             // contentType: "application/json; charset=utf-8",
             crossDomain: true,
             // url : "http://dev.xxd.com/integrationPlatform/bids?keyType=2&keyValue=AO20170412000042&status=BIDDING&productCategory=P001&currentPage=1&pageSize=10s",
-            // url : "http://172.16.16.136:8080/tyrant/swagger/api-docs?platformName=userCenter",
+            // url : "http://172.16.15.88:8080/tyrant/swagger/api-docs?platformName=userCenter",
             // url : "http://localhost:8080/swagger/api-docs?platformName=userCenter",
             // 
-            // url : "http://172.16.16.136:8080/tyrant/swagger/api-docs?platformName=userCenter",
-            url : "http://172.16.16.136:8080/tyrant/swagger/api-docs?platformName=integrationPlatform",
-            // url : "http://172.16.16.136:8080/tyrant/swagger/api-docs?platformName=tradeCenter",
+            // url : "http://172.16.15.88:8080/tyrant/swagger/api-docs?platformName=userCenter",
+            url : "http://172.16.15.88:8080/tyrant/swagger/api-docs?platformName=integrationPlatform",
+            // url : "http://172.16.15.88:8080/tyrant/swagger/api-docs?platformName=tradeCenter",
             // url : "http://localhost:8080/swagger/api-docs?platformName=integrationPlatform",
             // url : "http://localhost:8080/swagger/api-docs?platformName=fileCenter",
             success : function(data){

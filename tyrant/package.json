@@ -17,7 +17,7 @@
   "devDependencies": {},
   "scripts": {
 	"build": "gulp && webpack",
-    "start": "webpack-dev-server --progress --colors --hot --host 0.0.0.0"
+    "start": "webpack-dev-server --progress --colors --hot --host 0.0.0.0 -d -w "
   },
   "author": "snow",
   "license": "ISC"

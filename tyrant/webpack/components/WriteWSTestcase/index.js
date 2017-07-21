@@ -4,12 +4,14 @@
 
 import React from 'react';
 import WSData from 'WSData';
+import WSInfo from 'WSInfo';
 // import './index.css';
 
 var WriteWSTestcase = React.createClass({
 
 	getInitialState: function () {
         return {
+        	showEditFlag:false,
         	platList:[
         		{
         			id:0,
@@ -204,44 +206,54 @@ var WriteWSTestcase = React.createClass({
 	},
 
     render() {
-					// <WSData/>
 
 		var ws = this.state.ws;
     	return <div>
     			<form>
-	    			<div className="row">
-						<div className="col-lg-2">
-							<select className="form-control" value={this.state.selectedPlat} onChange={this.changePlat}>
-							  <option style={{display:this.state.selectedPlat===-1?'block':'none'}} value="-1">--请选择平台--</option>
-							  {
-							  	this.state.platList.map(o=>
-							  		<option key={o.id} value={o.id}>{o.description}</option>
-							  	)
-							  }
-							</select>
+    				<WSInfo/>
+    				{
+    					this.state.showEditFlag===true
+    					?
+    					<div>
+	    					<hr style={{border:'1px solid #000',marginTop: '20px'}}></hr>
+			    			<div className="row">
+								<div className="col-lg-2">
+									<select className="form-control" value={this.state.selectedPlat} onChange={this.changePlat}>
+									  <option style={{display:this.state.selectedPlat===-1?'block':'none'}} value="-1">--请选择平台--</option>
+									  {
+									  	this.state.platList.map(o=>
+									  		<option key={o.id} value={o.id}>{o.description}</option>
+									  	)
+									  }
+									</select>
+								</div>
+								<div className="col-lg-3">
+									<select className="form-control" placeholder="test" value={this.state.selectedModule} onChange={this.changeModule}>
+									  <option style={{display:this.state.selectedModule===-1?'block':'none'}} value="-1">--请选择模块--</option>
+									  {
+									  	this.state.moduleList.map(o=>
+									  		<option key={o.id} value={o.id}>{o.name}</option>
+									  	)
+									  }
+									</select>
+								</div>
+								<div className="col-lg-3">
+									<select className="form-control" value={this.state.selectedWS} onChange={this.changeWS} 
+											data-toggle="tooltip" data-placement="top" data-original-title={ws.title}>
+									  <option style={{display:this.state.selectedWS===-1?'block':'none'}} value="-1">--请选择接口--</option>
+									  {
+									  	this.state.wsList.map(o=>
+									  		<option key={o.id} value={o.id}>{o.title}</option>
+									  	)
+									  }
+									</select>
+								</div>
+							</div>
 						</div>
-						<div className="col-lg-3">
-							<select className="form-control" placeholder="test" value={this.state.selectedModule} onChange={this.changeModule}>
-							  <option style={{display:this.state.selectedModule===-1?'block':'none'}} value="-1">--请选择模块--</option>
-							  {
-							  	this.state.moduleList.map(o=>
-							  		<option key={o.id} value={o.id}>{o.name}</option>
-							  	)
-							  }
-							</select>
-						</div>
-						<div className="col-lg-3">
-							<select className="form-control" value={this.state.selectedWS} onChange={this.changeWS} 
-									data-toggle="tooltip" data-placement="top" data-original-title={ws.title}>
-							  <option style={{display:this.state.selectedWS===-1?'block':'none'}} value="-1">--请选择接口--</option>
-							  {
-							  	this.state.wsList.map(o=>
-							  		<option key={o.id} value={o.id}>{o.title}</option>
-							  	)
-							  }
-							</select>
-						</div>
-					</div>
+						:
+						<div/>
+    				}
+                    
 				</form>
 				{
 					$.isEmptyObject(this.state.wsData)
