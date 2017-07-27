@@ -9,7 +9,7 @@
 6 silly lifecycle tyrant@1.0.0~prestart: no script for prestart, continuing
 7 info lifecycle tyrant@1.0.0~start: tyrant@1.0.0
 8 verbose lifecycle tyrant@1.0.0~start: unsafe-perm in lifecycle true
-9 verbose lifecycle tyrant@1.0.0~start: PATH: /usr/local/lib/node_modules/npm/bin/node-gyp-bin:/Users/zhangli/Documents/EnvisionQA-svn/ATD/ATDFont/tyrant/node_modules/.bin:/usr/local/Cellar/node/5.9.0/bin:/Library/Frameworks/Python.framework/Versions/2.7/bin:/Users/zhangli/Documents/Tomcat-8/bin:/Applications/IntelliJ IDEA 2.app/Contents/plugins/maven/lib/maven3/bin:/usr/bin:/usr/sbin:/bin:/usr/local/bin:/sbin:/opt/x11/bin:/Library/Frameworks/Python.framework/Versions/2.7/bin:/Users/zhangli/Documents/Tomcat-8/bin:/Applications/IntelliJ IDEA.app/Contents/plugins/maven/lib/maven3/bin:/usr/bin:/usr/sbin:/bin:/usr/local/bin:/sbin:/opt/x11/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+9 verbose lifecycle tyrant@1.0.0~start: PATH: /usr/local/lib/node_modules/npm/bin/node-gyp-bin:/Users/zhangli/Documents/EnvisionQA-svn/ATD/ATDFont/tyrant/node_modules/.bin:/usr/local/Cellar/node/5.9.0/bin:/Library/Frameworks/Python.framework/Versions/2.7/bin:/Users/zhangli/Documents/Tomcat-8/bin:/Applications/IntelliJ IDEA 2.app/Contents/plugins/maven/lib/maven3/bin:/usr/bin:/usr/sbin:/bin:/usr/local/bin:/sbin:/opt/x11/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 10 verbose lifecycle tyrant@1.0.0~start: CWD: /Users/zhangli/Documents/EnvisionQA-svn/ATD/ATDFont/tyrant
 11 silly lifecycle tyrant@1.0.0~start: Args: [ '-c',
 11 silly lifecycle   'webpack-dev-server --progress --colors --hot --host 0.0.0.0 -d -w ' ]

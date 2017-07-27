@@ -68,7 +68,7 @@ var option = {
         // new webpack.optimize.CommonsChunkPlugin({name: 'common',minChunks: 3,filename: 'common.js'})
     ],
     resolve: {
-        modulesDirectories: ['./../node_modules', './components', '.'],
+        modulesDirectories: ['./node_modules', './components', '.'],
         alias: {
             //根据不同的build，使用不同的服务api配置文件
             server: 'src/common/js/conf/' + build + 'server_conf.js',

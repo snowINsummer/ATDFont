@@ -34,6 +34,7 @@ var Content = React.createClass({
             ]
         };
         var data = JSON.stringify({data:listTestcaseId});
+        console.log(data);
         var contentType = "application/json; charset=utf-8";
         $.ajax({
             type:"post", 
@@ -56,6 +57,9 @@ var Content = React.createClass({
         // phantomjs 部署到服务器
         // phantomjs 脚本加入到自动化测试框架中
         // jenkins 中配置插入图片
+        // 
+        // 后期，做一个接口，实时统计不同项目的数据，新建job-根据参数指定testcaseName-统计
+        // 前段请求根据数据库配置来动态生成数据图表。
         // 
         var props = {};
         var chartData = this.state.chartData;
