@@ -32,8 +32,26 @@ var LastFiveDaysResult = React.createClass({
 		// 	yAxisMaxValue = 400;
 		// }else if(max>400 && max<=500){
 		// 	yAxisMaxValue = 400;
-		}else if(max>500){
+		}else if(max>500 && max<=1000){
 			yAxisMaxValue = 1000;
+		}else if(max>1000 && max<=1500){
+			yAxisMaxValue = 1500;
+		}else if(max>1500 && max<=2000){
+			yAxisMaxValue = 2000;
+		}else if(max>2000 && max<=2500){
+			yAxisMaxValue = 2500;
+		}else if(max>2500 && max<=3000){
+			yAxisMaxValue = 3000;
+		}else if(max>3000 && max<=3500){
+			yAxisMaxValue = 3500;
+		}else if(max>3500 && max<=4000){
+			yAxisMaxValue = 4000;
+		}else if(max>4000 && max<=4500){
+			yAxisMaxValue = 4500;
+		}else if(max>4500 && max<=5000){
+			yAxisMaxValue = 5000;
+		}else if(max>5000){
+			yAxisMaxValue = 10000;
 		}
 		return yAxisMaxValue;
 	},

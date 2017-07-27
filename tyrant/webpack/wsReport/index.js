@@ -18,7 +18,7 @@ var Content = React.createClass({
 
     componentDidMount(){
         // 获取最近五天执行用例情况
-        var url = server.tyrant + "/testcase/queryLastFiveDaysResult";
+        var url = server.tyrant + "/testcase/queryLastSevenDaysResult";
         var listTestcaseId = {
             testcaseInfoList:[
                 {
@@ -54,7 +54,7 @@ var Content = React.createClass({
         });
 
         // 获取最近五天测试报告链接
-        url = server.tyrant + "/testcase/queryLastFiveDaysResultReport";
+        url = server.tyrant + "/testcase/queryLastSevenDaysResultReport";
         $.ajax({
             type:"post", 
             dataType:"json",
@@ -75,17 +75,13 @@ var Content = React.createClass({
 
 	render(){
         // TODO 
-        // phantomjs 部署到服务器
-        // phantomjs 脚本加入到自动化测试框架中
-        // jenkins 中配置插入图片
-        // 
         // 后期，做一个接口，实时统计不同项目的数据，新建job-根据参数指定testcaseName-统计
         // 前段请求根据数据库配置来动态生成数据图表。
         // 
         var props = {};
         var chartData = this.state.chartData;
         console.log(chartData);
-        var projectName = "最近五天";
+        var projectName = "最近七天";
         var historyReportInfo = this.state.historyReportInfo;
         console.log(historyReportInfo);
       

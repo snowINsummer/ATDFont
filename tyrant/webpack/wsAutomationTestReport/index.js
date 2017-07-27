@@ -16,7 +16,7 @@ var Content = React.createClass({
     },
 
     componentDidMount(){
-        var url = server.tyrant + "/testcase/queryLastFiveDaysResult";
+        var url = server.tyrant + "/testcase/queryLastSevenDaysResult";
         var listTestcaseId = {
             testcaseInfoList:[
                 {
@@ -64,7 +64,7 @@ var Content = React.createClass({
         var props = {};
         var chartData = this.state.chartData;
         console.log(chartData);
-        var projectName = "最近五天";
+        var projectName = "最近七天";
         return(
             <div className="container" style={{margin:'10px',float:'left'}}>
                     <section id="Reportsec">
