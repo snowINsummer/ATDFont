@@ -309,7 +309,7 @@ var WSData = React.createClass({
 
     render() {
         var arrflowData = this.props.arrflowData;
-        console.log(arrflowData);
+        // console.log(arrflowData);
         var selectedFlow = this.props.selectedFlow;
         var flowLen = selectedFlow.length;
         var flowIndex = this.props.flowIndex;

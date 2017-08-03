@@ -1352,12 +1352,6 @@ var Content = React.createClass({
                                             "description": "客户端当前时间"
                                         },
                                         {
-                                            "name": "s",
-                                            "default": "2b3464ae43ba5628e3e5a79d8cd4039d",
-                                            "in": "header",
-                                            "description": "32 LENGTH CHARS"
-                                        },
-                                        {
                                             "name": "token",
                                             "default": "hqB+6NnSabFXgMFRTQ2Qd1wYibVnD7mD0maJvRJYRUouLs7vVPcwfD642B8uk2UeA0YHECuksbX20Y8mjDbudE7xTcd6NhNmKFXDUF5bCi8=",
                                             "in": "header",
@@ -1365,13 +1359,35 @@ var Content = React.createClass({
                                         },
                                         {
                                             "name": "requestData",
-                                            "default": {"data":{"deviceType":1,"gpsInfo":{"gpsAuthorized":"Y","gpsProvince":"CODE","gpsCity":"CODE", "gpsDistrict":"CODE","gpsPosition":"具体地址","ipAddress":"127.0.0.1"}, "mobileContactList":[{"contactName":"联系人姓名","contactMobile":"手机","contactBusiPhone":"单位电话"}], "mobileAppList":[],"smsList":[],"tdBlackBox":"blackBoxValue"}},
+                                            "default": {
+                                                "data": {
+                                                    "deviceType": 1,
+                                                    "tdTokenId": "xinxindai15d3fe8a9c4-I8833a1471e9cf44f29d29344709937cf",
+                                                    "mobileInfo": {
+                                                        "gpsInfo": {
+                                                            "authorized": "Y",
+                                                            "longitude": 39.4361929993,
+                                                            "latitude": 116.4111328125
+                                                        },
+                                                        "addressBooks": [
+                                                            {
+                                                                "name": "zhangsan",
+                                                                "phone": "12233334444"
+                                                            },
+                                                            {
+                                                                "name": "lisi",
+                                                                "phone": "12233335555"
+                                                            }
+                                                        ]
+                                                    }
+                                                }
+                                            },
                                             "in": "body",
                                             "description": ""
                                         },
                                         {
                                             "name": "applyCode",
-                                            "default": "",
+                                            "default": "AO20170714000974",
                                             "in": "path",
                                             "description": "贷款申请单编号"
                                         }
@@ -1765,6 +1781,150 @@ var Content = React.createClass({
                                     ]
                                 }
                             },
+                             "/bids/staticResources/{productType}": {
+                                "get": {
+                                    "basePath": "/integrationPlatform",
+                                    "summary": "获取静态资源",
+                                    "description": "从交易中心查询",
+                                    "parameters": [
+                                        {
+                                            "name": "clientId",
+                                            "default": "XXD_LOAN_API",
+                                            "in": "header",
+                                            "description": "客户端I D"
+                                        },
+                                        {
+                                            "name": "clientTime",
+                                            "default": "1459845047000",
+                                            "in": "header",
+                                            "description": "客户端当前时间"
+                                        },
+                                        {
+                                            "name": "typeKey",
+                                            "default": "SAFEGUARD_MEASURE",
+                                            "in": "query",
+                                            "description": "类型名称"
+                                        },
+                                        {
+                                            "name": "source",
+                                            "default": "pc",
+                                            "in": "query",
+                                            "description": "调用接口的平台"
+                                        },
+                                        {
+                                            "name": "productType",
+                                            "default": "P001",
+                                            "in": "path",
+                                            "description": "产品类别"
+                                        }
+                                    ]
+                                }
+                            },
+                            "/bids/{bidCode}/borrower": {
+                                "get": {
+                                    "basePath": "/integrationPlatform",
+                                    "summary": "标的借款人信息",
+                                    "description": "从交易中心查询",
+                                    "parameters": [
+                                        {
+                                            "name": "clientId",
+                                            "default": "XXD_LOAN_API",
+                                            "in": "header",
+                                            "description": "客户端I D"
+                                        },
+                                        {
+                                            "name": "clientTime",
+                                            "default": "1459845047000",
+                                            "in": "header",
+                                            "description": "客户端当前时间"
+                                        },
+                                        {
+                                            "name": "bidCode",
+                                            "default": "BID20170613001215",
+                                            "in": "path",
+                                            "description": "标的编号"
+                                        }
+                                    ]
+                                }
+                            },
+                            "/bids/{bidCode}/investments": {
+                                "get": {
+                                    "basePath": "/integrationPlatform",
+                                    "summary": "标的投标记录",
+                                    "description": "从交易中心查询",
+                                    "parameters": [
+                                        {
+                                            "name": "clientId",
+                                            "default": "XXD_LOAN_API",
+                                            "in": "header",
+                                            "description": "客户端I D"
+                                        },
+                                        {
+                                            "name": "clientTime",
+                                            "default": "1459845047000",
+                                            "in": "header",
+                                            "description": "客户端当前时间"
+                                        },
+                                        {
+                                            "name": "currentPage",
+                                            "default": 1,
+                                            "in": "query",
+                                            "description": "页码"
+                                        },
+                                        {
+                                            "name": "pageSize",
+                                            "default": 10,
+                                            "in": "query",
+                                            "description": "每页数据的条目"
+                                        },
+                                        {
+                                            "name": "bidCode",
+                                            "default": "BW201412100356",
+                                            "in": "path",
+                                            "description": "标的编号"
+                                        }
+                                    ]
+                                }
+                            },
+                            "/bids/{bidCode}/loans": {
+                                "get": {
+                                    "basePath": "/integrationPlatform",
+                                    "summary": "标的贷款记录",
+                                    "description": "查询贷款记录",
+                                    "parameters": [
+                                        {
+                                            "name": "clientId",
+                                            "default": "XXD_LOAN_API",
+                                            "in": "header",
+                                            "description": "客户端I D"
+                                        },
+                                        {
+                                            "name": "clientTime",
+                                            "default": "1459845047000",
+                                            "in": "header",
+                                            "description": "客户端当前时间"
+                                        },
+                                        {
+                                            "name": "currentPage",
+                                            "default": 1,
+                                            "in": "query",
+                                            "description": "页码"
+                                        },
+                                        {
+                                            "name": "pageSize",
+                                            "default": 10,
+                                            "in": "query",
+                                            "description": "每页数据的条目"
+                                        },
+                                        {
+                                            "name": "bidCode",
+                                            "default": "BID20170613001215",
+                                            "in": "path",
+                                            "description": "标的编号"
+                                        }
+                                    ]
+                                }
+                            },
                             "XXXXX": {
                                 "post": {
                                     "basePath": "",
@@ -1807,9 +1967,6 @@ var Content = React.createClass({
                                     ]
                                 }
                             }
-
-
-
 
 
                         }
@@ -1876,8 +2033,8 @@ var Content = React.createClass({
                                                                 }
                                                             },
                                             relation:{
-                                                        // "['data']['userName']":"phone",
-                                                        // "['data']['password']":"password"
+                                                        "['data']['userName']":"phone",
+                                                        "['data']['password']":"password"
                                                     }
                                         },
                                         {
@@ -2319,16 +2476,50 @@ var Content = React.createClass({
                                             }
                                         },
                                         {
-                                            // 查看标的投标记录
+                                            // 查看标的还款记录
                                             name:'/bids/{bidCode}/repayment',
-                                            description:"查看标的投标记录",
+                                            description:"查看标的还款记录",
                                             saveParameters:{},
                                             relation:{
                                                 bidCode:"bidCode"
                                             }
                                         },
-
-
+                                        {
+                                            // 获取静态资源
+                                            name:'/bids/staticResources/{productType}',
+                                            description:"获取静态资源",
+                                            saveParameters:{},
+                                            relation:{
+                                                productType:"productType"
+                                            }
+                                        },
+                                        {
+                                            // 标的借款人信息
+                                            name:'/bids/{bidCode}/borrower',
+                                            description:"标的借款人信息",
+                                            saveParameters:{},
+                                            relation:{
+                                                bidCode:"bidCode"
+                                            }
+                                        },
+                                        {
+                                            // 标的投标记录
+                                            name:'/bids/{bidCode}/investments',
+                                            description:"标的投标记录",
+                                            saveParameters:{},
+                                            relation:{
+                                                bidCode:"bidCode"
+                                            }
+                                        },
+                                        {
+                                            // 标的贷款记录
+                                            name:'/bids/{bidCode}/loans',
+                                            description:"标的贷款记录",
+                                            saveParameters:{},
+                                            relation:{
+                                                bidCode:"bidCode"
+                                            }
+                                        }
                                     ]
                             
                         },
@@ -2362,8 +2553,8 @@ var Content = React.createClass({
             // url : "http://localhost:8080/swagger/api-docs?platformName=integrationPlatform",
             // url : "http://localhost:8080/swagger/api-docs?platformName=fileCenter",
             success : function(data){
-                var arr = ['/receipts/{applyCode}','put'];
-                // console.log(data);
+                var arr = ['/bids/{bidCode}/loans','get'];
+                console.log(data);
                 // console.log(data.data.paths);
                 // console.log(JSON.stringify(data.data));
                 var wsName = arr[0];
@@ -2402,7 +2593,7 @@ var Content = React.createClass({
                 getO[arr[1]] = getData;
                 pathsData[wsName] = getO;
                 // console.log(pathsData);
-                // console.log(JSON.stringify(pathsData,null,4));
+                console.log(JSON.stringify(pathsData,null,4));
                 // data.data.list.map(o=>Object.assign(o,{expanded:false}))
                 // this.setState({
                 //     allWSData:data.data
