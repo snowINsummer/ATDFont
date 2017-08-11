@@ -7,7 +7,17 @@ import WriteWSTestcase from 'WriteWSTestcase';
 // import './index.css';
 
 var SelectedMenu = React.createClass({
+	iFrameHeight(event){
 
+        var iframe = event.target;
+        var contentWrapper = event.target.parentNode.parentNode.parentNode;
+        // var subWeb = document.frames ? document.frames["iframe"].document :
+        				// iframe.contentDocument;
+		// console.log(subWeb);
+	    if(iframe != null) {
+	        iframe.style.height = contentWrapper.offsetHeight + "px";
+	    }
+	},
     render() {
     	var selectedMenu = this.props.selectedMenu;
     	// console.log(ws);
@@ -33,9 +43,13 @@ var SelectedMenu = React.createClass({
 				    				setMainSidebarHeight={this.props.setMainSidebarHeight}
 				    				/>
 	                        :
-	                        	<div>
-	                        		test
-	                        	</div>
+	                        	selectedMenu.id===101
+	                        	?
+	                        		<iframe src="http://172.16.15.88:8080/font/tyrant/dist/wsReport.html" onLoad={this.iFrameHeight} style={{width:'100%',borderWidth:'0px'}} scrolling="no"/>
+	                        	:
+		                        	<div>
+		                        		test
+		                        	</div>
 				    	}
 		    		</section>
 				</div>;
