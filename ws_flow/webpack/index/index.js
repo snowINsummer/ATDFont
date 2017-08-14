@@ -1362,12 +1362,13 @@ var Content = React.createClass({
                                             "default": {
                                                 "data": {
                                                     "deviceType": 1,
+                                                    "deviceId": "idfa",
                                                     "tdTokenId": "xinxindai15d3fe8a9c4-I8833a1471e9cf44f29d29344709937cf",
                                                     "mobileInfo": {
                                                         "gpsInfo": {
                                                             "authorized": "Y",
-                                                            "longitude": 39.4361929993,
-                                                            "latitude": 116.4111328125
+                                                            "longitude": 123.121211,
+                                                            "latitude": 123.212122
                                                         },
                                                         "addressBooks": [
                                                             {
@@ -2553,7 +2554,7 @@ var Content = React.createClass({
             // url : "http://localhost:8080/swagger/api-docs?platformName=integrationPlatform",
             // url : "http://localhost:8080/swagger/api-docs?platformName=fileCenter",
             success : function(data){
-                var arr = ['/bids/{bidCode}/loans','get'];
+                var arr = ['/receipts/{applyCode}','put'];
                 console.log(data);
                 // console.log(data.data.paths);
                 // console.log(JSON.stringify(data.data));
