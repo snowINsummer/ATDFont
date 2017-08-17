@@ -1749,11 +1749,11 @@ var Content = React.createClass({
                                     ]
                                 }
                             },
-                            "/bids/{bidCode}/investment": {
+                            "/bids/{bidCode}/investments": {
                                 "get": {
                                     "basePath": "/integrationPlatform",
                                     "summary": "标的投标记录",
-                                    "description": "查询单条记录",
+                                    "description": "从交易中心查询",
                                     "parameters": [
                                         {
                                             "name": "clientId",
@@ -1768,14 +1768,20 @@ var Content = React.createClass({
                                             "description": "客户端当前时间"
                                         },
                                         {
-                                            "name": "s",
-                                            "default": "0878b0790e427c8a35b05d0b5b4ff113",
-                                            "in": "header",
-                                            "description": "32 LENGTH CHARS"
+                                            "name": "currentPage",
+                                            "default": 1,
+                                            "in": "query",
+                                            "description": "页码"
+                                        },
+                                        {
+                                            "name": "pageSize",
+                                            "default": 10,
+                                            "in": "query",
+                                            "description": "每页数据的条目"
                                         },
                                         {
                                             "name": "bidCode",
-                                            "default": "",
+                                            "default": "BW201412100356",
                                             "in": "path",
                                             "description": "标的编号"
                                         }
@@ -1935,7 +1941,7 @@ var Content = React.createClass({
                                     ]
                                 }
                             },
-                            "/bids/{bidCode}/repayment": {
+                            "/bids/{bidCode}/repayments": {
                                 "get": {
                                     "basePath": "/integrationPlatform",
                                     "summary": "标的还款记录",
@@ -2460,7 +2466,7 @@ var Content = React.createClass({
                                         },
                                         {
                                             // 查看标的投标记录
-                                            name:'/bids/{bidCode}/investment',
+                                            name:'/bids/{bidCode}/investments',
                                             description:"查看标的投标记录",
                                             saveParameters:{},
                                             relation:{
@@ -2478,7 +2484,7 @@ var Content = React.createClass({
                                         },
                                         {
                                             // 查看标的还款记录
-                                            name:'/bids/{bidCode}/repayment',
+                                            name:'/bids/{bidCode}/repayments',
                                             description:"查看标的还款记录",
                                             saveParameters:{},
                                             relation:{
@@ -2498,15 +2504,6 @@ var Content = React.createClass({
                                             // 标的借款人信息
                                             name:'/bids/{bidCode}/borrower',
                                             description:"标的借款人信息",
-                                            saveParameters:{},
-                                            relation:{
-                                                bidCode:"bidCode"
-                                            }
-                                        },
-                                        {
-                                            // 标的投标记录
-                                            name:'/bids/{bidCode}/investments',
-                                            description:"标的投标记录",
                                             saveParameters:{},
                                             relation:{
                                                 bidCode:"bidCode"
@@ -2554,7 +2551,7 @@ var Content = React.createClass({
             // url : "http://localhost:8080/swagger/api-docs?platformName=integrationPlatform",
             // url : "http://localhost:8080/swagger/api-docs?platformName=fileCenter",
             success : function(data){
-                var arr = ['/receipts/{applyCode}','put'];
+                var arr = ['/bids/{bidCode}/repayments','get'];
                 console.log(data);
                 // console.log(data.data.paths);
                 // console.log(JSON.stringify(data.data));
