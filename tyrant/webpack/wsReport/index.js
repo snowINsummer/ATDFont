@@ -26,12 +26,20 @@ var Content = React.createClass({
                     evironment:"dev"
                 },
                 {
+                    testcaseName:"FileCenter_WS_dev",
+                    evironment:"dev"
+                },
+                {
                     testcaseName:"TradeCenter_WS_stage",
                     evironment:"stage"
                 },
                 {
                     testcaseName:"UserCenter_WS_stage",
                     evironment:"stage"
+                },
+                {
+                    testcaseName:"PayGate_WS_dev",
+                    evironment:"dev"
                 }
             ]
         };
