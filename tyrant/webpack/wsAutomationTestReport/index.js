@@ -38,6 +38,10 @@ var Content = React.createClass({
                 {
                     testcaseName:"PayGate_WS_dev",
                     evironment:"dev"
+                },
+                {
+                    testcaseName:"ApprovingSystem_WS_test",
+                    evironment:"test"
                 }
             ]
         };

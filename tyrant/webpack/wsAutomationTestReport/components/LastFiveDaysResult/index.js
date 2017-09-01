@@ -37,7 +37,7 @@ var LastFiveDaysResult = React.createClass({
 		}else if(max>1000 && max<=1500){
 			yAxisMaxValue = 1500;
 		}else if(max>1500 && max<=2000){
-			yAxisMaxValue = 2000;
+			yAxisMaxValue = 2500;
 		}else if(max>2000 && max<=2500){
 			yAxisMaxValue = 2500;
 		}else if(max>2500 && max<=3000){
@@ -113,8 +113,7 @@ var LastFiveDaysResult = React.createClass({
 			newFailData.push(oData);
 		}
 		var yAxisMax = this.getyAxisMaxValue(totalData);
-		return <Echars style={{position:'relative',width:'1000px',height:'400px'}} 
-		onClick={e=>e}
+		return <Echars style={{position:'relative',width:'1000px',height:'400px'}} onClick={e=>e}
 					option={{
 								title : {
 									x : 'center',
