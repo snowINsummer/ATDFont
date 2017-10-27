@@ -101,7 +101,7 @@ var WSData = React.createClass({
             data.append("data",JSON.stringify(req));
             contentType = false;
             // mimeType = "multipart/form-data";
-            url = "http://172.16.15.88:8080/tyrant/ws/uploadFile";
+            url = "http://192.168.33.47:8080/tyrant/ws/uploadFile";
             // url = "http://localhost:8080/ws/uploadFile";
             console.log(file);
             console.log(JSON.stringify(req));
@@ -109,7 +109,7 @@ var WSData = React.createClass({
             data = JSON.stringify({data:req});
             contentType = "application/json; charset=utf-8";
             // mimeType = "text/plain;charset=UTF-8";
-            url = "http://172.16.15.88:8080/tyrant/ws/sendMessage";
+            url = "http://192.168.33.47:8080/tyrant/ws/sendMessage";
             // url = "http://localhost:8080/ws/sendMessage";
             console.log(data);
         }
