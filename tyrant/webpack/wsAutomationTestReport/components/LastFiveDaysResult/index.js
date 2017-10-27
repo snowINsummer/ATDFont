@@ -113,7 +113,7 @@ var LastFiveDaysResult = React.createClass({
 			newFailData.push(oData);
 		}
 		var yAxisMax = this.getyAxisMaxValue(totalData);
-		return <Echars style={{position:'relative',width:'1000px',height:'400px'}} onClick={e=>e}
+		return <Echars style={{position:'relative',width:'970px',height:'400px'}} onClick={e=>e}
 					option={{
 								title : {
 									x : 'center',
