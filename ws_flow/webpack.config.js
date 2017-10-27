@@ -13,9 +13,9 @@ module.exports = {
         //]
     //},
     output: {
-        path: __dirname,
-        filename: "bundle.js"
-        //path: path.resolve('./dist'),
+        //path: __dirname,
+        filename: "bundle.js",
+        path: path.resolve('./dist')
         //filename: '[name]/index_[chunkhash:4].js'
     },
 	devServer: { inline: true, port: 7777 },
