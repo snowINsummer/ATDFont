@@ -16,7 +16,7 @@ var Content = React.createClass({
     },
 
     componentDidMount(){
-        var url = server.tyrant + "/statistics/queryDailyPageviewsAndVisitorAndSendMail";
+        var url = server.alice + "/statistics/queryDailyPageviewsAndVisitorAndSendMail";
         var listTestcaseId = {
         };
         var data = JSON.stringify({});
