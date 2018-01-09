@@ -18,7 +18,7 @@ var MainHeader = React.createClass({
 				      <a href="#" className="sidebar-toggle" data-toggle="offcanvas" role="button">
 				        <span className="sr-only">Toggle navigation</span>
 				      </a>
-				      <div className="navbar-custom-menu">
+				      <div className="navbar-custom-menu" style={{display:'none'}}>
 				        <ul className="nav navbar-nav">
 				        
 				          <li className="dropdown tasks-menu">

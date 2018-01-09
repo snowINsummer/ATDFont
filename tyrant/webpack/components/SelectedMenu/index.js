@@ -4,6 +4,8 @@
 
 import React from 'react';
 import WriteWSTestcase from 'WriteWSTestcase';
+import BorrowTender from 'BorrowTender';
+import Fdd from 'Fdd';
 // import './index.css';
 
 var SelectedMenu = React.createClass({
@@ -47,9 +49,17 @@ var SelectedMenu = React.createClass({
 	                        	?
 	                        		<iframe src="http://172.16.15.88:8080/font/tyrant/dist/wsReport.html" onLoad={this.iFrameHeight} style={{width:'100%',borderWidth:'0px'}} scrolling="no"/>
 	                        	:
-		                        	<div>
-		                        		test
-		                        	</div>
+	                        		selectedMenu.id===2
+	                        		?
+	                        			<BorrowTender/>
+	                        		:
+			                        	selectedMenu.id===3
+			                        	?
+			                        		<Fdd/>
+	                        			:
+			                        		<div>
+			                        			test
+			                        		</div>
 				    	}
 		    		</section>
 				</div>;

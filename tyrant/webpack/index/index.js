@@ -38,9 +38,14 @@ var Content = React.createClass({
     			},
     			{
     				id:2,
-    				name:"测试菜单",
-					description:"测试"
-    			}
+    				name:"债权转让匹配退出",
+					description:"债权转让匹配退出"
+    			},
+                {
+                    id:3,
+                    name:"FDD业务测试",
+                    description:"法大大业务测试相关sql"
+                }
     		],
     		selectedMenu:""
     	};
