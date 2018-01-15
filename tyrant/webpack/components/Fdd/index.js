@@ -5,6 +5,7 @@
 import React from 'react';
 import $ from 'jquery';
 import server from 'server';
+import Select from 'Select';
 // import '../WSData/index.css';
 
 var Fdd = React.createClass({
@@ -104,6 +105,7 @@ var Fdd = React.createClass({
                         </tbody>
                       </table>
                     </div>
+                    <hr style={{border:'1px solid #000',marginTop: '10px'}}></hr>
                 </form>
                     ;
     }

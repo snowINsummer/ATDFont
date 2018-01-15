@@ -1,0 +1,10 @@
+.checkpionttitle span{
+      background-color: yellow;
+}
+
+.row {
+	font-weight: bold;
+	text-align: left;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}

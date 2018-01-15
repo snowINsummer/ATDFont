@@ -5,6 +5,7 @@
 import React from 'react';
 import WriteWSTestcase from 'WriteWSTestcase';
 import BorrowTender from 'BorrowTender';
+import CreditorTransfer from 'CreditorTransfer';
 import Fdd from 'Fdd';
 // import './index.css';
 
@@ -47,13 +48,13 @@ var SelectedMenu = React.createClass({
 	                        :
 	                        	selectedMenu.id===101
 	                        	?
-	                        		<iframe src="http://172.16.15.88:8080/font/tyrant/dist/wsReport.html" onLoad={this.iFrameHeight} style={{width:'100%',borderWidth:'0px'}} scrolling="no"/>
+	                        		<iframe src="http://192.168.33.47:8080/font/tyrant/dist/wsReport.html" onLoad={this.iFrameHeight} style={{width:'100%',borderWidth:'0px'}} scrolling="no"/>
 	                        	:
 	                        		selectedMenu.id===2
 	                        		?
-	                        			<BorrowTender/>
+	                        			<CreditorTransfer/>
 	                        		:
-			                        	selectedMenu.id===3
+			                        	selectedMenu.id===5
 			                        	?
 			                        		<Fdd/>
 	                        			:

@@ -38,11 +38,21 @@ var Content = React.createClass({
     			},
     			{
     				id:2,
-    				name:"债权转让匹配退出",
-					description:"债权转让匹配退出"
+    				name:"债权转让",
+					description:"债权转让"
     			},
                 {
                     id:3,
+                    name:"债权匹配",
+                    description:"债权匹配"
+                },
+                {
+                    id:4,
+                    name:"债权退出",
+                    description:"债权退出"
+                },
+                {
+                    id:5,
                     name:"FDD业务测试",
                     description:"法大大业务测试相关sql"
                 }
