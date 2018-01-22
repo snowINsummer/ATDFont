@@ -1,7 +1,7 @@
 #submit {
     border:1px solid #DBDBDB ;
 }
-.row a{
+.row .button{
 	/*margin-bottom: 10px;*/
 	width: 80px;
 	text-align: center;

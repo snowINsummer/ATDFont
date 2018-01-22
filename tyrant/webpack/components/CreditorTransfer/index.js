@@ -247,8 +247,8 @@ var CreditorTransfer = React.createClass({
 
         return <div>
             <form className="wsform">
-                <div className="row" style={{fontWeight:'bold',textAlign:'left',marginTop:'15px'}}>
-                    <div className="col-lg-2">
+                <div className="row">
+                    <div className="col-lg-2" style={{width:'180px'}}>
                         <span style={{backgroundColor:'#f0ad4e',fontSize:'x-large'}}>数据库环境：</span>
                     </div>
                     <Select name={dbName}
@@ -274,7 +274,7 @@ var CreditorTransfer = React.createClass({
                         <div className="col-lg-2" style={{width:'230px'}}>
                             <input id="mobile" type="text" className="form-control" placeholder="债权持有人手机号（可不填）" defaultValue=""/>
                         </div>
-                        <div className="col-lg-2">
+                        <div className="col-lg-2" style={{width:'230px'}}>
                             <input id="schemeId" type="text" className="form-control" placeholder="理财产品编号（可不填）" defaultValue=""/>
                         </div>
 
@@ -282,7 +282,7 @@ var CreditorTransfer = React.createClass({
                             <input type="submit" className="large blue button" value="查询"/>
                         </div>
                         <div className="col-lg-1">
-                            <a onClick={this.changeData_btt.bind(this,borrowTenderTransferable)} style={{width:'100px'}} className="large orange button">{borrowTenderTransferable.bttButton===0?'隐藏':'显示'}</a>
+                            <a onClick={this.changeData_btt.bind(this,borrowTenderTransferable)} style={{width:'100px'}} className="large orange button">{borrowTenderTransferable.bttButton===0?'隐藏结果':'显示结果'}</a>
                         </div>
                     </div>
                     <Table 
@@ -313,14 +313,14 @@ var CreditorTransfer = React.createClass({
                         <span>检查点：XXD_TRADE_REQUEST新增记录，status=1</span>
                     </div>
                     <div className="row">
-                        <div className="col-lg-2">
+                        <div className="col-lg-2" style={{width:'170px'}}>
                             <input id="tenderId" type="text" className="form-control" placeholder="tenderId（必填）" defaultValue=""/>
                         </div>
                         <div className="col-lg-1">
                             <input type="submit" className="large blue button" value="查询"/>
                         </div>
                         <div className="col-lg-1">
-                            <a onClick={this.changeData_tr.bind(this,tradeRequest)} style={{width:'100px'}} className="large orange button">{tradeRequest.bttButton===0?'隐藏':'显示'}</a>
+                            <a onClick={this.changeData_tr.bind(this,tradeRequest)} style={{width:'100px'}} className="large orange button">{tradeRequest.bttButton===0?'隐藏结果':'显示结果'}</a>
                         </div>
                     </div>
                     <Table 
