@@ -105,7 +105,8 @@ var Fdd = React.createClass({
                         </tbody>
                       </table>
                     </div>
-                    <hr style={{border:'1px solid #000',marginTop: '10px'}}></hr>
+                    {/* <hr style={{border:'1px solid #000',marginTop: '10px'}}></hr> */}
+                    
                 </form>
                     ;
     }

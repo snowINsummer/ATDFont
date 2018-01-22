@@ -41,10 +41,13 @@ var SelectedMenu = React.createClass({
 				    	{
 				    		selectedMenu.id===102
 				    		?
+				    			<div>test</div>
+				    			/*
 				    			<WriteWSTestcase
 				    				setSelectedMenu={this.props.setSelectedMenu}
 				    				setMainSidebarHeight={this.props.setMainSidebarHeight}
 				    				/>
+				    				*/
 	                        :
 	                        	selectedMenu.id===101
 	                        	?
