@@ -13,7 +13,7 @@ var Table = React.createClass({
       var len = data.data.length;
       // console.log(len);
     	// var classN = this.props.classN+" dropdown-toggle";
-    	console.log(JSON.stringify(data.flag,null,4));
+    	// console.log(JSON.stringify(data.flag,null,4));
     	return <div>
                 <div className="panel panel-default" style={{display:data.flag===false?'none':data.bttButton===0?'block':'none'}}>
                       <div className="panel-heading">{dbName}.{data.tableInfo}</div>

@@ -10,8 +10,35 @@ import Fdd from 'Fdd';
 // import './index.css';
 
 var SelectedMenu = React.createClass({
-	iFrameHeight(event){
 
+    getInitialState(){
+        return {
+            // 数据源
+            dbSource:[
+                {
+                    id:0,
+                    description:"test"
+                },
+                {
+                    id:1,
+                    description:"stage"
+                }
+            ]
+        }
+    },
+    changeText(data){
+        // console.log(data);
+        var bttButton = data.bttButton;
+        if (bttButton === 0){
+            bttButton = 1;
+        }else if(bttButton === 1){
+            bttButton = 0;
+        }
+        data.bttButton = bttButton;
+        return data;
+    },
+
+	iFrameHeight(event){
         var iframe = event.target;
         var contentWrapper = event.target.parentNode.parentNode.parentNode;
         // var subWeb = document.frames ? document.frames["iframe"].document :
@@ -21,7 +48,53 @@ var SelectedMenu = React.createClass({
 	        iframe.style.height = contentWrapper.offsetHeight + "px";
 	    }
 	},
+
+    httpClient (url,postData,returnData,selectedDb) {
+        var def = $.Deferred();
+        //做一些异步操作
+        $.ajax({
+            type:"post", 
+            dataType:"json",
+            "processData": false,
+            contentType: "application/json; charset=utf-8",
+            data : postData,
+            url:url, 
+            success:data=>{
+                console.log(data);
+                returnData.selectedDb = selectedDb;
+                returnData.flag = true;
+                var getData = data.data;
+                if (getData.length>0){
+                    var arr = [];
+                    for(var key in getData[0]){
+                        arr.push({name:key});
+                    }
+                    returnData.title = arr;
+                    var valueArr = [];
+                    getData.forEach((item,index)=>{
+                        var valueArrT = [];
+                        for(var key in item){
+                            valueArrT.push(item[key]);
+                        }
+                        valueArr.push(valueArrT);
+                    })
+                    returnData.data = valueArr;
+                    returnData.bttButton = 0;
+                }
+                def.resolve(returnData);
+            },
+            error:function(e){
+                alert(JSON.stringify(e.responseJSON,null,4));
+            }.bind(this)
+        });
+        return def.promise();
+    },
+
     render() {
+        var props = {};
+        props.dbSource = this.state.dbSource;
+        props.changeText = this.changeText;
+        props.httpClient = this.httpClient;
     	var selectedMenu = this.props.selectedMenu;
     	// console.log(ws);
     	return <div>
@@ -55,11 +128,11 @@ var SelectedMenu = React.createClass({
 	                        	:
 	                        		selectedMenu.id===2
 	                        		?
-	                        			<CreditorTransfer/>
+	                        			<CreditorTransfer {...props}/>
 	                        		:
 			                        	selectedMenu.id===5
 			                        	?
-			                        		<Fdd/>
+			                        		<Fdd {...props}/>
 	                        			:
 			                        		<div>
 			                        			test

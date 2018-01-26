@@ -14,17 +14,7 @@ var CreditorTransfer = React.createClass({
 
     getInitialState(){
         return {
-            // 数据源
-            dbSource:[
-                {
-                    id:0,
-                    description:"test"
-                },
-                {
-                    id:1,
-                    description:"stage"
-                }
-            ],
+
             selectedDb:0,
 
             // 查询可转让债权
@@ -76,7 +66,7 @@ var CreditorTransfer = React.createClass({
     changeDbSource(value){
         // var value = event.target.innerText;
         // console.log(value);
-        var dbSourceId = this.state.dbSource.find(item=>item.description===value).id;
+        var dbSourceId = this.props.dbSource.find(item=>item.description===value).id;
         // console.log(dbSourceId);
         this.setState({
             selectedDb:dbSourceId
@@ -92,27 +82,16 @@ var CreditorTransfer = React.createClass({
     },
 
     changeData_btt(data){
-        data = this.changeText(data);
+        data = this.props.changeText(data);
         this.setState({
             borrowTenderTransferable:data
         });
     },
     changeData_tr(data){
-        data = this.changeText(data);
+        data = this.props.changeText(data);
         this.setState({
             tradeRequest:data
         });
-    },
-    changeText(data){
-        // console.log(data);
-        var bttButton = data.bttButton;
-        if (bttButton === 0){
-            bttButton = 1;
-        }else if(bttButton === 1){
-            bttButton = 0;
-        }
-        data.bttButton = bttButton;
-        return data;
     },
 
     // 查询可转让的债权
@@ -127,53 +106,13 @@ var CreditorTransfer = React.createClass({
         }
         var isOptimize = this.state.schemeList.find(item=>item.description===selectedScheme).id;
         var selectedDb = this.state.selectedDb;
-        var dbDesc = this.state.dbSource.find(item=>item.id===selectedDb).description;
+        var dbDesc = this.props.dbSource.find(item=>item.id===selectedDb).description;
         var url = server.redqueen + "/creditorTransfer/"+dbDesc+"/queryCreditorRights";
         var data = JSON.stringify({data:{mobile:mobileNum,schemeId:schemeId,isOptimize:isOptimize}});
         console.log(data);
-        var contentType = "application/json; charset=utf-8";
-        $.ajax({
-            type:"post", 
-            dataType:"json",
-            "processData": false,
-            contentType: contentType,
-            data : data,
-            url:url, 
-            success:data=>{
-                console.log(data);
-                var borrowTenderTransferable = this.state.borrowTenderTransferable;
-                borrowTenderTransferable.selectedDb = selectedDb;
-                borrowTenderTransferable.flag = true;
-                var getData = data.data;
-                if (getData.length>0){
-                    var arr = [];
-                    for(var key in getData[0]){
-                        arr.push({name:key});
-                    }
-                    borrowTenderTransferable.title = arr;
-                    var valueArr = [];
-                    getData.forEach((item,index)=>{
-                        var valueArrT = [];
-                        for(var key in item){
-                            valueArrT.push(item[key]);
-                        }
-                        valueArr.push(valueArrT);
-                    })
-                    // console.log(JSON.stringify(arr,null,4));
-                    // console.log(JSON.stringify(valueArr,null,4));
-                    borrowTenderTransferable.data = valueArr;
-                    // borrowTenderTransferable.data = getData;
-                    borrowTenderTransferable.bttButton = 0;
-                }
-                this.setState({
-                    borrowTenderTransferable:borrowTenderTransferable
-                });
-            },
-            error:function(e){
-                alert(JSON.stringify(e.responseJSON,null,4));
-            }.bind(this)
-        });
-
+        // var contentType = "application/json; charset=utf-8";
+        var borrowTenderTransferable = this.state.borrowTenderTransferable;
+        this.props.httpClient(url,data,borrowTenderTransferable,selectedDb).then(e=>this.setState({borrowTenderTransferable:e}));
 
     },
 
@@ -182,68 +121,29 @@ var CreditorTransfer = React.createClass({
         event.preventDefault(); // 阻止表单提交
         var tenderId = $("#tenderId").val();
         var selectedDb = this.state.selectedDb;
-        var dbDesc = this.state.dbSource.find(item=>item.id===selectedDb).description;
+        var dbDesc = this.props.dbSource.find(item=>item.id===selectedDb).description;
         var url = server.redqueen + "/creditorTransfer/"+dbDesc+"/queryTradeRequest";
         var data = JSON.stringify({data:{tenderId:tenderId}});
         console.log(data);
-        var contentType = "application/json; charset=utf-8";
-        $.ajax({
-            type:"post", 
-            dataType:"json",
-            "processData": false,
-            contentType: contentType,
-            data : data,
-            url:url, 
-            success:data=>{
-                console.log(data);
-                var tradeRequest = this.state.tradeRequest;
-                tradeRequest.selectedDb = selectedDb;
-                tradeRequest.flag = true;
-                var getData = data.data;
-                if (getData.length>0){
-                    var arr = [];
-                    for(var key in getData[0]){
-                        arr.push({name:key});
-                    }
-                    tradeRequest.title = arr;
-                    var valueArr = [];
-                    getData.forEach((item,index)=>{
-                        var valueArrT = [];
-                        for(var key in item){
-                            valueArrT.push(item[key]);
-                        }
-                        valueArr.push(valueArrT);
-                    })
-                    // console.log(JSON.stringify(arr,null,4));
-                    // console.log(JSON.stringify(valueArr,null,4));
-                    tradeRequest.data = valueArr;
-                    tradeRequest.bttButton = 0;
-
-                }
-                this.setState({
-                    tradeRequest:tradeRequest
-                });
-            },
-            error:function(e){
-                alert(JSON.stringify(e.responseJSON,null,4));
-            }.bind(this)
-        });
+        // var contentType = "application/json; charset=utf-8";
+        var tradeRequest = this.state.tradeRequest;
+        this.props.httpClient(url,data,tradeRequest,selectedDb).then(e=>this.setState({tradeRequest:e}));
     },
 
     render() {
         var wsData = {};
-        var dbSource = this.state.dbSource;
+        var dbSource = this.props.dbSource;
         var selectedDb = this.state.selectedDb;
         var dbName = dbSource.find(item=>item.id===selectedDb).description;
         // 1、查询可转让的债权：
         var borrowTenderTransferable = this.state.borrowTenderTransferable;
         var selectedScheme = this.state.selectedScheme;
         selectedScheme = selectedScheme===-1?'--请选择理财产品--':selectedScheme;
-        var bttDbName = this.state.dbSource.find(item=>item.id===borrowTenderTransferable.selectedDb).description;
+        var bttDbName = dbSource.find(item=>item.id===borrowTenderTransferable.selectedDb).description;
         // 检查点：XXD_TRADE_REQUEST新增记录，status=1
         var tradeRequest = this.state.tradeRequest;
         // console.log(tradeRequest);
-        var trDbName = this.state.dbSource.find(item=>item.id===tradeRequest.selectedDb).description;
+        var trDbName = dbSource.find(item=>item.id===tradeRequest.selectedDb).description;
 
         return <div>
             <form className="wsform">
@@ -252,7 +152,7 @@ var CreditorTransfer = React.createClass({
                         <span style={{backgroundColor:'#f0ad4e',fontSize:'x-large'}}>数据库环境：</span>
                     </div>
                     <Select name={dbName}
-                        data={this.state.dbSource}
+                        data={dbSource}
                         changeValue={this.changeDbSource}
                         classN="btn btn-warning"
                     />
