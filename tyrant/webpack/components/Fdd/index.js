@@ -23,8 +23,9 @@ var Fdd = React.createClass({
                 data:[],
                 title:[],
                 bttButton:0, // 0 按钮文字：隐藏，1 按钮文字：显示
-                inputText:[{id:"mobile",placeholder:"请填写手机号"}],
+                inputText:[{id:"mobile",placeholder:"请填写手机号",width:"200px"}],
                 buttonText:"查询签约短信",
+                buttonWidth:"170px",
                 dbName:""
             },
             borrowGuarantor:{
@@ -34,8 +35,9 @@ var Fdd = React.createClass({
                 data:[],
                 title:[],
                 bttButton:0, // 0 按钮文字：隐藏，1 按钮文字：显示
-                inputText:[{id:"borrowId_guarantor",placeholder:"请填写标的编号"}],
+                inputText:[{id:"borrowId_guarantor",placeholder:"请填写标的编号",width:"200px"}],
                 buttonText:"查询标的担保人",
+                buttonWidth:"170px",
                 dbName:""
             },
             corporatorMobile:{
@@ -45,8 +47,9 @@ var Fdd = React.createClass({
                 data:[],
                 title:[],
                 bttButton:0, // 0 按钮文字：隐藏，1 按钮文字：显示
-                inputText:[{id:"borrowId_corporator",placeholder:"请填写标的编号"}],
+                inputText:[{id:"borrowId_corporator",placeholder:"请填写标的编号",width:"200px"}],
                 buttonText:"查询法人手机号",
+                buttonWidth:"170px",
                 dbName:""
             }
         };

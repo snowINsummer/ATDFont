@@ -31,6 +31,7 @@ var CreditorTransfer = React.createClass({
                         {id:"schemeId_btt",placeholder:"理财产品编号（可不填）",width:"230px"}
                     ],
                 buttonText:"查询可转让债权",
+                buttonWidth:"180px",
                 dbName:""
             },
 
@@ -68,6 +69,7 @@ var CreditorTransfer = React.createClass({
                 bttButton:0, // 0 按钮文字：隐藏，1 按钮文字：显示
                 inputText:[{id:"tenderId_tr",placeholder:"tenderId（必填）"}],
                 buttonText:"查询责权转让申请",
+                buttonWidth:"190px",
                 dbName:""
             }
         };

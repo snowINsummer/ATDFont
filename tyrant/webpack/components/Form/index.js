@@ -26,6 +26,7 @@ var Form = React.createClass({
     	var data = this.props.data;
         var inputText = data.inputText;
         var buttonText = data.buttonText;
+        var buttonWidth = data.buttonWidth;
         // var queryData = data.queryData;
     	// console.log(data);
     	return <form className="wsform" onSubmit={this.queryFunc.bind(this,wsData)}>
@@ -37,7 +38,7 @@ var Form = React.createClass({
                                 </div>
                               )
                         }
-                        <div className="col-lg-2">
+                        <div className="col-lg-2" style={{width:buttonWidth}}>
                             <input type="submit" className="large blue button" value={buttonText}>
                             </input>
                         </div>
