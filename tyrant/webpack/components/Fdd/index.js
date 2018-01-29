@@ -31,6 +31,14 @@ var Fdd = React.createClass({
                 data:[],
                 title:[],
                 bttButton:0 // 0 按钮文字：隐藏，1 按钮文字：显示
+            },
+            corporatorMobile:{
+                selectedDb:0,
+                flag:false,
+                tableInfo:"XXD_USER_COMPANY '企业信息表",
+                data:[],
+                title:[],
+                bttButton:0 // 0 按钮文字：隐藏，1 按钮文字：显示
             }
         };
     },
@@ -51,6 +59,12 @@ var Fdd = React.createClass({
         data = this.props.changeText(data);
         this.setState({
             borrowGuarantor:data
+        });
+    },
+    changeData_cm(data){
+        data = this.props.changeText(data);
+        this.setState({
+            corporatorMobile:data
         });
     },
 
@@ -81,6 +95,19 @@ var Fdd = React.createClass({
         var borrowGuarantor = this.state.borrowGuarantor;
         this.props.httpClient(url,data,borrowGuarantor,selectedDb).then(e=>this.setState({borrowGuarantor:e}));
     },
+    
+    queryCorporatorMobile(wsData,event){
+        event.preventDefault(); // 阻止表单提交
+        var borrowId = $("#borrowId_corporator").val();
+        var selectedDb = this.state.selectedDb;
+        var dbDesc = this.props.dbSource.find(item=>item.id===selectedDb).description;
+        var url = server.redqueen + "/fdd/"+dbDesc+"/queryCorporatorMobile";
+        var data = JSON.stringify({data:{borrowId:borrowId}});
+        console.log(data);
+        // var contentType = "application/json; charset=utf-8";
+        var corporatorMobile = this.state.corporatorMobile;
+        this.props.httpClient(url,data,corporatorMobile,selectedDb).then(e=>this.setState({corporatorMobile:e}));
+    },
 
     render() {
         var wsData = {};
@@ -92,6 +119,9 @@ var Fdd = React.createClass({
         var bttDbName = dbSource.find(item=>item.id===signatoryMessage.selectedDb).description;
         var borrowGuarantor = this.state.borrowGuarantor;
         var bgDbName = dbSource.find(item=>item.id===borrowGuarantor.selectedDb).description;
+        var corporatorMobile = this.state.corporatorMobile;
+        var cmDbName = dbSource.find(item=>item.id===corporatorMobile.selectedDb).description;
+
         // console.log(JSON.stringify(signatoryMessage,null,4));
         return <div>
                 <form className="wsform">
@@ -113,7 +143,7 @@ var Fdd = React.createClass({
                             <input id="mobile" type="text" className="form-control" placeholder="请填写手机号" defaultValue=""/>
                         </div>
                         <div className="col-lg-2">
-                            <input type="submit" id="submit" className="large blue button" value="查询签约短信">
+                            <input type="submit" className="large blue button" value="查询签约短信">
                             </input>
                         </div>
                         <div className="col-lg-1">
@@ -132,7 +162,7 @@ var Fdd = React.createClass({
                             <input id="borrowId_guarantor" type="text" className="form-control" placeholder="请填写标的编号" defaultValue=""/>
                         </div>
                         <div className="col-lg-2">
-                            <input type="submit" id="submit" className="large blue button" value="查询标的担保人">
+                            <input type="submit" className="large blue button" value="查询标的担保人">
                             </input>
                         </div>
                         <div className="col-lg-1">
@@ -144,7 +174,24 @@ var Fdd = React.createClass({
                         data={borrowGuarantor}
                     />
                 </form>
-
+                <form className="wsform" onSubmit={this.queryCorporatorMobile.bind(this,wsData)}>
+                    <div className="row" style={{fontWeight:'bold',textAlign:'left',marginTop:'15px'}}>
+                        <div className="col-lg-2">
+                            <input id="borrowId_corporator" type="text" className="form-control" placeholder="请填写标的编号" defaultValue=""/>
+                        </div>
+                        <div className="col-lg-2">
+                            <input type="submit" className="large blue button" value="查询法人手机号">
+                            </input>
+                        </div>
+                        <div className="col-lg-1">
+                            <a onClick={this.changeData_cm.bind(this,corporatorMobile)} style={{width:'100px'}} className="large orange button">{corporatorMobile.bttButton===0?'隐藏':'显示'}</a>
+                        </div>
+                    </div>
+                    <Table 
+                        dbName={cmDbName}
+                        data={corporatorMobile}
+                    />
+                </form>
             </div>;
     }
 
