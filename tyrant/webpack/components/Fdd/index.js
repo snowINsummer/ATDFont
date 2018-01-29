@@ -6,7 +6,7 @@ import React from 'react';
 import $ from 'jquery';
 import server from 'server';
 import Select from 'Select';
-import Table from 'Table';
+import Form from 'Form';
 // import '../WSData/index.css';
 
 var Fdd = React.createClass({
@@ -22,7 +22,10 @@ var Fdd = React.createClass({
                 tableInfo:"XXD_MESSAGE_SITE_SENDLOGS '系统发送信件日志表'",
                 data:[],
                 title:[],
-                bttButton:0 // 0 按钮文字：隐藏，1 按钮文字：显示
+                bttButton:0, // 0 按钮文字：隐藏，1 按钮文字：显示
+                inputText:[{id:"mobile",placeholder:"请填写手机号"}],
+                buttonText:"查询签约短信",
+                dbName:""
             },
             borrowGuarantor:{
                 selectedDb:0,
@@ -30,7 +33,10 @@ var Fdd = React.createClass({
                 tableInfo:"RC_BORROW_GUARANTOR '担保人信息表（风控）'",
                 data:[],
                 title:[],
-                bttButton:0 // 0 按钮文字：隐藏，1 按钮文字：显示
+                bttButton:0, // 0 按钮文字：隐藏，1 按钮文字：显示
+                inputText:[{id:"borrowId_guarantor",placeholder:"请填写标的编号"}],
+                buttonText:"查询标的担保人",
+                dbName:""
             },
             corporatorMobile:{
                 selectedDb:0,
@@ -38,7 +44,10 @@ var Fdd = React.createClass({
                 tableInfo:"XXD_USER_COMPANY '企业信息表",
                 data:[],
                 title:[],
-                bttButton:0 // 0 按钮文字：隐藏，1 按钮文字：显示
+                bttButton:0, // 0 按钮文字：隐藏，1 按钮文字：显示
+                inputText:[{id:"borrowId_corporator",placeholder:"请填写标的编号"}],
+                buttonText:"查询法人手机号",
+                dbName:""
             }
         };
     },
@@ -116,12 +125,8 @@ var Fdd = React.createClass({
         var dbName = dbSource.find(item=>item.id===selectedDb).description;
         // var signatoryMessageTitle = this.state.signatoryMessageTitle;
         var signatoryMessage = this.state.signatoryMessage;
-        var bttDbName = dbSource.find(item=>item.id===signatoryMessage.selectedDb).description;
         var borrowGuarantor = this.state.borrowGuarantor;
-        var bgDbName = dbSource.find(item=>item.id===borrowGuarantor.selectedDb).description;
         var corporatorMobile = this.state.corporatorMobile;
-        var cmDbName = dbSource.find(item=>item.id===corporatorMobile.selectedDb).description;
-
         // console.log(JSON.stringify(signatoryMessage,null,4));
         return <div>
                 <form className="wsform">
@@ -137,61 +142,21 @@ var Fdd = React.createClass({
                     </div>
                 </form>
                 <hr style={{height:'2px',border:'none',borderTop:'2px dotted green',marginTop: '10px'}}></hr>
-                <form className="wsform" onSubmit={this.getSignatoryMessage.bind(this,wsData)}>
-                    <div className="row" style={{fontWeight:'bold',textAlign:'left',marginTop:'15px'}}>
-                        <div className="col-lg-2">
-                            <input id="mobile" type="text" className="form-control" placeholder="请填写手机号" defaultValue=""/>
-                        </div>
-                        <div className="col-lg-2">
-                            <input type="submit" className="large blue button" value="查询签约短信">
-                            </input>
-                        </div>
-                        <div className="col-lg-1">
-                            <a onClick={this.changeData_sm.bind(this,signatoryMessage)} style={{width:'100px'}} className="large orange button">{signatoryMessage.bttButton===0?'隐藏':'显示'}</a>
-                        </div>
-                    </div>
-                    <Table 
-                        dbName={bttDbName}
-                        data={signatoryMessage}
-                    />
-                    
-                </form>
-                <form className="wsform" onSubmit={this.queryBorrowGuarantor.bind(this,wsData)}>
-                    <div className="row" style={{fontWeight:'bold',textAlign:'left',marginTop:'15px'}}>
-                        <div className="col-lg-2">
-                            <input id="borrowId_guarantor" type="text" className="form-control" placeholder="请填写标的编号" defaultValue=""/>
-                        </div>
-                        <div className="col-lg-2">
-                            <input type="submit" className="large blue button" value="查询标的担保人">
-                            </input>
-                        </div>
-                        <div className="col-lg-1">
-                            <a onClick={this.changeData_bg.bind(this,borrowGuarantor)} style={{width:'100px'}} className="large orange button">{borrowGuarantor.bttButton===0?'隐藏':'显示'}</a>
-                        </div>
-                    </div>
-                    <Table 
-                        dbName={bgDbName}
-                        data={borrowGuarantor}
-                    />
-                </form>
-                <form className="wsform" onSubmit={this.queryCorporatorMobile.bind(this,wsData)}>
-                    <div className="row" style={{fontWeight:'bold',textAlign:'left',marginTop:'15px'}}>
-                        <div className="col-lg-2">
-                            <input id="borrowId_corporator" type="text" className="form-control" placeholder="请填写标的编号" defaultValue=""/>
-                        </div>
-                        <div className="col-lg-2">
-                            <input type="submit" className="large blue button" value="查询法人手机号">
-                            </input>
-                        </div>
-                        <div className="col-lg-1">
-                            <a onClick={this.changeData_cm.bind(this,corporatorMobile)} style={{width:'100px'}} className="large orange button">{corporatorMobile.bttButton===0?'隐藏':'显示'}</a>
-                        </div>
-                    </div>
-                    <Table 
-                        dbName={cmDbName}
-                        data={corporatorMobile}
-                    />
-                </form>
+                <Form
+                    data={signatoryMessage}
+                    changeData={this.changeData_sm}
+                    queryFunc={this.getSignatoryMessage}
+                />
+                <Form
+                    data={borrowGuarantor}
+                    changeData={this.changeData_bg}
+                    queryFunc={this.queryBorrowGuarantor}
+                />
+                <Form
+                    data={corporatorMobile}
+                    changeData={this.changeData_cm}
+                    queryFunc={this.queryCorporatorMobile}
+                />
             </div>;
     }
 

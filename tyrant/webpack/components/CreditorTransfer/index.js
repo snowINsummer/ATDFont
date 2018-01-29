@@ -7,6 +7,7 @@ import $ from 'jquery';
 import server from 'server';
 import Select from 'Select';
 import Table from 'Table';
+import Form from 'Form';
 import './index.css';
 // import '../WSData/index.css';
 
@@ -24,7 +25,13 @@ var CreditorTransfer = React.createClass({
                 tableInfo:"XXD_BORROW_TENDER '标的投标信息'",
                 data:[],
                 title:[],
-                bttButton:0 // 0 按钮文字：隐藏，1 按钮文字：显示
+                bttButton:0, // 0 按钮文字：隐藏，1 按钮文字：显示
+                inputText:[
+                        {id:"mobile_btt",placeholder:"债权持有人手机号（可不填）",width:"230px"},
+                        {id:"schemeId_btt",placeholder:"理财产品编号（可不填）",width:"230px"}
+                    ],
+                buttonText:"查询可转让债权",
+                dbName:""
             },
 
             selectedScheme:-1,
@@ -58,7 +65,10 @@ var CreditorTransfer = React.createClass({
                 tableInfo:"XXD_TRADE_REQUEST '责权转让申请'",
                 data:[],
                 title:[],
-                bttButton:0 // 0 按钮文字：隐藏，1 按钮文字：显示
+                bttButton:0, // 0 按钮文字：隐藏，1 按钮文字：显示
+                inputText:[{id:"tenderId_tr",placeholder:"tenderId（必填）"}],
+                buttonText:"查询责权转让申请",
+                dbName:""
             }
         };
     },
@@ -97,7 +107,7 @@ var CreditorTransfer = React.createClass({
     // 查询可转让的债权
     getBorrowTenderTransferable(wsData,event){
         event.preventDefault(); // 阻止表单提交
-        var mobileNum = $("#mobile").val();
+        var mobileNum = $("#mobile_btt").val();
         var schemeId = $("#schemeId").val();
         var selectedScheme = this.state.selectedScheme;
         if (selectedScheme === -1){
@@ -139,11 +149,11 @@ var CreditorTransfer = React.createClass({
         var borrowTenderTransferable = this.state.borrowTenderTransferable;
         var selectedScheme = this.state.selectedScheme;
         selectedScheme = selectedScheme===-1?'--请选择理财产品--':selectedScheme;
-        var bttDbName = dbSource.find(item=>item.id===borrowTenderTransferable.selectedDb).description;
+        // var bttDbName = dbSource.find(item=>item.id===borrowTenderTransferable.selectedDb).description;
         // 检查点：XXD_TRADE_REQUEST新增记录，status=1
         var tradeRequest = this.state.tradeRequest;
         // console.log(tradeRequest);
-        var trDbName = dbSource.find(item=>item.id===tradeRequest.selectedDb).description;
+        // var trDbName = dbSource.find(item=>item.id===tradeRequest.selectedDb).description;
 
         return <div>
             <form className="wsform">
@@ -159,37 +169,21 @@ var CreditorTransfer = React.createClass({
                 </div>
             </form>
             <hr style={{height:'2px',border:'none',borderTop:'2px dotted green',marginTop: '10px'}}></hr>
-            <form className="wsform" onSubmit={this.getBorrowTenderTransferable.bind(this,wsData)}>
-                    <div>
-                        <span>1、查询可转让的债权：</span>
-                    </div>
-                    <div className="row">
-                        <Select name={selectedScheme}
-                            data={this.state.schemeList}
-                            changeValue={this.changeScheme}
-                            classN="btn btn-primary"
-                        />
-                    </div>
-                    <div className="row">
-                        <div className="col-lg-2" style={{width:'230px'}}>
-                            <input id="mobile" type="text" className="form-control" placeholder="债权持有人手机号（可不填）" defaultValue=""/>
-                        </div>
-                        <div className="col-lg-2" style={{width:'230px'}}>
-                            <input id="schemeId" type="text" className="form-control" placeholder="理财产品编号（可不填）" defaultValue=""/>
-                        </div>
-
-                        <div className="col-lg-1">
-                            <input type="submit" className="large blue button" value="查询"/>
-                        </div>
-                        <div className="col-lg-1">
-                            <a onClick={this.changeData_btt.bind(this,borrowTenderTransferable)} style={{width:'100px'}} className="large orange button">{borrowTenderTransferable.bttButton===0?'隐藏结果':'显示结果'}</a>
-                        </div>
-                    </div>
-                    <Table 
-                        dbName={bttDbName}
-                        data={borrowTenderTransferable}
-                    />
-                </form>
+            <div>
+                <span>1、查询可转让的债权：</span>
+            </div>
+            <div className="row">
+                <Select name={selectedScheme}
+                    data={this.state.schemeList}
+                    changeValue={this.changeScheme}
+                    classN="btn btn-primary"
+                />
+            </div>
+                <Form
+                    data={borrowTenderTransferable}
+                    changeData={this.changeData_btt}
+                    queryFunc={this.getBorrowTenderTransferable}
+                />
                 <form>
                     <div>
                         <span>2、修改标的的应还款时间：</span>
@@ -208,26 +202,15 @@ var CreditorTransfer = React.createClass({
                     </div>
                     <hr style={{height:'2px',border:'none',borderTop:'2px dotted green',marginTop: '10px'}}></hr>
                 </form>
-                <form className="wsform" onSubmit={this.getTradeRequest.bind(this,wsData)}>
-                    <div className="checkpionttitle">
-                        <span>检查点：XXD_TRADE_REQUEST新增记录，status=1</span>
-                    </div>
-                    <div className="row">
-                        <div className="col-lg-2" style={{width:'170px'}}>
-                            <input id="tenderId" type="text" className="form-control" placeholder="tenderId（必填）" defaultValue=""/>
-                        </div>
-                        <div className="col-lg-1">
-                            <input type="submit" className="large blue button" value="查询"/>
-                        </div>
-                        <div className="col-lg-1">
-                            <a onClick={this.changeData_tr.bind(this,tradeRequest)} style={{width:'100px'}} className="large orange button">{tradeRequest.bttButton===0?'隐藏结果':'显示结果'}</a>
-                        </div>
-                    </div>
-                    <Table 
-                        dbName={trDbName}
-                        data={tradeRequest}
-                    />
-                </form>
+                <div className="checkpionttitle">
+                    <span>检查点：XXD_TRADE_REQUEST新增记录，status=1</span>
+                </div>
+                <Form
+                    data={tradeRequest}
+                    changeData={this.changeData_tr}
+                    queryFunc={this.getTradeRequest}
+                />
+
             </div>;
     }
 

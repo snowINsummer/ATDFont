@@ -62,6 +62,7 @@ var SelectedMenu = React.createClass({
             success:data=>{
                 console.log(data);
                 returnData.selectedDb = selectedDb;
+                returnData.dbName = this.state.dbSource.find(item=>item.id===returnData.selectedDb).description;
                 returnData.flag = true;
                 var getData = data.data;
                 if (getData.length>0){
