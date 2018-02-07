@@ -69,6 +69,7 @@ var Content = React.createClass({
     },
 
     setMainSidebarHeight(height){
+        height = height+51+'px'
         this.setState({
             mainSidebarHeigth:height
         });

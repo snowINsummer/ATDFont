@@ -96,6 +96,7 @@ var SelectedMenu = React.createClass({
         props.dbSource = this.state.dbSource;
         props.changeText = this.changeText;
         props.httpClient = this.httpClient;
+        props.setMainSidebarHeight = this.props.setMainSidebarHeight;
     	var selectedMenu = this.props.selectedMenu;
     	// console.log(ws);
     	return <div>

@@ -124,7 +124,9 @@ var CreditorTransfer = React.createClass({
         console.log(data);
         // var contentType = "application/json; charset=utf-8";
         var borrowTenderTransferable = this.state.borrowTenderTransferable;
-        this.props.httpClient(url,data,borrowTenderTransferable,selectedDb).then(e=>this.setState({borrowTenderTransferable:e}));
+        this.props.httpClient(url,data,borrowTenderTransferable,selectedDb)
+            .then(e=>this.setState({borrowTenderTransferable:e}))
+            .then(e=>this.props.setMainSidebarHeight($('.content-wrapper')[0].offsetHeight));
 
     },
 
@@ -139,7 +141,9 @@ var CreditorTransfer = React.createClass({
         console.log(data);
         // var contentType = "application/json; charset=utf-8";
         var tradeRequest = this.state.tradeRequest;
-        this.props.httpClient(url,data,tradeRequest,selectedDb).then(e=>this.setState({tradeRequest:e}));
+        this.props.httpClient(url,data,tradeRequest,selectedDb)
+            .then(e=>this.setState({tradeRequest:e}))
+            .then(e=>this.props.setMainSidebarHeight($('.content-wrapper')[0].offsetHeight));
     },
 
     render() {

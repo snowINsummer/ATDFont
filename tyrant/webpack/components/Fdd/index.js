@@ -51,6 +51,18 @@ var Fdd = React.createClass({
                 buttonText:"查询法人手机号",
                 buttonWidth:"170px",
                 dbName:""
+            },
+            creditorInfo:{
+                selectedDb:0,
+                flag:false,
+                tableInfo:"XXD_BORROW_TENDER '标的投标信息",
+                data:[],
+                title:[],
+                bttButton:0, // 0 按钮文字：隐藏，1 按钮文字：显示
+                inputText:[{id:"borrowId_creditorInfo",placeholder:"请填写标的编号",width:"200px"}],
+                buttonText:"查询标债权信息",
+                buttonWidth:"170px",
+                dbName:""
             }
         };
     },
@@ -79,6 +91,12 @@ var Fdd = React.createClass({
             corporatorMobile:data
         });
     },
+    changeData_ci(data){
+        data = this.props.changeText(data);
+        this.setState({
+            creditorInfo:data
+        });
+    },
 
     getSignatoryMessage(wsData,event){
         event.preventDefault(); // 阻止表单提交
@@ -92,7 +110,9 @@ var Fdd = React.createClass({
         console.log(data);
         // var contentType = "application/json; charset=utf-8";
         var signatoryMessage = this.state.signatoryMessage;
-        this.props.httpClient(url,data,signatoryMessage,selectedDb).then(e=>this.setState({signatoryMessage:e}));
+        this.props.httpClient(url,data,signatoryMessage,selectedDb)
+            .then(e=>this.setState({signatoryMessage:e}))
+            .then(e=>this.props.setMainSidebarHeight($('.content-wrapper')[0].offsetHeight));
 
     },
     queryBorrowGuarantor(wsData,event){
@@ -105,7 +125,9 @@ var Fdd = React.createClass({
         console.log(data);
         // var contentType = "application/json; charset=utf-8";
         var borrowGuarantor = this.state.borrowGuarantor;
-        this.props.httpClient(url,data,borrowGuarantor,selectedDb).then(e=>this.setState({borrowGuarantor:e}));
+        this.props.httpClient(url,data,borrowGuarantor,selectedDb)
+            .then(e=>this.setState({borrowGuarantor:e}))
+            .then(e=>this.props.setMainSidebarHeight($('.content-wrapper')[0].offsetHeight));
     },
     
     queryCorporatorMobile(wsData,event){
@@ -118,7 +140,25 @@ var Fdd = React.createClass({
         console.log(data);
         // var contentType = "application/json; charset=utf-8";
         var corporatorMobile = this.state.corporatorMobile;
-        this.props.httpClient(url,data,corporatorMobile,selectedDb).then(e=>this.setState({corporatorMobile:e}));
+        this.props.httpClient(url,data,corporatorMobile,selectedDb)
+            .then(e=>this.setState({corporatorMobile:e}))
+            .then(e=>this.props.setMainSidebarHeight($('.content-wrapper')[0].offsetHeight));
+    },
+    queryCreditorInfo(wsData,event){
+        event.preventDefault(); // 阻止表单提交
+        var borrowId = $("#borrowId_creditorInfo").val();
+        var selectedDb = this.state.selectedDb;
+        var dbDesc = this.props.dbSource.find(item=>item.id===selectedDb).description;
+        var url = server.redqueen + "/fdd/"+dbDesc+"/queryCreditorInfo";
+        var data = JSON.stringify({data:{borrowId:borrowId}});
+        console.log(data);
+        // var contentType = "application/json; charset=utf-8";
+        var creditorInfo = this.state.creditorInfo;
+        console.log($('.content-wrapper')[0].offsetHeight);
+        this.props.httpClient(url,data,creditorInfo,selectedDb)
+            .then(e=>this.setState({creditorInfo:e}))
+            .then(e=>this.props.setMainSidebarHeight($('.content-wrapper')[0].offsetHeight));
+
     },
 
     render() {
@@ -130,6 +170,7 @@ var Fdd = React.createClass({
         var signatoryMessage = this.state.signatoryMessage;
         var borrowGuarantor = this.state.borrowGuarantor;
         var corporatorMobile = this.state.corporatorMobile;
+        var creditorInfo = this.state.creditorInfo;
         // console.log(JSON.stringify(signatoryMessage,null,4));
         return <div>
                 <form className="wsform">
@@ -159,6 +200,11 @@ var Fdd = React.createClass({
                     data={corporatorMobile}
                     changeData={this.changeData_cm}
                     queryFunc={this.queryCorporatorMobile}
+                />
+                <Form
+                    data={creditorInfo}
+                    changeData={this.changeData_ci}
+                    queryFunc={this.queryCreditorInfo}
                 />
             </div>;
     }
