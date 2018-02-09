@@ -60,7 +60,7 @@ var Fdd = React.createClass({
                 title:[],
                 bttButton:0, // 0 按钮文字：隐藏，1 按钮文字：显示
                 inputText:[{id:"borrowId_creditorInfo",placeholder:"请填写标的编号",width:"200px"}],
-                buttonText:"查询标债权信息",
+                buttonText:"查询债权信息",
                 buttonWidth:"170px",
                 dbName:""
             }
@@ -154,7 +154,6 @@ var Fdd = React.createClass({
         console.log(data);
         // var contentType = "application/json; charset=utf-8";
         var creditorInfo = this.state.creditorInfo;
-        console.log($('.content-wrapper')[0].offsetHeight);
         this.props.httpClient(url,data,creditorInfo,selectedDb)
             .then(e=>this.setState({creditorInfo:e}))
             .then(e=>this.props.setMainSidebarHeight($('.content-wrapper')[0].offsetHeight));

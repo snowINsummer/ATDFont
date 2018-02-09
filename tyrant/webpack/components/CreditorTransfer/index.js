@@ -110,7 +110,7 @@ var CreditorTransfer = React.createClass({
     getBorrowTenderTransferable(wsData,event){
         event.preventDefault(); // 阻止表单提交
         var mobileNum = $("#mobile_btt").val();
-        var schemeId = $("#schemeId").val();
+        var schemeId = $("#schemeId_btt").val();
         var selectedScheme = this.state.selectedScheme;
         if (selectedScheme === -1){
             alert("请选择理财产品");
@@ -133,7 +133,7 @@ var CreditorTransfer = React.createClass({
     // 查询责权转让申请
     getTradeRequest(wsData,event){
         event.preventDefault(); // 阻止表单提交
-        var tenderId = $("#tenderId").val();
+        var tenderId = $("#tenderId_tr").val();
         var selectedDb = this.state.selectedDb;
         var dbDesc = this.props.dbSource.find(item=>item.id===selectedDb).description;
         var url = server.redqueen + "/creditorTransfer/"+dbDesc+"/queryTradeRequest";
