@@ -40,6 +40,19 @@ var CreditorMatching = React.createClass({
                 buttonText:"查询责权转让记录",
                 buttonWidth:"190px",
                 dbName:""
+            },
+            // 查询用户资金账户日志
+            accountLog:{
+                selectedDb:0,
+                flag:false,
+                tableInfo:"XXD_ACCOUNT_LOG '用户资金账户日志'",
+                data:[],
+                title:[],
+                bttButton:0, // 0 按钮文字：隐藏，1 按钮文字：显示
+                inputText:[{id:"requestId_al",placeholder:"requestId（必填）"}],
+                buttonText:"查询用户资金账户日志",
+                buttonWidth:"190px",
+                dbName:""
             }
         };
     },
@@ -69,6 +82,12 @@ var CreditorMatching = React.createClass({
             tradePack:data
         });
     },
+    changeData_al(data){
+        data = this.props.changeText(data);
+        this.setState({
+            accountLog:data
+        });
+    },
 
     // 查询责权转让申请
     queryTradeRequest(wsData,event){
@@ -81,7 +100,9 @@ var CreditorMatching = React.createClass({
         console.log(data);
         var contentType = "application/json; charset=utf-8";
         var tradeRequest = this.state.tradeRequest;
-        this.props.httpClient(url,data,tradeRequest,selectedDb).then(e=>this.setState({tradeRequest:e}));
+        this.props.httpClient(url,data,tradeRequest,selectedDb)
+                    .then(e=>this.setState({tradeRequest:e}))
+                    .then(e=>this.props.setMainSidebarHeight($('.content-wrapper')[0].offsetHeight));
     },
     // 查询责权转让记录
     queryTradePack(wsData,event){
@@ -94,7 +115,24 @@ var CreditorMatching = React.createClass({
         console.log(data);
         var contentType = "application/json; charset=utf-8";
         var tradePack = this.state.tradePack;
-        this.props.httpClient(url,data,tradePack,selectedDb).then(e=>this.setState({tradePack:e}));
+        this.props.httpClient(url,data,tradePack,selectedDb)
+                    .then(e=>this.setState({tradePack:e}))
+                    .then(e=>this.props.setMainSidebarHeight($('.content-wrapper')[0].offsetHeight));
+    },
+    // 查询责权转让记录
+    queryAccountLog(wsData,event){
+        event.preventDefault(); // 阻止表单提交
+        var requestId = $("#requestId_al").val();
+        var selectedDb = this.state.selectedDb;
+        var dbDesc = this.props.dbSource.find(item=>item.id===selectedDb).description;
+        var url = server.redqueen + "/creditorMatching/"+dbDesc+"/queryAccountLog";
+        var data = JSON.stringify({data:{requestId:requestId}});
+        console.log(data);
+        var contentType = "application/json; charset=utf-8";
+        var accountLog = this.state.accountLog;
+        this.props.httpClient(url,data,accountLog,selectedDb)
+                    .then(e=>this.setState({accountLog:e}))
+                    .then(e=>this.props.setMainSidebarHeight($('.content-wrapper')[0].offsetHeight));
     },
 
     render() {
@@ -105,6 +143,7 @@ var CreditorMatching = React.createClass({
         
         var tradeRequest = this.state.tradeRequest;
         var tradePack = this.state.tradePack;
+        var accountLog = this.state.accountLog;
         // console.log(tradeRequest);
 
         return <div>
@@ -133,15 +172,29 @@ var CreditorMatching = React.createClass({
                     queryFunc={this.queryTradeRequest}
                 />
                 <div className="checkpionttitle">
-                    <span>检查点（1）：XXD_TRADE_PACK 新增一条记录</span>
+                    <span>检查点（3）：XXD_TRADE_PACK 新增一条记录</span>
                 </div>
                 <div className="checkpionttitle">
-                    <span>检查点（2）：XXD_BORROW_TENDER.curuserid（当前持有用户） = XXD_TRADE_PACK.userid（买入用户）</span>
+                    <span>检查点（4）：XXD_BORROW_TENDER.curuserid（当前持有用户） = XXD_TRADE_PACK.userid（买入用户）</span>
                 </div>
                 <Form
                     data={tradePack}
                     changeData={this.changeData_tp}
                     queryFunc={this.queryTradePack}
+                />
+                <div className="checkpionttitle">
+                    <span>检查点（5）：XXD_ACCOUNT_LOG.BUSIID = XXD_TRADE_REQUEST.REQUESTID，只能查出2条记录</span>
+                </div>
+                <div className="checkpionttitle">
+                    <span>检查点（6）：XXD_ACCOUNT_LOG.workmoney（买方变动金额）= 债权金额（XXD_TRADE_REQUEST.amount）</span>
+                </div>
+                <div className="checkpionttitle">
+                    <span>检查点（7）：XXD_ACCOUNT_LOG.workmoney（卖方变动金额）= 债权金额（XXD_TRADE_REQUEST.amount）</span>
+                </div>
+                <Form
+                    data={accountLog}
+                    changeData={this.changeData_al}
+                    queryFunc={this.queryAccountLog}
                 />
             </div>;
     }
