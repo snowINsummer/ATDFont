@@ -27,7 +27,6 @@ var Form = React.createClass({
         var inputText = data.inputText;
         var buttonText = data.buttonText;
         var buttonWidth = data.buttonWidth;
-        // var queryData = data.queryData;
     	// console.log(data);
     	return <form className="wsform" onSubmit={this.queryFunc.bind(this,wsData)}>
                     <div className="row" style={{fontWeight:'bold',textAlign:'left',marginTop:'15px'}}>

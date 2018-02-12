@@ -76,7 +76,7 @@ var CreditorMatching = React.createClass({
         var tenderId = $("#tenderId_tm").val();
         var selectedDb = this.state.selectedDb;
         var dbDesc = this.props.dbSource.find(item=>item.id===selectedDb).description;
-        var url = server.redqueen + "/creditorTransfer/"+dbDesc+"/queryTradeRequest";
+        var url = server.redqueen + "/creditorMatching/"+dbDesc+"/queryTradeRequest";
         var data = JSON.stringify({data:{tenderId:tenderId}});
         console.log(data);
         var contentType = "application/json; charset=utf-8";
@@ -122,7 +122,10 @@ var CreditorMatching = React.createClass({
             </form>
             <hr style={{height:'2px',border:'none',borderTop:'2px dotted green',marginTop: '10px'}}></hr>
                 <div className="checkpionttitle">
-                    <span>检查点：XXD_TRADE_REQUEST.status = 2（匹配成功）</span>
+                    <span>检查点(1)：XXD_BORROW_TENDER.COLLECTAMOUNT（待收总额）- XXD_BORROW_TENDER.COLLECTINTEREST（待收利息）= XXD_TRADE_REQUEST.amount（债权金额）</span>
+                </div>
+                <div className="checkpionttitle">
+                    <span>检查点(2)：XXD_TRADE_REQUEST.status = 2（匹配成功）</span>
                 </div>
                 <Form
                     data={tradeRequest}
