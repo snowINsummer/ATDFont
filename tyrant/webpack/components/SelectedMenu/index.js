@@ -7,6 +7,7 @@ import WriteWSTestcase from 'WriteWSTestcase';
 import BorrowTender from 'BorrowTender';
 import CreditorTransfer from 'CreditorTransfer';
 import CreditorMatching from 'CreditorMatching';
+import CreditorExit from 'CreditorExit';
 import Fdd from 'Fdd';
 // import './index.css';
 
@@ -137,13 +138,17 @@ var SelectedMenu = React.createClass({
 		                        		?
 		                        			<CreditorMatching {...props}/>
 		                        		:
-				                        	selectedMenu.id===5
-				                        	?
-				                        		<Fdd {...props}/>
-		                        			:
-				                        		<div>
-				                        			test
-				                        		</div>
+			                        		selectedMenu.id===4
+			                        		?
+			                        			<CreditorExit {...props}/>
+			                        		:
+					                        	selectedMenu.id===5
+					                        	?
+					                        		<Fdd {...props}/>
+			                        			:
+					                        		<div>
+					                        			test
+					                        		</div>
 				    	}
 		    		</section>
 				</div>;
