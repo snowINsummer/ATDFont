@@ -130,19 +130,19 @@ var SelectedMenu = React.createClass({
 	                        	?
 	                        		<iframe src="http://192.168.33.47:8080/font/tyrant/dist/wsReport.html" onLoad={this.iFrameHeight} style={{width:'100%',borderWidth:'0px'}} scrolling="no"/>
 	                        	:
-	                        		selectedMenu.id===2
+	                        		selectedMenu.id===201
 	                        		?
 	                        			<CreditorTransfer {...props}/>
 	                        		:
-		                        		selectedMenu.id===3
+		                        		selectedMenu.id===202
 		                        		?
 		                        			<CreditorMatching {...props}/>
 		                        		:
-			                        		selectedMenu.id===4
+			                        		selectedMenu.id===203
 			                        		?
 			                        			<CreditorExit {...props}/>
 			                        		:
-					                        	selectedMenu.id===5
+					                        	selectedMenu.id===204
 					                        	?
 					                        		<Fdd {...props}/>
 			                        			:

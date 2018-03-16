@@ -36,25 +36,36 @@ var Content = React.createClass({
     					}
     				]
     			},
-    			{
-    				id:2,
-    				name:"债权转让",
-					description:"债权转让"
-    			},
                 {
-                    id:3,
-                    name:"债权匹配",
-                    description:"债权匹配"
-                },
-                {
-                    id:4,
-                    name:"债权退出",
-                    description:"债权退出"
-                },
-                {
-                    id:5,
-                    name:"FDD业务测试",
-                    description:"法大大业务测试相关sql"
+                    id:2,
+                    name:"SQL查询",
+                    icon:"fa fa-database",
+                    list:[
+                        {
+                            id:201,
+                            name:"债权转让",
+                            icon:"fa fa-retweet",
+                            description:"债权转让业务测试相关sql"
+                        },
+                        {
+                            id:202,
+                            name:"债权匹配",
+                            icon:"fa fa-handshake-o",
+                            description:"债权匹配业务测试相关sql"
+                        },
+                        {
+                            id:203,
+                            name:"债权退出",
+                            icon:"fa fa-sign-out",
+                            description:"债权退出业务测试相关sql"
+                        },
+                        {
+                            id:204,
+                            name:"FDD业务测试",
+                            icon:"fa fa-money",
+                            description:"法大大业务测试相关sql"
+                        }
+                    ]
                 }
     		],
     		selectedMenu:""
