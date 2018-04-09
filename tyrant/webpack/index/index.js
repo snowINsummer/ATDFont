@@ -28,12 +28,12 @@ var Content = React.createClass({
     						icon:"fa fa-bar-chart",
     						description:"接口自动化测试报告"
     					},
-    					{
-    						id:102,
-    						name:"编写用例",
-    						icon:"fa fa-pencil",
-    						description:"接口自动化测试用例"
-    					}
+    					// {
+    					// 	id:102,
+    					// 	name:"编写用例",
+    					// 	icon:"fa fa-pencil",
+    					// 	description:"接口自动化测试用例"
+    					// }
     				]
     			},
                 {
@@ -64,7 +64,14 @@ var Content = React.createClass({
                             name:"FDD业务测试",
                             icon:"fa fa-money",
                             description:"法大大业务测试相关sql"
+                        },
+                        {
+                            id:205,
+                            name:"企业注册",
+                            icon:"fa fa-registered",
+                            description:"企业注册相关sql"
                         }
+
                     ]
                 }
     		],

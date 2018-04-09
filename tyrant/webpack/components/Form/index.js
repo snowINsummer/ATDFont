@@ -20,7 +20,12 @@ var Form = React.createClass({
     changeData(wsData,event){
       this.props.changeData(wsData,event);
     },
-    
+    submitForm(wsData,event){
+        var form = event.target.nextSibling;
+        console.log(form);
+        form.click();
+    },
+
     render() {
     	var wsData = {};
     	var data = this.props.data;
@@ -38,12 +43,13 @@ var Form = React.createClass({
                               )
                         }
                         <div className="col-lg-2" style={{width:buttonWidth}}>
-                            <input type="submit" className="large blue button" value={buttonText}>
-                            </input>
+                            <a onClick={this.submitForm.bind(this,wsData)} className="large blue button">{buttonText}</a>
+                            <input type="submit" style={{display:'none'}}/>
                         </div>
                         <div className="col-lg-1">
                             <a onClick={this.changeData.bind(this,data)} style={{width:'100px'}} className="large orange button">{data.bttButton===0?'隐藏结果':'显示结果'}</a>
                         </div>
+
                     </div>
                     <Table 
                         dbName={data.dbName}

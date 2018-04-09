@@ -9,6 +9,7 @@ import CreditorTransfer from 'CreditorTransfer';
 import CreditorMatching from 'CreditorMatching';
 import CreditorExit from 'CreditorExit';
 import Fdd from 'Fdd';
+import CompanyRegister from 'CompanyRegister';
 // import './index.css';
 
 var SelectedMenu = React.createClass({
@@ -116,6 +117,7 @@ var SelectedMenu = React.createClass({
 
 	   				<section className="content">
 				    	{
+
 				    		selectedMenu.id===102
 				    		?
 				    			<div>test</div>
@@ -126,6 +128,7 @@ var SelectedMenu = React.createClass({
 				    				/>
 				    				*/
 	                        :
+
 	                        	selectedMenu.id===101
 	                        	?
 	                        		<iframe src="http://192.168.33.47:8080/font/tyrant/dist/wsReport.html" onLoad={this.iFrameHeight} style={{width:'100%',borderWidth:'0px'}} scrolling="no"/>
@@ -146,9 +149,13 @@ var SelectedMenu = React.createClass({
 					                        	?
 					                        		<Fdd {...props}/>
 			                        			:
-					                        		<div>
-					                        			test
-					                        		</div>
+						                        	selectedMenu.id===205
+						                        	?
+						                        		<CompanyRegister {...props}/>
+				                        			:
+						                        		<div>
+						                        			test
+						                        		</div>
 				    	}
 		    		</section>
 				</div>;
