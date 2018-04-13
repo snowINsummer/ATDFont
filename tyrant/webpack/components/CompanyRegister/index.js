@@ -49,7 +49,7 @@ var CompanyRegister = React.createClass({
         });
     },
 
-    setLoadingIconDisplay(flag){
+    setLoadingIconDisplay_aic(flag){
         var approInfoCenter = this.state.approInfoCenter;
         approInfoCenter.loadingIconDisplay = flag;
         this.setState({
@@ -59,10 +59,11 @@ var CompanyRegister = React.createClass({
 
     // 查询用户资金账户日志
     queryApproInfoCenter(wsData,event){
-        if (this.state.approInfoCenter.loadingIconDisplay === 1){
+        var approInfoCenter = this.state.approInfoCenter;
+        if (approInfoCenter.loadingIconDisplay === 1){
             return;
         }
-        this.setLoadingIconDisplay(1);
+        this.setLoadingIconDisplay_aic(1);
         event.preventDefault(); // 阻止表单提交
         var mobile = $("#moblie_aic").val();
         var selectedDb = this.state.selectedDb;
@@ -71,11 +72,10 @@ var CompanyRegister = React.createClass({
         var data = JSON.stringify({data:{mobile:mobile}});
         console.log(data);
         var contentType = "application/json; charset=utf-8";
-        var approInfoCenter = this.state.approInfoCenter;
         this.props.httpClient(url,data,approInfoCenter,selectedDb)
                             .then(e=>this.setState({approInfoCenter:e}))
                             .then(e=>this.props.setMainSidebarHeight($('.content-wrapper')[0].offsetHeight))
-                            .then(e=>this.setLoadingIconDisplay(0));
+                            .then(e=>this.setLoadingIconDisplay_aic(0));
     },
 
     render() {

@@ -26,7 +26,8 @@ var Fdd = React.createClass({
                 inputText:[{id:"mobile",placeholder:"请填写手机号",width:"200px"}],
                 buttonText:"查询签约短信",
                 buttonWidth:"170px",
-                dbName:""
+                dbName:"",
+                loadingIconDisplay:0
             },
             borrowGuarantor:{
                 selectedDb:0,
@@ -38,7 +39,8 @@ var Fdd = React.createClass({
                 inputText:[{id:"borrowId_guarantor",placeholder:"请填写标的编号",width:"200px"}],
                 buttonText:"查询标的担保人",
                 buttonWidth:"170px",
-                dbName:""
+                dbName:"",
+                loadingIconDisplay:0
             },
             corporatorMobile:{
                 selectedDb:0,
@@ -50,7 +52,8 @@ var Fdd = React.createClass({
                 inputText:[{id:"borrowId_corporator",placeholder:"请填写标的编号",width:"200px"}],
                 buttonText:"查询法人手机号",
                 buttonWidth:"170px",
-                dbName:""
+                dbName:"",
+                loadingIconDisplay:0
             },
             creditorInfo:{
                 selectedDb:0,
@@ -62,7 +65,8 @@ var Fdd = React.createClass({
                 inputText:[{id:"borrowId_creditorInfo",placeholder:"请填写标的编号",width:"200px"}],
                 buttonText:"查询债权信息",
                 buttonWidth:"170px",
-                dbName:""
+                dbName:"",
+                loadingIconDisplay:0
             }
         };
     },
@@ -98,7 +102,41 @@ var Fdd = React.createClass({
         });
     },
 
+    setLoadingIconDisplay_sm(flag){
+        var signatoryMessage = this.state.signatoryMessage;
+        signatoryMessage.loadingIconDisplay = flag;
+        this.setState({
+            signatoryMessage:signatoryMessage
+        });
+    },
+    setLoadingIconDisplay_bg(flag){
+        var borrowGuarantor = this.state.borrowGuarantor;
+        borrowGuarantor.loadingIconDisplay = flag;
+        this.setState({
+            borrowGuarantor:borrowGuarantor
+        });
+    },
+    setLoadingIconDisplay_cm(flag){
+        var corporatorMobile = this.state.corporatorMobile;
+        corporatorMobile.loadingIconDisplay = flag;
+        this.setState({
+            corporatorMobile:corporatorMobile
+        });
+    },
+    setLoadingIconDisplay_ci(flag){
+        var creditorInfo = this.state.creditorInfo;
+        creditorInfo.loadingIconDisplay = flag;
+        this.setState({
+            creditorInfo:creditorInfo
+        });
+    },
+
     getSignatoryMessage(wsData,event){
+        var signatoryMessage = this.state.signatoryMessage;
+        if (signatoryMessage.loadingIconDisplay === 1){
+            return;
+        }
+        this.setLoadingIconDisplay_sm(1);
         event.preventDefault(); // 阻止表单提交
         var mobileNum = $("#mobile").val();
         var selectedDb = this.state.selectedDb;
@@ -109,13 +147,17 @@ var Fdd = React.createClass({
         // console.log(JSON.stringify(data,null,4));
         console.log(data);
         // var contentType = "application/json; charset=utf-8";
-        var signatoryMessage = this.state.signatoryMessage;
         this.props.httpClient(url,data,signatoryMessage,selectedDb)
-            .then(e=>this.setState({signatoryMessage:e}))
-            .then(e=>this.props.setMainSidebarHeight($('.content-wrapper')[0].offsetHeight));
-
+                    .then(e=>this.setState({signatoryMessage:e}))
+                    .then(e=>this.props.setMainSidebarHeight($('.content-wrapper')[0].offsetHeight))
+                    .then(e=>this.setLoadingIconDisplay_sm(0));
     },
     queryBorrowGuarantor(wsData,event){
+        var borrowGuarantor = this.state.borrowGuarantor;
+        if (borrowGuarantor.loadingIconDisplay === 1){
+            return;
+        }
+        this.setLoadingIconDisplay_bg(1);
         event.preventDefault(); // 阻止表单提交
         var borrowId = $("#borrowId_guarantor").val();
         var selectedDb = this.state.selectedDb;
@@ -124,13 +166,18 @@ var Fdd = React.createClass({
         var data = JSON.stringify({data:{borrowId:borrowId}});
         console.log(data);
         // var contentType = "application/json; charset=utf-8";
-        var borrowGuarantor = this.state.borrowGuarantor;
         this.props.httpClient(url,data,borrowGuarantor,selectedDb)
-            .then(e=>this.setState({borrowGuarantor:e}))
-            .then(e=>this.props.setMainSidebarHeight($('.content-wrapper')[0].offsetHeight));
+                    .then(e=>this.setState({borrowGuarantor:e}))
+                    .then(e=>this.props.setMainSidebarHeight($('.content-wrapper')[0].offsetHeight))
+                    .then(e=>this.setLoadingIconDisplay_bg(0));
     },
     
     queryCorporatorMobile(wsData,event){
+        var corporatorMobile = this.state.corporatorMobile;
+        if (corporatorMobile.loadingIconDisplay === 1){
+            return;
+        }
+        this.setLoadingIconDisplay_cm(1);
         event.preventDefault(); // 阻止表单提交
         var borrowId = $("#borrowId_corporator").val();
         var selectedDb = this.state.selectedDb;
@@ -139,12 +186,17 @@ var Fdd = React.createClass({
         var data = JSON.stringify({data:{borrowId:borrowId}});
         console.log(data);
         // var contentType = "application/json; charset=utf-8";
-        var corporatorMobile = this.state.corporatorMobile;
         this.props.httpClient(url,data,corporatorMobile,selectedDb)
-            .then(e=>this.setState({corporatorMobile:e}))
-            .then(e=>this.props.setMainSidebarHeight($('.content-wrapper')[0].offsetHeight));
+                    .then(e=>this.setState({corporatorMobile:e}))
+                    .then(e=>this.props.setMainSidebarHeight($('.content-wrapper')[0].offsetHeight))
+                    .then(e=>this.setLoadingIconDisplay_cm(0));
     },
     queryCreditorInfo(wsData,event){
+        var creditorInfo = this.state.creditorInfo;
+        if (creditorInfo.loadingIconDisplay === 1){
+            return;
+        }
+        this.setLoadingIconDisplay_ci(1);
         event.preventDefault(); // 阻止表单提交
         var borrowId = $("#borrowId_creditorInfo").val();
         var selectedDb = this.state.selectedDb;
@@ -153,11 +205,10 @@ var Fdd = React.createClass({
         var data = JSON.stringify({data:{borrowId:borrowId}});
         console.log(data);
         // var contentType = "application/json; charset=utf-8";
-        var creditorInfo = this.state.creditorInfo;
         this.props.httpClient(url,data,creditorInfo,selectedDb)
-            .then(e=>this.setState({creditorInfo:e}))
-            .then(e=>this.props.setMainSidebarHeight($('.content-wrapper')[0].offsetHeight));
-
+                    .then(e=>this.setState({creditorInfo:e}))
+                    .then(e=>this.props.setMainSidebarHeight($('.content-wrapper')[0].offsetHeight))
+                    .then(e=>this.setLoadingIconDisplay_ci(0));
     },
 
     render() {
@@ -189,21 +240,25 @@ var Fdd = React.createClass({
                     data={signatoryMessage}
                     changeData={this.changeData_sm}
                     queryFunc={this.getSignatoryMessage}
+                    setLoadingIconDisplay={this.setLoadingIconDisplay_sm}
                 />
                 <Form
                     data={borrowGuarantor}
                     changeData={this.changeData_bg}
                     queryFunc={this.queryBorrowGuarantor}
+                    setLoadingIconDisplay={this.setLoadingIconDisplay_bg}
                 />
                 <Form
                     data={corporatorMobile}
                     changeData={this.changeData_cm}
                     queryFunc={this.queryCorporatorMobile}
+                    setLoadingIconDisplay={this.setLoadingIconDisplay_cm}
                 />
                 <Form
                     data={creditorInfo}
                     changeData={this.changeData_ci}
                     queryFunc={this.queryCreditorInfo}
+                    setLoadingIconDisplay={this.setLoadingIconDisplay_ci}
                 />
             </div>;
     }

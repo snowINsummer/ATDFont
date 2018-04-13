@@ -32,7 +32,8 @@ var CreditorTransfer = React.createClass({
                     ],
                 buttonText:"查询可转让债权",
                 buttonWidth:"180px",
-                dbName:""
+                dbName:"",
+                loadingIconDisplay:0
             },
 
             selectedScheme:-1,
@@ -70,7 +71,8 @@ var CreditorTransfer = React.createClass({
                 inputText:[{id:"tenderId_tr",placeholder:"tenderId（必填）"}],
                 buttonText:"查询责权转让申请",
                 buttonWidth:"190px",
-                dbName:""
+                dbName:"",
+                loadingIconDisplay:0
             }
         };
     },
@@ -106,16 +108,37 @@ var CreditorTransfer = React.createClass({
         });
     },
 
+    setLoadingIconDisplay_btt(flag){
+        var borrowTenderTransferable = this.state.borrowTenderTransferable;
+        borrowTenderTransferable.loadingIconDisplay = flag;
+        this.setState({
+            borrowTenderTransferable:borrowTenderTransferable
+        });
+    },
+    setLoadingIconDisplay_tr(flag){
+        var tradeRequest = this.state.tradeRequest;
+        tradeRequest.loadingIconDisplay = flag;
+        this.setState({
+            tradeRequest:tradeRequest
+        });
+    },
+
     // 查询可转让的债权
     getBorrowTenderTransferable(wsData,event){
+
         event.preventDefault(); // 阻止表单提交
-        var mobileNum = $("#mobile_btt").val();
-        var schemeId = $("#schemeId_btt").val();
         var selectedScheme = this.state.selectedScheme;
         if (selectedScheme === -1){
             alert("请选择理财产品");
             return;
         }
+        var borrowTenderTransferable = this.state.borrowTenderTransferable;
+        if (borrowTenderTransferable.loadingIconDisplay === 1){
+            return;
+        }
+        this.setLoadingIconDisplay_btt(1);
+        var mobileNum = $("#mobile_btt").val();
+        var schemeId = $("#schemeId_btt").val();
         var isOptimize = this.state.schemeList.find(item=>item.description===selectedScheme).id;
         var selectedDb = this.state.selectedDb;
         var dbDesc = this.props.dbSource.find(item=>item.id===selectedDb).description;
@@ -123,15 +146,19 @@ var CreditorTransfer = React.createClass({
         var data = JSON.stringify({data:{mobile:mobileNum,schemeId:schemeId,isOptimize:isOptimize}});
         console.log(data);
         // var contentType = "application/json; charset=utf-8";
-        var borrowTenderTransferable = this.state.borrowTenderTransferable;
         this.props.httpClient(url,data,borrowTenderTransferable,selectedDb)
-            .then(e=>this.setState({borrowTenderTransferable:e}))
-            .then(e=>this.props.setMainSidebarHeight($('.content-wrapper')[0].offsetHeight));
-
+                    .then(e=>this.setState({borrowTenderTransferable:e}))
+                    .then(e=>this.props.setMainSidebarHeight($('.content-wrapper')[0].offsetHeight))
+                    .then(e=>this.setLoadingIconDisplay_btt(0));
     },
 
     // 查询责权转让申请
     getTradeRequest(wsData,event){
+        var tradeRequest = this.state.tradeRequest;
+        if (tradeRequest.loadingIconDisplay === 1){
+            return;
+        }
+        this.setLoadingIconDisplay_tr(1);
         event.preventDefault(); // 阻止表单提交
         var tenderId = $("#tenderId_tr").val();
         var selectedDb = this.state.selectedDb;
@@ -140,10 +167,10 @@ var CreditorTransfer = React.createClass({
         var data = JSON.stringify({data:{tenderId:tenderId}});
         console.log(data);
         // var contentType = "application/json; charset=utf-8";
-        var tradeRequest = this.state.tradeRequest;
         this.props.httpClient(url,data,tradeRequest,selectedDb)
-            .then(e=>this.setState({tradeRequest:e}))
-            .then(e=>this.props.setMainSidebarHeight($('.content-wrapper')[0].offsetHeight));
+                    .then(e=>this.setState({tradeRequest:e}))
+                    .then(e=>this.props.setMainSidebarHeight($('.content-wrapper')[0].offsetHeight))
+                    .then(e=>this.setLoadingIconDisplay_tr(0));
     },
 
     render() {
@@ -162,33 +189,34 @@ var CreditorTransfer = React.createClass({
         // var trDbName = dbSource.find(item=>item.id===tradeRequest.selectedDb).description;
 
         return <div>
-            <form className="wsform">
-                <div className="row">
-                    <div className="col-lg-2" style={{width:'180px'}}>
-                        <span style={{backgroundColor:'#f0ad4e',fontSize:'x-large'}}>数据库环境：</span>
+                <form className="wsform">
+                    <div className="row">
+                        <div className="col-lg-2" style={{width:'180px'}}>
+                            <span style={{backgroundColor:'#f0ad4e',fontSize:'x-large'}}>数据库环境：</span>
+                        </div>
+                        <Select name={dbName}
+                            data={dbSource}
+                            changeValue={this.changeDbSource}
+                            classN="btn btn-warning"
+                        />
                     </div>
-                    <Select name={dbName}
-                        data={dbSource}
-                        changeValue={this.changeDbSource}
-                        classN="btn btn-warning"
+                </form>
+                <hr style={{height:'2px',border:'none',borderTop:'2px dotted green',marginTop: '10px'}}></hr>
+                <div>
+                    <span>1、查询可转让的债权：</span>
+                </div>
+                <div className="row">
+                    <Select name={selectedScheme}
+                        data={this.state.schemeList}
+                        changeValue={this.changeScheme}
+                        classN="btn btn-primary"
                     />
                 </div>
-            </form>
-            <hr style={{height:'2px',border:'none',borderTop:'2px dotted green',marginTop: '10px'}}></hr>
-            <div>
-                <span>1、查询可转让的债权：</span>
-            </div>
-            <div className="row">
-                <Select name={selectedScheme}
-                    data={this.state.schemeList}
-                    changeValue={this.changeScheme}
-                    classN="btn btn-primary"
-                />
-            </div>
                 <Form
                     data={borrowTenderTransferable}
                     changeData={this.changeData_btt}
                     queryFunc={this.getBorrowTenderTransferable}
+                    setLoadingIconDisplay={this.setLoadingIconDisplay_btt}
                 />
                 <form>
                     <div>
@@ -215,6 +243,7 @@ var CreditorTransfer = React.createClass({
                     data={tradeRequest}
                     changeData={this.changeData_tr}
                     queryFunc={this.getTradeRequest}
+                    setLoadingIconDisplay={this.setLoadingIconDisplay_tr}
                 />
 
             </div>;

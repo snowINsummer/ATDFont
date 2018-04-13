@@ -26,7 +26,8 @@ var CreditorMatching = React.createClass({
                 inputText:[{id:"tenderId_tm",placeholder:"tenderId（必填）"}],
                 buttonText:"查询责权转让申请",
                 buttonWidth:"190px",
-                dbName:""
+                dbName:"",
+                loadingIconDisplay:0
             },
             // 查询责权转让记录
             tradePack:{
@@ -39,7 +40,8 @@ var CreditorMatching = React.createClass({
                 inputText:[{id:"requestId_tp",placeholder:"requestId（必填）"}],
                 buttonText:"查询责权转让记录",
                 buttonWidth:"190px",
-                dbName:""
+                dbName:"",
+                loadingIconDisplay:0
             },
             // 查询用户资金账户日志
             accountLog:{
@@ -52,7 +54,8 @@ var CreditorMatching = React.createClass({
                 inputText:[{id:"requestId_al",placeholder:"requestId（必填）"}],
                 buttonText:"查询用户资金账户日志",
                 buttonWidth:"190px",
-                dbName:""
+                dbName:"",
+                loadingIconDisplay:0
             }
         };
     },
@@ -89,8 +92,35 @@ var CreditorMatching = React.createClass({
         });
     },
 
+    setLoadingIconDisplay_tr(flag){
+        var tradeRequest = this.state.tradeRequest;
+        tradeRequest.loadingIconDisplay = flag;
+        this.setState({
+            tradeRequest:tradeRequest
+        });
+    },
+    setLoadingIconDisplay_tp(flag){
+        var tradePack = this.state.tradePack;
+        tradePack.loadingIconDisplay = flag;
+        this.setState({
+            tradePack:tradePack
+        });
+    },
+    setLoadingIconDisplay_al(flag){
+        var accountLog = this.state.accountLog;
+        accountLog.loadingIconDisplay = flag;
+        this.setState({
+            accountLog:accountLog
+        });
+    },
+
     // 查询责权转让申请
     queryTradeRequest(wsData,event){
+        var tradeRequest = this.state.tradeRequest;
+        if (tradeRequest.loadingIconDisplay === 1){
+            return;
+        }
+        this.setLoadingIconDisplay_tr(1);
         event.preventDefault(); // 阻止表单提交
         var tenderId = $("#tenderId_tm").val();
         var selectedDb = this.state.selectedDb;
@@ -99,13 +129,18 @@ var CreditorMatching = React.createClass({
         var data = JSON.stringify({data:{tenderId:tenderId}});
         console.log(data);
         var contentType = "application/json; charset=utf-8";
-        var tradeRequest = this.state.tradeRequest;
         this.props.httpClient(url,data,tradeRequest,selectedDb)
                     .then(e=>this.setState({tradeRequest:e}))
-                    .then(e=>this.props.setMainSidebarHeight($('.content-wrapper')[0].offsetHeight));
+                    .then(e=>this.props.setMainSidebarHeight($('.content-wrapper')[0].offsetHeight))
+                    .then(e=>this.setLoadingIconDisplay_tr(0));
     },
     // 查询责权转让记录
     queryTradePack(wsData,event){
+        var tradePack = this.state.tradePack;
+        if (tradePack.loadingIconDisplay === 1){
+            return;
+        }
+        this.setLoadingIconDisplay_tr(1);
         event.preventDefault(); // 阻止表单提交
         var requestId = $("#requestId_tp").val();
         var selectedDb = this.state.selectedDb;
@@ -114,13 +149,18 @@ var CreditorMatching = React.createClass({
         var data = JSON.stringify({data:{requestId:requestId}});
         console.log(data);
         var contentType = "application/json; charset=utf-8";
-        var tradePack = this.state.tradePack;
         this.props.httpClient(url,data,tradePack,selectedDb)
                     .then(e=>this.setState({tradePack:e}))
-                    .then(e=>this.props.setMainSidebarHeight($('.content-wrapper')[0].offsetHeight));
+                    .then(e=>this.props.setMainSidebarHeight($('.content-wrapper')[0].offsetHeight))
+                    .then(e=>this.setLoadingIconDisplay_tp(0));
     },
     // 查询责权转让记录
     queryAccountLog(wsData,event){
+        var accountLog = this.state.accountLog;
+        if (accountLog.loadingIconDisplay === 1){
+            return;
+        }
+        this.setLoadingIconDisplay_tr(1);
         event.preventDefault(); // 阻止表单提交
         var requestId = $("#requestId_al").val();
         var selectedDb = this.state.selectedDb;
@@ -129,10 +169,10 @@ var CreditorMatching = React.createClass({
         var data = JSON.stringify({data:{requestId:requestId}});
         console.log(data);
         var contentType = "application/json; charset=utf-8";
-        var accountLog = this.state.accountLog;
         this.props.httpClient(url,data,accountLog,selectedDb)
                     .then(e=>this.setState({accountLog:e}))
-                    .then(e=>this.props.setMainSidebarHeight($('.content-wrapper')[0].offsetHeight));
+                    .then(e=>this.props.setMainSidebarHeight($('.content-wrapper')[0].offsetHeight))
+                    .then(e=>this.setLoadingIconDisplay_al(0));
     },
 
     render() {
@@ -170,6 +210,7 @@ var CreditorMatching = React.createClass({
                     data={tradeRequest}
                     changeData={this.changeData_tr}
                     queryFunc={this.queryTradeRequest}
+                    setLoadingIconDisplay={this.setLoadingIconDisplay_tr}
                 />
                 <div className="checkpionttitle">
                     <span>检查点（3）：XXD_TRADE_PACK 新增一条记录</span>
@@ -181,6 +222,7 @@ var CreditorMatching = React.createClass({
                     data={tradePack}
                     changeData={this.changeData_tp}
                     queryFunc={this.queryTradePack}
+                    setLoadingIconDisplay={this.setLoadingIconDisplay_tp}
                 />
                 <div className="checkpionttitle">
                     <span>检查点（5）：XXD_ACCOUNT_LOG.BUSIID = XXD_TRADE_REQUEST.REQUESTID，只能查出2条记录</span>
@@ -195,6 +237,7 @@ var CreditorMatching = React.createClass({
                     data={accountLog}
                     changeData={this.changeData_al}
                     queryFunc={this.queryAccountLog}
+                    setLoadingIconDisplay={this.setLoadingIconDisplay_al}
                 />
             </div>;
     }

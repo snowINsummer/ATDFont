@@ -29,8 +29,9 @@ var CreditorExit = React.createClass({
                             {id:"tenderId_ac",placeholder:"tenderId（必填）"}
                         ],
                 buttonText:"查询用户资金账户日志",
-                buttonWidth:"190px",
-                dbName:""
+                buttonWidth:"210px",
+                dbName:"",
+                loadingIconDisplay:0
             }
         };
     },
@@ -49,8 +50,20 @@ var CreditorExit = React.createClass({
         });
     },
 
+    setLoadingIconDisplay_ac(flag){
+        var accountLog = this.state.accountLog;
+        accountLog.loadingIconDisplay = flag;
+        this.setState({
+            accountLog:accountLog
+        });
+    },
+
     // 查询用户资金账户日志
     queryAccountLog(wsData,event){
+        if (this.state.accountLog.loadingIconDisplay === 1){
+            return;
+        }
+        this.setLoadingIconDisplay_ac(1);
         event.preventDefault(); // 阻止表单提交
         var schemeId = $("#schemeId_ac").val();
         var salerMobile = $("#salerMobile_ac").val();
@@ -64,7 +77,8 @@ var CreditorExit = React.createClass({
         var accountLog = this.state.accountLog;
         this.props.httpClient(url,data,accountLog,selectedDb)
                             .then(e=>this.setState({accountLog:e}))
-                            .then(e=>this.props.setMainSidebarHeight($('.content-wrapper')[0].offsetHeight));
+                            .then(e=>this.props.setMainSidebarHeight($('.content-wrapper')[0].offsetHeight))
+                            .then(e=>this.setLoadingIconDisplay_ac(0));
     },
 
     render() {
@@ -101,6 +115,7 @@ var CreditorExit = React.createClass({
                     data={accountLog}
                     changeData={this.changeData_ac}
                     queryFunc={this.queryAccountLog}
+                    setLoadingIconDisplay={this.setLoadingIconDisplay_ac}
                 />
 
             </div>;
