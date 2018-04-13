@@ -45,10 +45,13 @@ var SelectedMenu = React.createClass({
         var iframe = event.target;
         var contentWrapper = event.target.parentNode.parentNode.parentNode;
         // var subWeb = document.frames ? document.frames["iframe"].document :
-        				// iframe.contentDocument;
+		// iframe.contentDocument;
 		// console.log(subWeb);
 	    if(iframe != null) {
-	        iframe.style.height = contentWrapper.offsetHeight + "px";
+            var height = contentWrapper.offsetHeight;
+            iframe.style.height = height + "px";
+            height = contentWrapper.offsetHeight;
+            this.props.setMainSidebarHeight(height);
 	    }
 	},
 
@@ -64,6 +67,7 @@ var SelectedMenu = React.createClass({
             url:url, 
             success:data=>{
                 console.log(data);
+                // returnData.loadingIconDisplay = 0;
                 returnData.selectedDb = selectedDb;
                 returnData.dbName = this.state.dbSource.find(item=>item.id===returnData.selectedDb).description;
                 returnData.flag = true;
@@ -100,6 +104,7 @@ var SelectedMenu = React.createClass({
         props.changeText = this.changeText;
         props.httpClient = this.httpClient;
         props.setMainSidebarHeight = this.props.setMainSidebarHeight;
+        // props.iFrameHeight = this.props.iFrameHeight;
     	var selectedMenu = this.props.selectedMenu;
     	// console.log(ws);
     	return <div>

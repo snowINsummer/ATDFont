@@ -8,6 +8,26 @@ import SelectedMenu from 'SelectedMenu';
 
 var ContentWrapper = React.createClass({
 
+    componentDidMount(){
+        var contentWrapper = this.refs['contentWrapper'];
+        this.setState({
+            contentWrapperHeight:contentWrapper.offsetHeight
+        });
+    },
+
+    componentDidUpdate(prevProps, prevState){
+        var contentWrapper = this.refs['contentWrapper'];
+        if (prevState != null && prevState.contentWrapperHeight === contentWrapper.offsetHeight){
+            return false;
+        }
+        this.setState({
+            contentWrapperHeight:contentWrapper.offsetHeight
+        });
+        if (prevState != null){
+            this.props.setMainSidebarHeight(contentWrapper.offsetHeight);
+        }
+    },
+
 	iFrameHeight(){
         var iframe = this.refs['iframe'];
         var contentWrapper = this.refs['contentWrapper'];

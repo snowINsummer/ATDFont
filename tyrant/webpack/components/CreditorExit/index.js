@@ -62,7 +62,9 @@ var CreditorExit = React.createClass({
         console.log(data);
         var contentType = "application/json; charset=utf-8";
         var accountLog = this.state.accountLog;
-        this.props.httpClient(url,data,accountLog,selectedDb).then(e=>this.setState({accountLog:e}));
+        this.props.httpClient(url,data,accountLog,selectedDb)
+                            .then(e=>this.setState({accountLog:e}))
+                            .then(e=>this.props.setMainSidebarHeight($('.content-wrapper')[0].offsetHeight));
     },
 
     render() {
