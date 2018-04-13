@@ -24,14 +24,16 @@ var CompanyRegister = React.createClass({
                 title:[],
                 bttButton:0, // 0 按钮文字：隐藏，1 按钮文字：显示
                 inputText:[
-                            {id:"moblie_aic",placeholder:"请填写手机号"}
+                            {id:"moblie_aic",placeholder:"请填写登录账号"}
                         ],
                 buttonText:"查询企业认证结果",
                 buttonWidth:"190px",
-                dbName:""
+                dbName:"",
+                loadingIconDisplay:0
             }
         };
     },
+
     // 切换数据源
     changeDbSource(value){
         var dbSourceId = this.props.dbSource.find(item=>item.description===value).id;
@@ -47,8 +49,20 @@ var CompanyRegister = React.createClass({
         });
     },
 
+    setLoadingIconDisplay(flag){
+        var approInfoCenter = this.state.approInfoCenter;
+        approInfoCenter.loadingIconDisplay = flag;
+        this.setState({
+            approInfoCenter:approInfoCenter
+        });
+    },
+
     // 查询用户资金账户日志
     queryApproInfoCenter(wsData,event){
+        if (this.state.approInfoCenter.loadingIconDisplay === 1){
+            return;
+        }
+        this.setLoadingIconDisplay(1);
         event.preventDefault(); // 阻止表单提交
         var mobile = $("#moblie_aic").val();
         var selectedDb = this.state.selectedDb;
@@ -58,7 +72,10 @@ var CompanyRegister = React.createClass({
         console.log(data);
         var contentType = "application/json; charset=utf-8";
         var approInfoCenter = this.state.approInfoCenter;
-        this.props.httpClient(url,data,approInfoCenter,selectedDb).then(e=>this.setState({approInfoCenter:e}));
+        this.props.httpClient(url,data,approInfoCenter,selectedDb)
+                            .then(e=>this.setState({approInfoCenter:e}))
+                            .then(e=>this.props.setMainSidebarHeight($('.content-wrapper')[0].offsetHeight))
+                            .then(e=>this.setLoadingIconDisplay(0));
     },
 
     render() {
@@ -86,6 +103,7 @@ var CompanyRegister = React.createClass({
                     data={approInfoCenter}
                     changeData={this.changeData_aic}
                     queryFunc={this.queryApproInfoCenter}
+                    setLoadingIconDisplay={this.setLoadingIconDisplay}
                 />
 
             </div>;

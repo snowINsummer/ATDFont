@@ -27,7 +27,7 @@ var Select = React.createClass({
                           <ul className="dropdown-menu">
                               {
                                 data.map(o=>
-                                    <li key={o.id} onClick={this.changeValue.bind(this,wsData)}><a style={{fontWeight:'bold'}}>{o.description}</a></li>
+                                    <li key={o.id} onClick={this.changeValue.bind(this,wsData)}><a style={{fontWeight:'bold',cursor:'pointer'}}>{o.description}</a></li>
                                 )
                               }
                           </ul>
