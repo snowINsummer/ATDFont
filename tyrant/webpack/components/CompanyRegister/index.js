@@ -30,6 +30,24 @@ var CompanyRegister = React.createClass({
                 buttonWidth:"190px",
                 dbName:"",
                 loadingIconDisplay:0
+            },
+
+            // 查询企业风控审贷信息
+            fkComtomerInfo:{
+                selectedDb:0,
+                flag:false,
+                tableInfo:"CUSTOMER_INFO、V6CUSTOMERAPPLY '风控 客户标的相关信息",
+                data:[],
+                title:[],
+                bttButton:0, // 0 按钮文字：隐藏，1 按钮文字：显示
+                inputText:[
+                            {id:"userName_fkci",placeholder:"请填写登录账号"},
+                            {id:"borrowId_fkci",placeholder:"请填写标的编号"}
+                        ],
+                buttonText:"查询风控审贷信息",
+                buttonWidth:"190px",
+                dbName:"",
+                loadingIconDisplay:0
             }
         };
     },
@@ -48,12 +66,25 @@ var CompanyRegister = React.createClass({
             approInfoCenter:data
         });
     },
+    changeData_fkci(data){
+        data = this.props.changeText(data);
+        this.setState({
+            fkComtomerInfo:data
+        });
+    },
 
     setLoadingIconDisplay_aic(flag){
         var approInfoCenter = this.state.approInfoCenter;
         approInfoCenter.loadingIconDisplay = flag;
         this.setState({
             approInfoCenter:approInfoCenter
+        });
+    },
+    setLoadingIconDisplay_fkci(flag){
+        var fkComtomerInfo = this.state.fkComtomerInfo;
+        fkComtomerInfo.loadingIconDisplay = flag;
+        this.setState({
+            fkComtomerInfo:fkComtomerInfo
         });
     },
 
@@ -77,6 +108,27 @@ var CompanyRegister = React.createClass({
                             .then(e=>this.props.setMainSidebarHeight($('.content-wrapper')[0].offsetHeight))
                             .then(e=>this.setLoadingIconDisplay_aic(0));
     },
+    // 查询风控审贷信息
+    queryFkComtomerInfo(wsData,event){
+        var fkComtomerInfo = this.state.fkComtomerInfo;
+        if (fkComtomerInfo.loadingIconDisplay === 1){
+            return;
+        }
+        this.setLoadingIconDisplay_fkci(1);
+        event.preventDefault(); // 阻止表单提交
+        var userName = $("#userName_fkci").val();
+        var borrowId = $("#borrowId_fkci").val();
+        var selectedDb = this.state.selectedDb;
+        var dbDesc = this.props.dbSource.find(item=>item.id===selectedDb).description;
+        var url = server.redqueen + "/companyRegister/"+dbDesc+"/queryFkComtomerInfo";
+        var data = JSON.stringify({data:{userName:userName,borrowId:borrowId}});
+        console.log(data);
+        var contentType = "application/json; charset=utf-8";
+        this.props.httpClient(url,data,fkComtomerInfo,selectedDb)
+                            .then(e=>this.setState({fkComtomerInfo:e}))
+                            .then(e=>this.props.setMainSidebarHeight($('.content-wrapper')[0].offsetHeight))
+                            .then(e=>this.setLoadingIconDisplay_fkci(0));
+    },
 
     render() {
         var wsData = {};
@@ -85,6 +137,7 @@ var CompanyRegister = React.createClass({
         var dbName = dbSource.find(item=>item.id===selectedDb).description;
 
         var approInfoCenter = this.state.approInfoCenter;
+        var fkComtomerInfo = this.state.fkComtomerInfo;
         return <div>
             <form className="wsform">
                 <div className="row">
@@ -103,9 +156,12 @@ var CompanyRegister = React.createClass({
                     data={approInfoCenter}
                     changeData={this.changeData_aic}
                     queryFunc={this.queryApproInfoCenter}
-                    setLoadingIconDisplay={this.setLoadingIconDisplay}
                 />
-
+                <Form
+                    data={fkComtomerInfo}
+                    changeData={this.changeData_fkci}
+                    queryFunc={this.queryFkComtomerInfo}
+                />
             </div>;
     }
 

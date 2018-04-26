@@ -91,9 +91,9 @@ var SelectedMenu = React.createClass({
                 }
                 def.resolve(returnData);
             },
-            error:function(e){
+            error:e=>{
                 alert(JSON.stringify(e.responseJSON,null,4));
-            }.bind(this)
+            }
         });
         return def.promise();
     },
