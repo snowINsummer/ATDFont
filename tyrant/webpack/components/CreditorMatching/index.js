@@ -23,7 +23,7 @@ var CreditorMatching = React.createClass({
                 data:[],
                 title:[],
                 bttButton:0, // 0 按钮文字：隐藏，1 按钮文字：显示
-                inputText:[{id:"tenderId_tm",placeholder:"tenderId（必填）"}],
+                inputText:[{id:"tenderId_tm",placeholder:"tenderId（必填）",isNotBlank:true}],
                 buttonText:"查询责权转让申请",
                 buttonWidth:"190px",
                 dbName:"",
@@ -37,7 +37,7 @@ var CreditorMatching = React.createClass({
                 data:[],
                 title:[],
                 bttButton:0, // 0 按钮文字：隐藏，1 按钮文字：显示
-                inputText:[{id:"requestId_tp",placeholder:"requestId（必填）"}],
+                inputText:[{id:"requestId_tp",placeholder:"requestId（必填）",isNotBlank:true}],
                 buttonText:"查询责权转让记录",
                 buttonWidth:"190px",
                 dbName:"",
@@ -51,7 +51,7 @@ var CreditorMatching = React.createClass({
                 data:[],
                 title:[],
                 bttButton:0, // 0 按钮文字：隐藏，1 按钮文字：显示
-                inputText:[{id:"requestId_al",placeholder:"requestId（必填）"}],
+                inputText:[{id:"requestId_al",placeholder:"requestId（必填）",isNotBlank:true}],
                 buttonText:"查询用户资金账户日志",
                 buttonWidth:"210px",
                 dbName:"",

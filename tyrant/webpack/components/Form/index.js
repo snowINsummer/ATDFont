@@ -4,7 +4,7 @@
 
 import React from 'react';
 import Table from 'Table';
-// import './index.css';
+import './index.css';
 
 var Form = React.createClass({
 
@@ -38,16 +38,28 @@ var Form = React.createClass({
                     <div className="row" style={{fontWeight:'bold',textAlign:'left',marginTop:'15px'}}>
                         {
                             inputText.map(o=>
-                                <div key={o.id} className="col-lg-2" style={{width:o.width}}>
-                                    <input id={o.id} type="text" className="form-control" placeholder={o.placeholder} defaultValue=""/>
+                                <div key={o.id}>
+                                    <div className="col-lg-2" style={{width:o.width}}>
+                                        <input id={o.id} type="text" className="form-control" placeholder={o.placeholder} defaultValue=""/>
+                                    </div>
+                                    {
+                                        o.isNotBlank===true
+                                            ?
+                                            <div className="col-lg-1 myStar">
+                                                <span>*</span>
+                                            </div>
+                                            :
+                                            <div />
+                                    }
                                 </div>
+
                               )
                         }
                         <div className="col-lg-2" style={{width:buttonWidth}}>
                             <a onClick={this.submitForm.bind(this,wsData)} className="large blue button">{buttonText}</a>
                             <input type="submit" style={{display:'none'}}/>
                         </div>
-                            <i className="fa fa-spinner fa-pulse fa-fw" style={{width:'74px',marginTop:'5px',fontSize:'20px',display:loadingIconDisplay===1?'inline-block':'none'}}></i>
+                        <i className="fa fa-spinner fa-pulse fa-fw" style={{width:'74px',marginTop:'5px',fontSize:'20px',display:loadingIconDisplay===1?'inline-block':'none'}}></i>
                         <div className="col-lg-1">
                             <a onClick={this.changeData.bind(this,data)} style={{width:'100px'}} className="large orange button">{data.bttButton===0?'隐藏结果':'显示结果'}</a>
                         </div>

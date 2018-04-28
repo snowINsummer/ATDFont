@@ -68,7 +68,7 @@ var CreditorTransfer = React.createClass({
                 data:[],
                 title:[],
                 bttButton:0, // 0 按钮文字：隐藏，1 按钮文字：显示
-                inputText:[{id:"tenderId_tr",placeholder:"tenderId（必填）"}],
+                inputText:[{id:"tenderId_tr",placeholder:"tenderId（必填）",isNotBlank:true}],
                 buttonText:"查询责权转让申请",
                 buttonWidth:"190px",
                 dbName:"",

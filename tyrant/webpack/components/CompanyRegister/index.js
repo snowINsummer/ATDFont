@@ -24,7 +24,7 @@ var CompanyRegister = React.createClass({
                 title:[],
                 bttButton:0, // 0 按钮文字：隐藏，1 按钮文字：显示
                 inputText:[
-                            {id:"moblie_aic",placeholder:"请填写登录账号"}
+                            {id:"moblie_aic",placeholder:"请填写登录账号",isNotBlank:true}
                         ],
                 buttonText:"查询企业认证结果",
                 buttonWidth:"190px",

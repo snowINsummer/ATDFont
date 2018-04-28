@@ -60,21 +60,27 @@ var CreditorExit = React.createClass({
 
     // 查询用户资金账户日志
     queryAccountLog(wsData,event){
-        if (this.state.accountLog.loadingIconDisplay === 1){
+        var accountLog = this.state.accountLog;
+        if (accountLog.loadingIconDisplay === 1){
             return;
         }
-        this.setLoadingIconDisplay_ac(1);
         event.preventDefault(); // 阻止表单提交
         var schemeId = $("#schemeId_ac").val();
         var salerMobile = $("#salerMobile_ac").val();
         var tenderId = $("#tenderId_ac").val();
+        if (schemeId === "" && salerMobile === "" && tenderId === ""){
+            alert(accountLog.inputText.find(item=>item.id==="schemeId_ac").placeholder + " OR " +
+                accountLog.inputText.find(item=>item.id==="salerMobile_ac").placeholder + " OR " +
+                accountLog.inputText.find(item=>item.id==="tenderId_ac").placeholder);
+            return;
+        }
+        this.setLoadingIconDisplay_ac(1);
         var selectedDb = this.state.selectedDb;
         var dbDesc = this.props.dbSource.find(item=>item.id===selectedDb).description;
         var url = server.redqueen + "/creditorExit/"+dbDesc+"/queryAccountLog";
         var data = JSON.stringify({data:{schemeId:schemeId,salerMobile:salerMobile,tenderId:tenderId}});
         console.log(data);
         var contentType = "application/json; charset=utf-8";
-        var accountLog = this.state.accountLog;
         this.props.httpClient(url,data,accountLog,selectedDb)
                             .then(e=>this.setState({accountLog:e}))
                             .then(e=>this.props.setMainSidebarHeight($('.content-wrapper')[0].offsetHeight))
