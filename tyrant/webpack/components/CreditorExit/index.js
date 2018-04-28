@@ -24,9 +24,9 @@ var CreditorExit = React.createClass({
                 title:[],
                 bttButton:0, // 0 按钮文字：隐藏，1 按钮文字：显示
                 inputText:[
-                            {id:"schemeId_ac",placeholder:"schemeId（必填）"},
-                            {id:"salerMobile_ac",placeholder:"salerMobile（必填）"},
-                            {id:"tenderId_ac",placeholder:"tenderId（必填）"}
+                            {id:"schemeId_ac",placeholder:"请填写schemeId"},
+                            {id:"salerMobile_ac",placeholder:"请填写salerMobile"},
+                            {id:"tenderId_ac",placeholder:"请填写tenderId"}
                         ],
                 buttonText:"查询用户资金账户日志",
                 buttonWidth:"210px",
@@ -78,7 +78,9 @@ var CreditorExit = React.createClass({
         this.props.httpClient(url,data,accountLog,selectedDb)
                             .then(e=>this.setState({accountLog:e}))
                             .then(e=>this.props.setMainSidebarHeight($('.content-wrapper')[0].offsetHeight))
-                            .then(e=>this.setLoadingIconDisplay_ac(0));
+                            .then(e=>this.setLoadingIconDisplay_ac(0))
+                            .fail(e=>this.setLoadingIconDisplay_ac(0))
+                            ;
     },
 
     render() {

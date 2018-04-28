@@ -60,6 +60,7 @@ var SelectedMenu = React.createClass({
         //做一些异步操作
         $.ajax({
             type:"post", 
+            timeout : 10000,
             dataType:"json",
             "processData": false,
             contentType: "application/json; charset=utf-8",
@@ -67,32 +68,44 @@ var SelectedMenu = React.createClass({
             url:url, 
             success:data=>{
                 console.log(data);
-                // returnData.loadingIconDisplay = 0;
-                returnData.selectedDb = selectedDb;
-                returnData.dbName = this.state.dbSource.find(item=>item.id===returnData.selectedDb).description;
-                returnData.flag = true;
                 var getData = data.data;
-                if (getData.length>0){
-                    var arr = [];
-                    for(var key in getData[0]){
-                        arr.push({name:key});
-                    }
-                    returnData.title = arr;
-                    var valueArr = [];
-                    getData.forEach((item,index)=>{
-                        var valueArrT = [];
-                        for(var key in item){
-                            valueArrT.push(item[key]);
+                if (data.code===20000){
+                    alert(getData);
+                    def.reject();
+                }else if(data.code===10000){
+                    returnData.selectedDb = selectedDb;
+                    returnData.dbName = this.state.dbSource.find(item=>item.id===returnData.selectedDb).description;
+                    returnData.flag = true;
+                    if (getData.length>0){
+                        var arr = [];
+                        for(var key in getData[0]){
+                            arr.push({name:key});
                         }
-                        valueArr.push(valueArrT);
-                    })
-                    returnData.data = valueArr;
-                    returnData.bttButton = 0;
+                        returnData.title = arr;
+                        var valueArr = [];
+                        getData.forEach((item,index)=>{
+                            var valueArrT = [];
+                            for(var key in item){
+                                valueArrT.push(item[key]);
+                            }
+                            valueArr.push(valueArrT);
+                        })
+                        returnData.data = valueArr;
+                        returnData.bttButton = 0;
+                    }
+                    def.resolve(returnData);
+                }else{
+                    alert("未知异常！"+JSON.stringify(data));
+                    def.reject();
                 }
-                def.resolve(returnData);
             },
-            error:e=>{
-                alert(JSON.stringify(e.responseJSON,null,4));
+            error:(XMLHttpRequest,status)=>{
+                if (status === 'timeout'){
+                    alert("请求超时，请检查接口。");
+                }else{
+                    alert(JSON.stringify(XMLHttpRequest.responseJSON,null,4));
+                }
+                def.reject();
             }
         });
         return def.promise();

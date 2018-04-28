@@ -94,9 +94,13 @@ var CompanyRegister = React.createClass({
         if (approInfoCenter.loadingIconDisplay === 1){
             return;
         }
-        this.setLoadingIconDisplay_aic(1);
         event.preventDefault(); // 阻止表单提交
         var mobile = $("#moblie_aic").val();
+        if (mobile == ""){
+            alert(approInfoCenter.inputText.find(item=>item.id==="moblie_aic").placeholder);
+            return;
+        }
+        this.setLoadingIconDisplay_aic(1);
         var selectedDb = this.state.selectedDb;
         var dbDesc = this.props.dbSource.find(item=>item.id===selectedDb).description;
         var url = server.redqueen + "/companyRegister/"+dbDesc+"/queryApproInfoCenter";
@@ -106,7 +110,9 @@ var CompanyRegister = React.createClass({
         this.props.httpClient(url,data,approInfoCenter,selectedDb)
                             .then(e=>this.setState({approInfoCenter:e}))
                             .then(e=>this.props.setMainSidebarHeight($('.content-wrapper')[0].offsetHeight))
-                            .then(e=>this.setLoadingIconDisplay_aic(0));
+                            .then(e=>this.setLoadingIconDisplay_aic(0))
+                            .fail(e=>this.setLoadingIconDisplay_aic(0))
+                            ;
     },
     // 查询风控审贷信息
     queryFkComtomerInfo(wsData,event){
@@ -114,10 +120,15 @@ var CompanyRegister = React.createClass({
         if (fkComtomerInfo.loadingIconDisplay === 1){
             return;
         }
-        this.setLoadingIconDisplay_fkci(1);
         event.preventDefault(); // 阻止表单提交
         var userName = $("#userName_fkci").val();
         var borrowId = $("#borrowId_fkci").val();
+        if (userName === "" && borrowId === ""){
+            alert(fkComtomerInfo.inputText.find(item=>item.id==="userName_fkci").placeholder + " or " +
+                fkComtomerInfo.inputText.find(item=>item.id==="borrowId_fkci").placeholder);
+            return;
+        }
+        this.setLoadingIconDisplay_fkci(1);
         var selectedDb = this.state.selectedDb;
         var dbDesc = this.props.dbSource.find(item=>item.id===selectedDb).description;
         var url = server.redqueen + "/companyRegister/"+dbDesc+"/queryFkComtomerInfo";
@@ -127,7 +138,9 @@ var CompanyRegister = React.createClass({
         this.props.httpClient(url,data,fkComtomerInfo,selectedDb)
                             .then(e=>this.setState({fkComtomerInfo:e}))
                             .then(e=>this.props.setMainSidebarHeight($('.content-wrapper')[0].offsetHeight))
-                            .then(e=>this.setLoadingIconDisplay_fkci(0));
+                            .then(e=>this.setLoadingIconDisplay_fkci(0))
+                            .fail(e=>this.setLoadingIconDisplay_fkci(0))
+                            ;
     },
 
     render() {

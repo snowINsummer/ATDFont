@@ -136,9 +136,13 @@ var Fdd = React.createClass({
         if (signatoryMessage.loadingIconDisplay === 1){
             return;
         }
-        this.setLoadingIconDisplay_sm(1);
         event.preventDefault(); // 阻止表单提交
         var mobileNum = $("#mobile").val();
+        if (mobileNum == ""){
+            alert(signatoryMessage.inputText.find(item=>item.id==="mobile").placeholder);
+            return;
+        }
+        this.setLoadingIconDisplay_sm(1);
         var selectedDb = this.state.selectedDb;
         var dbDesc = this.props.dbSource.find(item=>item.id===selectedDb).description;
         // console.log(dbDesc);
@@ -150,16 +154,22 @@ var Fdd = React.createClass({
         this.props.httpClient(url,data,signatoryMessage,selectedDb)
                     .then(e=>this.setState({signatoryMessage:e}))
                     .then(e=>this.props.setMainSidebarHeight($('.content-wrapper')[0].offsetHeight))
-                    .then(e=>this.setLoadingIconDisplay_sm(0));
+                    .then(e=>this.setLoadingIconDisplay_sm(0))
+                    .fail(e=>this.setLoadingIconDisplay_sm(0))
+                    ;
     },
     queryBorrowGuarantor(wsData,event){
         var borrowGuarantor = this.state.borrowGuarantor;
         if (borrowGuarantor.loadingIconDisplay === 1){
             return;
         }
-        this.setLoadingIconDisplay_bg(1);
         event.preventDefault(); // 阻止表单提交
         var borrowId = $("#borrowId_guarantor").val();
+        if (borrowId == ""){
+            alert(borrowGuarantor.inputText.find(item=>item.id==="borrowId_guarantor").placeholder);
+            return;
+        }
+        this.setLoadingIconDisplay_bg(1);
         var selectedDb = this.state.selectedDb;
         var dbDesc = this.props.dbSource.find(item=>item.id===selectedDb).description;
         var url = server.redqueen + "/fdd/"+dbDesc+"/queryBorrowGuarantor";
@@ -169,7 +179,9 @@ var Fdd = React.createClass({
         this.props.httpClient(url,data,borrowGuarantor,selectedDb)
                     .then(e=>this.setState({borrowGuarantor:e}))
                     .then(e=>this.props.setMainSidebarHeight($('.content-wrapper')[0].offsetHeight))
-                    .then(e=>this.setLoadingIconDisplay_bg(0));
+                    .then(e=>this.setLoadingIconDisplay_bg(0))
+                    .fail(e=>this.setLoadingIconDisplay_bg(0))
+                    ;
     },
     
     queryCorporatorMobile(wsData,event){
@@ -177,9 +189,13 @@ var Fdd = React.createClass({
         if (corporatorMobile.loadingIconDisplay === 1){
             return;
         }
-        this.setLoadingIconDisplay_cm(1);
         event.preventDefault(); // 阻止表单提交
         var borrowId = $("#borrowId_corporator").val();
+        if (borrowId == ""){
+            alert(corporatorMobile.inputText.find(item=>item.id==="borrowId_corporator").placeholder);
+            return;
+        }
+        this.setLoadingIconDisplay_cm(1);
         var selectedDb = this.state.selectedDb;
         var dbDesc = this.props.dbSource.find(item=>item.id===selectedDb).description;
         var url = server.redqueen + "/fdd/"+dbDesc+"/queryCorporatorMobile";
@@ -189,16 +205,22 @@ var Fdd = React.createClass({
         this.props.httpClient(url,data,corporatorMobile,selectedDb)
                     .then(e=>this.setState({corporatorMobile:e}))
                     .then(e=>this.props.setMainSidebarHeight($('.content-wrapper')[0].offsetHeight))
-                    .then(e=>this.setLoadingIconDisplay_cm(0));
+                    .then(e=>this.setLoadingIconDisplay_cm(0))
+                    .fail(e=>this.setLoadingIconDisplay_cm(0))
+                    ;
     },
     queryCreditorInfo(wsData,event){
         var creditorInfo = this.state.creditorInfo;
         if (creditorInfo.loadingIconDisplay === 1){
             return;
         }
-        this.setLoadingIconDisplay_ci(1);
         event.preventDefault(); // 阻止表单提交
         var borrowId = $("#borrowId_creditorInfo").val();
+        if (borrowId == ""){
+            alert(creditorInfo.inputText.find(item=>item.id==="borrowId_creditorInfo").placeholder);
+            return;
+        }
+        this.setLoadingIconDisplay_ci(1);
         var selectedDb = this.state.selectedDb;
         var dbDesc = this.props.dbSource.find(item=>item.id===selectedDb).description;
         var url = server.redqueen + "/fdd/"+dbDesc+"/queryCreditorInfo";
@@ -208,7 +230,9 @@ var Fdd = React.createClass({
         this.props.httpClient(url,data,creditorInfo,selectedDb)
                     .then(e=>this.setState({creditorInfo:e}))
                     .then(e=>this.props.setMainSidebarHeight($('.content-wrapper')[0].offsetHeight))
-                    .then(e=>this.setLoadingIconDisplay_ci(0));
+                    .then(e=>this.setLoadingIconDisplay_ci(0))
+                    .fail(e=>this.setLoadingIconDisplay_ci(0))
+                    ;
     },
 
     render() {

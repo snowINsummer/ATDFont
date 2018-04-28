@@ -149,7 +149,9 @@ var CreditorTransfer = React.createClass({
         this.props.httpClient(url,data,borrowTenderTransferable,selectedDb)
                     .then(e=>this.setState({borrowTenderTransferable:e}))
                     .then(e=>this.props.setMainSidebarHeight($('.content-wrapper')[0].offsetHeight))
-                    .then(e=>this.setLoadingIconDisplay_btt(0));
+                    .then(e=>this.setLoadingIconDisplay_btt(0))
+                    .fail(e=>this.setLoadingIconDisplay_btt(0))
+                    ;
     },
 
     // 查询责权转让申请
@@ -158,9 +160,13 @@ var CreditorTransfer = React.createClass({
         if (tradeRequest.loadingIconDisplay === 1){
             return;
         }
-        this.setLoadingIconDisplay_tr(1);
         event.preventDefault(); // 阻止表单提交
         var tenderId = $("#tenderId_tr").val();
+        if (tenderId == ""){
+            alert(tradeRequest.inputText.find(item=>item.id==="tenderId_tr").placeholder);
+            return;
+        }
+        this.setLoadingIconDisplay_tr(1);
         var selectedDb = this.state.selectedDb;
         var dbDesc = this.props.dbSource.find(item=>item.id===selectedDb).description;
         var url = server.redqueen + "/creditorTransfer/"+dbDesc+"/queryTradeRequest";
@@ -170,7 +176,9 @@ var CreditorTransfer = React.createClass({
         this.props.httpClient(url,data,tradeRequest,selectedDb)
                     .then(e=>this.setState({tradeRequest:e}))
                     .then(e=>this.props.setMainSidebarHeight($('.content-wrapper')[0].offsetHeight))
-                    .then(e=>this.setLoadingIconDisplay_tr(0));
+                    .then(e=>this.setLoadingIconDisplay_tr(0))
+                    .fail(e=>this.setLoadingIconDisplay_tr(0))
+                    ;
     },
 
     render() {
